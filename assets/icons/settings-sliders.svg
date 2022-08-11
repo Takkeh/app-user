@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="20.998" height="21" viewBox="0 0 20.998 21">
+  <g id="settings-sliders" transform="translate(-0.026 0)">
+    <path id="Path_858" data-name="Path 858" d="M.9,4.157H3.295a3.262,3.262,0,0,0,6.3,0H20.149a.875.875,0,1,0,0-1.75H9.59a3.262,3.262,0,0,0-6.3,0H.9a.875.875,0,0,0,0,1.75Z" transform="translate(0 0)" fill="#d51d4f"/>
+    <path id="Path_859" data-name="Path 859" d="M20.149,178.387H17.755a3.261,3.261,0,0,0-6.294,0H.9a.875.875,0,0,0,0,1.75h10.56a3.261,3.261,0,0,0,6.294,0h2.394a.875.875,0,0,0,0-1.75Z" transform="translate(0 -168.762)" fill="#fac21c"/>
+    <path id="Path_860" data-name="Path 860" d="M20.149,354.407H9.59a3.262,3.262,0,0,0-6.3,0H.9a.875.875,0,1,0,0,1.75H3.295a3.262,3.262,0,0,0,6.3,0H20.149a.875.875,0,1,0,0-1.75Z" transform="translate(0 -337.564)" fill="#707070"/>
+  </g>
+</svg>

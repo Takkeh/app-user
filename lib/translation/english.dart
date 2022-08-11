@@ -29,5 +29,12 @@ const Map<String, String> en = {
   "Verification": "Verification",
   " Code": " Code",
   "Please enter the 4-digit verification code that was sent to the phone number:": "Please enter the 4-digit verification code that was sent to the phone number:",
+  "Resend ": "Resend ",
+  "After": "After",
+  "seconds": "seconds",
+  "Confirm": "Confirm",
+  "Please enter the 4-digit verification code": "Please enter the 4-digit verification code",
+  "Email": "Email",
+  "Enter your email": "Enter your email",
   "": "",
 };

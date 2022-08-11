@@ -7,7 +7,7 @@ import 'package:takkeh/translation/translation.dart';
 import 'package:takkeh/ui/base/intro.dart';
 import 'package:takkeh/ui/base/nav_bar.dart';
 import 'package:takkeh/ui/screens/registration/registration.dart';
-import 'package:takkeh/ui/screens/registration/verification.dart';
+import 'package:takkeh/ui/screens/restaurants/restaurants.dart';
 import 'package:takkeh/utils/material_theme.dart';
 import 'package:takkeh/utils/shared_prefrences.dart';
 
@@ -73,7 +73,7 @@ class _MyAppState extends State<MyApp> {
       fallbackLocale: Locale(MySharedPreferences.language),
       theme: AppThemeData().materialTheme,
       // home: _toggleScreen(),
-      home: const VerificationScreen(),
+      home: const RestaurantsScreen(),
     );
   }
 }

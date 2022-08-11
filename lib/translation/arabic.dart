@@ -29,5 +29,12 @@ const Map<String, String> ar = {
   "Verification": "رمز",
   " Code": " التحقق",
   "Please enter the 4-digit verification code that was sent to the phone number:": "يرجى ادخال رمز التحقق من 4 خانات والذي تم ارساله لرقم الهاتف:",
+  "Resend ": "إعادة إرسال ",
+  "After": "بعد",
+  "seconds": "ثانية",
+  "Confirm": "تأكيد",
+  "Please enter the 4-digit verification code": "يرجى ادخال رمز التحقق",
+  "Email": "البريد الإلكتروني",
+  "Enter your email": "أدخل بريد الإلكتروني",
   "": "",
 };

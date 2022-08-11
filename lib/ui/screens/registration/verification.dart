@@ -1,15 +1,43 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
-import 'package:takkeh/ui/widgets/CustomRichText.dart';
+import 'package:takkeh/ui/screens/registration/widgets/verification_text_field.dart';
 import 'package:takkeh/ui/widgets/custom_app_bar.dart';
 import 'package:takkeh/ui/widgets/custom_elevated_button.dart';
+import 'package:takkeh/ui/widgets/custom_rich_text.dart';
 import 'package:takkeh/utils/base/colors.dart';
 import 'package:takkeh/utils/base/icons.dart';
 import 'package:takkeh/utils/base/images.dart';
 
-class VerificationScreen extends StatelessWidget {
+class VerificationScreen extends StatefulWidget {
   const VerificationScreen({Key? key}) : super(key: key);
+
+  @override
+  State<VerificationScreen> createState() => _VerificationScreenState();
+}
+
+class _VerificationScreenState extends State<VerificationScreen> {
+  List<CodeField> codeFields = [
+    CodeField(focusNode: FocusNode(), controller: TextEditingController()),
+    CodeField(focusNode: FocusNode(), controller: TextEditingController()),
+    CodeField(focusNode: FocusNode(), controller: TextEditingController()),
+    CodeField(focusNode: FocusNode(), controller: TextEditingController()),
+  ];
+
+  @override
+  void initState() {
+    super.initState();
+  }
+
+  @override
+  void dispose() {
+    for (var element in codeFields) {
+      element.controller.dispose();
+      element.focusNode.dispose();
+    }
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -36,7 +64,7 @@ class VerificationScreen extends StatelessWidget {
               "Please enter the 4-digit verification code that was sent to the phone number:".tr,
             ),
             Padding(
-              padding: const EdgeInsets.fromLTRB(20, 35, 35, 20),
+              padding: const EdgeInsets.fromLTRB(35, 35, 35, 20),
               child: VerificationTextField(
                 initialValue: "+962791595029",
                 prefixIcon: SvgPicture.asset(
@@ -46,32 +74,47 @@ class VerificationScreen extends StatelessWidget {
               ),
             ),
             Row(
-              children: List.generate(
-                4,
-                (index) {
-                  return const Expanded(
-                    child: Padding(
-                      padding: EdgeInsets.symmetric(horizontal: 5.0),
-                      child: VerificationTextField(),
+              textDirection: TextDirection.ltr,
+              children: codeFields.map((element) {
+                return Expanded(
+                  child: Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 10.0),
+                    child: Directionality(
+                      textDirection: TextDirection.ltr,
+                      child: VerificationTextField(
+                        inputFormatters: [
+                          LengthLimitingTextInputFormatter(1),
+                        ],
+                        style: const TextStyle(fontSize: 18),
+                        textAlign: TextAlign.center,
+                        keyboardType: TextInputType.number,
+                        focusNode: element.focusNode,
+                        controller: element.controller,
+                        onChanged: (value) {
+                          if (value.length == 1) {
+                            element.focusNode.nextFocus();
+                          }
+                        },
+                      ),
                     ),
-                  );
-                },
-              ),
+                  ),
+                );
+              }).toList(),
             ),
             Padding(
               padding: const EdgeInsets.only(top: 40.0, bottom: 50),
               child: RichText(
-                text: const TextSpan(
+                text: TextSpan(
                   children: <TextSpan>[
                     TextSpan(
-                      text: 'Resend ',
-                      style: TextStyle(
+                      text: 'Resend '.tr,
+                      style: const TextStyle(
                         color: MyColors.text,
                       ),
                     ),
                     TextSpan(
-                      text: 'After 59 seconds',
-                      style: TextStyle(
+                      text: '${"After".tr} 59 ${"seconds".tr}',
+                      style: const TextStyle(
                         color: MyColors.redD4F,
                       ),
                     ),
@@ -80,8 +123,24 @@ class VerificationScreen extends StatelessWidget {
               ),
             ),
             CustomElevatedButton(
-              title: "Confirm",
-              onPressed: () {},
+              title: "Confirm".tr,
+              onPressed: () {
+                for (var element in codeFields) {
+                  if (element.controller.text.isEmpty) {
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      SnackBar(
+                        backgroundColor: MyColors.redD4F,
+                        content: Text(
+                          "Please enter the 4-digit verification code".tr,
+                        ),
+                      ),
+                    );
+                    return;
+                  }
+                }
+                FocusManager.instance.primaryFocus?.unfocus();
+                //api call
+              },
             ),
           ],
         ),
@@ -90,53 +149,12 @@ class VerificationScreen extends StatelessWidget {
   }
 }
 
-class VerificationTextField extends StatelessWidget {
-  final String? initialValue;
-  final Widget? prefixIcon;
+class CodeField {
+  final TextEditingController controller;
+  final FocusNode focusNode;
 
-  const VerificationTextField({
-    Key? key,
-    this.initialValue,
-    this.prefixIcon,
-  }) : super(key: key);
-
-  static const _border = 19.0;
-
-  @override
-  Widget build(BuildContext context) {
-    return TextFormField(
-      initialValue: initialValue,
-      decoration: InputDecoration(
-        filled: true,
-        fillColor: MyColors.grey4F9,
-        prefixIcon: prefixIcon,
-        prefixIconConstraints: const BoxConstraints(
-          maxHeight: 80,
-          minWidth: 70,
-          maxWidth: 70,
-        ),
-        enabledBorder: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(_border),
-          borderSide: BorderSide.none,
-        ),
-        disabledBorder: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(_border),
-          borderSide: BorderSide.none,
-        ),
-        focusedBorder: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(_border),
-          borderSide: BorderSide.none,
-        ),
-        errorBorder: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(_border),
-          borderSide: BorderSide.none,
-        ),
-        focusedErrorBorder: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(_border),
-          borderSide: BorderSide.none,
-        ),
-        errorStyle: const TextStyle(color: Color(0xFFD74545)),
-      ),
-    );
-  }
+  CodeField({
+    required this.focusNode,
+    required this.controller,
+  });
 }

@@ -80,7 +80,7 @@ class SignUpScreenState extends State<SignUpScreen> {
               padding: const EdgeInsets.symmetric(vertical: 15.0),
               child: CustomTextField(
                 controller: passwordCtrl,
-                label: "Password",
+                label: "Password".tr,
                 obscureText: true,
                 prefixIcon: const CustomPrefixIcon(icon: MyIcons.shieldPlus),
                 suffixIcon: SvgPicture.asset(MyIcons.eyeCrossed),
@@ -99,7 +99,7 @@ class SignUpScreenState extends State<SignUpScreen> {
             ),
             CustomTextField(
               controller: confirmPasswordCtrl,
-              label: "Confirm password",
+              label: "Confirm password".tr,
               obscureText: true,
               prefixIcon: const CustomPrefixIcon(icon: MyIcons.shieldCheck),
               suffixIcon: SvgPicture.asset(MyIcons.eyeCrossed),
