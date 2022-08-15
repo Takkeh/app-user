@@ -5,14 +5,14 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
 import 'package:takkeh/controller/registration/sign_in.dart';
-import 'package:takkeh/ui/screens/registration/reset_password.dart';
-import 'package:takkeh/ui/screens/registration/widgets/custom_prefix_icon.dart';
-import 'package:takkeh/ui/screens/registration/widgets/phone_suffix_icon.dart';
+import 'package:takkeh/ui/registration//reset_password.dart';
+import 'package:takkeh/ui/registration//widgets/custom_prefix_icon.dart';
 import 'package:takkeh/ui/widgets/custom_elevated_button.dart';
 import 'package:takkeh/ui/widgets/custom_social_button.dart';
 import 'package:takkeh/ui/widgets/custom_text_field.dart';
 import 'package:takkeh/utils/base/colors.dart';
 import 'package:takkeh/utils/base/icons.dart';
+import 'package:takkeh/utils/phone_field_helper.dart';
 
 class SignInScreen extends StatefulWidget {
   const SignInScreen({Key? key}) : super(key: key);
@@ -26,6 +26,8 @@ class SignInScreenState extends State<SignInScreen> {
   late TextEditingController passwordCtrl;
 
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
+
+  static const _border = 26.0;
 
   @override
   void initState() {
@@ -50,12 +52,13 @@ class SignInScreenState extends State<SignInScreen> {
         child: Column(
           children: [
             CustomTextField(
+              textAlign: TextAlign.left,
               controller: phoneCtrl,
               label: "Phone number".tr,
               textDirection: TextDirection.ltr,
               keyboardType: TextInputType.phone,
-              prefixIcon: const CustomPrefixIcon(icon: MyIcons.circlePhone),
-              suffixIcon: const PhoneSuffixIcon(),
+              prefixIcon: PhoneFieldHelper.togglePrefixIcon(),
+              suffixIcon: PhoneFieldHelper.toggleSuffixIcon(),
               validator: (value) {
                 if (value!.isEmpty) {
                   return "Enter your phone number".tr;

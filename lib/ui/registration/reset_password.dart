@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:takkeh/ui/screens/registration/widgets/custom_prefix_icon.dart';
-import 'package:takkeh/ui/screens/registration/widgets/phone_suffix_icon.dart';
+import 'package:takkeh/ui/registration/widgets/custom_prefix_icon.dart';
 import 'package:takkeh/ui/widgets/custom_app_bar.dart';
 import 'package:takkeh/ui/widgets/custom_elevated_button.dart';
 import 'package:takkeh/ui/widgets/custom_rich_text.dart';
 import 'package:takkeh/ui/widgets/custom_text_field.dart';
 import 'package:takkeh/utils/base/icons.dart';
 import 'package:takkeh/utils/base/images.dart';
+import 'package:takkeh/utils/phone_field_helper.dart';
 
 enum Menu { itemOne, itemTwo, itemThree, itemFour }
 
@@ -118,8 +118,8 @@ class _ResetPasswordScreenState extends State<ResetPasswordScreen> {
                     label: "Phone number".tr,
                     textDirection: TextDirection.ltr,
                     keyboardType: TextInputType.phone,
-                    prefixIcon: const CustomPrefixIcon(icon: MyIcons.circlePhone),
-                    suffixIcon: const PhoneSuffixIcon(),
+                    prefixIcon: PhoneFieldHelper.togglePrefixIcon(),
+                    suffixIcon: PhoneFieldHelper.toggleSuffixIcon(),
                     validator: (value) {
                       if (value!.isEmpty) {
                         return "Enter your phone number".tr;

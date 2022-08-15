@@ -19,7 +19,7 @@ class BackBoxWidget extends StatelessWidget {
         margin: const EdgeInsetsDirectional.fromSTEB(20, 5, 5, 5),
         alignment: Alignment.center,
         decoration: BoxDecoration(
-          color: MyColors.grey5FA,
+          color: MyColors.grey4F9.withOpacity(0.70),
           borderRadius: BorderRadius.circular(17),
         ),
         child: const Icon(

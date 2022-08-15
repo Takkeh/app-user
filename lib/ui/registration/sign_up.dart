@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:takkeh/controller/registration/sign_up.dart';
-import 'package:takkeh/ui/screens/registration/widgets/custom_prefix_icon.dart';
-import 'package:takkeh/ui/screens/registration/widgets/terms_check_box.dart';
+import 'package:takkeh/ui/registration//widgets/custom_prefix_icon.dart';
+import 'package:takkeh/ui/registration//widgets/terms_check_box.dart';
 import 'package:takkeh/ui/widgets/custom_elevated_button.dart';
 import 'package:takkeh/ui/widgets/custom_text_field.dart';
 import 'package:takkeh/utils/base/icons.dart';
@@ -62,6 +62,7 @@ class SignUpScreenState extends State<SignUpScreen> {
             ),
             const SizedBox(height: 15),
             CustomTextField(
+              horizontalPadding: 12,
               controller: emailCtrl,
               label: "Email".tr,
               keyboardType: TextInputType.emailAddress,

@@ -6,8 +6,8 @@ import 'package:takkeh/binding/registration/sign_in.dart';
 import 'package:takkeh/translation/translation.dart';
 import 'package:takkeh/ui/base/intro.dart';
 import 'package:takkeh/ui/base/nav_bar.dart';
-import 'package:takkeh/ui/screens/registration/registration.dart';
-import 'package:takkeh/ui/screens/restaurants/restaurants.dart';
+import 'package:takkeh/ui/registration/registration.dart';
+// import 'package:takkeh/ui/screens/restaurants/restaurants.dart';
 import 'package:takkeh/utils/material_theme.dart';
 import 'package:takkeh/utils/shared_prefrences.dart';
 
@@ -25,7 +25,7 @@ Future<void> main() async {
   MySharedPreferences.clearProfile();
   if (MySharedPreferences.language.isEmpty) {
     // MySharedPreferences.language = Get.deviceLocale!.languageCode;
-    MySharedPreferences.language = 'ar';
+    MySharedPreferences.language = 'en';
   }
   SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp, DeviceOrientation.portraitDown]);
   runApp(const MyApp());
@@ -69,11 +69,11 @@ class _MyAppState extends State<MyApp> {
       //   Locale('ar', 'JO'),
       // ],
       // locale: Locale(MySharedPreferences.language),
-      locale: const Locale("en"),
+      locale: Locale(MySharedPreferences.language),
       fallbackLocale: Locale(MySharedPreferences.language),
       theme: AppThemeData().materialTheme,
-      // home: _toggleScreen(),
-      home: const RestaurantsScreen(),
+      home: _toggleScreen(),
+      // home: const HomeScreen(),
     );
   }
 }

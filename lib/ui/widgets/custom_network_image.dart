@@ -7,14 +7,14 @@ import 'package:takkeh/utils/base/images.dart';
 class CustomNetworkImage extends StatelessWidget {
   final String url;
   final double radius;
-  final double width;
+  final double? width;
   final double? height;
 
   const CustomNetworkImage({
     Key? key,
     required this.url,
     required this.radius,
-    required this.width,
+    this.width,
     this.height,
   }) : super(key: key);
 
@@ -37,7 +37,7 @@ class CustomNetworkImage extends StatelessWidget {
         width: width,
         height: height,
         decoration: BoxDecoration(
-          color: MyColors.primary,
+          color: MyColors.greyED0,
           borderRadius: BorderRadius.circular(radius),
           image: const DecorationImage(
             image: AssetImage(MyImages.place),
@@ -51,7 +51,7 @@ class CustomNetworkImage extends StatelessWidget {
         height: height,
         // alignment: Alignment.center,
         decoration: BoxDecoration(
-          color: MyColors.primary,
+          color: MyColors.greyED0,
           borderRadius: BorderRadius.circular(radius),
           image: const DecorationImage(
             image: AssetImage(MyImages.place),

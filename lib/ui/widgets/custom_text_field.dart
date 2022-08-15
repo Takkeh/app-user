@@ -17,6 +17,8 @@ class CustomTextField extends StatelessWidget {
   final TextStyle? labelStyle;
   final TextStyle? hintStyle;
   final Widget? prefixIcon;
+  final TextAlign? textAlign;
+  final double? horizontalPadding;
 
   const CustomTextField({
     Key? key,
@@ -35,6 +37,8 @@ class CustomTextField extends StatelessWidget {
     this.labelStyle,
     this.hintStyle,
     this.prefixIcon,
+    this.textAlign,
+    this.horizontalPadding,
   }) : super(key: key);
 
   static const _border = 26.0;
@@ -44,6 +48,7 @@ class CustomTextField extends StatelessWidget {
     return TextFormField(
       autovalidateMode: autoValidateMode,
       onTap: onTap,
+      textAlign: textAlign ?? TextAlign.start,
       maxLines: maxLines,
       readOnly: readOnly,
       style: const TextStyle(color: MyColors.text, fontSize: 16),
@@ -59,7 +64,7 @@ class CustomTextField extends StatelessWidget {
         labelStyle: const TextStyle(color: MyColors.greyED0),
         prefixIcon: prefixIcon,
         suffixIcon: suffixIcon,
-        contentPadding: const EdgeInsets.symmetric(horizontal: 0, vertical: 20),
+        contentPadding: EdgeInsets.symmetric(horizontal: horizontalPadding ?? 0, vertical: 20),
         suffixIconConstraints: const BoxConstraints(
           maxHeight: 50,
           minWidth: 70,

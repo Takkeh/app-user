@@ -4,12 +4,13 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:takkeh/controller/home/category.dart';
 import 'package:takkeh/model/home/categories_model.dart';
-import 'package:takkeh/ui/screens/home/widgets/category_loading.dart';
-import 'package:takkeh/ui/screens/home/widgets/custom_indicator.dart';
-import 'package:takkeh/ui/screens/home/widgets/home_app_bar.dart';
-import 'package:takkeh/ui/screens/home/widgets/home_image_loading.dart';
-import 'package:takkeh/ui/screens/home/widgets/offers_loading.dart';
-import 'package:takkeh/ui/screens/home/widgets/special_offers_loading.dart';
+import 'package:takkeh/ui/base/widgets/category_loading.dart';
+import 'package:takkeh/ui/base/widgets/custom_indicator.dart';
+import 'package:takkeh/ui/base/widgets/home_app_bar.dart';
+import 'package:takkeh/ui/base/widgets/home_image_loading.dart';
+import 'package:takkeh/ui/base/widgets/offers_loading.dart';
+import 'package:takkeh/ui/base/widgets/special_offers_loading.dart';
+import 'package:takkeh/ui/restaurants/screens/restaurants/restaurants.dart';
 import 'package:takkeh/ui/widgets/custom_network_image.dart';
 import 'package:takkeh/ui/widgets/failed_widget.dart';
 import 'package:takkeh/ui/widgets/title_widget.dart';
@@ -97,10 +98,15 @@ class _HomeScreenState extends State<HomeScreen> {
                               itemCount: snapshot.data!.categorys!.length,
                               scrollDirection: Axis.horizontal,
                               itemBuilder: (context, index) {
-                                return CustomNetworkImage(
-                                  url: snapshot.data!.categorys![index].image!,
-                                  radius: 16,
-                                  width: Get.width - 80,
+                                return GestureDetector(
+                                  onTap: () {
+                                    Get.to(() => const RestaurantsScreen());
+                                  },
+                                  child: CustomNetworkImage(
+                                    url: snapshot.data!.categorys![index].image!,
+                                    radius: 16,
+                                    width: Get.width - 80,
+                                  ),
                                 );
                               },
                             ),
@@ -124,8 +130,10 @@ class _HomeScreenState extends State<HomeScreen> {
                   case ConnectionState.done:
                   default:
                     if (snapshot.hasData) {
-                      return Padding(
-                        padding: const EdgeInsets.fromLTRB(20, 50, 20, 60),
+                      return Container(
+                        height: 180,
+                        // color: Colors.red,
+                        padding: const EdgeInsets.symmetric(horizontal: 20),
                         child: Row(
                           children: [
                             Expanded(

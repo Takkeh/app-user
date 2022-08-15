@@ -20,6 +20,7 @@ class MyColors {
 
   //red
   static const Color redD4F = Color(0xFFD51D4F);
+  static const Color redB3A = Color(0xFFB90B3A);
 
   static const facebook = Color(0xFF4267B2);
 }

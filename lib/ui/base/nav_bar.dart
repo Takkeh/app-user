@@ -1,7 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:persistent_bottom_nav_bar/persistent-tab-view.dart';
-import 'package:takkeh/ui/screens/home/home.dart';
+import 'package:takkeh/ui/base/home.dart';
+// import 'package:takkeh/ui/screens/home/home.dart';
 import 'package:takkeh/utils/base/colors.dart';
 
 late PersistentTabController navBarController;

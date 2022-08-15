@@ -1,27 +1,32 @@
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 import 'package:takkeh/utils/base/colors.dart';
 
 class PhoneSuffixIcon extends StatelessWidget {
+  final TextDirection? textDirection;
+
   const PhoneSuffixIcon({
     Key? key,
+    this.textDirection,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Row(
-      children: [
-        const VerticalDivider(
-          width: 20,
-          indent: 5,
-          endIndent: 5,
-        ),
+      textDirection: textDirection,
+      children: const [
+        SizedBox(width: 14),
         Text(
-          "+962".tr,
-          style: const TextStyle(
+          "+962",
+          style: TextStyle(
             color: MyColors.text,
             fontSize: 16,
           ),
+        ),
+        SizedBox(width: 6),
+        VerticalDivider(
+          width: 10,
+          indent: 5,
+          endIndent: 5,
         ),
       ],
     );

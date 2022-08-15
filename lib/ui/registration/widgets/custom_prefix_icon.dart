@@ -3,15 +3,18 @@ import 'package:flutter_svg/flutter_svg.dart';
 
 class CustomPrefixIcon extends StatelessWidget {
   final String icon;
+  final TextDirection? textDirection;
 
   const CustomPrefixIcon({
     Key? key,
     required this.icon,
+    this.textDirection,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Row(
+      textDirection: textDirection,
       children: [
         const SizedBox(width: 20),
         SvgPicture.asset(icon),
