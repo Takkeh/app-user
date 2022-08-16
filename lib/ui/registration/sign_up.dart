@@ -60,7 +60,7 @@ class SignUpScreenState extends State<SignUpScreen> {
                 return null;
               },
             ),
-            const SizedBox(height: 15),
+            const SizedBox(height: 20),
             CustomTextField(
               horizontalPadding: 12,
               controller: emailCtrl,
@@ -78,7 +78,7 @@ class SignUpScreenState extends State<SignUpScreen> {
               },
             ),
             Padding(
-              padding: const EdgeInsets.symmetric(vertical: 15.0),
+              padding: const EdgeInsets.symmetric(vertical: 20.0),
               child: CustomTextField(
                 controller: passwordCtrl,
                 label: "Password".tr,
@@ -114,16 +114,18 @@ class SignUpScreenState extends State<SignUpScreen> {
                 return null;
               },
             ),
-            TermsCheckBox(
-              isChecked: isChecked,
-              onPressed: () {},
-              onChanged: (value) {
-                setState(() {
-                  isChecked = !isChecked;
-                });
-              },
+            Padding(
+              padding: const EdgeInsets.only(bottom: 30, top: 20),
+              child: TermsCheckBox(
+                isChecked: isChecked,
+                onPressed: () {},
+                onChanged: (value) {
+                  setState(() {
+                    isChecked = !isChecked;
+                  });
+                },
+              ),
             ),
-            const SizedBox(height: 30),
             CustomElevatedButton(
               title: "Sign up",
               onPressed: () {

@@ -10,7 +10,7 @@ import 'package:takkeh/ui/base/widgets/home_app_bar.dart';
 import 'package:takkeh/ui/base/widgets/home_image_loading.dart';
 import 'package:takkeh/ui/base/widgets/offers_loading.dart';
 import 'package:takkeh/ui/base/widgets/special_offers_loading.dart';
-import 'package:takkeh/ui/restaurants/screens/restaurants/restaurants.dart';
+import 'package:takkeh/ui/restaurants/screens/shop/home/home.dart';
 import 'package:takkeh/ui/widgets/custom_network_image.dart';
 import 'package:takkeh/ui/widgets/failed_widget.dart';
 import 'package:takkeh/ui/widgets/title_widget.dart';
@@ -100,7 +100,7 @@ class _HomeScreenState extends State<HomeScreen> {
                               itemBuilder: (context, index) {
                                 return GestureDetector(
                                   onTap: () {
-                                    Get.to(() => const RestaurantsScreen());
+                                    Get.to(() => const RestaurantsHomeScreen());
                                   },
                                   child: CustomNetworkImage(
                                     url: snapshot.data!.categorys![index].image!,

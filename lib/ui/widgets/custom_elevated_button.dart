@@ -3,7 +3,7 @@ import 'package:takkeh/utils/base/colors.dart';
 
 class CustomElevatedButton extends StatelessWidget {
   final String title;
-  final Function() onPressed;
+  final Function()? onPressed;
   final double height;
   final double width;
   final Color? color;

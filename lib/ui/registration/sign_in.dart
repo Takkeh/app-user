@@ -66,7 +66,7 @@ class SignInScreenState extends State<SignInScreen> {
                 return null;
               },
             ),
-            const SizedBox(height: 15),
+            const SizedBox(height: 20),
             CustomTextField(
               textDirection: TextDirection.ltr,
               controller: passwordCtrl,

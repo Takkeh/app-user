@@ -17,4 +17,6 @@ class MyIcons {
   static const String search = "${_path}search.svg";
   static const String filter = "${_path}settings-sliders.svg";
   static const String shoppingCart = "${_path}shopping-cart.svg";
+  static const String clock = "${_path}clock.svg";
+  static const String scooter = "${_path}scooter.svg";
 }
