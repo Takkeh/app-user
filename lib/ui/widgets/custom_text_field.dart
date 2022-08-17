@@ -11,6 +11,7 @@ class CustomTextField extends StatelessWidget {
   final TextInputType? keyboardType;
   final bool readOnly;
   final int maxLines;
+  final int? minLines;
   final Function()? onTap;
   final Widget? suffixIcon;
   final AutovalidateMode? autoValidateMode;
@@ -39,6 +40,7 @@ class CustomTextField extends StatelessWidget {
     this.prefixIcon,
     this.textAlign,
     this.horizontalPadding,
+    this.minLines,
   }) : super(key: key);
 
   static const _border = 26.0;
@@ -50,6 +52,7 @@ class CustomTextField extends StatelessWidget {
       onTap: onTap,
       textAlign: textAlign ?? TextAlign.start,
       maxLines: maxLines,
+      minLines: minLines,
       readOnly: readOnly,
       style: const TextStyle(color: MyColors.text, fontSize: 16),
       keyboardType: keyboardType,

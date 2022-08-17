@@ -19,4 +19,5 @@ class MyIcons {
   static const String shoppingCart = "${_path}shopping-cart.svg";
   static const String clock = "${_path}clock.svg";
   static const String scooter = "${_path}scooter.svg";
+  static const String notes = "${_path}notes.svg";
 }

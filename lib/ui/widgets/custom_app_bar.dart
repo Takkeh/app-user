@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:takkeh/ui/widgets/back_box_widget.dart';
+import 'package:takkeh/ui/widgets/back_leading_widget.dart';
 
 class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
   const CustomAppBar({super.key});
@@ -10,7 +10,7 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
       backgroundColor: Colors.transparent,
       elevation: 0,
       leadingWidth: 73,
-      leading: const BackBoxWidget(),
+      leading: const BackLeadingWidget(),
     );
   }
 

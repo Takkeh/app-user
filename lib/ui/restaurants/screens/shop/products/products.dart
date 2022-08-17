@@ -1,5 +1,9 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:takkeh/ui/restaurants/screens/shop/view_produt.dart';
+import 'package:takkeh/ui/widgets/back_leading_widget.dart';
+import 'package:takkeh/ui/widgets/search_box_widget.dart';
 import 'package:takkeh/utils/base/colors.dart';
 
 class ProductsScreen extends StatelessWidget {
@@ -7,13 +11,16 @@ class ProductsScreen extends StatelessWidget {
 
   Widget getFilter() {
     return Container(
-      color: Colors.teal,
+      color: Colors.white,
       height: 50,
-      child: ListView.builder(
+      child: ListView.separated(
+        padding: const EdgeInsets.all(8),
+        separatorBuilder: (context, index) => const SizedBox(width: 5),
         scrollDirection: Axis.horizontal,
         itemCount: 15,
         itemBuilder: (context, index) {
           return ElevatedButton(
+            style: ElevatedButton.styleFrom(primary: Colors.green),
             onPressed: () {},
             child: Text("Menu $index"),
           );
@@ -78,44 +85,103 @@ class ProductsScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: NestedScrollView(
-        floatHeaderSlivers: true,
-        headerSliverBuilder: (context, innerBoxIsScrolled) {
-          return [
-            SliverAppBar(
-                centerTitle: true,
-                title: const Text("hello"),
-                // collapsedHeight: 61,
-                expandedHeight: 340,
-                // floating: true,
-                pinned: true,
-                flexibleSpace: FlexibleSpaceBar(
-                  background: Container(
-                    alignment: Alignment.center,
-                    margin: EdgeInsets.only(top: 120),
-                    color: Colors.white,
-                    width: double.infinity,
-                    height: double.infinity,
-                    child: getMostPopular(),
-                  ),
-                )
-                // bottom: PreferredSize(
-                //   preferredSize: const Size.fromHeight(0.0),
-                //   child: getFilter(),
-                // ),
+      body: CustomScrollView(
+        physics: const ClampingScrollPhysics(),
+        slivers: [
+          SliverAppBar(
+            // stretch: false,
+            // stretchTriggerOffset: 10,
+            // scrolledUnderElevation: 300.0,
+            // surfaceTintColor: Colors.teal,
+            // foregroundColor: Colors.red,
+            // snap: false,
+
+            pinned: true,
+            floating: true,
+            backgroundColor: Colors.white,
+            leadingWidth: 73,
+            leading: const BackLeadingWidget(),
+            actions: const [
+              SearchBoxWidget(),
+            ],
+            expandedHeight: 500,
+            collapsedHeight: kToolbarHeight + 50,
+            centerTitle: true,
+            // toolbarHeight: 100,
+            title: const Text(
+              "Test",
+              style: TextStyle(color: MyColors.text),
+            ),
+            flexibleSpace: FlexibleSpaceBar(
+              collapseMode: CollapseMode.pin,
+              background: Container(
+                color: Colors.white,
+                padding: const EdgeInsets.only(bottom: 80),
+                child: Column(
+                  children: [
+                    Expanded(
+                      child: Container(
+                        decoration: const BoxDecoration(
+                          image: DecorationImage(
+                            image: NetworkImage(
+                              "https://img.freepik.com/free-photo/chicken-wings-barbecue-sweetly-sour-sauce-picnic-summer-menu-tasty-food-top-view-flat-lay_2829-6471.jpg?w=2000",
+                            ),
+                            fit: BoxFit.cover,
+                          ),
+                        ),
+                      ),
+                    ),
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        const Padding(
+                          padding: EdgeInsetsDirectional.fromSTEB(28, 20, 0, 10),
+                          child: Text(
+                            "Most Popular",
+                            style: TextStyle(
+                              fontSize: 18,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                        ),
+                        getMostPopular(),
+                      ],
+                    ),
+                  ],
                 ),
-          ];
-        },
-        body: ListView.builder(
-          padding: EdgeInsets.zero,
-          physics: const NeverScrollableScrollPhysics(),
-          itemCount: 40,
-          itemBuilder: (context, index) {
-            return const ListTile(
-              leading: Text("hello"),
-            );
-          },
-        ),
+                // child: getMostPopular(),
+              ),
+            ),
+            bottom: PreferredSize(
+              preferredSize: const Size.fromHeight(0.0),
+              child: getFilter(),
+            ),
+          ),
+          SliverList(
+            delegate: SliverChildBuilderDelegate(
+              childCount: 20,
+              (BuildContext context, int index) {
+                return GestureDetector(
+                  onTap: () {
+                    Get.to(() => const ViewProductScreen());
+                  },
+                  child: Card(
+                    margin: const EdgeInsets.all(15),
+                    child: Container(
+                      color: Colors.blue[100 * (index % 9 + 1)],
+                      height: 80,
+                      alignment: Alignment.center,
+                      child: Text(
+                        "Item $index",
+                        style: const TextStyle(fontSize: 30),
+                      ),
+                    ),
+                  ),
+                );
+              },
+            ),
+          ),
+        ],
       ),
     );
   }

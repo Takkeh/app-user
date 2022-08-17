@@ -2,9 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:takkeh/utils/base/colors.dart';
 
-class BackBoxWidget extends StatelessWidget {
-  const BackBoxWidget({
+class BackLeadingWidget extends StatelessWidget {
+  final IconData icon;
+
+  const BackLeadingWidget({
     Key? key,
+    this.icon = Icons.navigate_before,
   }) : super(key: key);
 
   @override
@@ -22,8 +25,8 @@ class BackBoxWidget extends StatelessWidget {
           color: MyColors.grey4F9.withOpacity(0.70),
           borderRadius: BorderRadius.circular(17),
         ),
-        child: const Icon(
-          Icons.navigate_before,
+        child: Icon(
+          icon,
           color: MyColors.greyEB3,
         ),
       ),
