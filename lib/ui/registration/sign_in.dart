@@ -67,23 +67,31 @@ class SignInScreenState extends State<SignInScreen> {
               },
             ),
             const SizedBox(height: 20),
-            CustomTextField(
-              textDirection: TextDirection.ltr,
-              controller: passwordCtrl,
-              label: "Password".tr,
-              obscureText: true,
-              suffixIcon: IconButton(
-                onPressed: () {},
-                icon: SvgPicture.asset(
-                  MyIcons.eyeCrossed,
-                ),
-              ),
-              prefixIcon: const CustomPrefixIcon(icon: MyIcons.shieldPlus),
-              validator: (value) {
-                if (value!.isEmpty) {
-                  return "Enter your password".tr;
-                }
-                return null;
+            GetBuilder<SignInController>(
+              init: SignInController(),
+              builder: (controller) {
+                return CustomTextField(
+                  textDirection: TextDirection.ltr,
+                  controller: passwordCtrl,
+                  label: "Password".tr,
+                  obscureText: controller.isObscure.value,
+                  suffixIcon: IconButton(
+                    onPressed: () {
+                      controller.changeObscure();
+                    },
+                    icon: SvgPicture.asset(
+                      //TODO: ask for the other icon
+                      MyIcons.eyeCrossed,
+                    ),
+                  ),
+                  prefixIcon: const CustomPrefixIcon(icon: MyIcons.shieldPlus),
+                  validator: (value) {
+                    if (value!.isEmpty) {
+                      return "Enter your password".tr;
+                    }
+                    return null;
+                  },
+                );
               },
             ),
             Row(
@@ -143,7 +151,7 @@ class SignInScreenState extends State<SignInScreen> {
               onPressed: () {
                 if (_formKey.currentState!.validate()) {
                   FocusManager.instance.primaryFocus?.unfocus();
-                  SignInController.fetchSignInData(
+                  SignInController.find.fetchSignInData(
                     // email: emailCtrl.text.trim(),
                     //TODO: change later
                     email: "testing123@gmail.com",

@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:takkeh/ui/registration/widgets/custom_prefix_icon.dart';
-import 'package:takkeh/ui/widgets/custom_app_bar.dart';
 import 'package:takkeh/ui/widgets/custom_elevated_button.dart';
 import 'package:takkeh/ui/widgets/custom_rich_text.dart';
 import 'package:takkeh/ui/widgets/custom_text_field.dart';
+import 'package:takkeh/ui/widgets/transparent_app_bar.dart';
 import 'package:takkeh/utils/base/icons.dart';
 import 'package:takkeh/utils/base/images.dart';
 import 'package:takkeh/utils/phone_field_helper.dart';
@@ -41,7 +41,7 @@ class _ResetPasswordScreenState extends State<ResetPasswordScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: const CustomAppBar(),
+      appBar: const TransparentAppBar(),
       body: SafeArea(
         child: Form(
           key: _formKey,

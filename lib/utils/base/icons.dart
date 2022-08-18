@@ -20,4 +20,15 @@ class MyIcons {
   static const String clock = "${_path}clock.svg";
   static const String scooter = "${_path}scooter.svg";
   static const String notes = "${_path}notes.svg";
+  static const String handUp = "${_path}hand_up.svg";
+  static const String clockWhite = "${_path}clock_white.svg";
+  static const String ticket = "${_path}ticket.svg";
+  static const String user = "${_path}user.svg";
+  static const String wallet = "${_path}wallet.svg";
+  static const String timePast = "${_path}time_past.svg";
+  static const String ticketBlack = "${_path}ticket_black.svg";
+  static const String questionMark = "${_path}question_mark.svg";
+  static const String info = "${_path}info.svg";
+  static const String edit = "${_path}edit.svg";
+  static const String signOut = "${_path}sign_out.svg";
 }

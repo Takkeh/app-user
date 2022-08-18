@@ -21,7 +21,7 @@ class SignUpScreenState extends State<SignUpScreen> {
   late TextEditingController nameCtrl, emailCtrl, passwordCtrl, confirmPasswordCtrl;
 
   final emailRegExp = RegExp(r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+");
-  final passwordRegExp = RegExp(r'^[a-zA-Z0-9_\-=@,\.;]+$');
+  final passwordRegExp = RegExp(r'^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[!@#\$&*~]).{8,}$');
 
   @override
   void initState() {
@@ -79,39 +79,63 @@ class SignUpScreenState extends State<SignUpScreen> {
             ),
             Padding(
               padding: const EdgeInsets.symmetric(vertical: 20.0),
-              child: CustomTextField(
-                controller: passwordCtrl,
-                label: "Password".tr,
-                obscureText: true,
-                prefixIcon: const CustomPrefixIcon(icon: MyIcons.shieldPlus),
-                suffixIcon: SvgPicture.asset(MyIcons.eyeCrossed),
-                textDirection: TextDirection.ltr,
-                validator: (value) {
-                  if (value!.isEmpty) {
-                    return "Enter your password".tr;
-                  } else if (value.length < 6) {
-                    return "password must be more than 5 characters".tr;
-                  } else if (!passwordRegExp.hasMatch(value)) {
-                    return "invalid password".tr;
-                  }
-                  return null;
+              child: GetBuilder<SignUpController>(
+                init: SignUpController(),
+                builder: (controller) {
+                  return CustomTextField(
+                    controller: passwordCtrl,
+                    label: "Password".tr,
+                    obscureText: controller.isPasswordObscure.value,
+                    prefixIcon: const CustomPrefixIcon(icon: MyIcons.shieldPlus),
+                    suffixIcon: GestureDetector(
+                      onTap: () {
+                        controller.changePasswordObscure();
+                      },
+                      child: SvgPicture.asset(
+                        MyIcons.eyeCrossed,
+                      ),
+                    ),
+                    textDirection: TextDirection.ltr,
+                    validator: (value) {
+                      if (value!.isEmpty) {
+                        return "Enter your password".tr;
+                      } else if (value.length < 6) {
+                        return "password must be more than 5 characters".tr;
+                      } else if (!passwordRegExp.hasMatch(value)) {
+                        return "invalid password".tr;
+                      }
+                      return null;
+                    },
+                  );
                 },
               ),
             ),
-            CustomTextField(
-              controller: confirmPasswordCtrl,
-              label: "Confirm password".tr,
-              obscureText: true,
-              prefixIcon: const CustomPrefixIcon(icon: MyIcons.shieldCheck),
-              suffixIcon: SvgPicture.asset(MyIcons.eyeCrossed),
-              textDirection: TextDirection.ltr,
-              validator: (value) {
-                if (value!.isEmpty) {
-                  return "Confirm your password".tr;
-                } else if (value != passwordCtrl.text) {
-                  return "password does not match".tr;
-                }
-                return null;
+            GetBuilder<SignUpController>(
+              init: SignUpController(),
+              builder: (controller) {
+                return CustomTextField(
+                  controller: confirmPasswordCtrl,
+                  label: "Confirm password".tr,
+                  obscureText: controller.isConfirmPasswordObscure.value,
+                  prefixIcon: const CustomPrefixIcon(icon: MyIcons.shieldCheck),
+                  suffixIcon: GestureDetector(
+                    onTap: () {
+                      controller.changeConfirmPasswordObscure();
+                    },
+                    child: SvgPicture.asset(
+                      MyIcons.eyeCrossed,
+                    ),
+                  ),
+                  textDirection: TextDirection.ltr,
+                  validator: (value) {
+                    if (value!.isEmpty) {
+                      return "Confirm your password".tr;
+                    } else if (value != passwordCtrl.text) {
+                      return "password does not match".tr;
+                    }
+                    return null;
+                  },
+                );
               },
             ),
             Padding(
@@ -141,7 +165,7 @@ class SignUpScreenState extends State<SignUpScreen> {
                     return;
                   }
                   FocusManager.instance.primaryFocus?.unfocus();
-                  SignUpController.fetchSignUpData(
+                  SignUpController.find.fetchSignUpData(
                     email: emailCtrl.text.trim(),
                     password: passwordCtrl.text.trim(),
                     name: nameCtrl.text.trim(),

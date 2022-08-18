@@ -10,10 +10,18 @@ import 'package:takkeh/ui/widgets/components/overlay_loader.dart';
 import 'package:takkeh/utils/app_constants.dart';
 import 'package:takkeh/utils/shared_prefrences.dart';
 
-class SignInController {
-  static SignInModel? signInModel;
+class SignInController extends GetxController {
+  static SignInController get find => Get.find();
 
-  static Future fetchSignInData({
+  SignInModel? signInModel;
+  final isObscure = true.obs;
+
+  void changeObscure() {
+    isObscure.value = !isObscure.value;
+    update();
+  }
+
+  Future fetchSignInData({
     required String email,
     required String password,
     required BuildContext context,

@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:get/get.dart';
+import 'package:takkeh/ui/base/notifications.dart';
 import 'package:takkeh/utils/base/icons.dart';
 
 class HomeAppBar extends StatelessWidget implements PreferredSizeWidget {
@@ -15,9 +17,14 @@ class HomeAppBar extends StatelessWidget implements PreferredSizeWidget {
       elevation: 0,
       leading: Padding(
         padding: const EdgeInsetsDirectional.fromSTEB(15, 0, 0, 0),
-        child: SvgPicture.asset(
-          MyIcons.menu,
-          height: 20,
+        child: GestureDetector(
+          onTap: () {
+            Scaffold.of(context).openDrawer();
+          },
+          child: SvgPicture.asset(
+            MyIcons.menu,
+            height: 20,
+          ),
         ),
       ),
       title: Row(
@@ -33,8 +40,13 @@ class HomeAppBar extends StatelessWidget implements PreferredSizeWidget {
       actions: [
         Padding(
           padding: const EdgeInsetsDirectional.fromSTEB(0, 0, 15, 0),
-          child: SvgPicture.asset(
-            MyIcons.bell,
+          child: GestureDetector(
+            onTap: () {
+              Get.to(() => const NotificationsScreen());
+            },
+            child: SvgPicture.asset(
+              MyIcons.bell,
+            ),
           ),
         ),
       ],

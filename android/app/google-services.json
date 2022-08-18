@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "308674443378",
+    "project_id": "takkeh-ab34f",
+    "storage_bucket": "takkeh-ab34f.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:308674443378:android:57684b301db0782c0daaeb",
+        "android_client_info": {
+          "package_name": "com.takkeh.wecan"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "308674443378-t0lv1b1kre9cjq4n8fuls5tomp0ql9h8.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCmppBilNY1xdR_o6J67qmGx1CDDIg0plY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "308674443378-t0lv1b1kre9cjq4n8fuls5tomp0ql9h8.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -4,10 +4,10 @@ import 'package:get/get.dart';
 import 'package:takkeh/binding/nav_bar.dart';
 import 'package:takkeh/binding/registration/sign_in.dart';
 import 'package:takkeh/translation/translation.dart';
+import 'package:takkeh/ui/base/home.dart';
 import 'package:takkeh/ui/base/intro.dart';
 import 'package:takkeh/ui/base/nav_bar.dart';
 import 'package:takkeh/ui/registration/registration.dart';
-import 'package:takkeh/ui/restaurants/screens/shop/products/products.dart';
 import 'package:takkeh/utils/material_theme.dart';
 import 'package:takkeh/utils/shared_prefrences.dart';
 
@@ -73,7 +73,7 @@ class _MyAppState extends State<MyApp> {
       fallbackLocale: Locale(MySharedPreferences.language),
       theme: AppThemeData().materialTheme,
       // home: _toggleScreen(),
-      home: const ProductsScreen(),
+      home: const HomeScreen(),
     );
   }
 }

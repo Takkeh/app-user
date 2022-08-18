@@ -17,7 +17,7 @@ class ViewProductScreen extends StatelessWidget {
     return Scaffold(
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
       floatingActionButton: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 30.0),
+        padding: const EdgeInsets.fromLTRB(30, 0, 30, 30),
         child: showFab
             ? ElevatedButton(
                 style: ElevatedButton.styleFrom(

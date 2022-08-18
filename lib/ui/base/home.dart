@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:takkeh/controller/home/category.dart';
 import 'package:takkeh/model/home/categories_model.dart';
+import 'package:takkeh/ui/base/drawer.dart';
 import 'package:takkeh/ui/base/widgets/category_loading.dart';
 import 'package:takkeh/ui/base/widgets/custom_indicator.dart';
 import 'package:takkeh/ui/base/widgets/home_app_bar.dart';
@@ -37,6 +38,7 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      drawer: const BaseDrawer(),
       appBar: const HomeAppBar(),
       body: SingleChildScrollView(
         padding: const EdgeInsets.only(bottom: 30),

@@ -44,6 +44,7 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                 title2: "Sign up",
                 onTap1: () {
                   setState(() {
+                    FocusManager.instance.primaryFocus?.unfocus();
                     isSignIn = true;
                     pageController.animateToPage(
                       0,
@@ -53,6 +54,7 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                   });
                 },
                 onTap2: () {
+                  FocusManager.instance.primaryFocus?.unfocus();
                   setState(() {
                     isSignIn = false;
                     pageController.animateToPage(
