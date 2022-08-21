@@ -4,7 +4,6 @@ import 'package:get/get.dart';
 import 'package:takkeh/binding/nav_bar.dart';
 import 'package:takkeh/binding/registration/sign_in.dart';
 import 'package:takkeh/translation/translation.dart';
-import 'package:takkeh/ui/base/home.dart';
 import 'package:takkeh/ui/base/intro.dart';
 import 'package:takkeh/ui/base/nav_bar.dart';
 import 'package:takkeh/ui/registration/registration.dart';
@@ -22,10 +21,11 @@ Future<void> main() async {
   // ),
   // );
   await MySharedPreferences.init();
-  MySharedPreferences.clearProfile();
+  //TODO: delete later
+  MySharedPreferences.language = '';
   if (MySharedPreferences.language.isEmpty) {
     // MySharedPreferences.language = Get.deviceLocale!.languageCode;
-    MySharedPreferences.language = 'en';
+    MySharedPreferences.language = 'ar';
   }
   SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp, DeviceOrientation.portraitDown]);
   runApp(const MyApp());
@@ -72,8 +72,7 @@ class _MyAppState extends State<MyApp> {
       locale: Locale(MySharedPreferences.language),
       fallbackLocale: Locale(MySharedPreferences.language),
       theme: AppThemeData().materialTheme,
-      // home: _toggleScreen(),
-      home: const HomeScreen(),
+      home: _toggleScreen(),
     );
   }
 }

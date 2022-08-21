@@ -11,10 +11,12 @@ class BaseNavBar extends StatefulWidget {
   const BaseNavBar({Key? key}) : super(key: key);
 
   @override
-  State<BaseNavBar> createState() => _BaseNavBarState();
+  State<BaseNavBar> createState() => BaseNavBarState();
 }
 
-class _BaseNavBarState extends State<BaseNavBar> {
+class BaseNavBarState extends State<BaseNavBar> {
+  bool isHidden = false;
+
   List<PersistentBottomNavBarItem> _navBarsItems() {
     return [
       PersistentBottomNavBarItem(
@@ -53,9 +55,18 @@ class _BaseNavBarState extends State<BaseNavBar> {
     ];
   }
 
+  void toggleBar(bool isDrawerOpen) {
+    if (isDrawerOpen) {
+      setState(() {
+        isHidden = isDrawerOpen;
+      });
+    }
+  }
+
   @override
   void initState() {
     navBarController = PersistentTabController(initialIndex: 0);
+    navBarController.addListener(() {});
     super.initState();
   }
 
@@ -66,6 +77,7 @@ class _BaseNavBarState extends State<BaseNavBar> {
       controller: navBarController,
       screens: _buildScreens(),
       items: _navBarsItems(),
+      hideNavigationBar: isHidden,
       confineInSafeArea: true,
       backgroundColor: MyColors.primary, // Default is Colors.white.
       handleAndroidBackButtonPress: true, // Default is true.

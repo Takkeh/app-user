@@ -38,6 +38,9 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      onDrawerChanged: (isOpen) {
+        //TODO: close nav bar when open
+      },
       drawer: const BaseDrawer(),
       appBar: const HomeAppBar(),
       body: SingleChildScrollView(

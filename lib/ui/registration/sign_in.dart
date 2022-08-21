@@ -24,10 +24,7 @@ class SignInScreen extends StatefulWidget {
 class SignInScreenState extends State<SignInScreen> {
   late TextEditingController phoneCtrl;
   late TextEditingController passwordCtrl;
-
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
-
-  static const _border = 26.0;
 
   @override
   void initState() {

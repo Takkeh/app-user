@@ -21,7 +21,7 @@ class SignUpScreenState extends State<SignUpScreen> {
   late TextEditingController nameCtrl, emailCtrl, passwordCtrl, confirmPasswordCtrl;
 
   final emailRegExp = RegExp(r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+");
-  final passwordRegExp = RegExp(r'^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[!@#\$&*~]).{8,}$');
+  final passwordRegExp = RegExp(r'^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[!@=#\$&*~]).{8,}$');
 
   @override
   void initState() {
@@ -171,7 +171,6 @@ class SignUpScreenState extends State<SignUpScreen> {
                     name: nameCtrl.text.trim(),
                     context: context,
                   );
-                  // controller.resetPassword(email: emailCtrl.text.trim(), context: context);
                 }
               },
             ),

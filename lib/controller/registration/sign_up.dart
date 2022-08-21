@@ -8,6 +8,7 @@ import 'package:takkeh/network/registration/sign_up.dart';
 import 'package:takkeh/ui/registration/verification.dart';
 import 'package:takkeh/ui/widgets/components/overlay_loader.dart';
 import 'package:takkeh/utils/app_constants.dart';
+import 'package:takkeh/utils/shared_prefrences.dart';
 
 class SignUpController extends GetxController {
   static SignUpController get find => Get.find();
@@ -41,6 +42,12 @@ class SignUpController extends GetxController {
       return;
     }
     if (signUpModel!.code == 200) {
+      MySharedPreferences.accessToken = signUpModel!.data!.token!;
+      MySharedPreferences.email = signUpModel!.data!.user!.email!;
+      MySharedPreferences.name = signUpModel!.data!.user!.name!;
+      MySharedPreferences.image = signUpModel!.data!.user!.image!;
+      MySharedPreferences.phone = signUpModel!.data!.user!.phone!;
+      MySharedPreferences.isLogIn = true;
       Get.offAll(() => const VerificationScreen(), binding: VerificationBinding());
     } else if (signUpModel!.code == 500) {
       //TODO: check status code when email or password is incorrect

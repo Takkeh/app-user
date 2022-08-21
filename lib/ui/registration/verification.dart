@@ -2,7 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
+import 'package:takkeh/binding/nav_bar.dart';
 import 'package:takkeh/controller/registration/verification.dart';
+import 'package:takkeh/ui/base/nav_bar.dart';
 import 'package:takkeh/ui/registration//widgets/verification_text_field.dart';
 import 'package:takkeh/ui/widgets/custom_elevated_button.dart';
 import 'package:takkeh/ui/widgets/custom_rich_text.dart';
@@ -138,7 +140,7 @@ class _VerificationScreenState extends State<VerificationScreen> {
                 }
                 FocusManager.instance.primaryFocus?.unfocus();
                 //api call
-                // Get.offAll(() => const BaseNavBar(), binding: NavBarBinding());
+                Get.offAll(() => const BaseNavBar(), binding: NavBarBinding());
                 // MySharedPreferences.accessToken = signUpModel!.data!.token!;
                 // MySharedPreferences.email = signUpModel!.data!.user!.email!;
                 // MySharedPreferences.name = signUpModel!.data!.user!.name!;

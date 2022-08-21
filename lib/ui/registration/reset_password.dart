@@ -22,7 +22,7 @@ class _ResetPasswordScreenState extends State<ResetPasswordScreen> {
   late TextEditingController phoneCtrl, countryCtrl;
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 
-  String _selectedMenu = '';
+  String selectedMenu = '';
 
   @override
   void initState() {
@@ -82,7 +82,7 @@ class _ResetPasswordScreenState extends State<ResetPasswordScreen> {
                     icon: const Icon(Icons.keyboard_arrow_down),
                     onSelected: (Menu item) {
                       setState(() {
-                        _selectedMenu = item.name;
+                        selectedMenu = item.name;
                       });
                     },
                     itemBuilder: (BuildContext context) => <PopupMenuEntry<Menu>>[

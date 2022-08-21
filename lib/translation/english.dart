@@ -36,5 +36,6 @@ const Map<String, String> en = {
   "Please enter the 4-digit verification code": "Please enter the 4-digit verification code",
   "Email": "Email",
   "Enter your email": "Enter your email",
+  "  Sign out  ": "  Sign out  ",
   "": "",
 };

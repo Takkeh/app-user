@@ -36,5 +36,6 @@ const Map<String, String> ar = {
   "Please enter the 4-digit verification code": "يرجى ادخال رمز التحقق",
   "Email": "البريد الإلكتروني",
   "Enter your email": "أدخل بريد الإلكتروني",
+  "  Sign out  ": "  تسجيل الخروج  ",
   "": "",
 };
