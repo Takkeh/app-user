@@ -1,12 +1,12 @@
-class SignUpModel {
-  SignUpModel({
+class CreateAccountModel {
+  CreateAccountModel({
     this.status,
     this.code,
     this.msg,
     this.data,
   });
 
-  SignUpModel.fromJson(dynamic json) {
+  CreateAccountModel.fromJson(dynamic json) {
     status = json['status'];
     code = json['code'];
     msg = json['msg'];

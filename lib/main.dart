@@ -1,3 +1,4 @@
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
@@ -12,20 +13,18 @@ import 'package:takkeh/utils/shared_prefrences.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  // await Firebase.initializeApp(
-  // options: const FirebaseOptions(
-  //   apiKey: "XXX",
-  //   appId: "XXX",
-  //   messagingSenderId: "XXX",
-  //   projectId: "XXX",
-  // ),
-  // );
+  await Firebase.initializeApp(
+      // options: const FirebaseOptions(
+      //   apiKey: "XXX",
+      //   appId: "XXX",
+      //   messagingSenderId: "XXX",
+      //   projectId: "XXX",
+      // ),
+      );
   await MySharedPreferences.init();
-  //TODO: delete later
-  MySharedPreferences.language = '';
   if (MySharedPreferences.language.isEmpty) {
     // MySharedPreferences.language = Get.deviceLocale!.languageCode;
-    MySharedPreferences.language = 'ar';
+    MySharedPreferences.language = 'en';
   }
   SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp, DeviceOrientation.portraitDown]);
   runApp(const MyApp());

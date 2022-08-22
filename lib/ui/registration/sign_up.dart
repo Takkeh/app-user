@@ -4,9 +4,11 @@ import 'package:get/get.dart';
 import 'package:takkeh/controller/registration/sign_up.dart';
 import 'package:takkeh/ui/registration//widgets/custom_prefix_icon.dart';
 import 'package:takkeh/ui/registration//widgets/terms_check_box.dart';
+import 'package:takkeh/ui/registration/send_otp.dart';
 import 'package:takkeh/ui/widgets/custom_elevated_button.dart';
 import 'package:takkeh/ui/widgets/custom_text_field.dart';
 import 'package:takkeh/utils/base/icons.dart';
+import 'package:takkeh/utils/strings.dart';
 
 class SignUpScreen extends StatefulWidget {
   const SignUpScreen({Key? key}) : super(key: key);
@@ -51,11 +53,11 @@ class SignUpScreenState extends State<SignUpScreen> {
           children: [
             CustomTextField(
               controller: nameCtrl,
-              label: "Full name".tr,
+              label: 'email_key',
               prefixIcon: const CustomPrefixIcon(icon: MyIcons.smileBeam),
               validator: (value) {
                 if (value!.isEmpty) {
-                  return "Enter your name".tr;
+                  return MyStrings.enterYourNameKey;
                 }
                 return null;
               },
@@ -64,15 +66,15 @@ class SignUpScreenState extends State<SignUpScreen> {
             CustomTextField(
               horizontalPadding: 12,
               controller: emailCtrl,
-              label: "Email".tr,
+              label: MyStrings.emailKey,
               keyboardType: TextInputType.emailAddress,
               textDirection: TextDirection.ltr,
               prefixIcon: const CustomPrefixIcon(icon: MyIcons.atSymbol),
               validator: (value) {
                 if (value!.isEmpty) {
-                  return "Enter your email".tr;
+                  return MyStrings.enterYourEmailKey;
                 } else if (!emailRegExp.hasMatch(value)) {
-                  return "invalid email".tr;
+                  return MyStrings.invalidEmailKey;
                 }
                 return null;
               },
@@ -84,7 +86,7 @@ class SignUpScreenState extends State<SignUpScreen> {
                 builder: (controller) {
                   return CustomTextField(
                     controller: passwordCtrl,
-                    label: "Password".tr,
+                    label: MyStrings.passwordKey,
                     obscureText: controller.isPasswordObscure.value,
                     prefixIcon: const CustomPrefixIcon(icon: MyIcons.shieldPlus),
                     suffixIcon: GestureDetector(
@@ -98,11 +100,9 @@ class SignUpScreenState extends State<SignUpScreen> {
                     textDirection: TextDirection.ltr,
                     validator: (value) {
                       if (value!.isEmpty) {
-                        return "Enter your password".tr;
-                      } else if (value.length < 6) {
-                        return "password must be more than 5 characters".tr;
+                        return MyStrings.enterYourPasswordKey;
                       } else if (!passwordRegExp.hasMatch(value)) {
-                        return "invalid password".tr;
+                        return MyStrings.invalidPasswordKey;
                       }
                       return null;
                     },
@@ -115,7 +115,7 @@ class SignUpScreenState extends State<SignUpScreen> {
               builder: (controller) {
                 return CustomTextField(
                   controller: confirmPasswordCtrl,
-                  label: "Confirm password".tr,
+                  label: MyStrings.confirmPassword,
                   obscureText: controller.isConfirmPasswordObscure.value,
                   prefixIcon: const CustomPrefixIcon(icon: MyIcons.shieldCheck),
                   suffixIcon: GestureDetector(
@@ -129,9 +129,9 @@ class SignUpScreenState extends State<SignUpScreen> {
                   textDirection: TextDirection.ltr,
                   validator: (value) {
                     if (value!.isEmpty) {
-                      return "Confirm your password".tr;
+                      return MyStrings.confirmPassword;
                     } else if (value != passwordCtrl.text) {
-                      return "password does not match".tr;
+                      return MyStrings.passwordDoesNotMatchKey;
                     }
                     return null;
                   },
@@ -151,25 +151,26 @@ class SignUpScreenState extends State<SignUpScreen> {
               ),
             ),
             CustomElevatedButton(
-              title: "Sign up",
+              title: MyStrings.signUpKey,
               onPressed: () {
                 if (_formKey.currentState!.validate()) {
                   if (!isChecked) {
                     ScaffoldMessenger.of(context).showSnackBar(
                       SnackBar(
                         content: Text(
-                          "You must agree to the terms and conditions".tr,
+                          MyStrings.mustAgreeToTermsKey,
                         ),
                       ),
                     );
                     return;
                   }
                   FocusManager.instance.primaryFocus?.unfocus();
-                  SignUpController.find.fetchSignUpData(
-                    email: emailCtrl.text.trim(),
-                    password: passwordCtrl.text.trim(),
-                    name: nameCtrl.text.trim(),
-                    context: context,
+                  Get.to(
+                    () => SendOtpScreen(
+                      email: emailCtrl.text.trim(),
+                      password: passwordCtrl.text.trim(),
+                      name: nameCtrl.text.trim(),
+                    ),
                   );
                 }
               },

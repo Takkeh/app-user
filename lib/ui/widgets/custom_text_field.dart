@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:takkeh/utils/base/colors.dart';
 
 class CustomTextField extends StatelessWidget {
@@ -20,6 +21,7 @@ class CustomTextField extends StatelessWidget {
   final Widget? prefixIcon;
   final TextAlign? textAlign;
   final double? horizontalPadding;
+  final List<TextInputFormatter>? inputFormatters;
 
   const CustomTextField({
     Key? key,
@@ -41,6 +43,7 @@ class CustomTextField extends StatelessWidget {
     this.textAlign,
     this.horizontalPadding,
     this.minLines,
+    this.inputFormatters,
   }) : super(key: key);
 
   static const _border = 26.0;
@@ -48,6 +51,7 @@ class CustomTextField extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return TextFormField(
+      inputFormatters: inputFormatters,
       autovalidateMode: autoValidateMode,
       onTap: onTap,
       textAlign: textAlign ?? TextAlign.start,

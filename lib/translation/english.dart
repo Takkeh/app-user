@@ -1,4 +1,6 @@
-const Map<String, String> en = {
+import 'package:takkeh/utils/strings.dart';
+
+final Map<String, String> en = {
   "Sign in": "Sign in",
   "Sign Up": "Sign Up",
   "Phone number": "Phone number",
@@ -37,5 +39,9 @@ const Map<String, String> en = {
   "Email": "Email",
   "Enter your email": "Enter your email",
   "  Sign out  ": "  Sign out  ",
+  MyStrings.signInKey: 'Sign in',
+  MyStrings.signUpKey: 'Sign Up',
+  MyStrings.emailOrPhoneAlreadyRegisteredKey: 'Email or Phone Already registered',
+  MyStrings.fullNameLabelKey: 'Enter your full name',
   "": "",
 };

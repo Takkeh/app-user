@@ -42,8 +42,7 @@ class SignInController extends GetxController {
       MySharedPreferences.phone = signInModel!.data!.user!.phone!;
       MySharedPreferences.isLogIn = true;
     } else if (signInModel!.code == 500) {
-      //TODO: check status code when email or password is incorrect
-      Fluttertoast.showToast(msg: signInModel!.msg!);
+      Fluttertoast.showToast(msg: "incorrect email or password");
     } else {
       Fluttertoast.showToast(msg: signInModel!.msg!);
     }

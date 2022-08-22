@@ -5,7 +5,6 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
 import 'package:takkeh/controller/registration/sign_in.dart';
-import 'package:takkeh/ui/registration//reset_password.dart';
 import 'package:takkeh/ui/registration//widgets/custom_prefix_icon.dart';
 import 'package:takkeh/ui/widgets/custom_elevated_button.dart';
 import 'package:takkeh/ui/widgets/custom_social_button.dart';
@@ -95,7 +94,7 @@ class SignInScreenState extends State<SignInScreen> {
               children: [
                 TextButton(
                   onPressed: () {
-                    Get.to(() => const ResetPasswordScreen());
+                    // Get.to(() => const SendOtpScreen());
                   },
                   child: Text(
                     "Forgot Password ?".tr,
@@ -149,9 +148,7 @@ class SignInScreenState extends State<SignInScreen> {
                 if (_formKey.currentState!.validate()) {
                   FocusManager.instance.primaryFocus?.unfocus();
                   SignInController.find.fetchSignInData(
-                    // email: emailCtrl.text.trim(),
-                    //TODO: change later
-                    email: "testing123@gmail.com",
+                    email: phoneCtrl.text.trim(),
                     password: passwordCtrl.text.trim(),
                     context: context,
                   );

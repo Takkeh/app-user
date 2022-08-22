@@ -3,6 +3,8 @@ import 'package:takkeh/ui/registration//sign_in.dart';
 import 'package:takkeh/ui/registration//sign_up.dart';
 import 'package:takkeh/ui/widgets/base_switch_slider.dart';
 import 'package:takkeh/utils/base/images.dart';
+import 'package:takkeh/utils/shared_prefrences.dart';
+import 'package:takkeh/utils/strings.dart';
 
 class RegistrationScreen extends StatefulWidget {
   const RegistrationScreen({Key? key}) : super(key: key);
@@ -40,8 +42,8 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                 height: 150,
               ),
               BaseSwitchSlider(
-                title1: "Sign in",
-                title2: "Sign up",
+                title1: MyStrings.signInKey,
+                title2: MyStrings.signUpKey,
                 onTap1: () {
                   setState(() {
                     FocusManager.instance.primaryFocus?.unfocus();
@@ -64,7 +66,7 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                     );
                   });
                 },
-                isFirst: isSignIn,
+                isFirst: MySharedPreferences.language == 'en' ? isSignIn : !isSignIn,
               ),
               Expanded(
                 child: PageView(

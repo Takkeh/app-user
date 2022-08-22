@@ -1,28 +1,46 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:get/get.dart';
+import 'package:takkeh/controller/registration/create_account.dart';
+import 'package:takkeh/ui/registration/widgets/countries_dialog.dart';
 import 'package:takkeh/ui/registration/widgets/custom_prefix_icon.dart';
 import 'package:takkeh/ui/widgets/custom_elevated_button.dart';
 import 'package:takkeh/ui/widgets/custom_rich_text.dart';
 import 'package:takkeh/ui/widgets/custom_text_field.dart';
 import 'package:takkeh/ui/widgets/transparent_app_bar.dart';
+import 'package:takkeh/utils/base/colors.dart';
 import 'package:takkeh/utils/base/icons.dart';
 import 'package:takkeh/utils/base/images.dart';
 import 'package:takkeh/utils/phone_field_helper.dart';
 
-enum Menu { itemOne, itemTwo, itemThree, itemFour }
+class SendOtpScreen extends StatefulWidget {
+  final String email, password, name;
 
-class ResetPasswordScreen extends StatefulWidget {
-  const ResetPasswordScreen({Key? key}) : super(key: key);
+  const SendOtpScreen({
+    Key? key,
+    required this.email,
+    required this.password,
+    required this.name,
+  }) : super(key: key);
 
   @override
-  State<ResetPasswordScreen> createState() => _ResetPasswordScreenState();
+  State<SendOtpScreen> createState() => _SendOtpScreenState();
 }
 
-class _ResetPasswordScreenState extends State<ResetPasswordScreen> {
+class _SendOtpScreenState extends State<SendOtpScreen> {
   late TextEditingController phoneCtrl, countryCtrl;
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 
-  String selectedMenu = '';
+  void showDialog() {
+    Get.defaultDialog(
+      title: "Countries",
+      titlePadding: const EdgeInsets.only(top: 35),
+      radius: 56,
+      titleStyle: const TextStyle(color: MyColors.primary),
+      contentPadding: const EdgeInsets.symmetric(horizontal: 15, vertical: 0),
+      content: CountriesDialog(chosenCountry: countryCtrl.text),
+    );
+  }
 
   @override
   void initState() {
@@ -72,48 +90,24 @@ class _ResetPasswordScreenState extends State<ResetPasswordScreen> {
                   label: "Country".tr,
                   textDirection: TextDirection.ltr,
                   readOnly: true,
-                  onTap: () {},
-                  keyboardType: TextInputType.phone,
-                  //TODO: do it later
+                  onTap: () {
+                    showDialog();
+                  },
                   prefixIcon: const CustomPrefixIcon(
                     icon: MyIcons.circlePhone,
                   ),
-                  suffixIcon: PopupMenuButton<Menu>(
-                    icon: const Icon(Icons.keyboard_arrow_down),
-                    onSelected: (Menu item) {
-                      setState(() {
-                        selectedMenu = item.name;
-                      });
-                    },
-                    itemBuilder: (BuildContext context) => <PopupMenuEntry<Menu>>[
-                      const PopupMenuItem<Menu>(
-                        value: Menu.itemOne,
-                        child: Text('Item 1'),
-                      ),
-                      const PopupMenuItem<Menu>(
-                        value: Menu.itemTwo,
-                        child: Text('Item 2'),
-                      ),
-                      const PopupMenuItem<Menu>(
-                        value: Menu.itemThree,
-                        child: Text('Item 3'),
-                      ),
-                      const PopupMenuItem<Menu>(
-                        value: Menu.itemFour,
-                        child: Text('Item 4'),
-                      ),
-                    ],
-                  ),
+                  suffixIcon: const Icon(Icons.keyboard_arrow_down),
                   validator: (value) {
-                    if (value!.isEmpty) {
-                      return "Enter your phone number".tr;
-                    }
+                    // if (value!.isEmpty) {
+                    //   return "Enter your phone number".tr;
+                    // }
                     return null;
                   },
                 ),
                 Padding(
                   padding: const EdgeInsets.only(top: 15.0, bottom: 30),
                   child: CustomTextField(
+                    inputFormatters: [LengthLimitingTextInputFormatter(9)],
                     controller: phoneCtrl,
                     label: "Phone number".tr,
                     textDirection: TextDirection.ltr,
@@ -123,6 +117,8 @@ class _ResetPasswordScreenState extends State<ResetPasswordScreen> {
                     validator: (value) {
                       if (value!.isEmpty) {
                         return "Enter your phone number".tr;
+                      } else if (value.length < 9) {
+                        return '';
                       }
                       return null;
                     },
@@ -135,7 +131,13 @@ class _ResetPasswordScreenState extends State<ResetPasswordScreen> {
                     onPressed: () {
                       if (_formKey.currentState!.validate()) {
                         FocusManager.instance.primaryFocus?.unfocus();
-                        // controller.resetPassword(email: emailCtrl.text.trim(), context: context);
+                        CreateAccountController.fetchSignUpData(
+                          email: widget.email,
+                          password: widget.password,
+                          name: widget.name,
+                          context: context,
+                          phone: phoneCtrl.text,
+                        );
                       }
                     },
                   ),

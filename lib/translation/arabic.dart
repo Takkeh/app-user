@@ -1,4 +1,6 @@
-const Map<String, String> ar = {
+import 'package:takkeh/utils/strings.dart';
+
+final Map<String, String> ar = {
   "Sign in": "تسجيل الدخول",
   "Sign Up": "إنشاء حساب",
   "Phone number": "رقم الهاتف",
@@ -37,5 +39,9 @@ const Map<String, String> ar = {
   "Email": "البريد الإلكتروني",
   "Enter your email": "أدخل بريد الإلكتروني",
   "  Sign out  ": "  تسجيل الخروج  ",
+  MyStrings.signInKey: "تسجيل الدخول",
+  MyStrings.signUpKey: "إنشاء حساب",
+  MyStrings.emailOrPhoneAlreadyRegisteredKey: "الحساب مسجل مسبقا",
+  MyStrings.fullNameLabelKey: "أدخل الإسم",
   "": "",
 };
