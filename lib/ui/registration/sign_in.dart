@@ -6,7 +6,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
 import 'package:takkeh/controller/registration/sign_in.dart';
-import 'package:takkeh/translation/translation_service/service.dart';
+import 'package:takkeh/translation/service.dart';
 import 'package:takkeh/ui/registration//widgets/custom_prefix_icon.dart';
 import 'package:takkeh/ui/registration/reset_password/step1.dart';
 import 'package:takkeh/ui/widgets/custom_elevated_button.dart';
@@ -54,14 +54,14 @@ class SignInScreenState extends State<SignInScreen> {
               textAlign: TextAlign.left,
               controller: phoneCtrl,
               inputFormatters: [LengthLimitingTextInputFormatter(9)],
-              label: TranslationService.getString('sign_in_key'),
+              label: TranslationService.getString('phone_number_key'),
               textDirection: TextDirection.ltr,
               keyboardType: TextInputType.phone,
               prefixIcon: PhoneFieldHelper.togglePrefixIcon(),
               suffixIcon: PhoneFieldHelper.toggleSuffixIcon(),
               validator: (value) {
                 if (value!.isEmpty) {
-                  return "Enter your phone number".tr;
+                  return TranslationService.getString('enter_phone_number_key');
                 }
                 return null;
               },
@@ -73,7 +73,7 @@ class SignInScreenState extends State<SignInScreen> {
                 return CustomTextField(
                   textDirection: TextDirection.ltr,
                   controller: passwordCtrl,
-                  label: "Password".tr,
+                  label: TranslationService.getString('password_key'),
                   obscureText: controller.isObscure.value,
                   suffixIcon: IconButton(
                     onPressed: () {
@@ -87,7 +87,7 @@ class SignInScreenState extends State<SignInScreen> {
                   prefixIcon: const CustomPrefixIcon(icon: MyIcons.shieldPlus),
                   validator: (value) {
                     if (value!.isEmpty) {
-                      return "Enter your password".tr;
+                      return TranslationService.getString('enter_password_key');
                     }
                     return null;
                   },
@@ -101,7 +101,7 @@ class SignInScreenState extends State<SignInScreen> {
                     Get.to(() => const ResetPassStep1Screen());
                   },
                   child: Text(
-                    "Forgot Password ?".tr,
+                    TranslationService.getString('forgot_password_key'),
                     style: const TextStyle(
                       color: MyColors.text,
                       fontSize: 16,
@@ -118,7 +118,7 @@ class SignInScreenState extends State<SignInScreen> {
               endIndent: 30,
             ),
             Text(
-              "Or sign in with".tr,
+              TranslationService.getString('or_sign_in_with_key'),
               style: const TextStyle(
                 fontSize: 16,
               ),
@@ -147,7 +147,7 @@ class SignInScreenState extends State<SignInScreen> {
             ),
             const SizedBox(height: 40.0),
             CustomElevatedButton(
-              title: "Sign in".tr,
+              title: TranslationService.getString('sign_in_key'),
               onPressed: () {
                 if (_formKey.currentState!.validate()) {
                   FocusManager.instance.primaryFocus?.unfocus();

@@ -4,8 +4,8 @@ import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:takkeh/binding/nav_bar.dart';
 import 'package:takkeh/binding/registration/sign_in.dart';
+import 'package:takkeh/translation/service.dart';
 import 'package:takkeh/translation/translation.dart';
-import 'package:takkeh/translation/translation_service/service.dart';
 import 'package:takkeh/ui/base/intro.dart';
 import 'package:takkeh/ui/base/nav_bar.dart';
 import 'package:takkeh/ui/registration/registration.dart';
@@ -27,7 +27,7 @@ Future<void> main() async {
   MySharedPreferences.clearProfile();
   if (MySharedPreferences.language.isEmpty) {
     // MySharedPreferences.language = Get.deviceLocale!.languageCode;
-    MySharedPreferences.language = 'ar';
+    MySharedPreferences.language = 'en';
   }
   await TranslationService.init();
   await SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp, DeviceOrientation.portraitDown]);
