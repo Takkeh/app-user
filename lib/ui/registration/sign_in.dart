@@ -54,7 +54,7 @@ class SignInScreenState extends State<SignInScreen> {
               textAlign: TextAlign.left,
               controller: phoneCtrl,
               inputFormatters: [LengthLimitingTextInputFormatter(9)],
-              label: TranslationService.getString('phone number key'),
+              label: TranslationService.getString('sign_in_key'),
               textDirection: TextDirection.ltr,
               keyboardType: TextInputType.phone,
               prefixIcon: PhoneFieldHelper.togglePrefixIcon(),
