@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:takkeh/controller/registration/send_otp.dart';
+import 'package:takkeh/controller/registration/countries.dart';
 import 'package:takkeh/model/registration/countries_model.dart';
 import 'package:takkeh/ui/registration/widgets/flags_widgets.dart';
 import 'package:takkeh/ui/widgets/custom_elevated_button.dart';

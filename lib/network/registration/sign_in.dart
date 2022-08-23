@@ -26,7 +26,6 @@ class SignInApi {
       SignInModel signInModel = SignInModel.fromJson(json.decode(response.body));
       if (response.statusCode == 200) {
         return signInModel;
-        //TODO: check status code when email or password is incorrect
       } else if (response.statusCode == 500) {
         return signInModel;
       } else {

@@ -145,26 +145,26 @@ class _HomeScreenState extends State<HomeScreen> {
                               child: CachedNetworkImage(
                                 imageUrl: "${ApiUrl.mainUrl}/${snapshot.data!.categorys![0].image!}",
                                 placeholder: (context, url) => Image.asset(
-                                  MyImages.place,
+                                  MyImages.placeHolder,
                                   color: MyColors.primary,
                                 ),
-                                errorWidget: (context, url, error) => Image.asset(MyImages.place),
+                                errorWidget: (context, url, error) => Image.asset(MyImages.placeHolder),
                               ),
                             ),
                             const SizedBox(width: 10),
                             Expanded(
                               child: CachedNetworkImage(
                                 imageUrl: "${ApiUrl.mainUrl}/${snapshot.data!.categorys![0].image!}",
-                                placeholder: (context, url) => Image.asset(MyImages.place),
-                                errorWidget: (context, url, error) => Image.asset(MyImages.place),
+                                placeholder: (context, url) => Image.asset(MyImages.placeHolder),
+                                errorWidget: (context, url, error) => Image.asset(MyImages.placeHolder),
                               ),
                             ),
                             const SizedBox(width: 10),
                             Expanded(
                               child: CachedNetworkImage(
                                 imageUrl: "${ApiUrl.mainUrl}/${snapshot.data!.categorys![0].image!}",
-                                placeholder: (context, url) => Image.asset(MyImages.place),
-                                errorWidget: (context, url, error) => Image.asset(MyImages.place),
+                                placeholder: (context, url) => Image.asset(MyImages.placeHolder),
+                                errorWidget: (context, url, error) => Image.asset(MyImages.placeHolder),
                               ),
                             ),
                           ],

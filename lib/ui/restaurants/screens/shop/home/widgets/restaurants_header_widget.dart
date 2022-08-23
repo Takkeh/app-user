@@ -106,8 +106,8 @@ class _RestaurantsHeaderWidgetState extends State<RestaurantsHeaderWidget> {
                                     Flexible(
                                       child: CachedNetworkImage(
                                         imageUrl: "${ApiUrl.mainUrl}/${snapshot.data!.categorys![index].image!}",
-                                        placeholder: (context, url) => Image.asset(MyImages.place),
-                                        errorWidget: (context, url, error) => Image.asset(MyImages.place),
+                                        placeholder: (context, url) => Image.asset(MyImages.placeHolder),
+                                        errorWidget: (context, url, error) => Image.asset(MyImages.placeHolder),
                                       ),
                                     ),
                                     const SizedBox(height: 5),

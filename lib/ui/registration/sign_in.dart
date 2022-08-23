@@ -1,11 +1,14 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
 import 'package:takkeh/controller/registration/sign_in.dart';
+import 'package:takkeh/translation/translation_service/service.dart';
 import 'package:takkeh/ui/registration//widgets/custom_prefix_icon.dart';
+import 'package:takkeh/ui/registration/reset_password/step1.dart';
 import 'package:takkeh/ui/widgets/custom_elevated_button.dart';
 import 'package:takkeh/ui/widgets/custom_social_button.dart';
 import 'package:takkeh/ui/widgets/custom_text_field.dart';
@@ -50,7 +53,8 @@ class SignInScreenState extends State<SignInScreen> {
             CustomTextField(
               textAlign: TextAlign.left,
               controller: phoneCtrl,
-              label: "Phone number".tr,
+              inputFormatters: [LengthLimitingTextInputFormatter(9)],
+              label: TranslationService.getString('phone number key'),
               textDirection: TextDirection.ltr,
               keyboardType: TextInputType.phone,
               prefixIcon: PhoneFieldHelper.togglePrefixIcon(),
@@ -94,7 +98,7 @@ class SignInScreenState extends State<SignInScreen> {
               children: [
                 TextButton(
                   onPressed: () {
-                    // Get.to(() => const SendOtpScreen());
+                    Get.to(() => const ResetPassStep1Screen());
                   },
                   child: Text(
                     "Forgot Password ?".tr,

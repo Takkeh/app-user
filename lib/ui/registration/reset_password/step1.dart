@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
-import 'package:takkeh/controller/registration/create_account.dart';
+import 'package:takkeh/controller/registration/reset_pass/step1.dart';
 import 'package:takkeh/ui/registration/widgets/countries_dialog.dart';
 import 'package:takkeh/ui/registration/widgets/custom_prefix_icon.dart';
 import 'package:takkeh/ui/widgets/custom_elevated_button.dart';
@@ -13,21 +13,16 @@ import 'package:takkeh/utils/base/icons.dart';
 import 'package:takkeh/utils/base/images.dart';
 import 'package:takkeh/utils/phone_field_helper.dart';
 
-class SendOtpScreen extends StatefulWidget {
-  final String? email, password, name;
-
-  const SendOtpScreen({
+class ResetPassStep1Screen extends StatefulWidget {
+  const ResetPassStep1Screen({
     Key? key,
-    this.email,
-    this.password,
-    this.name,
   }) : super(key: key);
 
   @override
-  State<SendOtpScreen> createState() => _SendOtpScreenState();
+  State<ResetPassStep1Screen> createState() => _ResetPassStep1ScreenState();
 }
 
-class _SendOtpScreenState extends State<SendOtpScreen> {
+class _ResetPassStep1ScreenState extends State<ResetPassStep1Screen> {
   late TextEditingController phoneCtrl, countryCtrl;
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 
@@ -75,15 +70,15 @@ class _SendOtpScreenState extends State<SendOtpScreen> {
                 CustomRichText(
                   underLineNum: 1,
                   texts: [
-                    "Confirm ".tr,
-                    "Phone".tr,
-                    " Number".tr,
+                    "Reset ".tr,
+                    "Your".tr,
+                    " Password".tr,
                   ],
                 ),
                 Padding(
                   padding: const EdgeInsets.symmetric(vertical: 20.0),
                   child: Text(
-                    "Please enter the phone number".tr,
+                    "Please enter the phone number associated with the account to reset your password".tr,
                   ),
                 ),
                 CustomTextField(
@@ -131,10 +126,7 @@ class _SendOtpScreenState extends State<SendOtpScreen> {
                     onPressed: () {
                       if (_formKey.currentState!.validate()) {
                         FocusManager.instance.primaryFocus?.unfocus();
-                        CreateAccountController.fetchSignUpData(
-                          email: widget.email!,
-                          password: widget.password!,
-                          name: widget.name!,
+                        ResetPassStep1Controller.fetchOtpData(
                           context: context,
                           phone: phoneCtrl.text,
                         );

@@ -40,7 +40,7 @@ class CustomNetworkImage extends StatelessWidget {
           color: MyColors.greyED0,
           borderRadius: BorderRadius.circular(radius),
           image: const DecorationImage(
-            image: AssetImage(MyImages.place),
+            image: AssetImage(MyImages.placeHolder),
             fit: BoxFit.contain,
             alignment: Alignment.center,
           ),
@@ -54,7 +54,7 @@ class CustomNetworkImage extends StatelessWidget {
           color: MyColors.greyED0,
           borderRadius: BorderRadius.circular(radius),
           image: const DecorationImage(
-            image: AssetImage(MyImages.place),
+            image: AssetImage(MyImages.error),
             fit: BoxFit.contain,
             alignment: Alignment.center,
           ),

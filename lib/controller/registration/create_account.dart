@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_overlay_loader/flutter_overlay_loader.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
-import 'package:takkeh/binding/registration/verification.dart';
+import 'package:takkeh/binding/registration/code_timer.dart';
 import 'package:takkeh/model/registration/create_account_model.dart';
 import 'package:takkeh/network/registration/create_account.dart';
 import 'package:takkeh/ui/registration/verification.dart';
@@ -35,7 +35,7 @@ class CreateAccountController {
                 email: signUpModel!.data!.user!.email!,
                 token: signUpModel!.data!.token!,
               ),
-          binding: VerificationBinding());
+          binding: CodeTimerBinding());
     } else if (signUpModel!.code == 500) {
       Fluttertoast.showToast(msg: MyStrings.emailOrPhoneAlreadyRegisteredKey);
     } else {

@@ -1,11 +1,11 @@
-class CheckOtpModel {
-  CheckOtpModel({
+class SendOtpModel {
+  SendOtpModel({
     this.status,
     this.code,
     this.msg,
   });
 
-  CheckOtpModel.fromJson(dynamic json) {
+  SendOtpModel.fromJson(dynamic json) {
     status = json['status'];
     code = json['code'];
     msg = json['msg'];

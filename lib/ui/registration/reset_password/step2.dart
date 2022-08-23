@@ -3,7 +3,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:takkeh/controller/registration/code_timer_controller.dart';
-import 'package:takkeh/controller/registration/send_otp.dart';
+import 'package:takkeh/controller/registration/reset_pass/step2.dart';
 import 'package:takkeh/ui/registration//widgets/verification_text_field.dart';
 import 'package:takkeh/ui/widgets/custom_elevated_button.dart';
 import 'package:takkeh/ui/widgets/custom_rich_text.dart';
@@ -12,21 +12,18 @@ import 'package:takkeh/utils/base/colors.dart';
 import 'package:takkeh/utils/base/icons.dart';
 import 'package:takkeh/utils/base/images.dart';
 
-class VerificationScreen extends StatefulWidget {
-  final String phoneNum, name, email, token;
-  const VerificationScreen({
+class ResetPassStep2Screen extends StatefulWidget {
+  final String phoneNum;
+  const ResetPassStep2Screen({
     Key? key,
     required this.phoneNum,
-    required this.name,
-    required this.email,
-    required this.token,
   }) : super(key: key);
 
   @override
-  State<VerificationScreen> createState() => _VerificationScreenState();
+  State<ResetPassStep2Screen> createState() => _ResetPassStep2ScreenState();
 }
 
-class _VerificationScreenState extends State<VerificationScreen> {
+class _ResetPassStep2ScreenState extends State<ResetPassStep2Screen> {
   List<CodeField> codeFields = [
     CodeField(focusNode: FocusNode(), controller: TextEditingController()),
     CodeField(focusNode: FocusNode(), controller: TextEditingController()),
@@ -153,13 +150,10 @@ class _VerificationScreenState extends State<VerificationScreen> {
                   }
                 }
                 FocusManager.instance.primaryFocus?.unfocus();
-                SendOtpController.fetchOtpData(
-                  code: '${codeFields[0].controller.text}${codeFields[1].controller.text}${codeFields[2].controller.text}${codeFields[3].controller.text}'.trim(),
-                  phone: widget.phoneNum,
+                ResetPassStep2Controller.fetchResetPassStep2Data(
                   context: context,
-                  name: widget.name,
-                  token: widget.token,
-                  email: widget.email,
+                  phone: widget.phoneNum,
+                  code: '${codeFields[0].controller.text}${codeFields[1].controller.text}${codeFields[2].controller.text}${codeFields[3].controller.text}'.trim(),
                 );
               },
             ),
