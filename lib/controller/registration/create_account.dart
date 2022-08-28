@@ -5,10 +5,10 @@ import 'package:get/get.dart';
 import 'package:takkeh/binding/registration/code_timer.dart';
 import 'package:takkeh/model/registration/create_account_model.dart';
 import 'package:takkeh/network/registration/create_account.dart';
+import 'package:takkeh/translation/service.dart';
 import 'package:takkeh/ui/registration/verification.dart';
 import 'package:takkeh/ui/widgets/components/overlay_loader.dart';
 import 'package:takkeh/utils/app_constants.dart';
-import 'package:takkeh/utils/strings.dart';
 
 class CreateAccountController {
   static CreateAccountModel? signUpModel;
@@ -37,7 +37,7 @@ class CreateAccountController {
               ),
           binding: CodeTimerBinding());
     } else if (signUpModel!.code == 500) {
-      Fluttertoast.showToast(msg: MyStrings.emailOrPhoneAlreadyRegisteredKey);
+      Fluttertoast.showToast(msg: TranslationService.getString("email_or_phone_already_registered_key"));
     } else {
       Fluttertoast.showToast(msg: signUpModel!.msg!);
     }

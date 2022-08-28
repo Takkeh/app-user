@@ -5,6 +5,7 @@ import 'package:get/get.dart';
 import 'package:takkeh/controller/registration/code_timer_controller.dart';
 import 'package:takkeh/controller/registration/send_otp.dart';
 import 'package:takkeh/ui/registration//widgets/verification_text_field.dart';
+import 'package:takkeh/ui/registration/widgets/otp_counter_widget.dart';
 import 'package:takkeh/ui/widgets/custom_elevated_button.dart';
 import 'package:takkeh/ui/widgets/custom_rich_text.dart';
 import 'package:takkeh/ui/widgets/transparent_app_bar.dart';
@@ -111,31 +112,7 @@ class _VerificationScreenState extends State<VerificationScreen> {
                 );
               }).toList(),
             ),
-            Padding(
-              padding: const EdgeInsets.only(top: 40.0, bottom: 50),
-              child: GetBuilder<CodeTimerController>(
-                builder: (controller) {
-                  return RichText(
-                    text: TextSpan(
-                      children: <TextSpan>[
-                        TextSpan(
-                          text: 'Resend '.tr,
-                          style: const TextStyle(
-                            color: MyColors.text,
-                          ),
-                        ),
-                        TextSpan(
-                          text: '${"After".tr} ${controller.counter.value} ${"seconds".tr}',
-                          style: const TextStyle(
-                            color: MyColors.redD4F,
-                          ),
-                        ),
-                      ],
-                    ),
-                  );
-                },
-              ),
-            ),
+            OtpCounterWidget(phone: widget.phoneNum),
             CustomElevatedButton(
               title: "Confirm".tr,
               onPressed: () {

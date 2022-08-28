@@ -7,7 +7,7 @@ import 'package:takkeh/utils/api_url.dart';
 
 class SignInApi {
   static Future<SignInModel?> data({
-    required String email,
+    required String phone,
     required String password,
   }) async {
     try {
@@ -17,7 +17,7 @@ class SignInApi {
         'Content-Type': 'application/json',
       };
       var body = jsonEncode({
-        "email": email,
+        "phone": '+962$phone',
         "password": password,
       });
       log("Response:: SignInResponse\nUrl:: $url\nheaders:: $headers\nbody:: $body");

@@ -1,9 +1,11 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:persistent_bottom_nav_bar/persistent-tab-view.dart';
-import 'package:takkeh/ui/base/home.dart';
+import 'package:takkeh/ui/base/home/home.dart';
+import 'package:takkeh/ui/widgets/custom_nav_bar_icon.dart';
 // import 'package:takkeh/ui/screens/home/home.dart';
 import 'package:takkeh/utils/base/colors.dart';
+import 'package:takkeh/utils/base/icons.dart';
 
 late PersistentTabController navBarController;
 
@@ -20,28 +22,16 @@ class BaseNavBarState extends State<BaseNavBar> {
   List<PersistentBottomNavBarItem> _navBarsItems() {
     return [
       PersistentBottomNavBarItem(
-        icon: const Icon(CupertinoIcons.home),
-        title: ("Home"),
-        activeColorPrimary: CupertinoColors.activeBlue,
-        inactiveColorPrimary: CupertinoColors.systemGrey,
+        icon: CustomNavBaaButton(icon: MyIcons.home, isChosen: navBarController.index == 0 ? true : false),
       ),
       PersistentBottomNavBarItem(
-        icon: const Icon(CupertinoIcons.settings),
-        title: ("Settings"),
-        activeColorPrimary: CupertinoColors.activeBlue,
-        inactiveColorPrimary: CupertinoColors.systemGrey,
+        icon: CustomNavBaaButton(icon: MyIcons.timePast, isChosen: navBarController.index == 1 ? true : false),
       ),
       PersistentBottomNavBarItem(
-        icon: const Icon(CupertinoIcons.settings),
-        title: ("Settings"),
-        activeColorPrimary: CupertinoColors.activeBlue,
-        inactiveColorPrimary: CupertinoColors.systemGrey,
+        icon: CustomNavBaaButton(icon: MyIcons.headset, isChosen: navBarController.index == 2 ? true : false),
       ),
       PersistentBottomNavBarItem(
-        icon: const Icon(CupertinoIcons.settings),
-        title: ("Settings"),
-        activeColorPrimary: CupertinoColors.activeBlue,
-        inactiveColorPrimary: CupertinoColors.systemGrey,
+        icon: CustomNavBaaButton(icon: MyIcons.user, isChosen: navBarController.index == 3 ? true : false),
       ),
     ];
   }
@@ -66,7 +56,9 @@ class BaseNavBarState extends State<BaseNavBar> {
   @override
   void initState() {
     navBarController = PersistentTabController(initialIndex: 0);
-    navBarController.addListener(() {});
+    navBarController.addListener(() {
+      setState(() {});
+    });
     super.initState();
   }
 
@@ -79,6 +71,7 @@ class BaseNavBarState extends State<BaseNavBar> {
       items: _navBarsItems(),
       hideNavigationBar: isHidden,
       confineInSafeArea: true,
+      navBarHeight: 70,
       backgroundColor: MyColors.primary, // Default is Colors.white.
       handleAndroidBackButtonPress: true, // Default is true.
       resizeToAvoidBottomInset: true, // This needs to be true if you want to move up the screen when keyboard appears. Default is true.
@@ -100,7 +93,7 @@ class BaseNavBarState extends State<BaseNavBar> {
         curve: Curves.ease,
         duration: Duration(milliseconds: 200),
       ),
-      navBarStyle: NavBarStyle.style9, // Choose the nav bar style with this property.
+      navBarStyle: NavBarStyle.style6, // Choose the nav bar style with this property.
     );
   }
 }

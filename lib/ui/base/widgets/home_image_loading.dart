@@ -7,6 +7,7 @@ class HomeImageLoading extends StatelessWidget {
   static Widget getWidget() {
     return const Expanded(
       child: CustomShimmerLoading(
+        height: 100,
         radius: 15,
       ),
     );
@@ -14,9 +15,8 @@ class HomeImageLoading extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      height: 180,
-      padding: const EdgeInsets.fromLTRB(20, 50, 20, 60),
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 20.0, vertical: 30),
       child: Row(
         children: [
           getWidget(),

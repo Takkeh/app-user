@@ -8,5 +8,6 @@ class MyImages {
   static const String placeHolder = "${_path}place_holder.png";
   static const String notifications = "${_path}notifications.png";
   static const String handUpTransparent = "${_path}hand_up_transparent.png";
-  static const String error = "${_path}error.png";
+  static const String errorImage = "${_path}error_image.png";
+  static const String failedImage = "${_path}error_image.png";
 }

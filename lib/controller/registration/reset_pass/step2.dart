@@ -6,6 +6,7 @@ import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
 import 'package:takkeh/model/registration/reset_password/reset_pass_step2_model.dart';
 import 'package:takkeh/network/registration/reset_password/step2.dart';
+import 'package:takkeh/translation/service.dart';
 import 'package:takkeh/ui/registration/reset_password/step3.dart';
 import 'package:takkeh/ui/widgets/components/overlay_loader.dart';
 import 'package:takkeh/utils/app_constants.dart';
@@ -29,7 +30,7 @@ class ResetPassStep2Controller extends GetxController {
     if (resetPassStep2Model!.code == 200) {
       Get.to(() => ResetPassStep3Screen(phone: phone));
     } else if (resetPassStep2Model!.code == 500) {
-      Fluttertoast.showToast(msg: "incorrect otp");
+      Fluttertoast.showToast(msg: TranslationService.getString('incorrect_otp_key'));
     } else {
       Fluttertoast.showToast(msg: resetPassStep2Model!.msg!);
     }

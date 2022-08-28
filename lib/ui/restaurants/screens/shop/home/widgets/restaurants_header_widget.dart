@@ -13,12 +13,14 @@ class RestaurantsHeaderWidget extends StatefulWidget {
   final TextEditingController controller;
   final Function(String) onChanged;
   final String title;
+  final int index;
 
   const RestaurantsHeaderWidget({
     Key? key,
     required this.controller,
     required this.onChanged,
     required this.title,
+    required this.index,
   }) : super(key: key);
 
   @override
@@ -148,13 +150,20 @@ class _RestaurantsHeaderWidgetState extends State<RestaurantsHeaderWidget> {
             color: Colors.white,
           ),
           child: FittedBox(
-            child: Text(
-              widget.title,
-              style: const TextStyle(
-                color: MyColors.primary,
-                fontSize: 20,
+            child: AnimatedSwitcher(
+              duration: const Duration(milliseconds: 250),
+              transitionBuilder: (Widget child, Animation<double> animation) {
+                return ScaleTransition(scale: animation, child: child);
+              },
+              child: Text(
+                widget.title,
+                key: ValueKey<int>(widget.index),
+                style: const TextStyle(
+                  color: MyColors.primary,
+                  fontSize: 20,
+                ),
+                maxLines: 1,
               ),
-              maxLines: 1,
             ),
           ),
         ),

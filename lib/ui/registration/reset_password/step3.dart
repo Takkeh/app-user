@@ -28,6 +28,9 @@ class _ResetPassStep3ScreenState extends State<ResetPassStep3Screen> {
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
   final passwordRegExp = RegExp(r'^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[!@=#\$&*~]).{8,}$');
 
+  bool isPassObscure = true;
+  bool isConfirmPassObscure = true;
+
   @override
   void initState() {
     passwordCtrl = TextEditingController();
@@ -87,7 +90,7 @@ class _ResetPassStep3ScreenState extends State<ResetPassStep3Screen> {
                             controller.changePasswordObscure();
                           },
                           child: SvgPicture.asset(
-                            MyIcons.eyeCrossed,
+                            controller.isPasswordObscure.value ? MyIcons.eyeCrossed : MyIcons.eye,
                           ),
                         ),
                         textDirection: TextDirection.ltr,
@@ -116,7 +119,7 @@ class _ResetPassStep3ScreenState extends State<ResetPassStep3Screen> {
                           controller.changeConfirmPasswordObscure();
                         },
                         child: SvgPicture.asset(
-                          MyIcons.eyeCrossed,
+                          controller.isConfirmPasswordObscure.value ? MyIcons.eyeCrossed : MyIcons.eye,
                         ),
                       ),
                       textDirection: TextDirection.ltr,

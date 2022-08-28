@@ -31,4 +31,7 @@ class MyIcons {
   static const String info = "${_path}info.svg";
   static const String edit = "${_path}edit.svg";
   static const String signOut = "${_path}sign_out.svg";
+  static const String eye = "${_path}eye.svg";
+  static const String home = "${_path}home.svg";
+  static const String headset = "${_path}headset.svg";
 }

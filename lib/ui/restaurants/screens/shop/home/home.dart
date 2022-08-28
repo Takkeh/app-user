@@ -1,17 +1,13 @@
-import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:takkeh/controller/restaurants/restaurants.dart';
 import 'package:takkeh/model/restaurants/restaurants_model.dart';
+import 'package:takkeh/ui/restaurants/screens/shop/home/widgets/categories_builder.dart';
 import 'package:takkeh/ui/restaurants/screens/shop/home/widgets/gradient_colors_box.dart';
 import 'package:takkeh/ui/restaurants/screens/shop/home/widgets/restaurants_app_bar.dart';
-import 'package:takkeh/ui/restaurants/screens/shop/home/widgets/restaurants_header_widget.dart';
 import 'package:takkeh/ui/restaurants/screens/shop/home/widgets/restaurants_list_tile.dart';
 import 'package:takkeh/ui/restaurants/screens/shop/products/products.dart';
 import 'package:takkeh/ui/widgets/failed_widget.dart';
-import 'package:takkeh/utils/base/icons.dart';
-import 'package:takkeh/utils/constants.dart';
 
 class RestaurantsHomeScreen extends StatefulWidget {
   const RestaurantsHomeScreen({Key? key}) : super(key: key);
@@ -46,51 +42,9 @@ class _RestaurantsHomeScreenState extends State<RestaurantsHomeScreen> {
           Stack(
             clipBehavior: Clip.none,
             alignment: Alignment.bottomCenter,
-            children: [
-              const GradientColorsBox(),
-              ListBody(
-                children: [
-                  RestaurantsHeaderWidget(
-                    controller: controller,
-                    onChanged: (value) {},
-                    title: "Burger",
-                  ),
-                  Stack(
-                    alignment: Alignment.center,
-                    children: [
-                      Container(
-                        width: 90,
-                        height: 80,
-                        decoration: kSliderBoxDecoration,
-                      ),
-                      SizedBox(
-                        height: 80,
-                        child: CarouselSlider(
-                          options: CarouselOptions(
-                            viewportFraction: 0.167,
-                            height: 80.0,
-                          ),
-                          items: [1, 2, 3, 4, 5, 6, 7, 8, 9].map((i) {
-                            return Builder(
-                              builder: (BuildContext context) {
-                                return Container(
-                                  alignment: Alignment.center,
-                                  width: 30,
-                                  child: SvgPicture.asset(
-                                    MyIcons.marker,
-                                    color: Colors.black,
-                                    height: 60,
-                                  ),
-                                );
-                              },
-                            );
-                          }).toList(),
-                        ),
-                      ),
-                    ],
-                  ),
-                ],
-              ),
+            children: const [
+              GradientColorsBox(),
+              RestaurantCategoriesBuilder(),
             ],
           ),
           const SizedBox(height: 20),

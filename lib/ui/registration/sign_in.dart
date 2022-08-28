@@ -1,16 +1,12 @@
-import 'dart:io';
-
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
 import 'package:takkeh/controller/registration/sign_in.dart';
 import 'package:takkeh/translation/service.dart';
 import 'package:takkeh/ui/registration//widgets/custom_prefix_icon.dart';
 import 'package:takkeh/ui/registration/reset_password/step1.dart';
 import 'package:takkeh/ui/widgets/custom_elevated_button.dart';
-import 'package:takkeh/ui/widgets/custom_social_button.dart';
 import 'package:takkeh/ui/widgets/custom_text_field.dart';
 import 'package:takkeh/utils/base/colors.dart';
 import 'package:takkeh/utils/base/icons.dart';
@@ -30,6 +26,7 @@ class SignInScreenState extends State<SignInScreen> {
 
   @override
   void initState() {
+    Get.lazyPut(() => SignInController());
     phoneCtrl = TextEditingController();
     passwordCtrl = TextEditingController();
     super.initState();
@@ -80,8 +77,7 @@ class SignInScreenState extends State<SignInScreen> {
                       controller.changeObscure();
                     },
                     icon: SvgPicture.asset(
-                      //TODO: ask for the other icon
-                      MyIcons.eyeCrossed,
+                      controller.isObscure.value ? MyIcons.eyeCrossed : MyIcons.eye,
                     ),
                   ),
                   prefixIcon: const CustomPrefixIcon(icon: MyIcons.shieldPlus),
@@ -112,39 +108,40 @@ class SignInScreenState extends State<SignInScreen> {
                 const Spacer(),
               ],
             ),
-            const Divider(
-              height: 30,
-              indent: 30,
-              endIndent: 30,
-            ),
-            Text(
-              TranslationService.getString('or_sign_in_with_key'),
-              style: const TextStyle(
-                fontSize: 16,
-              ),
-            ),
-            const SizedBox(height: 20),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                CustomSocialButton(
-                  isGoogle: true,
-                  color: Colors.white,
-                  onTap: () {},
-                ),
-                CustomSocialButton(
-                  icon: FontAwesomeIcons.facebookF,
-                  color: MyColors.facebook,
-                  onTap: () {},
-                ),
-                if (Platform.isIOS)
-                  CustomSocialButton(
-                    icon: FontAwesomeIcons.apple,
-                    color: Colors.black,
-                    onTap: () {},
-                  ),
-              ],
-            ),
+            //TODO: for 2nd version
+            // const Divider(
+            //   height: 30,
+            //   indent: 30,
+            //   endIndent: 30,
+            // ),
+            // Text(
+            //   TranslationService.getString('or_sign_in_with_key'),
+            //   style: const TextStyle(
+            //     fontSize: 16,
+            //   ),
+            // ),
+            // const SizedBox(height: 20),
+            // Row(
+            //   mainAxisAlignment: MainAxisAlignment.center,
+            //   children: [
+            //     CustomSocialButton(
+            //       isGoogle: true,
+            //       color: Colors.white,
+            //       onTap: () {},
+            //     ),
+            //     CustomSocialButton(
+            //       icon: FontAwesomeIcons.facebookF,
+            //       color: MyColors.facebook,
+            //       onTap: () {},
+            //     ),
+            //     if (Platform.isIOS)
+            //       CustomSocialButton(
+            //         icon: FontAwesomeIcons.apple,
+            //         color: Colors.black,
+            //         onTap: () {},
+            //       ),
+            //   ],
+            // ),
             const SizedBox(height: 40.0),
             CustomElevatedButton(
               title: TranslationService.getString('sign_in_key'),
@@ -152,7 +149,7 @@ class SignInScreenState extends State<SignInScreen> {
                 if (_formKey.currentState!.validate()) {
                   FocusManager.instance.primaryFocus?.unfocus();
                   SignInController.find.fetchSignInData(
-                    email: phoneCtrl.text.trim(),
+                    phone: phoneCtrl.text.trim(),
                     password: passwordCtrl.text.trim(),
                     context: context,
                   );

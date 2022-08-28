@@ -6,7 +6,7 @@ class TranslationService {
   static final Map<String, String> arabic = {};
   static final baseCollection = FirebaseFirestore.instance.collection("translation");
 
-  static addToFirebase(String key) async {
+  static Future addToFirebase(String key) async {
     if (english.containsKey(key)) return;
     english[key] = "";
     baseCollection.doc('english').update({
@@ -22,9 +22,9 @@ class TranslationService {
   static String getString(String key) {
     addToFirebase(key);
     if (MySharedPreferences.language == 'en') {
-      return english.containsKey(key) ? english[key]! : "Firebase Translation";
+      return english.containsKey(key) && english[key]!.isNotEmpty ? english[key]! : key;
     } else {
-      return arabic.containsKey(key) ? arabic[key]! : "يترجم لاحقا";
+      return arabic.containsKey(key) && arabic[key]!.isNotEmpty ? arabic[key]! : key;
     }
   }
 

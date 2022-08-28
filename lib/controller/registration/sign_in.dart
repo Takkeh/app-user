@@ -5,6 +5,7 @@ import 'package:get/get.dart';
 import 'package:takkeh/binding/nav_bar.dart';
 import 'package:takkeh/model/registration/sign_in_model.dart';
 import 'package:takkeh/network/registration/sign_in.dart';
+import 'package:takkeh/translation/service.dart';
 import 'package:takkeh/ui/base/nav_bar.dart';
 import 'package:takkeh/ui/widgets/components/overlay_loader.dart';
 import 'package:takkeh/utils/app_constants.dart';
@@ -22,12 +23,12 @@ class SignInController extends GetxController {
   }
 
   Future fetchSignInData({
-    required String email,
+    required String phone,
     required String password,
     required BuildContext context,
   }) async {
     OverLayLoader.showLoading(context);
-    signInModel = await SignInApi.data(email: email, password: password);
+    signInModel = await SignInApi.data(phone: phone, password: password);
     if (signInModel == null) {
       Fluttertoast.showToast(msg: AppConstants.failedMessage);
       Loader.hide();
@@ -42,7 +43,7 @@ class SignInController extends GetxController {
       MySharedPreferences.phone = signInModel!.data!.user!.phone!;
       MySharedPreferences.isLogIn = true;
     } else if (signInModel!.code == 500) {
-      Fluttertoast.showToast(msg: "incorrect email or password");
+      Fluttertoast.showToast(msg: TranslationService.getString('incorrect_email_or_password_key'));
     } else {
       Fluttertoast.showToast(msg: signInModel!.msg!);
     }

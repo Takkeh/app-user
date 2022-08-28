@@ -13,4 +13,10 @@ class ApiUrl {
 
   //home
   static const String categories = "/api/v1/categories";
+  static const String slider = "/api/v1/sliders";
+  static const String offers = "/api/v1/offers";
+  static const String specialOffers = "/api/v1/specials";
+
+  //restaurants
+  static const String restaurantCategories = "/api/v1/categories";
 }

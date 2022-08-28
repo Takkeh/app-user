@@ -12,6 +12,8 @@ import 'package:takkeh/ui/registration/registration.dart';
 import 'package:takkeh/utils/material_theme.dart';
 import 'package:takkeh/utils/shared_prefrences.dart';
 
+// implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
+
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(
@@ -23,8 +25,6 @@ Future<void> main() async {
       // ),
       );
   await MySharedPreferences.init();
-  MySharedPreferences.language = '';
-  MySharedPreferences.clearProfile();
   if (MySharedPreferences.language.isEmpty) {
     // MySharedPreferences.language = Get.deviceLocale!.languageCode;
     MySharedPreferences.language = 'en';
@@ -53,10 +53,10 @@ class _MyAppState extends State<MyApp> {
   }
 
   Bindings _initialBinding() {
-    if (MySharedPreferences.accessToken.isEmpty) {
-      return SignInBinding();
-    } else {
+    if (MySharedPreferences.isLogIn) {
       return NavBarBinding();
+    } else {
+      return SignInBinding();
     }
   }
 
