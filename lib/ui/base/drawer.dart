@@ -30,7 +30,10 @@ class BaseDrawer extends StatelessWidget {
                 Expanded(
                   child: ListView(
                     children: [
-                      const DrawerProfileInfo(),
+                      Opacity(
+                        opacity: MySharedPreferences.accessToken.isEmpty ? 0.0 : 1.0,
+                        child: const DrawerProfileInfo(),
+                      ),
                       DrawerListTile(
                         title: 'Profile',
                         icon: MyIcons.user,

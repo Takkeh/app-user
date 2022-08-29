@@ -38,7 +38,6 @@ class TranslationService {
     final keys = await baseCollection.doc('arabic').get();
     var file = Map<String, String>.from(keys.data()!['keys']);
     arabic.addAll(file);
-    print("arabic:: $arabic");
   }
 
   static Future init() async {

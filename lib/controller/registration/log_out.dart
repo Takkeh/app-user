@@ -5,7 +5,7 @@ import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
 import 'package:takkeh/model/registration/log_out_model.dart';
 import 'package:takkeh/network/registration/log_out.dart';
-import 'package:takkeh/ui/registration/registration.dart';
+import 'package:takkeh/ui/screens/registration/registration.dart';
 import 'package:takkeh/ui/widgets/components/overlay_loader.dart';
 import 'package:takkeh/utils/app_constants.dart';
 import 'package:takkeh/utils/shared_prefrences.dart';

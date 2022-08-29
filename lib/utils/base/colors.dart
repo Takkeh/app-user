@@ -23,6 +23,7 @@ class MyColors {
   //red
   static const Color redD4F = Color(0xFFD51D4F);
   static const Color redB3A = Color(0xFFB90B3A);
+  static const Color redF98 = Color(0xFFDC7F98);
 
   //blue
   static const Color blue6FA = Color(0xFFF5F6FA);

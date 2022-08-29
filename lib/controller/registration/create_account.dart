@@ -6,7 +6,7 @@ import 'package:takkeh/binding/registration/code_timer.dart';
 import 'package:takkeh/model/registration/create_account_model.dart';
 import 'package:takkeh/network/registration/create_account.dart';
 import 'package:takkeh/translation/service.dart';
-import 'package:takkeh/ui/registration/verification.dart';
+import 'package:takkeh/ui/screens/registration/verification.dart';
 import 'package:takkeh/ui/widgets/components/overlay_loader.dart';
 import 'package:takkeh/utils/app_constants.dart';
 

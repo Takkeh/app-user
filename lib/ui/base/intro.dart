@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:takkeh/ui/registration/registration.dart';
+import 'package:takkeh/ui/screens/registration/registration.dart';
 import 'package:takkeh/utils/app_constants.dart';
 import 'package:takkeh/utils/base/images.dart';
 import 'package:takkeh/utils/shared_prefrences.dart';

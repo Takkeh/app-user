@@ -29,6 +29,7 @@ class NotificationsBox extends StatelessWidget {
           day,
           style: const TextStyle(
             fontSize: 20,
+            fontWeight: FontWeight.w500,
           ),
         ),
         ListView.separated(
@@ -42,7 +43,7 @@ class NotificationsBox extends StatelessWidget {
               child: Container(
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(17),
-                  color: const Color(0xFFFAF5E6),
+                  color: const Color(0xFFFDFDFE),
                 ),
                 padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 13),
                 child: Row(
@@ -53,8 +54,7 @@ class NotificationsBox extends StatelessWidget {
                       height: 80,
                       alignment: Alignment.center,
                       decoration: BoxDecoration(
-                        //TODO: ask for color
-                        color: MyColors.redD4F.withOpacity(0.50),
+                        color: MyColors.primary.withOpacity(0.50),
                         borderRadius: BorderRadius.circular(9.0),
                       ),
                       child: SvgPicture.asset(icon),
@@ -69,6 +69,7 @@ class NotificationsBox extends StatelessWidget {
                             style: const TextStyle(
                               color: MyColors.text,
                               fontSize: 18,
+                              fontWeight: FontWeight.w500,
                             ),
                           ),
                           Text(
@@ -97,6 +98,10 @@ class NotificationsBox extends StatelessWidget {
                           ),
                         ],
                       ),
+                    ),
+                    const Icon(
+                      Icons.navigate_next,
+                      color: MyColors.text,
                     ),
                   ],
                 ),

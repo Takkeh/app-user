@@ -4,7 +4,7 @@ import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
 import 'package:takkeh/model/registration/reset_password/reset_pass_step3_model.dart';
 import 'package:takkeh/network/registration/reset_password/step3.dart';
-import 'package:takkeh/ui/registration/registration.dart';
+import 'package:takkeh/ui/screens/registration/registration.dart';
 import 'package:takkeh/ui/widgets/components/overlay_loader.dart';
 import 'package:takkeh/utils/app_constants.dart';
 

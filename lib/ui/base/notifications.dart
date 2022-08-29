@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:takkeh/ui/base/widgets/notifications_box.dart';
 import 'package:takkeh/ui/widgets/transparent_app_bar.dart';
 import 'package:takkeh/utils/base/colors.dart';
@@ -15,8 +16,17 @@ class NotificationsScreen extends StatelessWidget {
     return Stack(
       alignment: Alignment.bottomCenter,
       children: [
+        Container(
+          alignment: Alignment.bottomCenter,
+          color: MyColors.blue6FA,
+          height: Get.height,
+          child: Image.asset(
+            MyImages.handUpTransparent,
+            height: 300,
+          ),
+        ),
         Scaffold(
-          backgroundColor: MyColors.blue6FA,
+          backgroundColor: Colors.transparent,
           appBar: const TransparentAppBar(
             title: "Notifications",
           ),
@@ -46,7 +56,7 @@ class NotificationsScreen extends StatelessWidget {
                   ),
                 )
               : ListView.separated(
-                  separatorBuilder: (context, index) => const SizedBox(height: 20),
+                  separatorBuilder: (context, index) => const SizedBox(height: 30),
                   padding: const EdgeInsets.symmetric(horizontal: 30, vertical: 30),
                   itemCount: 3,
                   itemBuilder: (context, index) {
@@ -62,10 +72,6 @@ class NotificationsScreen extends StatelessWidget {
                     );
                   },
                 ),
-        ),
-        Image.asset(
-          MyImages.handUpTransparent,
-          height: 200,
         ),
       ],
     );

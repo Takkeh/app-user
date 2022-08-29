@@ -95,7 +95,7 @@ flutter:
         - asset: assets/fonts/BalooBhaijaan2-Regular.ttf
     - family: Tajawal
       fonts:
-        - asset: assets/fonts/Tajawal-Medium.ttf
+        - asset: assets/fonts/Tajawal-Regular.ttf
   #       - asset: fonts/Schyler-Italic.ttf
   #         style: italic
   #   - family: Trajan Pro

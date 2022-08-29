@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:takkeh/ui/registration/widgets/custom_prefix_icon.dart';
-import 'package:takkeh/ui/registration/widgets/phone_suffix_icon.dart';
+import 'package:takkeh/ui/screens/registration/widgets/custom_prefix_icon.dart';
+import 'package:takkeh/ui/screens/registration/widgets/phone_suffix_icon.dart';
 import 'package:takkeh/utils/base/icons.dart';
 import 'package:takkeh/utils/shared_prefrences.dart';
 
