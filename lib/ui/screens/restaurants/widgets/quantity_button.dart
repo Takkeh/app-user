@@ -17,9 +17,9 @@ class QuantityButton extends StatelessWidget {
     return ElevatedButton(
       style: ElevatedButton.styleFrom(
         maximumSize: const Size(30, 30),
+        backgroundColor: color,
         minimumSize: const Size(30, 30),
         padding: EdgeInsets.zero,
-        primary: color,
       ),
       onPressed: onPressed,
       child: Icon(

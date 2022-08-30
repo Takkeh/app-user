@@ -56,7 +56,7 @@ class _ProductsScreenState extends State<ProductsScreen> {
         slivers: [
           SliverAppBar(
             pinned: isAppBarPinned,
-            backgroundColor: MyColors.primary,
+            backgroundColor: MyColors.redD4F,
             leadingWidth: 73,
             leading: const BackLeadingWidget(),
             actions: const [

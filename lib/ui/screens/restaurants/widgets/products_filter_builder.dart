@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:takkeh/controller/restaurants/products_filter.dart';
+import 'package:takkeh/ui/screens/restaurants/widgets/custom_circular_progress_indicator.dart';
+import 'package:takkeh/ui/screens/restaurants/widgets/products_filter_loading.dart';
 import 'package:takkeh/utils/base/colors.dart';
 import 'package:takkeh/utils/base/images.dart';
 
@@ -19,12 +21,7 @@ class _ProductsFilterBuilderState extends State<ProductsFilterBuilder> {
     return GetBuilder<ProductsFilterCtrl>(
       builder: (controller) {
         if (controller.isLoading.value) {
-          return const Center(
-            child: Padding(
-              padding: EdgeInsets.only(top: 20.0),
-              child: CircularProgressIndicator(),
-            ),
-          );
+          return const ProductsFilterLoading();
         }
 
         if (controller.productsFilterModel == null) {
@@ -43,15 +40,7 @@ class _ProductsFilterBuilderState extends State<ProductsFilterBuilder> {
             itemBuilder: (context, index) {
               if (index + 1 == controller.filters.length) {
                 if (controller.loadMore.value) {
-                  return const Center(
-                    child: SizedBox(
-                      height: 25,
-                      width: 25,
-                      child: CircularProgressIndicator(
-                        strokeWidth: 2,
-                      ),
-                    ),
-                  );
+                  return const CustomCircularProgressIndicator(color: MyColors.redD4F);
                 } else {
                   return const SizedBox.shrink();
                 }

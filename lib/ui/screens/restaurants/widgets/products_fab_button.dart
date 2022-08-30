@@ -19,7 +19,7 @@ class ProductsFABButton extends StatelessWidget {
           Get.to(() => const BasketScreen());
         },
         style: ElevatedButton.styleFrom(
-          primary: MyColors.redF98,
+          backgroundColor: MyColors.redF98,
           shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(11)),
           fixedSize: const Size(double.infinity, 50),
           minimumSize: const Size(double.infinity, 50),
