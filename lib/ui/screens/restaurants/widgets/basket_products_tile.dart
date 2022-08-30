@@ -6,6 +6,7 @@ import 'package:takkeh/utils/base/colors.dart';
 
 class BasketProductTile extends StatefulWidget {
   final String imageUrl, title, subTitle, description;
+  final double initialPrice;
   final List<Widget> notes;
   final Function() onTap;
 
@@ -17,36 +18,35 @@ class BasketProductTile extends StatefulWidget {
     required this.description,
     required this.onTap,
     required this.notes,
+    required this.initialPrice,
   }) : super(key: key);
 
-  static double myValue = 20;
-
   @override
-  State<BasketProductTile> createState() => _BasketProductTileState();
+  State<BasketProductTile> createState() => BasketProductTileState();
 }
 
-class _BasketProductTileState extends State<BasketProductTile> {
+class BasketProductTileState extends State<BasketProductTile> {
   late int counter;
+  late double newPrice;
 
-  void toggle(String status) {
+  void toggle(String status, double initialPrice) {
     if (status == 'add') {
       setState(() {
         counter++;
+        newPrice = initialPrice * counter;
       });
     } else {
       if (counter == 1) return;
       setState(() {
         counter--;
+        newPrice = initialPrice * counter;
       });
     }
   }
 
-  String getPrice(double price) {
-    return (price * counter).toString();
-  }
-
   @override
   void initState() {
+    newPrice = widget.initialPrice;
     counter = 1;
     super.initState();
   }
@@ -93,7 +93,7 @@ class _BasketProductTileState extends State<BasketProductTile> {
                             return ScaleTransition(scale: animation, child: child);
                           },
                           child: Text(
-                            "${getPrice(22.5)} $kPCurrency",
+                            "$newPrice $kPCurrency",
                             key: ValueKey(counter),
                             style: const TextStyle(
                               fontSize: 16,
@@ -109,7 +109,7 @@ class _BasketProductTileState extends State<BasketProductTile> {
                         QuantityButton(
                           icon: Icons.add,
                           onPressed: () {
-                            toggle('add');
+                            toggle('add', widget.initialPrice);
                           },
                           color: MyColors.redD4F,
                         ),
@@ -122,7 +122,7 @@ class _BasketProductTileState extends State<BasketProductTile> {
                         QuantityButton(
                           icon: Icons.remove,
                           onPressed: () {
-                            toggle('remove');
+                            toggle('remove', widget.initialPrice);
                           },
                           color: counter == 1 ? MyColors.redD4F.withOpacity(0.60) : MyColors.redD4F,
                         ),

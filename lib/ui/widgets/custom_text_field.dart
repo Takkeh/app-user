@@ -21,6 +21,8 @@ class CustomTextField extends StatelessWidget {
   final Widget? prefixIcon;
   final TextAlign? textAlign;
   final double? horizontalPadding;
+  final double? minSuffixWidth;
+  final double? maxSuffixWidth;
   final List<TextInputFormatter>? inputFormatters;
 
   const CustomTextField({
@@ -44,6 +46,8 @@ class CustomTextField extends StatelessWidget {
     this.horizontalPadding,
     this.minLines,
     this.inputFormatters,
+    this.minSuffixWidth = 70,
+    this.maxSuffixWidth = 70,
   }) : super(key: key);
 
   static const _border = 26.0;
@@ -72,10 +76,10 @@ class CustomTextField extends StatelessWidget {
         prefixIcon: prefixIcon,
         suffixIcon: suffixIcon,
         contentPadding: EdgeInsets.symmetric(horizontal: horizontalPadding ?? 0, vertical: 20),
-        suffixIconConstraints: const BoxConstraints(
+        suffixIconConstraints: BoxConstraints(
           maxHeight: 50,
-          minWidth: 70,
-          maxWidth: 70,
+          minWidth: minSuffixWidth == null ? 70 : minSuffixWidth!,
+          maxWidth: maxSuffixWidth == null ? 70 : maxSuffixWidth!,
         ),
         prefixIconConstraints: const BoxConstraints(
           maxHeight: 50,

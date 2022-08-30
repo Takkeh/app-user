@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:takkeh/model/restaurants/restaurants_model.dart';
-import 'package:takkeh/network/restaurants/restaurants.dart';
+import 'package:takkeh/model/restaurants/products_filter_model.dart';
+import 'package:takkeh/network/restaurants/products_filter.dart';
 
-class RestaurantsCtrl extends GetxController {
-  RestaurantsModel? restaurantsModel;
+class ProductsFilterCtrl extends GetxController {
+  ProductsFilterModel? productsFilterModel;
   late ScrollController scrollCtrl;
-  final restaurants = <Restaurants>[].obs;
+  final filters = <ProductFilter>[].obs;
   final isLoading = false.obs;
   final loadMore = false.obs;
   final allLoaded = false.obs;
@@ -28,22 +28,22 @@ class RestaurantsCtrl extends GetxController {
     update();
   }
 
-  Future<RestaurantsModel?> fetchCategoriesData(int page, String loadingCase) async {
+  Future<ProductsFilterModel?> fetchCategoriesData(int page, String loadingCase) async {
     toggleLoading(loadingCase, true);
-    restaurantsModel = await RestaurantsApi.data(page);
-    if (restaurantsModel == null) {
+    productsFilterModel = await ProductsFilterApi.data(page);
+    if (productsFilterModel == null) {
       toggleLoading(loadingCase, false);
       return null;
     }
-    if (restaurantsModel!.products!.isNotEmpty) {
-      restaurants.addAll(restaurantsModel!.products!);
+    if (productsFilterModel!.products!.isNotEmpty) {
+      filters.addAll(productsFilterModel!.products!);
       limit++;
     } else {
       allLoaded.value = true;
     }
     update();
     toggleLoading(loadingCase, false);
-    return restaurantsModel;
+    return productsFilterModel;
   }
 
   @override

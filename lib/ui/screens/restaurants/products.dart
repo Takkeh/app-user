@@ -62,7 +62,7 @@ class _ProductsScreenState extends State<ProductsScreen> {
             actions: const [
               SearchBoxWidget(),
             ],
-            expandedHeight: 500,
+            expandedHeight: 470,
             collapsedHeight: kToolbarHeight + 50,
             centerTitle: true,
             title: const Text(
@@ -77,7 +77,7 @@ class _ProductsScreenState extends State<ProductsScreen> {
               collapseMode: CollapseMode.pin,
               background: Container(
                 color: Colors.white,
-                padding: const EdgeInsets.only(bottom: 80),
+                padding: const EdgeInsets.only(bottom: 60),
                 child: Column(
                   children: [
                     Expanded(

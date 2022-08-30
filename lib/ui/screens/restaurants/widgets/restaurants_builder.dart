@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:takkeh/binding/restaurants/products.dart';
 import 'package:takkeh/controller/restaurants/restaurants.dart';
 import 'package:takkeh/ui/screens/restaurants/products.dart';
 import 'package:takkeh/ui/widgets/custom_list_tile.dart';
@@ -26,47 +27,37 @@ class RestaurantsBuilder extends StatelessWidget {
         }
 
         return Expanded(
-          child: Stack(
-            alignment: Alignment.bottomCenter,
-            children: [
-              Container(
-                padding: const EdgeInsets.only(bottom: 50.0),
-                child: ListView.separated(
-                  controller: controller.scrollCtrl,
-                  padding: const EdgeInsets.fromLTRB(20, 20, 20, 0),
-                  separatorBuilder: (context, index) => const SizedBox(height: 15),
-                  itemCount: controller.restaurants.length,
-                  itemBuilder: (context, index) {
-                    return GetBuilder<RestaurantsCtrl>(
-                      builder: (controller) {
-                        return CustomListTile(
-                          imageUrl: controller.restaurants[index].thumbnail!,
-                          title: controller.restaurants[index].title!,
-                          description: controller.restaurants[index].description!,
-                          subTitle: controller.restaurants[index].brand!,
-                          onTap: () {
-                            Get.to(() => const ProductsScreen());
-                          },
-                        );
-                      },
-                    );
-                  },
-                ),
-              ),
-              // if (controller.loadMore.value)
-              GetBuilder<RestaurantsCtrl>(
-                builder: (controller) {
-                  if (!controller.loadMore.value) {
-                    return const Positioned(
-                      bottom: 10,
-                      child: CircularProgressIndicator(),
-                    );
-                  } else {
-                    return const SizedBox.shrink();
-                  }
+          child: ListView.separated(
+            controller: controller.scrollCtrl,
+            padding: EdgeInsets.symmetric(horizontal: 20, vertical: controller.allLoaded.value ? 15 : 35),
+            separatorBuilder: (context, index) => const SizedBox(height: 15),
+            itemCount: controller.restaurants.length,
+            itemBuilder: (context, index) {
+              if (index + 1 == controller.restaurants.length) {
+                if (controller.loadMore.value) {
+                  return const Center(
+                    child: SizedBox(
+                      height: 25,
+                      width: 25,
+                      child: CircularProgressIndicator(
+                        strokeWidth: 2,
+                      ),
+                    ),
+                  );
+                } else {
+                  return const SizedBox.shrink();
+                }
+              }
+              return CustomListTile(
+                imageUrl: controller.restaurants[index].thumbnail!,
+                title: controller.restaurants[index].title!,
+                description: controller.restaurants[index].description!,
+                subTitle: controller.restaurants[index].brand!,
+                onTap: () {
+                  Get.to(() => const ProductsScreen(), binding: ProductBinding());
                 },
-              ),
-            ],
+              );
+            },
           ),
         );
       },

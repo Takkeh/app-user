@@ -6,7 +6,8 @@ class MostPopularCategoriesBuilder extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SizedBox(
+    return Container(
+      color: Colors.white,
       height: 165,
       child: ListView.separated(
         padding: const EdgeInsets.symmetric(horizontal: 28),

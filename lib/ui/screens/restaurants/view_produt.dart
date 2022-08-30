@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:takkeh/translation/service.dart';
 import 'package:takkeh/ui/screens/registration/widgets/custom_prefix_icon.dart';
 import 'package:takkeh/ui/screens/restaurants/widgets/custom_check_box.dart';
+import 'package:takkeh/ui/screens/restaurants/widgets/custom_fab_button.dart';
 import 'package:takkeh/ui/screens/restaurants/widgets/product_counter.dart';
 import 'package:takkeh/ui/screens/restaurants/widgets/view_product_app_bar.dart';
-import 'package:takkeh/ui/screens/restaurants/widgets/view_product_fab_button.dart';
 import 'package:takkeh/ui/widgets/custom_text_field.dart';
 import 'package:takkeh/utils/base/colors.dart';
 import 'package:takkeh/utils/base/icons.dart';
@@ -24,10 +25,15 @@ class _ViewProductScreenState extends State<ViewProductScreen> {
   Widget build(BuildContext context) {
     final bool showFab = MediaQuery.of(context).viewInsets.bottom == 0.0;
     return Scaffold(
-      floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
+      floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
       floatingActionButton: Padding(
-        padding: const EdgeInsets.fromLTRB(30, 0, 30, 30),
-        child: showFab ? const ViewProductFABButton() : null,
+        padding: const EdgeInsets.fromLTRB(30, 0, 30, 0),
+        child: showFab
+            ? CustomFABButton(
+                title: TranslationService.getString('add_to_cart_key'),
+                onPressed: () {},
+              )
+            : null,
       ),
       body: CustomScrollView(
         slivers: [
