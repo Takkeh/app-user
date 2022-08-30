@@ -1,12 +1,28 @@
+import 'package:get/get.dart';
 import 'package:takkeh/model/restaurants/filter_model.dart';
 import 'package:takkeh/network/restaurants/filter.dart';
 
-class FilterController {
-  static FilterModel? filterModel;
-  static late Future<FilterModel?> filterData;
+class RestaurantsFilterController extends GetxController {
+  static RestaurantsFilterController get find => Get.find();
 
-  static Future<FilterModel?> fetchCategoriesData() async {
+  final isFilterActive = false.obs;
+
+  void toggle() {
+    isFilterActive.value = !isFilterActive.value;
+    update();
+  }
+
+  FilterModel? filterModel;
+  late Future<FilterModel?> initialize;
+
+  Future<FilterModel?> fetchCategoriesData() async {
     filterModel = await FilterApi.data();
     return filterModel;
+  }
+
+  @override
+  void onInit() {
+    super.onInit();
+    initialize = fetchCategoriesData();
   }
 }

@@ -10,7 +10,7 @@ class HomeHeader extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: const EdgeInsets.only(bottom: 80),
+      margin: const EdgeInsets.only(bottom: 60),
       padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
       height: 165,
       width: double.infinity,

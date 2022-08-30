@@ -5,9 +5,9 @@ import 'package:http/http.dart' as http;
 import 'package:takkeh/model/restaurants/restaurants_model.dart';
 
 class RestaurantsApi {
-  static Future<RestaurantsModel?> data() async {
+  static Future<RestaurantsModel?> data(int page) async {
     try {
-      String url = 'http://api.brightlifeapp.com/public/api/v1/categories';
+      String url = 'https://dummyjson.com/products?limit=${page}0&skip=${page * 10}&select=title,price,thumbnail,rating,description,brand,category,images,stock,discountPercentage';
       Uri uri = Uri.parse(url);
       var headers = {
         'Content-Type': 'application/json',

@@ -1,68 +1,93 @@
+// To parse this JSON data, do
+//
+//     final restaurantsModel = restaurantsModelFromJson(jsonString);
+
+import 'dart:convert';
+
+RestaurantsModel restaurantsModelFromJson(String str) => RestaurantsModel.fromJson(json.decode(str));
+
+String restaurantsModelToJson(RestaurantsModel data) => json.encode(data.toJson());
+
 class RestaurantsModel {
   RestaurantsModel({
-    this.status,
-    this.code,
-    this.msg,
-    this.categorys,
+    this.products,
+    this.total,
+    this.skip,
+    this.limit,
   });
 
-  RestaurantsModel.fromJson(dynamic json) {
-    status = json['status'];
-    code = json['code'];
-    msg = json['msg'];
-    if (json['Categorys'] != null) {
-      categorys = [];
-      json['Categorys'].forEach((v) {
-        categorys?.add(Categorys.fromJson(v));
-      });
-    }
-  }
-  bool? status;
-  int? code;
-  String? msg;
-  List<Categorys>? categorys;
+  List<Restaurants>? products;
+  int? total;
+  String? skip;
+  int? limit;
 
-  Map<String, dynamic> toJson() {
-    final map = <String, dynamic>{};
-    map['status'] = status;
-    map['code'] = code;
-    map['msg'] = msg;
-    if (categorys != null) {
-      map['Categorys'] = categorys?.map((v) => v.toJson()).toList();
-    }
-    return map;
-  }
+  factory RestaurantsModel.fromJson(Map<String, dynamic> json) => RestaurantsModel(
+        products: List<Restaurants>.from(json["products"].map((x) => Restaurants.fromJson(x))),
+        total: json["total"],
+        skip: json["skip"],
+        limit: json["limit"],
+      );
+
+  Map<String, dynamic> toJson() => {
+        "products": List<dynamic>.from(products!.map((x) => x.toJson())),
+        "total": total,
+        "skip": skip,
+        "limit": limit,
+      };
 }
 
-class Categorys {
-  Categorys({
+class Restaurants {
+  Restaurants({
     this.id,
-    this.name,
-    this.image,
-    this.createdAt,
-    this.updatedAt,
+    this.title,
+    this.price,
+    this.thumbnail,
+    this.rating,
+    this.description,
+    this.brand,
+    this.category,
+    this.images,
+    this.stock,
+    this.discountPercentage,
   });
 
-  Categorys.fromJson(dynamic json) {
-    id = json['id'];
-    name = json['name'];
-    image = json['image'];
-    createdAt = json['created_at'];
-    updatedAt = json['updated_at'];
-  }
   int? id;
-  String? name;
-  String? image;
-  String? createdAt;
-  String? updatedAt;
+  String? title;
+  int? price;
+  String? thumbnail;
+  double? rating;
+  String? description;
+  String? brand;
+  String? category;
+  List<String>? images;
+  int? stock;
+  double? discountPercentage;
 
-  Map<String, dynamic> toJson() {
-    final map = <String, dynamic>{};
-    map['id'] = id;
-    map['name'] = name;
-    map['image'] = image;
-    map['created_at'] = createdAt;
-    map['updated_at'] = updatedAt;
-    return map;
-  }
+  factory Restaurants.fromJson(Map<String, dynamic> json) => Restaurants(
+        id: json["id"],
+        title: json["title"],
+        price: json["price"],
+        thumbnail: json["thumbnail"],
+        rating: json["rating"].toDouble(),
+        description: json["description"],
+        brand: json["brand"],
+        category: json["category"],
+        images: List<String>.from(json["images"].map((x) => x)),
+        stock: json["stock"],
+        discountPercentage: json["discountPercentage"].toDouble(),
+      );
+
+  Map<String, dynamic> toJson() => {
+        "id": id,
+        "title": title,
+        "price": price,
+        "thumbnail": thumbnail,
+        "rating": rating,
+        "description": description,
+        "brand": brand,
+        "category": category,
+        "images": List<dynamic>.from(images!.map((x) => x)),
+        "stock": stock,
+        "discountPercentage": discountPercentage,
+      };
 }

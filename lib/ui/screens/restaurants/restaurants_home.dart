@@ -1,13 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
-import 'package:takkeh/controller/restaurants/restaurants.dart';
-import 'package:takkeh/model/restaurants/restaurants_model.dart';
-import 'package:takkeh/ui/screens/restaurants/products.dart';
 import 'package:takkeh/ui/screens/restaurants/widgets/categories_builder.dart';
 import 'package:takkeh/ui/screens/restaurants/widgets/gradient_colors_box.dart';
 import 'package:takkeh/ui/screens/restaurants/widgets/restaurants_app_bar.dart';
-import 'package:takkeh/ui/widgets/custom_list_tile.dart';
-import 'package:takkeh/ui/widgets/failed_widget.dart';
+import 'package:takkeh/ui/screens/restaurants/widgets/restaurants_builder.dart';
 
 class RestaurantsHomeScreen extends StatefulWidget {
   const RestaurantsHomeScreen({Key? key}) : super(key: key);
@@ -22,7 +17,6 @@ class _RestaurantsHomeScreenState extends State<RestaurantsHomeScreen> {
   @override
   void initState() {
     controller = TextEditingController();
-    RestaurantsController.restaurantsData = RestaurantsController.fetchCategoriesData();
     super.initState();
   }
 
@@ -51,46 +45,7 @@ class _RestaurantsHomeScreenState extends State<RestaurantsHomeScreen> {
             ],
           ),
           const SizedBox(height: 20),
-          FutureBuilder<RestaurantsModel?>(
-            future: RestaurantsController.restaurantsData,
-            builder: (context, snapshot) {
-              switch (snapshot.connectionState) {
-                case ConnectionState.waiting:
-                  return const Center(
-                    child: Padding(
-                      padding: EdgeInsets.only(top: 100.0),
-                      child: CircularProgressIndicator(),
-                    ),
-                  );
-                case ConnectionState.done:
-                default:
-                  if (snapshot.hasData) {
-                    return Expanded(
-                      child: ListView.separated(
-                        padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 30),
-                        separatorBuilder: (context, index) => const SizedBox(height: 15),
-                        itemCount: snapshot.data!.categorys!.length,
-                        itemBuilder: (context, index) {
-                          return CustomListTile(
-                            imageUrl: snapshot.data!.categorys![index].image!,
-                            title: snapshot.data!.categorys![index].name!,
-                            description: snapshot.data!.categorys![index].name!,
-                            subTitle: snapshot.data!.categorys![index].name!,
-                            onTap: () {
-                              Get.to(() => const ProductsScreen());
-                            },
-                          );
-                        },
-                      ),
-                    );
-                  } else if (snapshot.hasError) {
-                    return const FailedWidget();
-                  } else {
-                    return const FailedWidget();
-                  }
-              }
-            },
-          ),
+          const RestaurantsBuilder(),
         ],
       ),
     );

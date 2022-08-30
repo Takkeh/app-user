@@ -22,8 +22,8 @@ class SliderBuilder extends StatelessWidget {
           case ConnectionState.done:
           default:
             if (snapshot.hasData) {
-              return SizedBox(
-                height: 180,
+              return AspectRatio(
+                aspectRatio: 2.5,
                 child: ListView.separated(
                   padding: const EdgeInsets.symmetric(horizontal: 20),
                   separatorBuilder: (context, index) => const SizedBox(width: 15),
@@ -34,10 +34,12 @@ class SliderBuilder extends StatelessWidget {
                       onTap: () {
                         Get.to(() => const RestaurantsHomeScreen(), binding: RestaurantsHomeBinding());
                       },
-                      child: CustomNetworkImage(
-                        url: snapshot.data!.sliders![index].image!,
-                        radius: 16,
-                        width: 400,
+                      child: AspectRatio(
+                        aspectRatio: 2,
+                        child: CustomNetworkImage(
+                          url: snapshot.data!.sliders![index].image!,
+                          radius: 16,
+                        ),
                       ),
                     );
                   },

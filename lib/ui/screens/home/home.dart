@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:takkeh/controller/home/category.dart';
+import 'package:takkeh/controller/nav_bar_ctrl.dart';
 import 'package:takkeh/model/home/categories_model.dart';
 import 'package:takkeh/ui/base/drawer.dart';
 import 'package:takkeh/ui/screens/home/widgets/home_app_bar.dart';
@@ -32,7 +33,7 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       onDrawerChanged: (isOpen) {
-        //TODO: close nav bar when open
+        NavBarCtrl.find.toggle(isOpen);
       },
       drawer: const BaseDrawer(),
       appBar: const HomeAppBar(),
@@ -47,6 +48,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 SliderBuilder(),
               ],
             ),
+            const SizedBox(height: 30),
             FutureBuilder<CategoriesModel?>(
               future: CategoriesController.categoriesData,
               builder: (context, snapshot) {
