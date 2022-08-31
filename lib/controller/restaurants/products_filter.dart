@@ -4,6 +4,8 @@ import 'package:takkeh/model/restaurants/products_filter_model.dart';
 import 'package:takkeh/network/restaurants/products_filter.dart';
 
 class ProductsFilterCtrl extends GetxController {
+  static ProductsFilterCtrl get find => Get.find();
+
   ProductsFilterModel? productsFilterModel;
   late ScrollController scrollCtrl;
   final filters = <ProductFilter>[].obs;
@@ -11,6 +13,13 @@ class ProductsFilterCtrl extends GetxController {
   final loadMore = false.obs;
   final allLoaded = false.obs;
   int limit = 1;
+
+  final currentIndex = 0.obs;
+
+  void toggle(int index) {
+    currentIndex.value = index;
+    update();
+  }
 
   void toggleLoading(String loadingCase, bool status) {
     switch (loadingCase) {

@@ -1,15 +1,16 @@
 import 'package:flutter/material.dart';
-import 'package:takkeh/translation/service.dart';
 import 'package:takkeh/utils/base/colors.dart';
 
 class CustomSuffixIcon extends StatelessWidget {
   final String icon;
+  final String title;
   final Function() onTap;
 
   const CustomSuffixIcon({
     Key? key,
     required this.icon,
     required this.onTap,
+    required this.title,
   }) : super(key: key);
 
   @override
@@ -24,8 +25,8 @@ class CustomSuffixIcon extends StatelessWidget {
         GestureDetector(
           onTap: onTap,
           child: Text(
-            TranslationService.getString('send_key'),
-            style: const TextStyle(color: MyColors.primary),
+            title,
+            style: const TextStyle(color: MyColors.redD4F),
           ),
         ),
         const SizedBox(width: 10),

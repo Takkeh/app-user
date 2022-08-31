@@ -8,22 +8,25 @@ class OffersLoading extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return CarouselSlider(
-      options: CarouselOptions(
-        height: 370.0,
-        viewportFraction: 0.70,
-        enlargeCenterPage: true,
+    return Padding(
+      padding: const EdgeInsets.only(top: 15.0, bottom: 50),
+      child: CarouselSlider(
+        options: CarouselOptions(
+          height: 370.0,
+          viewportFraction: 0.70,
+          enlargeCenterPage: true,
+        ),
+        items: [1, 2, 3, 4, 5].map((element) {
+          return Builder(
+            builder: (BuildContext context) {
+              return CustomShimmerLoading(
+                radius: 23,
+                width: Get.width,
+              );
+            },
+          );
+        }).toList(),
       ),
-      items: [1, 2, 3].map((element) {
-        return Builder(
-          builder: (BuildContext context) {
-            return CustomShimmerLoading(
-              radius: 23,
-              width: Get.width,
-            );
-          },
-        );
-      }).toList(),
     );
   }
 }

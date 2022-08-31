@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:get/get.dart';
 import 'package:takkeh/translation/service.dart';
 import 'package:takkeh/ui/screens/registration/widgets/custom_prefix_icon.dart';
+import 'package:takkeh/ui/screens/restaurants/confirm_order.dart';
 import 'package:takkeh/ui/screens/restaurants/widgets/basket_products_tile.dart';
 import 'package:takkeh/ui/screens/restaurants/widgets/custom_fab_button.dart';
 import 'package:takkeh/ui/screens/restaurants/widgets/custom_suffix_icon.dart';
@@ -34,7 +36,9 @@ class _BasketScreenState extends State<BasketScreen> {
         child: showFab
             ? CustomFABButton(
                 title: TranslationService.getString('confirm_order_key'),
-                onPressed: () {},
+                onPressed: () {
+                  Get.to(() => const ConfirmOrderScreen());
+                },
               )
             : null,
       ),
@@ -134,14 +138,14 @@ class _BasketScreenState extends State<BasketScreen> {
                 Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 30),
                   child: CustomTextField(
-                    keyboardType: TextInputType.multiline,
                     hintText: TranslationService.getString('enter_coupon_num_key'),
                     minLines: 1,
-                    maxLines: 3,
+                    maxLines: 1,
                     prefixIcon: const CustomPrefixIcon(
                       icon: MyIcons.ticketBlack,
                     ),
                     suffixIcon: CustomSuffixIcon(
+                      title: TranslationService.getString('send_key'),
                       icon: MyIcons.ticketBlack,
                       onTap: () {},
                     ),

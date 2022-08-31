@@ -1,20 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:takkeh/controller/restaurants/filter_category.dart';
 import 'package:takkeh/controller/restaurants/products_filter.dart';
 import 'package:takkeh/ui/screens/restaurants/widgets/custom_circular_progress_indicator.dart';
 import 'package:takkeh/ui/screens/restaurants/widgets/products_filter_loading.dart';
 import 'package:takkeh/utils/base/colors.dart';
 import 'package:takkeh/utils/base/images.dart';
 
-class ProductsFilterBuilder extends StatefulWidget {
-  const ProductsFilterBuilder({Key? key}) : super(key: key);
-
-  @override
-  State<ProductsFilterBuilder> createState() => _ProductsFilterBuilderState();
-}
-
-class _ProductsFilterBuilderState extends State<ProductsFilterBuilder> {
-  int currentIndex = 0;
+class ProductsFilterBuilder extends StatelessWidget {
+  const ProductsFilterBuilder({
+    Key? key,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -50,18 +46,17 @@ class _ProductsFilterBuilderState extends State<ProductsFilterBuilder> {
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(9),
                   ),
-                  backgroundColor: currentIndex == index ? MyColors.redD4F : Colors.transparent,
+                  backgroundColor: controller.currentIndex.value == index ? MyColors.redD4F : Colors.transparent,
                   elevation: 0,
                 ),
                 onPressed: () {
-                  setState(() {
-                    currentIndex = index;
-                  });
+                  FilterCategoryCtrl.find.scrollToItem(index);
+                  controller.toggle(index);
                 },
                 child: Text(
                   controller.filters[index].title!,
                   style: TextStyle(
-                    color: currentIndex == index ? Colors.white : MyColors.text,
+                    color: controller.currentIndex.value == index ? Colors.white : MyColors.text,
                     fontSize: 16,
                     fontWeight: FontWeight.w500,
                   ),

@@ -10,4 +10,6 @@ class MyImages {
   static const String handUpTransparent = "${_path}hand_up_transparent.png";
   static const String errorImage = "${_path}error_image.png";
   static const String failedImage = "${_path}error_image.png";
+  static const String driver = "${_path}driver.png";
+  static const String halfCircleHorizontal = "${_path}half_circle_hori.png";
 }

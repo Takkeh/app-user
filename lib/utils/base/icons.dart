@@ -34,4 +34,5 @@ class MyIcons {
   static const String eye = "${_path}eye.svg";
   static const String home = "${_path}home.svg";
   static const String headset = "${_path}headset.svg";
+  static const String phoneCall = "${_path}phone_call.svg";
 }

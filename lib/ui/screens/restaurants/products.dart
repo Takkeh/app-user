@@ -1,50 +1,15 @@
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
-import 'package:takkeh/binding/restaurants/view_product.dart';
-import 'package:takkeh/ui/screens/restaurants/view_produt.dart';
+import 'package:takkeh/controller/restaurants/filter_category.dart';
+import 'package:takkeh/ui/screens/restaurants/widgets/filter_category.dart';
 import 'package:takkeh/ui/screens/restaurants/widgets/most_popular_categories.dart';
 import 'package:takkeh/ui/screens/restaurants/widgets/products_fab_button.dart';
 import 'package:takkeh/ui/screens/restaurants/widgets/products_filter_builder.dart';
-import 'package:takkeh/ui/screens/restaurants/widgets/products_list_tile.dart';
 import 'package:takkeh/ui/widgets/back_leading_widget.dart';
 import 'package:takkeh/ui/widgets/search_box_widget.dart';
 import 'package:takkeh/utils/base/colors.dart';
 
-class ProductsScreen extends StatefulWidget {
+class ProductsScreen extends StatelessWidget {
   const ProductsScreen({Key? key}) : super(key: key);
-
-  @override
-  State<ProductsScreen> createState() => _ProductsScreenState();
-}
-
-class _ProductsScreenState extends State<ProductsScreen> {
-  late ScrollController controller;
-  late bool isAppBarPinned;
-
-  @override
-  void initState() {
-    super.initState();
-    controller = ScrollController()..addListener(onScroll);
-    isAppBarPinned = true;
-  }
-
-  void onScroll() {
-    if (controller.position.pixels > 200) {
-      if (isAppBarPinned) {
-        setState(() => isAppBarPinned = false);
-      }
-    } else {
-      if (!isAppBarPinned) {
-        setState(() => isAppBarPinned = true);
-      }
-    }
-  }
-
-  @override
-  void dispose() {
-    controller.dispose();
-    super.dispose();
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -52,10 +17,11 @@ class _ProductsScreenState extends State<ProductsScreen> {
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
       floatingActionButton: const ProductsFABButton(),
       body: CustomScrollView(
+        controller: FilterCategoryCtrl.find.scrollCtrl,
         physics: const ClampingScrollPhysics(),
         slivers: [
           SliverAppBar(
-            pinned: isAppBarPinned,
+            pinned: true,
             backgroundColor: MyColors.redD4F,
             leadingWidth: 73,
             leading: const BackLeadingWidget(),
@@ -118,25 +84,7 @@ class _ProductsScreenState extends State<ProductsScreen> {
               child: ProductsFilterBuilder(),
             ),
           ),
-          SliverList(
-            delegate: SliverChildBuilderDelegate(
-              childCount: 20,
-              (BuildContext context, int index) {
-                return Padding(
-                  padding: const EdgeInsets.symmetric(vertical: 8.0, horizontal: 20),
-                  child: ProductsListTile(
-                    imageUrl: 'https://img.freepik.com/free-photo/chicken-wings-barbecue-sweetly-sour-sauce-picnic-summer-menu-tasty-food-top-view-flat-lay_2829-6471.jpg?w=2000',
-                    title: 'title',
-                    price: '12.0',
-                    subTitle: 'sub description',
-                    onTap: () {
-                      Get.to(() => const ViewProductScreen(), binding: ViewProductBinding());
-                    },
-                  ),
-                );
-              },
-            ),
-          ),
+          const FilterCategoryBuilder(),
           const SliverToBoxAdapter(
             child: SizedBox(height: 80),
           ),
