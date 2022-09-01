@@ -78,7 +78,7 @@ class _MyAppState extends State<MyApp> {
       fallbackLocale: Locale(MySharedPreferences.language),
       theme: AppThemeData().materialTheme,
       home: _toggleScreen(),
-      // home: const TestList(),
+      // home: const StickyApp(),
     );
   }
 }

@@ -19,4 +19,5 @@ class ApiUrl {
 
   //restaurants
   static const String restaurantCategories = "/api/v1/categories";
+  static const String viewProduct = "/api/v1/restaurants?page=";
 }

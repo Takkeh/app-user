@@ -5,7 +5,6 @@ import 'package:takkeh/controller/restaurants/filter_category.dart';
 import 'package:takkeh/ui/screens/restaurants/view_produt.dart';
 import 'package:takkeh/ui/screens/restaurants/widgets/custom_circular_progress_indicator.dart';
 import 'package:takkeh/ui/screens/restaurants/widgets/products_list_tile.dart';
-import 'package:takkeh/ui/widgets/custom_shimmer_loading.dart';
 import 'package:takkeh/utils/base/colors.dart';
 import 'package:takkeh/utils/base/images.dart';
 
@@ -20,12 +19,16 @@ class FilterCategoryBuilder extends StatelessWidget {
       builder: (controller) {
         if (controller.isLoading.value) {
           return const SliverToBoxAdapter(
-            child: CustomShimmerLoading(
-              radius: 17,
-              height: 150,
-              highlightColor: MyColors.redD4F,
+            child: Center(
+              child: Padding(
+                padding: EdgeInsets.only(top: 30.0),
+                child: CircularProgressIndicator(
+                  color: MyColors.redD4F,
+                ),
+              ),
             ),
           );
+          // return const FilterCategoryLoading();
         }
 
         if (controller.filterCategoryModel == null) {

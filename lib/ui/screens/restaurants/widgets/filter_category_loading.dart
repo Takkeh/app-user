@@ -7,11 +7,16 @@ class FilterCategoryLoading extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const SliverToBoxAdapter(
-      child: CustomShimmerLoading(
-        radius: 17,
-        height: 150,
-        highlightColor: MyColors.redD4F,
+    return SliverToBoxAdapter(
+      child: Column(
+        children: List.generate(10, (index) {
+          return const CustomShimmerLoading(
+            margin: EdgeInsets.symmetric(horizontal: 15),
+            radius: 17,
+            height: 120,
+            highlightColor: MyColors.redD4F,
+          );
+        }),
       ),
     );
   }

@@ -1,6 +1,8 @@
 const String kPCurrency = '₪';
 
 class AppConstants {
+  static const googleApiKey = 'AIzaSyDSPeDTWmjTol4rLhHw0fT9Nzrb7bAqs2M';
+
   static const differentCredentialMessage = "[firebase_auth/account-exists-with-different-credential] An account already exists with the same email address but different sign-in credentials. Sign in using a provider associated with this email address.";
   static const failedMessage = "Something went Wrong, try again later";
   static String get requiredField => "Field is required";

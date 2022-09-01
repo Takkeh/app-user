@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
+import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:takkeh/translation/service.dart';
 import 'package:takkeh/ui/screens/registration/widgets/custom_prefix_icon.dart';
 import 'package:takkeh/ui/screens/restaurants/order_status.dart';
@@ -7,17 +9,31 @@ import 'package:takkeh/ui/screens/restaurants/widgets/custom_check_box.dart';
 import 'package:takkeh/ui/screens/restaurants/widgets/custom_fab_button.dart';
 import 'package:takkeh/ui/screens/restaurants/widgets/custom_suffix_icon.dart';
 import 'package:takkeh/ui/screens/restaurants/widgets/gradient_colors_box.dart';
+import 'package:takkeh/ui/screens/restaurants/widgets/map_bubble.dart';
 import 'package:takkeh/ui/widgets/custom_text_field.dart';
 import 'package:takkeh/ui/widgets/transparent_app_bar.dart';
 import 'package:takkeh/utils/app_constants.dart';
 import 'package:takkeh/utils/base/colors.dart';
 import 'package:takkeh/utils/base/icons.dart';
 
-class ConfirmOrderScreen extends StatelessWidget {
+class ConfirmOrderScreen extends StatefulWidget {
   const ConfirmOrderScreen({Key? key}) : super(key: key);
 
+  @override
+  State<ConfirmOrderScreen> createState() => _ConfirmOrderScreenState();
+}
+
+class _ConfirmOrderScreenState extends State<ConfirmOrderScreen> {
   //TODO: transfer to controller later
-  static List<bool> choose = [false, false, false];
+  List<bool> choose = [false, false, false];
+
+  late GoogleMapController mapController;
+
+  @override
+  void dispose() {
+    super.dispose();
+    mapController.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -47,16 +63,8 @@ class ConfirmOrderScreen extends StatelessWidget {
             child: ListView(
               padding: const EdgeInsets.symmetric(horizontal: 30),
               children: [
-                Container(
-                  margin: const EdgeInsets.only(bottom: 20),
-                  alignment: Alignment.center,
-                  height: 150,
-                  decoration: BoxDecoration(
-                    color: MyColors.redD4F,
-                    borderRadius: BorderRadius.circular(24),
-                  ),
-                  child: Text("Map"),
-                ),
+                const MapBubbleBuilder(),
+                const SizedBox(height: 20),
                 CustomTextField(
                   hintText: '30 - 40 min',
                   minLines: 1,
@@ -69,7 +77,9 @@ class ConfirmOrderScreen extends StatelessWidget {
                   suffixIcon: CustomSuffixIcon(
                     title: TranslationService.getString('pre_order_key'),
                     icon: MyIcons.scooter,
-                    onTap: () {},
+                    onTap: () {
+                      Fluttertoast.showToast(msg: "Coming Soon!", backgroundColor: MyColors.grey070);
+                    },
                   ),
                 ),
                 const Divider(

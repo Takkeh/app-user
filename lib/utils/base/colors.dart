@@ -27,6 +27,7 @@ class MyColors {
 
   //blue
   static const Color blue6FA = Color(0xFFF5F6FA);
+  static const Color blue6FB = Color(0xFFE8F6FB);
 
   static const facebook = Color(0xFF4267B2);
 }

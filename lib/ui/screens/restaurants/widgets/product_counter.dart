@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:takkeh/controller/restaurants/product_counter.dart';
+import 'package:takkeh/controller/restaurants/view_product.dart';
 import 'package:takkeh/ui/screens/restaurants/widgets/quantity_button.dart';
 import 'package:takkeh/utils/base/colors.dart';
 
@@ -13,7 +13,7 @@ class ProductCounter extends StatelessWidget {
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 12.0),
-      child: GetBuilder<ProductCounterCtrl>(builder: (controller) {
+      child: GetBuilder<ViewProductCtrl>(builder: (controller) {
         return Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [

@@ -1,9 +1,9 @@
 import 'package:get/get.dart';
-import 'package:takkeh/controller/restaurants/product_counter.dart';
+import 'package:takkeh/controller/restaurants/view_product.dart';
 
 class ViewProductBinding implements Bindings {
   @override
   void dependencies() {
-    Get.lazyPut(() => ProductCounterCtrl());
+    Get.lazyPut(() => ViewProductCtrl());
   }
 }

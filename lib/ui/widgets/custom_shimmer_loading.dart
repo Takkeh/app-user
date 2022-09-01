@@ -7,6 +7,7 @@ class CustomShimmerLoading extends StatelessWidget {
   final double radius;
   final double? height;
   final EdgeInsets? padding;
+  final EdgeInsets? margin;
   final Color highlightColor;
 
   const CustomShimmerLoading({
@@ -16,6 +17,7 @@ class CustomShimmerLoading extends StatelessWidget {
     this.height,
     this.highlightColor = MyColors.primary,
     this.padding,
+    this.margin,
   }) : super(key: key);
 
   @override
@@ -24,6 +26,7 @@ class CustomShimmerLoading extends StatelessWidget {
       baseColor: MyColors.greyED0,
       highlightColor: highlightColor,
       child: Container(
+        margin: margin,
         padding: padding,
         height: height,
         width: width,
