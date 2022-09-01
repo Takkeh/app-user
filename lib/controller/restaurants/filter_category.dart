@@ -73,6 +73,7 @@ class FilterCategoryCtrl extends GetxController {
     scrollCtrl = ScrollController()
       ..addListener(() {
         detect(1);
+        print("position:: ${scrollCtrl.position.atEdge}");
         if (scrollCtrl.offset == scrollCtrl.position.maxScrollExtent) {
           if (!allLoaded.value && !loadMore.value) {
             fetchCategoriesData(limit, "load_more");

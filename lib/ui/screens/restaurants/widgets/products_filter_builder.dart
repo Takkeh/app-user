@@ -46,7 +46,7 @@ class ProductsFilterBuilder extends StatelessWidget {
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(9),
                   ),
-                  backgroundColor: controller.currentIndex.value == index ? MyColors.redD4F : Colors.transparent,
+                  primary: controller.currentIndex.value == index ? MyColors.redD4F : Colors.transparent,
                   elevation: 0,
                 ),
                 onPressed: () {

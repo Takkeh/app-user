@@ -20,7 +20,7 @@ class CustomFABButton extends StatelessWidget {
             11,
           ),
         ),
-        backgroundColor: MyColors.redD4F,
+        primary: MyColors.redD4F,
         minimumSize: const Size(double.infinity, 50),
       ),
       onPressed: onPressed,
