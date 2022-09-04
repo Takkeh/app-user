@@ -10,84 +10,76 @@ String restaurantsModelToJson(RestaurantsModel data) => json.encode(data.toJson(
 
 class RestaurantsModel {
   RestaurantsModel({
-    this.products,
-    this.total,
-    this.skip,
-    this.limit,
+    this.status,
+    this.code,
+    this.msg,
+    this.data,
   });
 
-  List<Restaurants>? products;
-  int? total;
-  String? skip;
-  int? limit;
+  bool? status;
+  int? code;
+  String? msg;
+  List<Restaurants>? data;
 
   factory RestaurantsModel.fromJson(Map<String, dynamic> json) => RestaurantsModel(
-        products: List<Restaurants>.from(json["products"].map((x) => Restaurants.fromJson(x))),
-        total: json["total"],
-        skip: json["skip"],
-        limit: json["limit"],
+        status: json["status"],
+        code: json["code"],
+        msg: json["msg"],
+        data: List<Restaurants>.from(json["data"].map((x) => Restaurants.fromJson(x))),
       );
 
   Map<String, dynamic> toJson() => {
-        "products": List<dynamic>.from(products!.map((x) => x.toJson())),
-        "total": total,
-        "skip": skip,
-        "limit": limit,
+        "status": status,
+        "code": code,
+        "msg": msg,
+        "data": List<dynamic>.from(data!.map((x) => x.toJson())),
       };
 }
 
 class Restaurants {
   Restaurants({
     this.id,
-    this.title,
-    this.price,
-    this.thumbnail,
-    this.rating,
-    this.description,
-    this.brand,
-    this.category,
-    this.images,
-    this.stock,
-    this.discountPercentage,
+    this.name,
+    this.logo,
+    this.cover,
+    this.categories,
+    this.reviewIcon,
+    this.review,
+    this.cost,
+    this.time,
   });
 
   int? id;
-  String? title;
-  int? price;
-  String? thumbnail;
-  double? rating;
-  String? description;
-  String? brand;
-  String? category;
-  List<String>? images;
-  int? stock;
-  double? discountPercentage;
+  String? name;
+  String? logo;
+  String? cover;
+  String? categories;
+  String? reviewIcon;
+  String? review;
+  String? cost;
+  String? time;
 
   factory Restaurants.fromJson(Map<String, dynamic> json) => Restaurants(
         id: json["id"],
-        title: json["title"],
-        price: json["price"],
-        thumbnail: json["thumbnail"],
-        rating: json["rating"].toDouble(),
-        description: json["description"],
-        brand: json["brand"],
-        category: json["category"],
-        images: List<String>.from(json["images"].map((x) => x)),
-        stock: json["stock"],
-        discountPercentage: json["discountPercentage"].toDouble(),
+        name: json["name"],
+        logo: json["logo"],
+        cover: json["cover"],
+        categories: json["categories"],
+        reviewIcon: json["review_icon"],
+        review: json["review"],
+        cost: json["cost"],
+        time: json["time"],
       );
 
   Map<String, dynamic> toJson() => {
         "id": id,
-        "title": title,
-        "price": price,
-        "thumbnail": thumbnail,
-        "rating": rating,
-        "description": description,
-        "brand": brand,
-        "category": category,
-        "images": List<dynamic>.from(images!.map((x) => x)),
-        "stock": stock,
-        "discountPercentage": discountPercentage,
+        "name": name,
+        "logo": logo,
+        "cover": cover,
+        "categories": categories,
+        "review_icon": reviewIcon,
+        "review": review,
+        "cost": cost,
+        "time": time,
       };
 }

@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:takkeh/binding/restaurants/products.dart';
 import 'package:takkeh/controller/restaurants/restaurants.dart';
-import 'package:takkeh/ui/screens/restaurants/products.dart';
+import 'package:takkeh/ui/screens/restaurants/view_restaurants.dart';
 import 'package:takkeh/ui/widgets/custom_list_tile.dart';
 import 'package:takkeh/utils/base/images.dart';
 
@@ -31,9 +31,9 @@ class RestaurantsBuilder extends StatelessWidget {
             controller: controller.scrollCtrl,
             padding: EdgeInsets.symmetric(horizontal: 20, vertical: controller.allLoaded.value ? 15 : 35),
             separatorBuilder: (context, index) => const SizedBox(height: 15),
-            itemCount: controller.restaurants.length,
+            itemCount: controller.restaurants.length + 1,
             itemBuilder: (context, index) {
-              if (index + 1 == controller.restaurants.length) {
+              if (index == controller.restaurants.length) {
                 if (controller.loadMore.value) {
                   return const Center(
                     child: SizedBox(
@@ -49,12 +49,18 @@ class RestaurantsBuilder extends StatelessWidget {
                 }
               }
               return CustomListTile(
-                imageUrl: controller.restaurants[index].thumbnail!,
-                title: controller.restaurants[index].title!,
-                description: controller.restaurants[index].description!,
-                subTitle: controller.restaurants[index].brand!,
+                imageUrl: controller.restaurants[index].logo!,
+                title: controller.restaurants[index].name!,
+                description: controller.restaurants[index].name!,
+                subTitle: controller.restaurants[index].name!,
                 onTap: () {
-                  Get.to(() => const ProductsScreen(), binding: ProductBinding());
+                  Get.to(
+                    () => ViewRestaurantScreen(
+                      title: controller.restaurants[index].name!,
+                      cover: controller.restaurants[index].cover!,
+                    ),
+                    binding: ProductBinding(id: controller.restaurants[index].id!),
+                  );
                 },
               );
             },

@@ -2,27 +2,28 @@ import 'dart:convert';
 import 'dart:developer';
 
 import 'package:http/http.dart' as http;
-import 'package:takkeh/model/restaurants/filter_category_model.dart';
+import 'package:takkeh/model/restaurants/view_restaurant.dart';
+import 'package:takkeh/utils/api_url.dart';
 
-class FilterCategoryApi {
-  static Future<FilterCategoryModel?> data(int page) async {
+class ViewRestaurantApi {
+  static Future<ViewRestaurantModel?> data(int page, int id) async {
     try {
-      String url = 'https://dummyjson.com/products?limit=${page}0&skip=${page * 10}&select=title,price,thumbnail,rating,description,brand,category,images,stock,discountPercentage';
+      String url = '${ApiUrl.mainUrl}${ApiUrl.viewRestaurants}$id?page=$page';
       Uri uri = Uri.parse(url);
       var headers = {
         'Content-Type': 'application/json',
       };
-      log("Response:: RestaurantsResponse\nUrl:: $url\nheaders:: $headers");
+      log("Response:: ViewRestaurantsResponse\nUrl:: $url\nheaders:: $headers");
       http.Response response = await http.get(uri, headers: headers);
-      log("RestaurantsStatusCode:: ${response.statusCode}  RestaurantsBody:: ${response.body}");
-      FilterCategoryModel filterCategoryModel = FilterCategoryModel.fromJson(json.decode(response.body));
+      log("ViewRestaurantsStatusCode:: ${response.statusCode}  ViewRestaurantsBody:: ${response.body}");
+      ViewRestaurantModel viewRestaurantModel = ViewRestaurantModel.fromJson(json.decode(response.body));
       if (response.statusCode == 200) {
-        return filterCategoryModel;
+        return viewRestaurantModel;
       } else {
-        throw "Restaurants Error";
+        throw "ViewRestaurants Error";
       }
     } catch (e) {
-      log("Restaurants Error $e");
+      log("ViewRestaurants Error $e");
       return null;
     }
   }

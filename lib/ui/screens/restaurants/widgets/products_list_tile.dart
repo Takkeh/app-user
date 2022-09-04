@@ -7,7 +7,8 @@ import 'package:takkeh/utils/base/colors.dart';
 import 'package:takkeh/utils/shared_prefrences.dart';
 
 class ProductsListTile extends StatelessWidget {
-  final String imageUrl, title, subTitle, price;
+  final String imageUrl, title, subTitle;
+  final int price;
   final Function() onTap;
 
   const ProductsListTile({

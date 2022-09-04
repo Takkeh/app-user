@@ -5,6 +5,7 @@ import 'package:takkeh/controller/home/special_offers.dart';
 import 'package:takkeh/controller/nav_bar_ctrl.dart';
 import 'package:takkeh/controller/registration/sign_in.dart';
 import 'package:takkeh/controller/user_location.dart';
+import 'package:takkeh/controller/user_order_ctrl.dart';
 
 class NavBarBinding implements Bindings {
   @override
@@ -15,5 +16,6 @@ class NavBarBinding implements Bindings {
     Get.lazyPut(() => SpecialOffersController());
     Get.put(NavBarCtrl());
     Get.put(UserLocationCtrl());
+    Get.put(UserOrderCtrl(), permanent: true);
   }
 }

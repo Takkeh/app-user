@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:takkeh/controller/user_order_ctrl.dart';
 import 'package:takkeh/translation/service.dart';
 import 'package:takkeh/ui/screens/restaurants/basket.dart';
 import 'package:takkeh/utils/app_constants.dart';
@@ -35,12 +36,16 @@ class ProductsFABButton extends StatelessWidget {
                 color: MyColors.redD4F,
                 borderRadius: BorderRadius.circular(11),
               ),
-              child: const Text(
-                "1",
-                style: TextStyle(
-                  fontSize: 16,
-                  fontWeight: FontWeight.w500,
-                ),
+              child: GetBuilder<UserOrderCtrl>(
+                builder: (controller) {
+                  return Text(
+                    controller.userOrder.length.toString(),
+                    style: const TextStyle(
+                      fontSize: 16,
+                      fontWeight: FontWeight.w500,
+                    ),
+                  );
+                },
               ),
             ),
             Text(

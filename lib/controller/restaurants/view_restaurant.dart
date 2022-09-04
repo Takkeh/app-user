@@ -1,14 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:takkeh/model/restaurants/filter_category_model.dart';
+import 'package:takkeh/model/restaurants/view_restaurant.dart';
 import 'package:takkeh/network/restaurants/filter_category.dart';
 
-class FilterCategoryCtrl extends GetxController {
-  static FilterCategoryCtrl get find => Get.find();
+class ViewRestaurantCtrl extends GetxController {
+  final int id;
+  ViewRestaurantCtrl({required this.id});
 
-  FilterCategoryModel? filterCategoryModel;
+  static ViewRestaurantCtrl get find => Get.find();
+
+  ViewRestaurantModel? viewRestaurantModel;
   late ScrollController scrollCtrl;
-  final filterCategory = <FilterCategory>[].obs;
+  final viewRestaurants = <ViewRestaurants>[].obs;
   final isLoading = false.obs;
   final loadMore = false.obs;
   final allLoaded = false.obs;
@@ -47,27 +50,28 @@ class FilterCategoryCtrl extends GetxController {
     update();
   }
 
-  Future<FilterCategoryModel?> fetchCategoriesData(int page, String loadingCase) async {
+  Future<ViewRestaurantModel?> fetchViewRestaurantData(int page, String loadingCase, int id) async {
     toggleLoading(loadingCase, true);
-    filterCategoryModel = await FilterCategoryApi.data(page);
-    if (filterCategoryModel == null) {
+    viewRestaurantModel = await ViewRestaurantApi.data(page, id);
+    if (viewRestaurantModel == null) {
       toggleLoading(loadingCase, false);
       return null;
     }
-    if (filterCategoryModel!.products!.isNotEmpty) {
-      filterCategory.addAll(filterCategoryModel!.products!);
+    if (viewRestaurantModel!.data!.products!.isNotEmpty) {
+      viewRestaurants.addAll(viewRestaurantModel!.data!.products!);
+      print("length::::: ${viewRestaurantModel!.data!.products!}");
       limit++;
     } else {
       allLoaded.value = true;
     }
     update();
     toggleLoading(loadingCase, false);
-    return filterCategoryModel;
+    return viewRestaurantModel;
   }
 
   @override
   void onInit() {
-    fetchCategoriesData(1, "default");
+    fetchViewRestaurantData(1, "default", id);
 
     // itemKeys = List.generate(filterCategory.length, (index) => GlobalKey());
     scrollCtrl = ScrollController()
@@ -76,7 +80,7 @@ class FilterCategoryCtrl extends GetxController {
         print("position:: ${scrollCtrl.position.atEdge}");
         if (scrollCtrl.offset == scrollCtrl.position.maxScrollExtent) {
           if (!allLoaded.value && !loadMore.value) {
-            fetchCategoriesData(limit, "load_more");
+            fetchViewRestaurantData(limit, "load_more", id);
           }
         }
       });

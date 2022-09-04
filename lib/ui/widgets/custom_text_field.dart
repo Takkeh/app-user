@@ -23,6 +23,8 @@ class CustomTextField extends StatelessWidget {
   final double? horizontalPadding;
   final double? minSuffixWidth;
   final double? maxSuffixWidth;
+  final bool? filled;
+  final Color? fillColor;
   final List<TextInputFormatter>? inputFormatters;
 
   const CustomTextField({
@@ -48,6 +50,8 @@ class CustomTextField extends StatelessWidget {
     this.inputFormatters,
     this.minSuffixWidth = 70,
     this.maxSuffixWidth = 70,
+    this.filled,
+    this.fillColor,
   }) : super(key: key);
 
   static const _border = 26.0;
@@ -69,6 +73,8 @@ class CustomTextField extends StatelessWidget {
       validator: validator,
       controller: controller,
       decoration: InputDecoration(
+        filled: filled,
+        fillColor: fillColor,
         label: label == null ? null : Text(label!),
         hintText: hintText,
         hintStyle: hintStyle,

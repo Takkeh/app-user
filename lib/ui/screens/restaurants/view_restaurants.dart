@@ -1,15 +1,22 @@
 import 'package:flutter/material.dart';
-import 'package:takkeh/controller/restaurants/filter_category.dart';
-import 'package:takkeh/ui/screens/restaurants/widgets/filter_category.dart';
+import 'package:takkeh/controller/restaurants/view_restaurant.dart';
 import 'package:takkeh/ui/screens/restaurants/widgets/most_popular_categories.dart';
 import 'package:takkeh/ui/screens/restaurants/widgets/products_fab_button.dart';
 import 'package:takkeh/ui/screens/restaurants/widgets/products_filter_builder.dart';
+import 'package:takkeh/ui/screens/restaurants/widgets/view_restaurant_builder.dart';
 import 'package:takkeh/ui/widgets/back_leading_widget.dart';
+import 'package:takkeh/ui/widgets/custom_network_image.dart';
 import 'package:takkeh/ui/widgets/search_box_widget.dart';
 import 'package:takkeh/utils/base/colors.dart';
 
-class ProductsScreen extends StatelessWidget {
-  const ProductsScreen({Key? key}) : super(key: key);
+class ViewRestaurantScreen extends StatelessWidget {
+  final String title, cover;
+
+  const ViewRestaurantScreen({
+    Key? key,
+    required this.title,
+    required this.cover,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -17,7 +24,7 @@ class ProductsScreen extends StatelessWidget {
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
       floatingActionButton: const ProductsFABButton(),
       body: CustomScrollView(
-        controller: FilterCategoryCtrl.find.scrollCtrl,
+        controller: ViewRestaurantCtrl.find.scrollCtrl,
         physics: const ClampingScrollPhysics(),
         slivers: [
           SliverAppBar(
@@ -31,9 +38,9 @@ class ProductsScreen extends StatelessWidget {
             expandedHeight: 470,
             collapsedHeight: kToolbarHeight + 50,
             centerTitle: true,
-            title: const Text(
-              "Test",
-              style: TextStyle(
+            title: Text(
+              title,
+              style: const TextStyle(
                 color: Colors.white,
                 fontWeight: FontWeight.bold,
                 fontSize: 20,
@@ -47,15 +54,9 @@ class ProductsScreen extends StatelessWidget {
                 child: Column(
                   children: [
                     Expanded(
-                      child: Container(
-                        decoration: const BoxDecoration(
-                          image: DecorationImage(
-                            image: NetworkImage(
-                              "https://img.freepik.com/free-photo/chicken-wings-barbecue-sweetly-sour-sauce-picnic-summer-menu-tasty-food-top-view-flat-lay_2829-6471.jpg?w=2000",
-                            ),
-                            fit: BoxFit.cover,
-                          ),
-                        ),
+                      child: CustomNetworkImage(
+                        url: cover,
+                        radius: 0,
                       ),
                     ),
                     Column(
@@ -84,7 +85,7 @@ class ProductsScreen extends StatelessWidget {
               child: ProductsFilterBuilder(),
             ),
           ),
-          const FilterCategoryBuilder(),
+          const ViewRestaurantBuilder(),
           const SliverToBoxAdapter(
             child: SizedBox(height: 80),
           ),

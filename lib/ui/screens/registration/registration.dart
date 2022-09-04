@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:takkeh/ui/screens/registration//sign_in.dart';
 import 'package:takkeh/ui/screens/registration//sign_up.dart';
 import 'package:takkeh/ui/widgets/base_switch_slider.dart';
+import 'package:takkeh/utils/base/colors.dart';
 import 'package:takkeh/utils/base/images.dart';
 import 'package:takkeh/utils/shared_prefrences.dart';
 import 'package:takkeh/utils/strings.dart';
@@ -42,6 +43,8 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                 height: 150,
               ),
               BaseSwitchSlider(
+                margin: const EdgeInsets.only(top: 20, bottom: 40),
+                color: MyColors.grey5FA,
                 title1: MyStrings.signInKey,
                 title2: MyStrings.signUpKey,
                 onTap1: () {

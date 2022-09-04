@@ -8,6 +8,8 @@ class BaseSwitchSlider extends StatelessWidget {
   final bool isFirst;
   final Function() onTap1;
   final Function() onTap2;
+  final Color color;
+  final EdgeInsetsGeometry margin;
 
   const BaseSwitchSlider({
     Key? key,
@@ -16,6 +18,8 @@ class BaseSwitchSlider extends StatelessWidget {
     required this.onTap1,
     required this.onTap2,
     required this.isFirst,
+    required this.color,
+    required this.margin,
   }) : super(key: key);
 
   static Widget buildField(String title, Function() onTap) {
@@ -42,12 +46,12 @@ class BaseSwitchSlider extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       alignment: Alignment.center,
-      margin: const EdgeInsets.only(top: 20, bottom: 40),
+      margin: margin,
       width: double.infinity,
       height: 70,
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(26),
-        color: MyColors.grey5FA,
+        color: color,
       ),
       child: Stack(
         alignment: Alignment.center,

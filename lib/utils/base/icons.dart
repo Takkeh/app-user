@@ -36,4 +36,5 @@ class MyIcons {
   static const String headset = "${_path}headset.svg";
   static const String phoneCall = "${_path}phone_call.svg";
   static const String pinClassic = "${_path}pin_classic.svg";
+  static const String camera = "${_path}camera.svg";
 }

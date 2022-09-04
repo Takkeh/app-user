@@ -2,11 +2,15 @@ import 'dart:math' as math;
 
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:get/get.dart';
 import 'package:takkeh/controller/registration/log_out.dart';
+import 'package:takkeh/translation/service.dart';
 import 'package:takkeh/ui/base/widgets/drawer_app_bar.dart';
 import 'package:takkeh/ui/base/widgets/drawer_background_image.dart';
 import 'package:takkeh/ui/base/widgets/drawer_list_tile.dart';
 import 'package:takkeh/ui/base/widgets/drawer_profile_info.dart';
+import 'package:takkeh/ui/screens/help/help.dart';
+import 'package:takkeh/ui/screens/profile/profile.dart';
 import 'package:takkeh/utils/base/colors.dart';
 import 'package:takkeh/utils/base/icons.dart';
 import 'package:takkeh/utils/shared_prefrences.dart';
@@ -35,9 +39,11 @@ class BaseDrawer extends StatelessWidget {
                         child: const DrawerProfileInfo(),
                       ),
                       DrawerListTile(
-                        title: 'Profile',
+                        title: TranslationService.getString('profile_key'),
                         icon: MyIcons.user,
-                        onTap: () {},
+                        onTap: () {
+                          Get.to(() => const ProfileScreen());
+                        },
                       ),
                       DrawerListTile(
                         title: 'Orders',
@@ -55,9 +61,11 @@ class BaseDrawer extends StatelessWidget {
                         onTap: () {},
                       ),
                       DrawerListTile(
-                        title: 'Help',
+                        title: TranslationService.getString('help_key'),
                         icon: MyIcons.questionMark,
-                        onTap: () {},
+                        onTap: () {
+                          Get.to(() => const HelpScreen());
+                        },
                       ),
                       DrawerListTile(
                         title: 'About',

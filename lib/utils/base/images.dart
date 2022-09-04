@@ -12,4 +12,5 @@ class MyImages {
   static const String failedImage = "${_path}error_image.png";
   static const String driver = "${_path}driver.png";
   static const String halfCircleHorizontal = "${_path}half_circle_hori.png";
+  static const String help = "${_path}help.png";
 }

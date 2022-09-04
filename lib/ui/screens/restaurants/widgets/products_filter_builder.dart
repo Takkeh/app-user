@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:takkeh/controller/restaurants/filter_category.dart';
 import 'package:takkeh/controller/restaurants/products_filter.dart';
+import 'package:takkeh/controller/restaurants/view_restaurant.dart';
 import 'package:takkeh/ui/screens/restaurants/widgets/custom_circular_progress_indicator.dart';
 import 'package:takkeh/ui/screens/restaurants/widgets/products_filter_loading.dart';
 import 'package:takkeh/utils/base/colors.dart';
@@ -50,7 +50,7 @@ class ProductsFilterBuilder extends StatelessWidget {
                   elevation: 0,
                 ),
                 onPressed: () {
-                  FilterCategoryCtrl.find.scrollToItem(index);
+                  ViewRestaurantCtrl.find.scrollToItem(index);
                   controller.toggle(index);
                 },
                 child: Text(

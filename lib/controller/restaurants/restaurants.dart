@@ -35,8 +35,9 @@ class RestaurantsCtrl extends GetxController {
       toggleLoading(loadingCase, false);
       return null;
     }
-    if (restaurantsModel!.products!.isNotEmpty) {
-      restaurants.addAll(restaurantsModel!.products!);
+    if (restaurantsModel!.data!.isNotEmpty) {
+      restaurants.addAll(restaurantsModel!.data!);
+      print("length:: ${restaurantsModel!.data!.length}");
       limit++;
     } else {
       allLoaded.value = true;

@@ -3,11 +3,12 @@ import 'dart:developer';
 
 import 'package:http/http.dart' as http;
 import 'package:takkeh/model/restaurants/restaurants_model.dart';
+import 'package:takkeh/utils/api_url.dart';
 
 class RestaurantsApi {
   static Future<RestaurantsModel?> data(int page) async {
     try {
-      String url = 'https://dummyjson.com/products?limit=${page}0&skip=${page * 10}&select=title,price,thumbnail,rating,description,brand,category,images,stock,discountPercentage';
+      String url = '${ApiUrl.mainUrl}${ApiUrl.restaurants}$page';
       Uri uri = Uri.parse(url);
       var headers = {
         'Content-Type': 'application/json',

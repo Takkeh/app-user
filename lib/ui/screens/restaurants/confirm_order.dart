@@ -97,7 +97,7 @@ class _ConfirmOrderScreenState extends State<ConfirmOrderScreen> {
                 ...List.generate(3, (index) {
                   return CustomCheckBox(
                     title: "Food",
-                    price: "99.2",
+                    price: 99.2,
                     shape: const CircleBorder(),
                     onChanged: (value) {
                       // setState(() {
