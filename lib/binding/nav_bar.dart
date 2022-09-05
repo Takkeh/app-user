@@ -14,8 +14,8 @@ class NavBarBinding implements Bindings {
     Get.lazyPut(() => SliderController());
     Get.lazyPut(() => OffersController());
     Get.lazyPut(() => SpecialOffersController());
-    Get.put(NavBarCtrl());
-    Get.put(UserLocationCtrl());
+    Get.put(NavBarCtrl(), permanent: true);
+    Get.put(UserLocationCtrl(), permanent: true);
     Get.put(UserOrderCtrl(), permanent: true);
   }
 }

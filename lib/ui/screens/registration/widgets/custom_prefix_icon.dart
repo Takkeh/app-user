@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:takkeh/utils/base/colors.dart';
 
 class CustomPrefixIcon extends StatelessWidget {
   final String icon;
@@ -23,6 +24,7 @@ class CustomPrefixIcon extends StatelessWidget {
           width: 20,
           indent: 5,
           endIndent: 5,
+          color: MyColors.grey9F4,
         ),
       ],
     );

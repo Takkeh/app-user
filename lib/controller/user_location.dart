@@ -7,14 +7,16 @@ import 'package:geolocator/geolocator.dart';
 import 'package:get/get.dart';
 import 'package:takkeh/ui/widgets/custom_button.dart';
 import 'package:takkeh/utils/base/colors.dart';
+import 'package:takkeh/utils/shared_prefrences.dart';
 
 class UserLocationCtrl extends GetxController {
   static UserLocationCtrl get find => Get.find();
 
   final latitude = Rxn<double>();
   final longitude = Rxn<double>();
-  final region = Rxn<String>();
+  final subLocality = Rxn<String>();
   final street = Rxn<String>();
+  final locality = Rxn<String>();
   late LocationPermission permission;
 
   final savedAddresses = [
@@ -58,13 +60,14 @@ class UserLocationCtrl extends GetxController {
   }
 
   Future getAddressDetails(double lat, double lng) async {
-    List<Placemark> placeMarks = await placemarkFromCoordinates(lat, lng, localeIdentifier: 'ar');
+    List<Placemark> placeMarks = await placemarkFromCoordinates(lat, lng, localeIdentifier: MySharedPreferences.language);
 
-    region.value = placeMarks[1].subLocality!.isEmpty ? "Unknown" : placeMarks[1].subLocality;
+    locality.value = placeMarks[1].locality!.isEmpty ? "Unknown" : placeMarks[1].locality;
+    subLocality.value = placeMarks[1].subLocality!.isEmpty ? "Unknown" : placeMarks[1].subLocality;
     street.value = placeMarks[1].street!.isEmpty ? "Unknown" : placeMarks[1].street;
 
     log("placeMarkers:: $placeMarks");
-    log("address:: ${region.value} -- ${street.value}");
+    log("address:: ${subLocality.value} -- ${street.value}");
 
     update();
   }

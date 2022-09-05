@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
+import 'package:takkeh/controller/user_location.dart';
 import 'package:takkeh/ui/base/notifications.dart';
+import 'package:takkeh/ui/screens/restaurants/widgets/custom_circular_progress_indicator.dart';
 import 'package:takkeh/utils/base/icons.dart';
 
 class HomeAppBar extends StatelessWidget implements PreferredSizeWidget {
@@ -34,7 +36,16 @@ class HomeAppBar extends StatelessWidget implements PreferredSizeWidget {
         children: [
           SvgPicture.asset(MyIcons.marker),
           const SizedBox(width: 5),
-          const Text("Amman, Khalda"),
+          GetBuilder<UserLocationCtrl>(
+            builder: (controller) {
+              if (controller.locality.value == null || controller.subLocality.value == null) {
+                return const CustomCircularProgressIndicator(color: Colors.white);
+              }
+              return Text(
+                "${controller.locality.value}, ${controller.subLocality.value}",
+              );
+            },
+          ),
         ],
       ),
       actions: [

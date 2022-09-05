@@ -37,7 +37,6 @@ class ViewRestaurantProductScreen extends StatefulWidget {
 }
 
 class _ViewRestaurantProductScreenState extends State<ViewRestaurantProductScreen> {
-  // List<int> chooseList = [];
   int? chooseIndex;
   List<int> extrasList = [];
   late TextEditingController noteCtrl;

@@ -37,4 +37,8 @@ class MyIcons {
   static const String phoneCall = "${_path}phone_call.svg";
   static const String pinClassic = "${_path}pin_classic.svg";
   static const String camera = "${_path}camera.svg";
+  static const String plus = "${_path}plus.svg";
+  static const String book = "${_path}book.svg";
+  static const String cardWhite = "${_path}card_white.svg";
+  static const String currency = "${_path}currency.svg";
 }

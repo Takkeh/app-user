@@ -11,6 +11,7 @@ import 'package:takkeh/ui/base/widgets/drawer_list_tile.dart';
 import 'package:takkeh/ui/base/widgets/drawer_profile_info.dart';
 import 'package:takkeh/ui/screens/help/help.dart';
 import 'package:takkeh/ui/screens/profile/profile.dart';
+import 'package:takkeh/ui/screens/wallet/wallet.dart';
 import 'package:takkeh/utils/base/colors.dart';
 import 'package:takkeh/utils/base/icons.dart';
 import 'package:takkeh/utils/shared_prefrences.dart';
@@ -53,7 +54,9 @@ class BaseDrawer extends StatelessWidget {
                       DrawerListTile(
                         title: 'Wallet',
                         icon: MyIcons.wallet,
-                        onTap: () {},
+                        onTap: () {
+                          Get.to(() => const WalletScreen());
+                        },
                       ),
                       DrawerListTile(
                         title: 'Cards',

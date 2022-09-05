@@ -28,10 +28,10 @@ class ViewRestaurantCtrl extends GetxController {
     );
   }
 
-  void detect(int index) {
+  void detectPosition(int index) {
     RenderBox box = itemKeys[index].currentContext!.findRenderObject() as RenderBox;
     Offset position = box.localToGlobal(Offset.zero);
-    // print("value:: $position - ${itemKeys.length}");
+    print("value:: $position - ${itemKeys.length}");
   }
 
   void toggleLoading(String loadingCase, bool status) {
@@ -76,7 +76,7 @@ class ViewRestaurantCtrl extends GetxController {
     // itemKeys = List.generate(filterCategory.length, (index) => GlobalKey());
     scrollCtrl = ScrollController()
       ..addListener(() {
-        detect(1);
+        // detectPosition(1);
         print("position:: ${scrollCtrl.position.atEdge}");
         if (scrollCtrl.offset == scrollCtrl.position.maxScrollExtent) {
           if (!allLoaded.value && !loadMore.value) {

@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:takkeh/controller/restaurants/view_restaurant.dart';
 import 'package:takkeh/ui/screens/restaurants/widgets/most_popular_categories.dart';
 import 'package:takkeh/ui/screens/restaurants/widgets/products_fab_button.dart';
 import 'package:takkeh/ui/screens/restaurants/widgets/products_filter_builder.dart';
@@ -24,7 +23,7 @@ class ViewRestaurantScreen extends StatelessWidget {
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
       floatingActionButton: const ProductsFABButton(),
       body: CustomScrollView(
-        controller: ViewRestaurantCtrl.find.scrollCtrl,
+        // controller: ViewRestaurantCtrl.find.scrollCtrl,
         physics: const ClampingScrollPhysics(),
         slivers: [
           SliverAppBar(

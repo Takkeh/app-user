@@ -71,7 +71,7 @@ class _MapBubbleBuilderState extends State<MapBubbleBuilder> {
               ],
             ),
             DeliveryInfoBox(
-              address: "${controller.region.value!}, ${controller.street.value!}",
+              address: "${controller.subLocality.value!}, ${controller.street.value!}",
             ),
           ],
         ),

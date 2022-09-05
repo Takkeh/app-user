@@ -3,12 +3,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:takkeh/binding/nav_bar.dart';
-import 'package:takkeh/binding/registration/sign_in.dart';
 import 'package:takkeh/translation/service.dart';
 import 'package:takkeh/translation/translation.dart';
 import 'package:takkeh/ui/base/intro.dart';
 import 'package:takkeh/ui/base/nav_bar.dart';
 import 'package:takkeh/ui/screens/registration/registration.dart';
+import 'package:takkeh/ui/test_list.dart';
 import 'package:takkeh/utils/material_theme.dart';
 import 'package:takkeh/utils/shared_prefrences.dart';
 
@@ -25,6 +25,7 @@ Future<void> main() async {
       // ),
       );
   await MySharedPreferences.init();
+  //TODO: remove later
   MySharedPreferences.language = '';
   if (MySharedPreferences.language.isEmpty) {
     // MySharedPreferences.language = Get.deviceLocale!.languageCode;
@@ -58,7 +59,8 @@ class _MyAppState extends State<MyApp> {
     if (MySharedPreferences.isLogIn) {
       return NavBarBinding();
     } else {
-      return SignInBinding();
+      // return SignInBinding();
+      return NavBarBinding();
     }
   }
 
@@ -77,8 +79,8 @@ class _MyAppState extends State<MyApp> {
       locale: Locale(MySharedPreferences.language),
       fallbackLocale: Locale(MySharedPreferences.language),
       theme: AppThemeData().materialTheme,
-      home: _toggleScreen(),
-      // home: const HelpScreen(),
+      // home: _toggleScreen(),
+      home: const TestList(),
     );
   }
 }
