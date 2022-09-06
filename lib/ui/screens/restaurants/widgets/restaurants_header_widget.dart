@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:takkeh/controller/restaurants/filter.dart';
+import 'package:takkeh/translation/service.dart';
 import 'package:takkeh/ui/screens/restaurants/widgets/filter_widget.dart';
 import 'package:takkeh/ui/screens/restaurants/widgets/restaurants_filter_builder.dart';
 import 'package:takkeh/ui/screens/restaurants/widgets/search_field.dart';
@@ -40,7 +41,7 @@ class RestaurantsHeaderWidget extends StatelessWidget {
                   children: [
                     Expanded(
                       child: SearchField(
-                        hintText: "What do you want to eat ?",
+                        hintText: TranslationService.getString('what_to_search_key'),
                         controller: controller,
                         onChanged: onChanged,
                       ),

@@ -7,6 +7,7 @@ class MySharedPreferences {
   static const String keyAccessToken = "key_access_token";
   static const String keyEmail = "key_email";
   static const String keyName = "key_name";
+  static const String keyUserId = "key_user_id";
   static const String keyIsPassedIntro = "key_is_passed_intro";
   static const String keyLanguage = "key_language";
   static const String keyDeviceToken = "key_device_token";
@@ -22,6 +23,7 @@ class MySharedPreferences {
     isLogIn = false;
     email = "";
     name = "";
+    userId = "";
     language = "";
     deviceToken = "";
     phone = "";
@@ -45,6 +47,9 @@ class MySharedPreferences {
 
   static String get name => _sharedPreferences.getString(keyName) ?? "";
   static set name(String value) => _sharedPreferences.setString(keyName, value);
+
+  static String get userId => _sharedPreferences.getString(keyUserId) ?? "";
+  static set userId(String value) => _sharedPreferences.setString(keyUserId, value);
 
   static String get deviceToken => _sharedPreferences.getString(keyDeviceToken) ?? "";
   static set deviceToken(String value) => _sharedPreferences.setString(keyDeviceToken, value);

@@ -151,6 +151,8 @@ class _BasketScreenState extends State<BasketScreen> {
                         icon: MyIcons.ticketBlack,
                         onTap: () {},
                       ),
+                      //TODO: check later
+                      maxSuffixWidth: 100,
                     ),
                   ),
                   const Divider(

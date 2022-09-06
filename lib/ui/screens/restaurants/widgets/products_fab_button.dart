@@ -2,13 +2,16 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:takkeh/controller/user_order_ctrl.dart';
 import 'package:takkeh/translation/service.dart';
-import 'package:takkeh/ui/screens/restaurants/basket.dart';
 import 'package:takkeh/utils/app_constants.dart';
 import 'package:takkeh/utils/base/colors.dart';
 
 class ProductsFABButton extends StatelessWidget {
+  final int total, restaurantId;
+
   const ProductsFABButton({
     Key? key,
+    required this.total,
+    required this.restaurantId,
   }) : super(key: key);
 
   @override
@@ -17,7 +20,11 @@ class ProductsFABButton extends StatelessWidget {
       padding: const EdgeInsets.symmetric(horizontal: 20.0),
       child: ElevatedButton(
         onPressed: () {
-          Get.to(() => const BasketScreen());
+          UserOrderCtrl.find.fetchMakeOrderData(
+            context: context,
+            total: total,
+            restaurantId: restaurantId,
+          );
         },
         style: ElevatedButton.styleFrom(
           primary: MyColors.redF98,

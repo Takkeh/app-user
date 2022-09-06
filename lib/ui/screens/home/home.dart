@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:takkeh/controller/home/category.dart';
 import 'package:takkeh/controller/nav_bar_ctrl.dart';
 import 'package:takkeh/model/home/categories_model.dart';
+import 'package:takkeh/translation/service.dart';
 import 'package:takkeh/ui/base/drawer.dart';
 import 'package:takkeh/ui/screens/home/widgets/home_app_bar.dart';
 import 'package:takkeh/ui/screens/home/widgets/home_header.dart';
@@ -96,12 +97,12 @@ class _HomeScreenState extends State<HomeScreen> {
                 }
               },
             ),
-            const TitleWidget(
-              title: 'Takkeh Offers',
+            TitleWidget(
+              title: TranslationService.getString('takkeh_offers_key'),
             ),
             const TakkehOffersBuilder(),
-            const TitleWidget(
-              title: 'Special Offers',
+            TitleWidget(
+              title: TranslationService.getString('special_offers_key'),
             ),
             const SpecialOffersBuilder(),
           ],

@@ -47,19 +47,19 @@ class BaseDrawer extends StatelessWidget {
                         },
                       ),
                       DrawerListTile(
-                        title: 'Orders',
+                        title: TranslationService.getString('orders_key'),
                         icon: MyIcons.timePast,
                         onTap: () {},
                       ),
                       DrawerListTile(
-                        title: 'Wallet',
+                        title: TranslationService.getString('wallet_key'),
                         icon: MyIcons.wallet,
                         onTap: () {
                           Get.to(() => const WalletScreen());
                         },
                       ),
                       DrawerListTile(
-                        title: 'Cards',
+                        title: TranslationService.getString('cards_key'),
                         icon: MyIcons.ticketBlack,
                         onTap: () {},
                       ),
@@ -71,7 +71,7 @@ class BaseDrawer extends StatelessWidget {
                         },
                       ),
                       DrawerListTile(
-                        title: 'About',
+                        title: TranslationService.getString('about_us_key'),
                         icon: MyIcons.info,
                         onTap: () {},
                       ),

@@ -17,6 +17,7 @@ class SendOtpController {
     required BuildContext context,
     required String phone,
     required String name,
+    required String userId,
     required String token,
     required String email,
     required String code,
@@ -32,6 +33,7 @@ class SendOtpController {
       MySharedPreferences.accessToken = token;
       MySharedPreferences.email = email;
       MySharedPreferences.name = name;
+      MySharedPreferences.userId = name;
       MySharedPreferences.phone = "+962$phone";
       MySharedPreferences.isLogIn = true;
       Get.offAll(() => const BaseNavBar(), binding: NavBarBinding());

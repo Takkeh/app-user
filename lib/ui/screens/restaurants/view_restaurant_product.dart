@@ -17,6 +17,7 @@ class ViewRestaurantProductScreen extends StatefulWidget {
   final double price;
   final String cover;
   final int productId;
+  final int restaurantId;
   //TODO: change type later
   final List<Extra> choose;
   final List<Extra> extra;
@@ -30,6 +31,7 @@ class ViewRestaurantProductScreen extends StatefulWidget {
     required this.extra,
     required this.cover,
     required this.productId,
+    required this.restaurantId,
   }) : super(key: key);
 
   @override
@@ -66,10 +68,11 @@ class _ViewRestaurantProductScreenState extends State<ViewRestaurantProductScree
                 title: TranslationService.getString('add_to_cart_key'),
                 onPressed: () {
                   if (chooseIndex == null) {
-                    Get.snackbar("Choose", "message", backgroundColor: MyColors.redD4F);
+                    Get.snackbar("Choose", "message", backgroundColor: MyColors.primary);
                     return;
                   }
                   UserOrderCtrl.find.addProduct(
+                    restaurantId: widget.restaurantId,
                     productId: widget.productId,
                     quantity: counterKey.currentState!.counter,
                     choose: widget.choose[chooseIndex!].id!,
@@ -77,7 +80,7 @@ class _ViewRestaurantProductScreenState extends State<ViewRestaurantProductScree
                     note: noteCtrl.text,
                     price: counterKey.currentState!.price,
                   );
-                  // Get.back();
+                  Get.back();
                 },
               )
             : null,

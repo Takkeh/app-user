@@ -2,7 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:persistent_bottom_nav_bar/persistent-tab-view.dart';
 import 'package:takkeh/controller/nav_bar_ctrl.dart';
+import 'package:takkeh/ui/screens/help/help.dart';
 import 'package:takkeh/ui/screens/home/home.dart';
+import 'package:takkeh/ui/screens/profile/profile.dart';
 import 'package:takkeh/ui/widgets/custom_nav_bar_icon.dart';
 import 'package:takkeh/utils/base/colors.dart';
 import 'package:takkeh/utils/base/icons.dart';
@@ -40,8 +42,8 @@ class BaseNavBarState extends State<BaseNavBar> {
     return [
       const HomeScreen(),
       const HomeScreen(),
-      const HomeScreen(),
-      const HomeScreen(),
+      const HelpScreen(),
+      const ProfileScreen(),
     ];
   }
 

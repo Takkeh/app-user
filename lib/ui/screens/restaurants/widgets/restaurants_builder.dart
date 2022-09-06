@@ -58,6 +58,7 @@ class RestaurantsBuilder extends StatelessWidget {
                     () => ViewRestaurantScreen(
                       title: controller.restaurants[index].name!,
                       cover: controller.restaurants[index].cover!,
+                      restaurantId: controller.restaurants[index].id!,
                     ),
                     binding: ProductBinding(id: controller.restaurants[index].id!),
                   );

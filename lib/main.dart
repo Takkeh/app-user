@@ -3,12 +3,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:takkeh/binding/nav_bar.dart';
+import 'package:takkeh/binding/registration/sign_in.dart';
 import 'package:takkeh/translation/service.dart';
 import 'package:takkeh/translation/translation.dart';
 import 'package:takkeh/ui/base/intro.dart';
 import 'package:takkeh/ui/base/nav_bar.dart';
 import 'package:takkeh/ui/screens/registration/registration.dart';
-import 'package:takkeh/ui/test_list.dart';
 import 'package:takkeh/utils/material_theme.dart';
 import 'package:takkeh/utils/shared_prefrences.dart';
 
@@ -25,11 +25,10 @@ Future<void> main() async {
       // ),
       );
   await MySharedPreferences.init();
-  //TODO: remove later
-  MySharedPreferences.language = '';
+  MySharedPreferences.language = "";
   if (MySharedPreferences.language.isEmpty) {
     // MySharedPreferences.language = Get.deviceLocale!.languageCode;
-    MySharedPreferences.language = 'en';
+    MySharedPreferences.language = 'ar';
   }
   await TranslationService.init();
   await SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp, DeviceOrientation.portraitDown]);
@@ -60,7 +59,7 @@ class _MyAppState extends State<MyApp> {
       return NavBarBinding();
     } else {
       // return SignInBinding();
-      return NavBarBinding();
+      return SignInBinding();
     }
   }
 
@@ -79,8 +78,8 @@ class _MyAppState extends State<MyApp> {
       locale: Locale(MySharedPreferences.language),
       fallbackLocale: Locale(MySharedPreferences.language),
       theme: AppThemeData().materialTheme,
-      // home: _toggleScreen(),
-      home: const TestList(),
+      home: _toggleScreen(),
+      // home: const BaseNavBar(),
     );
   }
 }

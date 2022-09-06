@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:takkeh/translation/service.dart';
 import 'package:takkeh/ui/screens/restaurants/widgets/most_popular_categories.dart';
 import 'package:takkeh/ui/screens/restaurants/widgets/products_fab_button.dart';
 import 'package:takkeh/ui/screens/restaurants/widgets/products_filter_builder.dart';
@@ -10,18 +11,21 @@ import 'package:takkeh/utils/base/colors.dart';
 
 class ViewRestaurantScreen extends StatelessWidget {
   final String title, cover;
+  final int restaurantId;
 
   const ViewRestaurantScreen({
     Key? key,
     required this.title,
     required this.cover,
+    required this.restaurantId,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
-      floatingActionButton: const ProductsFABButton(),
+      //TODO: check later
+      floatingActionButton: ProductsFABButton(total: 40, restaurantId: restaurantId),
       body: CustomScrollView(
         // controller: ViewRestaurantCtrl.find.scrollCtrl,
         physics: const ClampingScrollPhysics(),
@@ -60,18 +64,18 @@ class ViewRestaurantScreen extends StatelessWidget {
                     ),
                     Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
-                      children: const [
+                      children: [
                         Padding(
-                          padding: EdgeInsetsDirectional.fromSTEB(28, 20, 0, 10),
+                          padding: const EdgeInsetsDirectional.fromSTEB(28, 20, 0, 10),
                           child: Text(
-                            "Most Popular",
-                            style: TextStyle(
+                            TranslationService.getString('most_popular_key'),
+                            style: const TextStyle(
                               fontSize: 18,
                               fontWeight: FontWeight.bold,
                             ),
                           ),
                         ),
-                        MostPopularCategoriesBuilder(),
+                        const MostPopularCategoriesBuilder(),
                       ],
                     ),
                   ],
@@ -84,7 +88,7 @@ class ViewRestaurantScreen extends StatelessWidget {
               child: ProductsFilterBuilder(),
             ),
           ),
-          const ViewRestaurantBuilder(),
+          ViewRestaurantBuilder(restaurantId: restaurantId),
           const SliverToBoxAdapter(
             child: SizedBox(height: 80),
           ),

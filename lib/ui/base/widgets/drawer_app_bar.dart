@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:takkeh/translation/service.dart';
 import 'package:takkeh/utils/base/colors.dart';
 
 class DrawerAppBar extends StatelessWidget implements PreferredSizeWidget {
@@ -30,9 +31,9 @@ class DrawerAppBar extends StatelessWidget implements PreferredSizeWidget {
           ),
         ),
       ),
-      title: const Text(
-        "Menu",
-        style: TextStyle(
+      title: Text(
+        TranslationService.getString('menu_key'),
+        style: const TextStyle(
           color: MyColors.text,
           fontSize: 20,
           fontWeight: FontWeight.bold,
