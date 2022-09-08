@@ -17,7 +17,7 @@ class _Test2State extends State<Test2> {
     super.initState();
     itemScrollController = ItemScrollController();
     itemPositionsListener.itemPositions.addListener(() {
-      print("value:: ${itemPositionsListener.itemPositions.value.first.index}");
+      print("value:: ${itemPositionsListener.itemPositions}");
     });
   }
 
@@ -33,22 +33,12 @@ class _Test2State extends State<Test2> {
           );
         },
       ),
-      appBar: AppBar(),
+      // appBar: AppBar(),
       body: ScrollablePositionedList.builder(
-        shrinkWrap: true,
         itemScrollController: itemScrollController,
         itemPositionsListener: itemPositionsListener,
         itemCount: 50,
         itemBuilder: (context, index) {
-          if (index == 0) {
-            return Container(
-              height: 200,
-              alignment: Alignment.center,
-              margin: const EdgeInsets.all(16),
-              color: Colors.teal,
-              child: Text('Item $index'),
-            );
-          }
           return Container(
             height: 100,
             alignment: Alignment.center,
