@@ -16,6 +16,7 @@ class _Test2State extends State<Test2> {
   void initState() {
     super.initState();
     itemScrollController = ItemScrollController();
+
     itemPositionsListener.itemPositions.addListener(() {
       print("value:: ${itemPositionsListener.itemPositions}");
     });

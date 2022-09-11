@@ -25,7 +25,7 @@ class _Test3State extends State<Test3> {
       viewportBoundaryGetter: () => Rect.fromLTRB(0, 0, 0, MediaQuery.of(context).padding.bottom),
     );
     controller.addListener(() {
-      print("value:: ${controller.isIndexStateInLayoutRange(15)}");
+      print("value:: ${controller.tagMap}");
     });
   }
 
@@ -42,20 +42,23 @@ class _Test3State extends State<Test3> {
         scrollDirection: scrollDirection,
         controller: controller,
         children: <Widget>[
-          ...List.generate(20, (index) {
-            return AutoScrollTag(
-              key: ValueKey(index),
-              controller: controller,
-              index: index,
-              highlightColor: Colors.black.withOpacity(0.1),
-              child: Container(
-                height: 100,
-                color: Colors.red,
-                margin: const EdgeInsets.all(10),
-                child: Center(child: Text('index: $index')),
-              ),
-            );
-          }),
+          ...List.generate(
+            20,
+            (index) {
+              return AutoScrollTag(
+                key: ValueKey(index),
+                controller: controller,
+                index: index,
+                highlightColor: Colors.black.withOpacity(0.1),
+                child: Container(
+                  height: 100,
+                  color: Colors.red,
+                  margin: const EdgeInsets.all(10),
+                  child: Center(child: Text('index: $index')),
+                ),
+              );
+            },
+          ),
         ],
       ),
     );

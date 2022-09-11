@@ -9,7 +9,7 @@ import 'package:takkeh/translation/translation.dart';
 import 'package:takkeh/ui/base/intro.dart';
 import 'package:takkeh/ui/base/nav_bar.dart';
 import 'package:takkeh/ui/screens/registration/registration.dart';
-import 'package:takkeh/ui/test3.dart';
+import 'package:takkeh/ui/scroll_test/test_7.dart';
 import 'package:takkeh/utils/material_theme.dart';
 import 'package:takkeh/utils/shared_prefrences.dart';
 
@@ -80,7 +80,7 @@ class _MyAppState extends State<MyApp> {
       fallbackLocale: Locale(MySharedPreferences.language),
       theme: AppThemeData().materialTheme,
       // home: _toggleScreen(),
-      home: const Test3(),
+      home: const Test7(),
     );
   }
 }
