@@ -12,38 +12,31 @@ class _Test7State extends State<Test7> {
   final _keys = {};
   final scrollController = ScrollController();
 
-  /// Make the entire ListView have the ability to get rect.
   var listViewKey = RectGetter.createGlobalKey();
 
   List<int> getVisible() {
-    /// First, get the rect of ListView, and then traver the _keys
-    /// get rect of each item by keys in _keys, and if this rect in the range of ListView's rect,
-    /// add the index into result list.
     var rect = RectGetter.getRectFromKey(listViewKey);
     var items = <int>[];
     _keys.forEach((index, key) {
       var itemRect = RectGetter.getRectFromKey(key);
 
-      // if (itemRect != null && !(itemRect.top + 106 > rect!.bottom || itemRect.bottom < rect.top)) {
-      //   print('TopItemRect:: ${itemRect.top} BottomItemRect:: ${itemRect.bottom}  TopRect:: ${rect.top} BottomRect:: ${rect.bottom}');
-      //   items.add(index);
-      // }
-      // print('  TopRect:: ${rect!.top} BottomRect:: ${rect!.bottom}');
-
       if (itemRect != null && !(itemRect.top > rect!.bottom || itemRect.bottom < rect.top)) {
-        //print('TopItemRect:: ${itemRect!.top} BottomItemRect:: ${itemRect.bottom}  TopRect:: ${rect!.top} BottomRect:: ${rect.bottom}');
+        //bottomRREct = 866
+        //TopRect = 216
+        if (rect.top == 5.684341886080802e-14) {
+          print("alsifjasfil");
+        }
+        print('TopItemRect:: ${itemRect.top} BottomItemRect:: ${itemRect.bottom}  TopRect:: ${rect.top} BottomRect:: ${rect.bottom}');
         items.add(index);
         print(items);
       }
     });
 
-    /// so all visible item's index are in this _items.
     return items;
   }
 
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
     scrollController.addListener(() {
       getVisible();
@@ -84,8 +77,7 @@ class _Test7State extends State<Test7> {
         },
         body: NotificationListener<ScrollUpdateNotification>(
           onNotification: (notification) {
-            /// print all visible item's index when scroll updated.
-            // print("getVisible:: ${getVisible()}");
+            print("getVisible:: ${getVisible()}");
             return true;
           },
           child: RectGetter(
@@ -94,8 +86,6 @@ class _Test7State extends State<Test7> {
               padding: EdgeInsets.zero,
               itemCount: 1000,
               itemBuilder: (BuildContext context, int index) {
-                /// Make every item have the ability to get rect,
-                /// and save keys for RectGetter and its index into _keys.
                 _keys[index] = RectGetter.createGlobalKey();
 
                 return RectGetter(
@@ -104,7 +94,6 @@ class _Test7State extends State<Test7> {
                     width: double.infinity,
                     alignment: Alignment.center,
                     height: 50.0 + ((27 * index) % 15) * 3.14,
-                    // margin: const EdgeInsets.all(20.0),
                     color: Colors.primaries[index % Colors.primaries.length],
                     child: Text('$index'),
                   ),
