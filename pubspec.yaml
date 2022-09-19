@@ -63,6 +63,8 @@ dependencies:
   inview_notifier_list: ^3.0.0
   scrollable_list_tabview: ^0.2.0-nullsafety
   rect_getter: ^1.1.0
+  sunmi_printer_plus: ^2.1.1
+  esc_pos_utils: ^1.1.0
 
 dev_dependencies:
   flutter_test:
