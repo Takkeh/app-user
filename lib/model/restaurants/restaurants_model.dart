@@ -42,33 +42,33 @@ class Restaurants {
     this.name,
     this.logo,
     this.cover,
-    this.categories,
     this.reviewIcon,
     this.review,
     this.cost,
     this.time,
+    this.categories,
   });
 
   int? id;
   String? name;
   String? logo;
   String? cover;
-  String? categories;
   String? reviewIcon;
   String? review;
   String? cost;
   String? time;
+  List<Category>? categories;
 
   factory Restaurants.fromJson(Map<String, dynamic> json) => Restaurants(
         id: json["id"],
         name: json["name"],
         logo: json["logo"],
         cover: json["cover"],
-        categories: json["categories"],
         reviewIcon: json["review_icon"],
         review: json["review"],
         cost: json["cost"],
         time: json["time"],
+        categories: List<Category>.from(json["categories"].map((x) => Category.fromJson(x))),
       );
 
   Map<String, dynamic> toJson() => {
@@ -76,10 +76,34 @@ class Restaurants {
         "name": name,
         "logo": logo,
         "cover": cover,
-        "categories": categories,
         "review_icon": reviewIcon,
         "review": review,
         "cost": cost,
         "time": time,
+        "categories": List<dynamic>.from(categories!.map((x) => x.toJson())),
+      };
+}
+
+class Category {
+  Category({
+    this.id,
+    this.name,
+    this.image,
+  });
+
+  int? id;
+  String? name;
+  String? image;
+
+  factory Category.fromJson(Map<String, dynamic> json) => Category(
+        id: json["id"],
+        name: json["name"],
+        image: json["image"],
+      );
+
+  Map<String, dynamic> toJson() => {
+        "id": id,
+        "name": name,
+        "image": image,
       };
 }

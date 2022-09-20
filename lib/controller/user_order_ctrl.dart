@@ -13,79 +13,66 @@ import 'package:takkeh/utils/app_constants.dart';
 class UserOrderCtrl extends GetxController {
   static UserOrderCtrl get find => Get.find();
   final userOrder = <Map<String, dynamic>>[].obs;
+  Map<String, dynamic> userOrderMap = {};
+  final total = 0.0.obs;
   MakeOrderModel? makeOrderModel;
 
-  // final reOrderedUserOrder = <Map<String, dynamic>>[].obs;
-
-  // final alaa = {
-  //   'userID': 1,
-  //   'products': [
   //     {
-  //       'productId': productId,
-  //       'quantity': quantity,
-  //       'chose': choose,
-  //       'extra': extras,
-  //       'note': note,
-  //       'price': price,
+  //       "product_id": 1,
+  //       "quantity": 5,
+  //       "size_id": 1,
+  //       "extras": [
+  //         {"extra_id": 1}
+  //       ],
+  //       "note": "Product Note",
+  //       "price": 10
   //     },
-  //     {
-  //       'productId': productId,
-  //       'quantity': quantity,
-  //       'chose': choose,
-  //       'extra': extras,
-  //       'note': note,
-  //       'price': price,
-  //     },
-  //   ],
-  // };
 
-  // void reOrder(Map<String, dynamic> productDetails) {
-  //   // int? index;
-  //   // int? quantity;
-  //   // bool? isEqual;
-  //   if (reOrderedUserOrder.isEmpty) {
-  //     reOrderedUserOrder.add(productDetails);
-  //     return;
-  //   }
-  //   for (var element in reOrderedUserOrder) {
-  //     if (mapEquals(element, productDetails)) {
-  //       // isEqual = true;
-  //       var index = reOrderedUserOrder.indexOf(element);
-  //       var quantity = reOrderedUserOrder[index]['quantity'];
-  //       print("aslifhasflih");
-  //       reOrderedUserOrder[index]['quantity'] = quantity! + 1;
-  //       print("reOrderdList:: $reOrderedUserOrder");
-  //       return;
-  //     } else {
-  //       reOrderedUserOrder.add(productDetails);
-  //       print("reOrderdList:: $reOrderedUserOrder");
-  //     }
-  //   }
-  //   // if (isEqual != null && isEqual) {
-  //   //   reOrderedUserOrder[index!]['quantity'] = quantity! + 1;
-  //   //   print("reOrderdList:: $reOrderedUserOrder");
-  //   // }
-  // }
+  void calculateTotal(double price) {
+    total.value = total.value + price;
+  }
+
+  bool checkIfItemAlreadyExist(Map<String, dynamic> productDetails) {
+    bool isPreExist = false;
+    for (var element in userOrder) {
+      if (productDetails.toString() == element.toString()) {
+        element['quantity']++;
+        isPreExist = true;
+        break;
+      }
+    }
+    return isPreExist;
+  }
 
   void addProduct({
     required int productId,
     required int quantity,
-    required int choose,
+    required int size,
     required List<int> extras,
     required String note,
     required double price,
+    required int extraId,
     required int restaurantId,
   }) {
     final productDetails = {
-      'productId': productId,
+      'product_id': productId,
       'quantity': quantity,
-      'chose': choose,
-      'extra': extras,
-      'note': note,
-      'price': price,
+      'extras': [
+        {
+          'extra_id': extraId,
+        },
+      ],
+      'size_id': size,
+      'note': "note",
+      'price': price
     };
-
-    userOrder.add(productDetails);
+    if (userOrder.isEmpty) {
+      userOrder.add(productDetails);
+    } else {
+      if (!checkIfItemAlreadyExist(productDetails)) {
+        userOrder.add(productDetails);
+      }
+    }
     log("userOrder:: $userOrder -- length ${userOrder.length}");
     update();
   }
@@ -93,18 +80,23 @@ class UserOrderCtrl extends GetxController {
   void removeProduct({
     required int productId,
     required int quantity,
-    required int choose,
+    required int size,
     required List<int> extras,
     required String note,
+    required int extraId,
     required double price,
   }) {
     final productDetails = {
-      'productId': productId,
+      'product_id': productId,
       'quantity': quantity,
-      'chose': choose,
-      'extra': extras,
+      'extras': [
+        {
+          'extra_id': extraId,
+        },
+      ],
+      'size_id': size,
       'note': note,
-      'price': price,
+      'price': price
     };
 
     userOrder.remove(productDetails);
@@ -114,13 +106,12 @@ class UserOrderCtrl extends GetxController {
 
   Future fetchMakeOrderData({
     required BuildContext context,
-    required int total,
     required int restaurantId,
   }) async {
     OverLayLoader.showLoading(context);
     makeOrderModel = await MakeOrderApi.data(
       userOrder: userOrder,
-      total: total,
+      total: total.value,
       restaurantId: restaurantId,
     );
     if (makeOrderModel == null) {

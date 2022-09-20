@@ -30,7 +30,7 @@ class _StickyHeaderState extends State<StickyHeader> {
             expandedHeight: 200,
             collapsedHeight: kToolbarHeight + 50,
             pinned: true,
-            backgroundColor: MyColors.redD4F,
+            backgroundColor: MyColors.redPrimary,
           ),
           SliverStickyHeader.builder(
             overlapsContent: true,

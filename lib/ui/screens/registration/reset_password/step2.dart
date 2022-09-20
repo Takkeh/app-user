@@ -117,7 +117,7 @@ class _ResetPassStep2ScreenState extends State<ResetPassStep2Screen> {
                   if (element.controller.text.isEmpty) {
                     ScaffoldMessenger.of(context).showSnackBar(
                       SnackBar(
-                        backgroundColor: MyColors.redD4F,
+                        backgroundColor: MyColors.redPrimary,
                         content: Text(
                           "Please enter the 4-digit verification code".tr,
                         ),

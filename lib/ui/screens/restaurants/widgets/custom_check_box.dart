@@ -29,8 +29,8 @@ class CustomCheckBox extends StatelessWidget {
           height: 24,
           width: 24,
           child: Checkbox(
-            fillColor: MaterialStateProperty.all(MyColors.redD4F),
-            side: const BorderSide(color: MyColors.redD4F),
+            fillColor: MaterialStateProperty.all(MyColors.redPrimary),
+            side: const BorderSide(color: MyColors.redPrimary),
             materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
             shape: shape,
             value: value,

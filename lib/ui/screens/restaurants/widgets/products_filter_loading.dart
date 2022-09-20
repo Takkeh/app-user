@@ -20,7 +20,7 @@ class ProductsFilterLoading extends StatelessWidget {
             radius: 9,
             height: 50,
             width: 80,
-            highlightColor: MyColors.redD4F,
+            highlightColor: MyColors.redPrimary,
           );
         },
       ),

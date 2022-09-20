@@ -26,7 +26,7 @@ class CustomSuffixIcon extends StatelessWidget {
           onTap: onTap,
           child: Text(
             title,
-            style: const TextStyle(color: MyColors.redD4F),
+            style: const TextStyle(color: MyColors.redPrimary),
           ),
         ),
         const SizedBox(width: 10),

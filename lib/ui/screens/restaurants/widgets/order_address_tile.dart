@@ -16,7 +16,7 @@ class OrderAddressTile extends StatelessWidget {
       minLeadingWidth: 0,
       leading: SvgPicture.asset(
         MyIcons.marker,
-        color: MyColors.redD4F,
+        color: MyColors.redPrimary,
       ),
       title: Text(
         TranslationService.getString(

@@ -121,7 +121,7 @@ class _VerificationScreenState extends State<VerificationScreen> {
                   if (element.controller.text.isEmpty) {
                     ScaffoldMessenger.of(context).showSnackBar(
                       SnackBar(
-                        backgroundColor: MyColors.redD4F,
+                        backgroundColor: MyColors.redPrimary,
                         content: Text(
                           "Please enter the 4-digit verification code".tr,
                         ),

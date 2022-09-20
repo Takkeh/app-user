@@ -39,7 +39,7 @@ class _ScrollTestState extends State<ScrollTest> {
           return [
             SliverAppBar(
               pinned: true,
-              backgroundColor: MyColors.redD4F,
+              backgroundColor: MyColors.redPrimary,
               leadingWidth: 73,
               leading: const BackLeadingWidget(),
               actions: const [

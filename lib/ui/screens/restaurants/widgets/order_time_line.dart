@@ -12,7 +12,7 @@ class OrderTimeLine extends StatelessWidget {
       children: const [
         Expanded(
           child: Divider(
-            color: MyColors.redD4F,
+            color: MyColors.redPrimary,
             thickness: 3,
           ),
         ),
@@ -22,13 +22,13 @@ class OrderTimeLine extends StatelessWidget {
             padding: EdgeInsets.symmetric(horizontal: 10.0),
             child: Divider(
               thickness: 3,
-              color: MyColors.redD4F,
+              color: MyColors.redPrimary,
             ),
           ),
         ),
         Expanded(
           child: Divider(
-            color: MyColors.redD4F,
+            color: MyColors.redPrimary,
             thickness: 3,
           ),
         ),

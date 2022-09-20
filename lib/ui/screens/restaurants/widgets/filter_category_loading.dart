@@ -14,7 +14,7 @@ class FilterCategoryLoading extends StatelessWidget {
             margin: EdgeInsets.symmetric(horizontal: 15),
             radius: 17,
             height: 120,
-            highlightColor: MyColors.redD4F,
+            highlightColor: MyColors.redPrimary,
           );
         }),
       ),

@@ -14,7 +14,7 @@ class CustomNavBaaButton extends StatelessWidget {
 
   static Color _toggleColor(bool isChosen) {
     if (isChosen) {
-      return MyColors.redD4F;
+      return MyColors.redPrimary;
     } else {
       return Colors.transparent;
     }

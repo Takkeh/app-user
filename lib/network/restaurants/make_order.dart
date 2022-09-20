@@ -8,7 +8,7 @@ import 'package:takkeh/utils/api_url.dart';
 class MakeOrderApi {
   static Future<MakeOrderModel?> data({
     required List userOrder,
-    required int total,
+    required double total,
     required int restaurantId,
   }) async {
     try {
@@ -18,40 +18,41 @@ class MakeOrderApi {
         'Content-Type': 'application/json',
       };
       var body = jsonEncode({
+        //TODO: from shared pref
         "user_id": 1,
         "restaurant_id": 1,
         "note": "Order Note here",
         "total": 200,
-        "products": [
-          {
-            "product_id": 1,
-            "quantity": 5,
-            "size_id": 1,
-            "extras": [
-              {"extra_id": 1}
-            ],
-            "note": "Product Note",
-            "price": 10
-          },
-          {
-            "product_id": 2,
-            "quantity": 2,
-            "size_id": 4,
-            "extras": [
-              {"extra_id": 3},
-              {"extra_id": 4}
-            ],
-            "note": "Product Note",
-            "price": 10
-          }
-        ]
+        "products": userOrder,
       });
       // var body = jsonEncode({
-      //   "user_id": MySharedPreferences.userId,
-      //   "restaurant_id": restaurantId,
+      //   "user_id": 1,
+      //   "restaurant_id": 1,
       //   "note": "Order Note here",
-      //   "total": total,
-      //   "products": userOrder,
+      //   "total": 200,
+      //   "products": [
+      //     {
+      //       "product_id": 1,
+      //       "quantity": 5,
+      //       "size_id": 1,
+      //       "extras": [
+      //         {"extra_id": 1}
+      //       ],
+      //       "note": "Product Note",
+      //       "price": 10
+      //     },
+      //     {
+      //       "product_id": 2,
+      //       "quantity": 2,
+      //       "size_id": 4,
+      //       "extras": [
+      //         {"extra_id": 3},
+      //         {"extra_id": 4}
+      //       ],
+      //       "note": "Product Note",
+      //       "price": 10
+      //     }
+      //   ]
       // });
       log("Response:: MakeOrderResponse\nUrl:: $url\nheaders:: $headers\nbody:: $body");
       http.Response response = await http.post(uri, body: body, headers: headers);

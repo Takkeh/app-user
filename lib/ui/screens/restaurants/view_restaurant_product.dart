@@ -67,20 +67,39 @@ class _ViewRestaurantProductScreenState extends State<ViewRestaurantProductScree
             ? CustomFABButton(
                 title: TranslationService.getString('add_to_cart_key'),
                 onPressed: () {
+                  Get.closeCurrentSnackbar();
                   if (chooseIndex == null) {
-                    Get.snackbar("Choose", "message", backgroundColor: MyColors.primary);
+                    Get.snackbar(
+                      "Choose",
+                      "message",
+                      colorText: Colors.white,
+                      backgroundColor: MyColors.redPrimary,
+                    );
                     return;
                   }
+                  UserOrderCtrl.find.calculateTotal(counterKey.currentState!.price);
+                  UserOrderCtrl.find.userOrderMap = {
+                    'product_id': 1,
+                    'quantity': counterKey.currentState!.counter,
+                    'extras': [
+                      {'extra_id': 1}
+                    ],
+                    'size_id': widget.choose[chooseIndex!].id!,
+                    'note': "note",
+                    'price': counterKey.currentState!.price,
+                  };
+
                   UserOrderCtrl.find.addProduct(
                     restaurantId: widget.restaurantId,
                     productId: widget.productId,
                     quantity: counterKey.currentState!.counter,
-                    choose: widget.choose[chooseIndex!].id!,
+                    size: widget.choose[chooseIndex!].id!,
                     extras: extrasList,
                     note: noteCtrl.text,
                     price: counterKey.currentState!.price,
+                    extraId: 1,
                   );
-                  Get.back();
+                  Get.back(closeOverlays: true);
                 },
               )
             : null,

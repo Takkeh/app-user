@@ -39,7 +39,7 @@ class OtpCounterWidget extends StatelessWidget {
                   TextSpan(
                     text: '${"After".tr} ${controller.counter.value} ${"seconds".tr}',
                     style: const TextStyle(
-                      color: MyColors.redD4F,
+                      color: MyColors.redPrimary,
                     ),
                   ),
                 ],

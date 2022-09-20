@@ -24,15 +24,17 @@ class ViewRestaurantScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
-      //TODO: check later
-      floatingActionButton: ProductsFABButton(total: 40, restaurantId: restaurantId),
+      //TODO: check color later
+      floatingActionButton: ProductsFABButton(
+        restaurantId: restaurantId,
+      ),
       body: CustomScrollView(
         // controller: ViewRestaurantCtrl.find.scrollCtrl,
         physics: const ClampingScrollPhysics(),
         slivers: [
           SliverAppBar(
             pinned: true,
-            backgroundColor: MyColors.redD4F,
+            backgroundColor: MyColors.redPrimary,
             leadingWidth: 73,
             leading: const BackLeadingWidget(),
             actions: const [

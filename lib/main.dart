@@ -4,7 +4,6 @@ import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:takkeh/binding/nav_bar.dart';
 import 'package:takkeh/binding/registration/sign_in.dart';
-import 'package:takkeh/print_test.dart';
 import 'package:takkeh/translation/service.dart';
 import 'package:takkeh/translation/translation.dart';
 import 'package:takkeh/ui/base/intro.dart';
@@ -79,8 +78,8 @@ class _MyAppState extends State<MyApp> {
       locale: Locale(MySharedPreferences.language),
       fallbackLocale: Locale(MySharedPreferences.language),
       theme: AppThemeData().materialTheme,
-      // home: _toggleScreen(),
-      home: PrintTest(),
+      home: _toggleScreen(),
+      // home: const TestMap(),
     );
   }
 }

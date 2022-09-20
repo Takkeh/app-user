@@ -1,6 +1,7 @@
-import 'dart:math' as math;
-
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:takkeh/controller/user_order_ctrl.dart';
+import 'package:takkeh/ui/screens/restaurants/widgets/product_quantity_label.dart';
 import 'package:takkeh/ui/widgets/custom_network_image.dart';
 import 'package:takkeh/utils/app_constants.dart';
 import 'package:takkeh/utils/base/colors.dart';
@@ -8,7 +9,7 @@ import 'package:takkeh/utils/shared_prefrences.dart';
 
 class ProductsListTile extends StatelessWidget {
   final String imageUrl, title, subTitle;
-  final int price;
+  final int price, index, id;
   final Function() onTap;
 
   const ProductsListTile({
@@ -18,7 +19,22 @@ class ProductsListTile extends StatelessWidget {
     required this.subTitle,
     required this.onTap,
     required this.price,
+    required this.index,
+    required this.id,
   }) : super(key: key);
+
+  // static double? quantity;
+
+  // bool getIndex() {
+  //    UserOrderCtrl.find.userOrder.any((element) {
+  //     if(element['product_id'] == id) {
+  //       quantity =  element['quantity'];
+  //       return true;
+  //     } else {
+  //       return false;
+  //     }
+  //   });
+  // }
 
   @override
   Widget build(BuildContext context) {
@@ -63,7 +79,7 @@ class ProductsListTile extends StatelessWidget {
                       Text(
                         "$price $kPCurrency",
                         style: const TextStyle(
-                          color: MyColors.redD4F,
+                          color: MyColors.redPrimary,
                           fontSize: 18,
                           fontWeight: FontWeight.w500,
                         ),
@@ -74,29 +90,26 @@ class ProductsListTile extends StatelessWidget {
               ],
             ),
           ),
-          Transform(
-            alignment: Alignment.center,
-            transform: Matrix4.rotationY(MySharedPreferences.language == 'ar' ? 0 : math.pi),
-            child: Container(
-              height: 32,
-              width: 32,
-              alignment: Alignment.center,
-              decoration: const BoxDecoration(
-                color: MyColors.redD4F,
-                borderRadius: BorderRadius.only(
-                  topRight: Radius.circular(16),
-                  bottomLeft: Radius.circular(16),
-                ),
-              ),
-              child: Transform(
-                alignment: Alignment.center,
-                transform: Matrix4.rotationY(MySharedPreferences.language == 'ar' ? 0 : math.pi),
-                child: const Text(
-                  "X2",
-                  style: TextStyle(color: Colors.white),
-                ),
-              ),
-            ),
+          GetBuilder<UserOrderCtrl>(
+            builder: (controller) {
+              int? quantity;
+              bool? isContain;
+
+              isContain = UserOrderCtrl.find.userOrder.any((element) {
+                if (element['product_id'] == id) {
+                  quantity = element['quantity'];
+                  return true;
+                } else {
+                  return false;
+                }
+              });
+              print("MyId::: $id");
+              if (isContain) {
+                return ProductQuantityLabel(quantity: quantity!);
+              } else {
+                return const SizedBox.shrink();
+              }
+            },
           ),
         ],
       ),

@@ -475,14 +475,14 @@ class _PrintTestState extends State<PrintTest> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Sunmi printer Example'),
+        title: const Text("April's Order"),
       ),
       body: Center(
         child: ElevatedButton(
           onPressed: () async {
             await SunmiPrinter.initPrinter();
             await SunmiPrinter.startTransactionPrint(true);
-            await SunmiPrinter.printText('Khaled Awad\n2 Big Tasty\n1 Pepsi\nExtra Mayo\nTotal :50 JD', style: SunmiStyle(bold: true));
+            await SunmiPrinter.printText('Khaled Order', style: SunmiStyle(bold: true));
             await SunmiPrinter.lineWrap(2);
             await SunmiPrinter.exitTransactionPrint(true);
           },

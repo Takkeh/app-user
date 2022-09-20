@@ -17,7 +17,7 @@ class ViewProductAppBar extends StatelessWidget {
       expandedHeight: 240,
       collapsedHeight: kToolbarHeight,
       leadingWidth: 70,
-      backgroundColor: MyColors.redD4F,
+      backgroundColor: MyColors.redPrimary,
       elevation: 0,
       pinned: true,
       floating: true,

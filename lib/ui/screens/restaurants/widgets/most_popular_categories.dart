@@ -53,7 +53,7 @@ class MostPopularCategoriesBuilder extends StatelessWidget {
                   "18.3",
                   style: TextStyle(
                     fontSize: 15,
-                    color: MyColors.redD4F,
+                    color: MyColors.redPrimary,
                   ),
                 ),
               ],
@@ -88,7 +88,7 @@ class MostPopularCategoriesBuilder extends StatelessWidget {
             itemBuilder: (context, index) {
               if (index + 1 == controller.mostPopular.length) {
                 if (controller.loadMore.value) {
-                  return const CustomCircularProgressIndicator(color: MyColors.redD4F);
+                  return const CustomCircularProgressIndicator(color: MyColors.redPrimary);
                 } else {
                   return const SizedBox.shrink();
                 }
@@ -123,7 +123,7 @@ class MostPopularCategoriesBuilder extends StatelessWidget {
                       controller.mostPopular[index].price!.toString(),
                       style: const TextStyle(
                         fontSize: 15,
-                        color: MyColors.redD4F,
+                        color: MyColors.redPrimary,
                       ),
                     ),
                   ],

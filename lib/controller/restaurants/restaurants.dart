@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:takkeh/controller/restaurants/restaurant_categories.dart';
 import 'package:takkeh/model/restaurants/restaurants_model.dart';
 import 'package:takkeh/network/restaurants/restaurants.dart';
 
 class RestaurantsCtrl extends GetxController {
+  static RestaurantsCtrl get find => Get.find();
+
   RestaurantsModel? restaurantsModel;
   late ScrollController scrollCtrl;
   final restaurants = <Restaurants>[].obs;
@@ -28,9 +31,9 @@ class RestaurantsCtrl extends GetxController {
     update();
   }
 
-  Future<RestaurantsModel?> fetchCategoriesData(int page, String loadingCase) async {
+  Future<RestaurantsModel?> fetchCategoriesData(int page, String loadingCase, int filter) async {
     toggleLoading(loadingCase, true);
-    restaurantsModel = await RestaurantsApi.data(page);
+    restaurantsModel = await RestaurantsApi.data(page, filter);
     if (restaurantsModel == null) {
       toggleLoading(loadingCase, false);
       return null;
@@ -47,16 +50,20 @@ class RestaurantsCtrl extends GetxController {
     return restaurantsModel;
   }
 
+  void loadMoreCategories(int filterId) {
+    if (scrollCtrl.offset == scrollCtrl.position.maxScrollExtent) {
+      if (!allLoaded.value && !loadMore.value) {
+        fetchCategoriesData(limit, "load_more", filterId);
+      }
+    }
+  }
+
   @override
   void onInit() {
-    fetchCategoriesData(1, "default");
+    fetchCategoriesData(1, "default", 1);
     scrollCtrl = ScrollController()
       ..addListener(() {
-        if (scrollCtrl.offset == scrollCtrl.position.maxScrollExtent) {
-          if (!allLoaded.value && !loadMore.value) {
-            fetchCategoriesData(limit, "load_more");
-          }
-        }
+        loadMoreCategories(RestaurantCategoriesController.find.filterId);
       });
     super.onInit();
   }

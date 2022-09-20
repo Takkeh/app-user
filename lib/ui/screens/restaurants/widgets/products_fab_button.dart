@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:takkeh/controller/user_order_ctrl.dart';
@@ -6,11 +8,10 @@ import 'package:takkeh/utils/app_constants.dart';
 import 'package:takkeh/utils/base/colors.dart';
 
 class ProductsFABButton extends StatelessWidget {
-  final int total, restaurantId;
+  final int restaurantId;
 
   const ProductsFABButton({
     Key? key,
-    required this.total,
     required this.restaurantId,
   }) : super(key: key);
 
@@ -20,9 +21,9 @@ class ProductsFABButton extends StatelessWidget {
       padding: const EdgeInsets.symmetric(horizontal: 20.0),
       child: ElevatedButton(
         onPressed: () {
+          print("details:: ${UserOrderCtrl.find.userOrder} -- ${jsonEncode(UserOrderCtrl.find.userOrder)}");
           UserOrderCtrl.find.fetchMakeOrderData(
             context: context,
-            total: total,
             restaurantId: restaurantId,
           );
         },
@@ -40,7 +41,7 @@ class ProductsFABButton extends StatelessWidget {
               width: 35,
               alignment: Alignment.center,
               decoration: BoxDecoration(
-                color: MyColors.redD4F,
+                color: MyColors.redPrimary,
                 borderRadius: BorderRadius.circular(11),
               ),
               child: GetBuilder<UserOrderCtrl>(
@@ -62,13 +63,15 @@ class ProductsFABButton extends StatelessWidget {
                 fontWeight: FontWeight.w500,
               ),
             ),
-            const Text(
-              "0.00 $kPCurrency",
-              style: TextStyle(
-                fontSize: 16,
-                fontWeight: FontWeight.w500,
-              ),
-            ),
+            GetBuilder<UserOrderCtrl>(builder: (controller) {
+              return Text(
+                "${controller.total.value} $kPCurrency",
+                style: const TextStyle(
+                  fontSize: 16,
+                  fontWeight: FontWeight.w500,
+                ),
+              );
+            }),
           ],
         ),
       ),

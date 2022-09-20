@@ -36,7 +36,7 @@ class ProductsFilterBuilder extends StatelessWidget {
             itemBuilder: (context, index) {
               if (index + 1 == controller.filters.length) {
                 if (controller.loadMore.value) {
-                  return const CustomCircularProgressIndicator(color: MyColors.redD4F);
+                  return const CustomCircularProgressIndicator(color: MyColors.redPrimary);
                 } else {
                   return const SizedBox.shrink();
                 }
@@ -46,7 +46,7 @@ class ProductsFilterBuilder extends StatelessWidget {
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(9),
                   ),
-                  primary: controller.currentIndex.value == index ? MyColors.redD4F : Colors.transparent,
+                  primary: controller.currentIndex.value == index ? MyColors.redPrimary : Colors.transparent,
                   elevation: 0,
                 ),
                 onPressed: () {

@@ -25,7 +25,7 @@ class ViewRestaurantBuilder extends StatelessWidget {
               child: Padding(
                 padding: EdgeInsets.only(top: 30.0),
                 child: CircularProgressIndicator(
-                  color: MyColors.redD4F,
+                  color: MyColors.redPrimary,
                 ),
               ),
             );
@@ -65,7 +65,7 @@ class ViewRestaurantBuilder extends StatelessWidget {
           return Column(
             children: List.generate(
               controller.viewRestaurants.length,
-              (index) {
+              (number) {
                 controller.itemKeys.add(GlobalKey());
                 //TODO: re-comment later
                 // if (index == controller.viewRestaurants.length) {
@@ -83,11 +83,11 @@ class ViewRestaurantBuilder extends StatelessWidget {
                       GestureDetector(
                         onTap: () {
                           //153
-                          controller.detectPosition(index);
+                          controller.detectPosition(number);
                         },
                         child: Text(
-                          "position for $index",
-                          key: controller.itemKeys[index],
+                          "position for $number",
+                          key: controller.itemKeys[number],
                           style: const TextStyle(
                             fontSize: 20,
                             fontWeight: FontWeight.w400,
@@ -100,6 +100,8 @@ class ViewRestaurantBuilder extends StatelessWidget {
                           return Padding(
                             padding: const EdgeInsets.symmetric(vertical: 6.0),
                             child: ProductsListTile(
+                              index: number,
+                              id: controller.viewRestaurants[index].id!,
                               imageUrl: 'https://img.freepik.com/free-photo/chicken-wings-barbecue-sweetly-sour-sauce-picnic-summer-menu-tasty-food-top-view-flat-lay_2829-6471.jpg?w=2000',
                               title: controller.viewRestaurants[index].name!,
                               price: controller.viewRestaurants[index].price!,

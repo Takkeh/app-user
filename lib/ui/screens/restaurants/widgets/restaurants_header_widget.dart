@@ -28,7 +28,7 @@ class RestaurantsHeaderWidget extends StatelessWidget {
         Container(
           padding: const EdgeInsets.only(bottom: 30),
           decoration: const BoxDecoration(
-            color: MyColors.redD4F,
+            color: MyColors.redPrimary,
             borderRadius: BorderRadius.vertical(
               bottom: Radius.elliptical(150, 60),
             ),

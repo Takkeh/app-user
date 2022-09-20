@@ -6,9 +6,9 @@ import 'package:takkeh/model/restaurants/restaurants_model.dart';
 import 'package:takkeh/utils/api_url.dart';
 
 class RestaurantsApi {
-  static Future<RestaurantsModel?> data(int page) async {
+  static Future<RestaurantsModel?> data(int page, int filter) async {
     try {
-      String url = '${ApiUrl.mainUrl}${ApiUrl.restaurants}$page';
+      String url = '${ApiUrl.mainUrl}${ApiUrl.restaurants}?page=$page&filter=$filter';
       Uri uri = Uri.parse(url);
       var headers = {
         'Content-Type': 'application/json',

@@ -50,11 +50,11 @@ class DeliveryInfoBox extends StatelessWidget {
               );
             },
             style: TextButton.styleFrom(
-              textStyle: const TextStyle(color: MyColors.redD4F),
+              textStyle: const TextStyle(color: MyColors.redPrimary),
             ),
             child: Text(
               TranslationService.getString('change_key'),
-              style: const TextStyle(color: MyColors.redD4F),
+              style: const TextStyle(color: MyColors.redPrimary),
             ),
           ),
         ],

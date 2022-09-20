@@ -18,7 +18,7 @@ class MostPopularLoading extends StatelessWidget {
         itemBuilder: (context, index) {
           return const CustomShimmerLoading(
             padding: EdgeInsets.only(bottom: 3),
-            highlightColor: MyColors.redD4F,
+            highlightColor: MyColors.redPrimary,
             radius: 12,
             width: 115,
           );

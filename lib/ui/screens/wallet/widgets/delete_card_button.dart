@@ -27,7 +27,7 @@ class DeleteCardButton extends StatelessWidget {
             padding: const EdgeInsetsDirectional.fromSTEB(37, 23, 20, 23),
             child: Text(
               TranslationService.getString('delete_card_from_account_key'),
-              style: const TextStyle(color: MyColors.redD4F),
+              style: const TextStyle(color: MyColors.redPrimary),
             ),
           ),
         ),

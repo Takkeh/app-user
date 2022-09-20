@@ -67,7 +67,7 @@ class _MapBubbleBuilderState extends State<MapBubbleBuilder> {
                     ),
                   ),
                 ),
-                const CustomMarker(color: MyColors.redD4F),
+                const CustomMarker(color: MyColors.redPrimary),
               ],
             ),
             DeliveryInfoBox(

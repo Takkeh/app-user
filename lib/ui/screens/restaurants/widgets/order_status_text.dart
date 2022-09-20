@@ -13,7 +13,7 @@ class OrderStatusText extends StatelessWidget {
           text: const TextSpan(
             children: <TextSpan>[
               TextSpan(text: 'your order on the way, ', style: TextStyle(fontSize: 18, color: MyColors.text)),
-              TextSpan(text: 'takkeh', style: TextStyle(fontSize: 18, color: MyColors.redD4F)),
+              TextSpan(text: 'takkeh', style: TextStyle(fontSize: 18, color: MyColors.redPrimary)),
               TextSpan(text: ' and it will be there', style: TextStyle(fontSize: 18, color: MyColors.text)),
             ],
           ),

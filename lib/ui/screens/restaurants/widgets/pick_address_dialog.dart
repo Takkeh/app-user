@@ -29,7 +29,7 @@ class _PickAddressDialogState extends State<PickAddressDialog> {
               child: Text(
                 TranslationService.getString("select_address_key"),
                 style: const TextStyle(
-                  color: MyColors.redD4F,
+                  color: MyColors.redPrimary,
                   fontSize: 22,
                 ),
               ),
@@ -42,8 +42,8 @@ class _PickAddressDialogState extends State<PickAddressDialog> {
             return ListTile(
               title: Text(UserLocationCtrl.find.savedAddresses[index]),
               leading: Radio<String>(
-                fillColor: MaterialStateProperty.all(MyColors.redD4F),
-                activeColor: MyColors.redD4F,
+                fillColor: MaterialStateProperty.all(MyColors.redPrimary),
+                activeColor: MyColors.redPrimary,
                 value: UserLocationCtrl.find.savedAddresses[index],
                 groupValue: selectedText,
                 onChanged: (String? value) {
@@ -59,7 +59,7 @@ class _PickAddressDialogState extends State<PickAddressDialog> {
         CustomElevatedButton(
           title: TranslationService.getString("confirm_address_key"),
           width: double.maxFinite,
-          color: MyColors.redD4F,
+          color: MyColors.redPrimary,
           textColor: Colors.white,
           onPressed: () {
             Get.back();

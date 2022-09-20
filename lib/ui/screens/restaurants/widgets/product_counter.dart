@@ -56,7 +56,7 @@ class ProductCounterState extends State<ProductCounter> {
               price.toString(),
               style: const TextStyle(
                 fontSize: 20,
-                color: MyColors.redD4F,
+                color: MyColors.redPrimary,
                 fontWeight: FontWeight.bold,
               ),
             ),
@@ -68,7 +68,7 @@ class ProductCounterState extends State<ProductCounter> {
                 onPressed: () {
                   toggle('add');
                 },
-                color: MyColors.redD4F,
+                color: MyColors.redPrimary,
               ),
               Text(
                 counter.toString(),
@@ -81,7 +81,7 @@ class ProductCounterState extends State<ProductCounter> {
                 onPressed: () {
                   toggle('remove');
                 },
-                color: counter == 1 ? MyColors.redD4F.withOpacity(0.60) : MyColors.redD4F,
+                color: counter == 1 ? MyColors.redPrimary.withOpacity(0.60) : MyColors.redPrimary,
               ),
             ],
           )

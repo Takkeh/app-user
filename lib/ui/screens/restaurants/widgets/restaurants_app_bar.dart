@@ -11,7 +11,7 @@ class RestaurantsAppBar extends StatelessWidget implements PreferredSizeWidget {
   Widget build(BuildContext context) {
     return AppBar(
       elevation: 0,
-      backgroundColor: MyColors.redD4F,
+      backgroundColor: MyColors.redPrimary,
       leadingWidth: 60,
       centerTitle: true,
       leading: GestureDetector(

@@ -108,7 +108,7 @@ class _AddNewAddressScreenState extends State<AddNewAddressScreen> {
             ),
             CustomElevatedButton(
               radius: 11,
-              color: MyColors.redD4F,
+              color: MyColors.redPrimary,
               title: TranslationService.getString('save_address_key'),
               onPressed: () {
                 if (_formKey.currentState!.validate()) {}

@@ -39,7 +39,7 @@ class TermsCheckBox extends StatelessWidget {
                 ),
                 child: Text(
                   "terms and conditions".tr,
-                  style: const TextStyle(color: MyColors.redD4F),
+                  style: const TextStyle(color: MyColors.redPrimary),
                 ),
               ),
             ],

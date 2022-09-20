@@ -52,7 +52,7 @@ class MapScreen extends StatelessWidget {
           child: CustomElevatedButton(
             radius: 11,
             width: double.maxFinite,
-            color: MyColors.redD4F,
+            color: MyColors.redPrimary,
             textColor: Colors.white,
             title: 'Confirm'.tr,
             onPressed: () async {
@@ -108,7 +108,7 @@ class MapScreen extends StatelessWidget {
                         MapController.find.newLng = position.target.longitude;
                       },
                     ),
-                    const CustomMarker(color: MyColors.redD4F),
+                    const CustomMarker(color: MyColors.redPrimary),
                   ],
                 ),
               );

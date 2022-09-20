@@ -97,7 +97,7 @@ class BasketProductTileState extends State<BasketProductTile> {
                             key: ValueKey(counter),
                             style: const TextStyle(
                               fontSize: 16,
-                              color: MyColors.redD4F,
+                              color: MyColors.redPrimary,
                               fontWeight: FontWeight.bold,
                             ),
                           ),
@@ -111,7 +111,7 @@ class BasketProductTileState extends State<BasketProductTile> {
                           onPressed: () {
                             toggle('add', widget.initialPrice);
                           },
-                          color: MyColors.redD4F,
+                          color: MyColors.redPrimary,
                         ),
                         Text(
                           counter.toString(),
@@ -124,7 +124,7 @@ class BasketProductTileState extends State<BasketProductTile> {
                           onPressed: () {
                             toggle('remove', widget.initialPrice);
                           },
-                          color: counter == 1 ? MyColors.redD4F.withOpacity(0.60) : MyColors.redD4F,
+                          color: counter == 1 ? MyColors.redPrimary.withOpacity(0.60) : MyColors.redPrimary,
                         ),
                       ],
                     ),
