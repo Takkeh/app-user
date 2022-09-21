@@ -1,9 +1,8 @@
-import 'dart:convert';
-
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:takkeh/controller/user_order_ctrl.dart';
 import 'package:takkeh/translation/service.dart';
+import 'package:takkeh/ui/screens/restaurants/basket.dart';
 import 'package:takkeh/utils/app_constants.dart';
 import 'package:takkeh/utils/base/colors.dart';
 
@@ -21,11 +20,8 @@ class ProductsFABButton extends StatelessWidget {
       padding: const EdgeInsets.symmetric(horizontal: 20.0),
       child: ElevatedButton(
         onPressed: () {
-          print("details:: ${UserOrderCtrl.find.userOrder} -- ${jsonEncode(UserOrderCtrl.find.userOrder)}");
-          UserOrderCtrl.find.fetchMakeOrderData(
-            context: context,
-            restaurantId: restaurantId,
-          );
+          Get.to(() => BasketScreen(restaurantId: restaurantId));
+          // UserOrderCtrl.find.fetchMakeOrderData(context: context, restaurantId: restaurantId);
         },
         style: ElevatedButton.styleFrom(
           primary: MyColors.redF98,

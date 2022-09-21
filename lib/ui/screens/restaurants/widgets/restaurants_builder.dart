@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:takkeh/binding/restaurants/products.dart';
 import 'package:takkeh/controller/restaurants/restaurants.dart';
-import 'package:takkeh/ui/screens/restaurants/view_restaurants.dart';
+import 'package:takkeh/ui/screens/restaurants/view_restaurant.dart';
 import 'package:takkeh/ui/widgets/custom_list_tile.dart';
 import 'package:takkeh/utils/base/images.dart';
 

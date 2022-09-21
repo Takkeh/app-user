@@ -92,20 +92,8 @@ class ProductsListTile extends StatelessWidget {
           ),
           GetBuilder<UserOrderCtrl>(
             builder: (controller) {
-              int? quantity;
-              bool? isContain;
-
-              isContain = UserOrderCtrl.find.userOrder.any((element) {
-                if (element['product_id'] == id) {
-                  quantity = element['quantity'];
-                  return true;
-                } else {
-                  return false;
-                }
-              });
-              print("MyId::: $id");
-              if (isContain) {
-                return ProductQuantityLabel(quantity: quantity!);
+              if (controller.getProductQuantity(id) != 0) {
+                return ProductQuantityLabel(quantity: controller.getProductQuantity(id));
               } else {
                 return const SizedBox.shrink();
               }

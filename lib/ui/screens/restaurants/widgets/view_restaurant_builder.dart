@@ -112,7 +112,7 @@ class ViewRestaurantBuilder extends StatelessWidget {
                                     title: controller.viewRestaurants[index].name!,
                                     subTitle: controller.viewRestaurants[index].categorise!,
                                     price: controller.viewRestaurants[index].price!.toDouble(),
-                                    choose: controller.viewRestaurants[index].sizes!,
+                                    sizes: controller.viewRestaurants[index].sizes!,
                                     extra: controller.viewRestaurants[index].extras!,
                                     cover: controller.viewRestaurantModel!.data!.cover!,
                                     productId: controller.viewRestaurants[index].id!,

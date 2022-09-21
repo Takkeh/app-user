@@ -19,7 +19,7 @@ class ViewRestaurantProductScreen extends StatefulWidget {
   final int productId;
   final int restaurantId;
   //TODO: change type later
-  final List<Extra> choose;
+  final List<Extra> sizes;
   final List<Extra> extra;
 
   const ViewRestaurantProductScreen({
@@ -27,7 +27,7 @@ class ViewRestaurantProductScreen extends StatefulWidget {
     required this.title,
     required this.subTitle,
     required this.price,
-    required this.choose,
+    required this.sizes,
     required this.extra,
     required this.cover,
     required this.productId,
@@ -39,8 +39,8 @@ class ViewRestaurantProductScreen extends StatefulWidget {
 }
 
 class _ViewRestaurantProductScreenState extends State<ViewRestaurantProductScreen> {
-  int? chooseIndex;
-  List<int> extrasList = [];
+  int? sizeId;
+  List<int> extrasTest = [];
   late TextEditingController noteCtrl;
   final counterKey = GlobalKey<ProductCounterState>();
 
@@ -68,7 +68,7 @@ class _ViewRestaurantProductScreenState extends State<ViewRestaurantProductScree
                 title: TranslationService.getString('add_to_cart_key'),
                 onPressed: () {
                   Get.closeCurrentSnackbar();
-                  if (chooseIndex == null) {
+                  if (sizeId == null) {
                     Get.snackbar(
                       "Choose",
                       "message",
@@ -78,27 +78,17 @@ class _ViewRestaurantProductScreenState extends State<ViewRestaurantProductScree
                     return;
                   }
                   UserOrderCtrl.find.calculateTotal(counterKey.currentState!.price);
-                  UserOrderCtrl.find.userOrderMap = {
-                    'product_id': 1,
-                    'quantity': counterKey.currentState!.counter,
-                    'extras': [
-                      {'extra_id': 1}
-                    ],
-                    'size_id': widget.choose[chooseIndex!].id!,
-                    'note': "note",
-                    'price': counterKey.currentState!.price,
-                  };
-
                   UserOrderCtrl.find.addProduct(
                     restaurantId: widget.restaurantId,
                     productId: widget.productId,
                     quantity: counterKey.currentState!.counter,
-                    size: widget.choose[chooseIndex!].id!,
-                    extras: extrasList,
+                    size: sizeId!,
+                    extras: List.generate(extrasTest.length, (index) => {'extra_id': extrasTest[index]}),
                     note: noteCtrl.text,
                     price: counterKey.currentState!.price,
                     extraId: 1,
                   );
+                  UserOrderCtrl.find.getProductQuantity(widget.productId);
                   Get.back(closeOverlays: true);
                 },
               )
@@ -138,29 +128,23 @@ class _ViewRestaurantProductScreenState extends State<ViewRestaurantProductScree
                     ),
                   ),
                   ...List.generate(
-                    widget.choose.length,
+                    widget.sizes.length,
                     (index) {
                       return CustomCheckBox(
-                        title: widget.choose[index].name!,
-                        price: widget.choose[index].price!.toDouble(),
+                        title: widget.sizes[index].name!,
+                        price: widget.sizes[index].price!.toDouble(),
                         shape: const CircleBorder(),
                         onChanged: (value) {
-                          var id = widget.choose[index].id!;
+                          var id = widget.sizes[index].id;
                           setState(() {
-                            if (chooseIndex == index) {
-                              chooseIndex = null;
+                            if (sizeId == id) {
+                              sizeId = null;
                               return;
                             }
-                            chooseIndex = index;
-                            // if (chooseList.contains(id)) {
-                            //   chooseList.remove(id);
-                            // } else {
-                            //   chooseList.clear();
-                            //   chooseList.add(id);
-                            // }
+                            sizeId = id;
                           });
                         },
-                        value: chooseIndex == index ? true : false,
+                        value: sizeId == widget.sizes[index].id ? true : false,
                       );
                     },
                   ),
@@ -182,14 +166,16 @@ class _ViewRestaurantProductScreenState extends State<ViewRestaurantProductScree
                         onChanged: (value) {
                           var id = widget.extra[index].id!;
                           setState(() {
-                            if (extrasList.contains(id)) {
-                              extrasList.remove(id);
+                            if (extrasTest.contains(id)) {
+                              extrasTest.remove(id);
                             } else {
-                              extrasList.add(id);
+                              extrasTest.add(id);
                             }
                           });
+                          print("extras:: $extrasTest");
                         },
-                        value: extrasList.contains(widget.extra[index].id!),
+                        value: extrasTest.contains(widget.extra[index].id!),
+                        // value: true,
                       );
                     },
                   ),

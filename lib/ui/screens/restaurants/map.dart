@@ -45,6 +45,7 @@ class MapScreen extends StatelessWidget {
           ),
         ),
       ),
+      floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
       floatingActionButton: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 50),
         child: Align(
@@ -96,8 +97,9 @@ class MapScreen extends StatelessWidget {
                       //     // position: LocationController.find.pickedLocation(),
                       //   ),
                       // },
-                      myLocationButtonEnabled: true,
-                      myLocationEnabled: true,
+                      zoomControlsEnabled: false,
+                      myLocationButtonEnabled: false,
+                      myLocationEnabled: false,
                       initialCameraPosition: CameraPosition(
                         target: LatLng(UserLocationCtrl.find.latitude.value!, UserLocationCtrl.find.longitude.value!),
                         zoom: 15,
