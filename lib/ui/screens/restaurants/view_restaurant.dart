@@ -24,7 +24,6 @@ class ViewRestaurantScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
-      //TODO: check color later
       floatingActionButton: ProductsFABButton(
         restaurantId: restaurantId,
       ),

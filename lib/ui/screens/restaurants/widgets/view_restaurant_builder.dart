@@ -118,7 +118,7 @@ class ViewRestaurantBuilder extends StatelessWidget {
                                     productId: controller.viewRestaurants[index].id!,
                                     restaurantId: restaurantId,
                                   ),
-                                  binding: ViewProductBinding(),
+                                  binding: ViewProductBinding(id: controller.viewRestaurants[index].id!),
                                 );
                               },
                             ),

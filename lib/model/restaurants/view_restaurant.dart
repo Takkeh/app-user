@@ -86,16 +86,16 @@ class ViewRestaurants {
   String? name;
   int? price;
   String? categorise;
-  List<Extra>? sizes;
-  List<Extra>? extras;
+  List<Sizes>? sizes;
+  List<Extras>? extras;
 
   factory ViewRestaurants.fromJson(Map<String, dynamic> json) => ViewRestaurants(
         id: json["id"],
         name: json["name"],
         price: json["price"],
         categorise: json["categorise"],
-        sizes: List<Extra>.from(json["sizes"].map((x) => Extra.fromJson(x))),
-        extras: List<Extra>.from(json["extras"].map((x) => Extra.fromJson(x))),
+        sizes: List<Sizes>.from(json["sizes"].map((x) => Sizes.fromJson(x))),
+        extras: List<Extras>.from(json["extras"].map((x) => Extras.fromJson(x))),
       );
 
   Map<String, dynamic> toJson() => {
@@ -108,8 +108,8 @@ class ViewRestaurants {
       };
 }
 
-class Extra {
-  Extra({
+class Sizes {
+  Sizes({
     this.id,
     this.price,
     this.name,
@@ -125,7 +125,43 @@ class Extra {
   DateTime? createdAt;
   DateTime? updatedAt;
 
-  factory Extra.fromJson(Map<String, dynamic> json) => Extra(
+  factory Sizes.fromJson(Map<String, dynamic> json) => Sizes(
+        id: json["id"],
+        price: json["price"],
+        name: json["name"],
+        productId: json["product_id"],
+        createdAt: DateTime.parse(json["created_at"]),
+        updatedAt: DateTime.parse(json["updated_at"]),
+      );
+
+  Map<String, dynamic> toJson() => {
+        "id": id,
+        "price": price,
+        "name": name,
+        "product_id": productId,
+        "created_at": createdAt!.toIso8601String(),
+        "updated_at": updatedAt!.toIso8601String(),
+      };
+}
+
+class Extras {
+  Extras({
+    this.id,
+    this.price,
+    this.name,
+    this.productId,
+    this.createdAt,
+    this.updatedAt,
+  });
+
+  int? id;
+  int? price;
+  String? name;
+  int? productId;
+  DateTime? createdAt;
+  DateTime? updatedAt;
+
+  factory Extras.fromJson(Map<String, dynamic> json) => Extras(
         id: json["id"],
         price: json["price"],
         name: json["name"],

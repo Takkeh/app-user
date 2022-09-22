@@ -2,8 +2,11 @@ import 'package:get/get.dart';
 import 'package:takkeh/model/restaurants/view_product_model.dart';
 import 'package:takkeh/network/restaurants/view_product.dart';
 
-class ViewProductCtrl extends GetxController {
-  static ViewProductCtrl get find => Get.find();
+class ViewRestaurantProductCtrl extends GetxController {
+  final int id;
+  ViewRestaurantProductCtrl({required this.id});
+
+  static ViewRestaurantProductCtrl get find => Get.find();
 
   final counter = 1.obs;
 
@@ -11,7 +14,7 @@ class ViewProductCtrl extends GetxController {
     return (price * counter.value).toString();
   }
 
-  void toggle(String status) {
+  void toggleCounter(String status) {
     if (status == 'add') {
       counter.value++;
     } else {
@@ -21,11 +24,11 @@ class ViewProductCtrl extends GetxController {
     update();
   }
 
-  ViewProductModel? viewProductModel;
-  late Future<ViewProductModel?> initialize;
+  ViewRestaurantProductModel? viewProductModel;
+  late Future<ViewRestaurantProductModel?> initialize;
 
-  Future<ViewProductModel?> fetchRestaurantCategoriesData() async {
-    viewProductModel = await ViewProductApi.data();
+  Future<ViewRestaurantProductModel?> fetchRestaurantCategoriesData() async {
+    viewProductModel = await ViewRestaurantProductApi.data(id);
     return viewProductModel;
   }
 

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:takkeh/controller/restaurants/make_order.dart';
 import 'package:takkeh/controller/user_order_ctrl.dart';
 import 'package:takkeh/translation/service.dart';
 import 'package:takkeh/ui/screens/restaurants/basket.dart';
@@ -18,59 +19,80 @@ class ProductsFABButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 20.0),
-      child: ElevatedButton(
-        onPressed: () {
-          Get.to(() => BasketScreen(restaurantId: restaurantId));
-          // UserOrderCtrl.find.fetchMakeOrderData(context: context, restaurantId: restaurantId);
-        },
-        style: ElevatedButton.styleFrom(
-          primary: MyColors.redF98,
-          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(11)),
-          fixedSize: const Size(double.infinity, 50),
-          minimumSize: const Size(double.infinity, 50),
-        ),
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            Container(
-              height: 35,
-              width: 35,
-              alignment: Alignment.center,
-              decoration: BoxDecoration(
-                color: MyColors.redPrimary,
-                borderRadius: BorderRadius.circular(11),
+      child: GetBuilder<UserOrderCtrl>(builder: (controller) {
+        return ElevatedButton(
+          onPressed: () {
+            if (controller.userOrder.isEmpty) {
+              Get.closeCurrentSnackbar();
+              Get.snackbar(
+                '',
+                TranslationService.getString('your_basket_is_empty_key'),
+                titleText: const SizedBox.shrink(),
+                colorText: Colors.white,
+                backgroundColor: MyColors.redPrimary,
+              );
+              return;
+            }
+            MakeOrderCtrl.fetchMakeOrderData(
+              context: context,
+              restaurantId: restaurantId,
+              //TODO: api fix -> make empty string later
+              generalNote: 'a',
+              route: BasketScreen(
+                restaurantId: restaurantId,
               ),
-              child: GetBuilder<UserOrderCtrl>(
-                builder: (controller) {
-                  return Text(
-                    controller.userOrder.length.toString(),
-                    style: const TextStyle(
-                      fontSize: 16,
-                      fontWeight: FontWeight.w500,
-                    ),
-                  );
-                },
+            );
+            // UserOrderCtrl.find.fetchMakeOrderData(context: context, restaurantId: restaurantId);
+          },
+          style: ElevatedButton.styleFrom(
+            primary: controller.userOrder.isEmpty ? MyColors.redF98 : MyColors.redPrimary,
+            shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(11)),
+            fixedSize: const Size(double.infinity, 50),
+            minimumSize: const Size(double.infinity, 50),
+          ),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Container(
+                height: 35,
+                width: 35,
+                alignment: Alignment.center,
+                decoration: BoxDecoration(
+                  color: controller.userOrder.isEmpty ? MyColors.redPrimary : MyColors.redF98,
+                  borderRadius: BorderRadius.circular(11),
+                ),
+                child: GetBuilder<UserOrderCtrl>(
+                  builder: (controller) {
+                    return Text(
+                      controller.totalQuantity.value.toString(),
+                      style: const TextStyle(
+                        fontSize: 16,
+                        fontWeight: FontWeight.w500,
+                      ),
+                    );
+                  },
+                ),
               ),
-            ),
-            Text(
-              TranslationService.getString('review_basket_key'),
-              style: const TextStyle(
-                fontSize: 16,
-                fontWeight: FontWeight.w500,
-              ),
-            ),
-            GetBuilder<UserOrderCtrl>(builder: (controller) {
-              return Text(
-                "${controller.total.value} $kPCurrency",
+              Text(
+                TranslationService.getString('review_basket_key'),
                 style: const TextStyle(
                   fontSize: 16,
                   fontWeight: FontWeight.w500,
                 ),
-              );
-            }),
-          ],
-        ),
-      ),
+              ),
+              GetBuilder<UserOrderCtrl>(builder: (controller) {
+                return Text(
+                  "${controller.totalPrice.value} $kPCurrency",
+                  style: const TextStyle(
+                    fontSize: 16,
+                    fontWeight: FontWeight.w500,
+                  ),
+                );
+              }),
+            ],
+          ),
+        );
+      }),
     );
   }
 }

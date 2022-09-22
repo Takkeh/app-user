@@ -5,7 +5,8 @@ import 'package:get/get.dart';
 class UserOrderCtrl extends GetxController {
   static UserOrderCtrl get find => Get.find();
   final userOrder = <Map<String, dynamic>>[].obs;
-  final total = 0.0.obs;
+  final totalPrice = 0.0.obs;
+  final totalQuantity = 0.obs;
 
   int getProductQuantity(int id) {
     int quantity = 0;
@@ -17,8 +18,13 @@ class UserOrderCtrl extends GetxController {
     return quantity;
   }
 
-  void calculateTotal(double price) {
-    total.value = total.value + price;
+  void calculateTotalQuantity(int quantity) {
+    totalQuantity.value = totalQuantity.value + quantity;
+    update();
+  }
+
+  void calculateTotalPrice(double price) {
+    totalPrice.value = totalPrice.value + price;
   }
 
   bool checkIfItemAlreadyExist(Map<String, dynamic> productDetails) {
@@ -43,7 +49,6 @@ class UserOrderCtrl extends GetxController {
     required List<Map<String, int>> extras,
     required String note,
     required double price,
-    required int extraId,
     required int restaurantId,
   }) {
     final productDetails = {
@@ -51,7 +56,7 @@ class UserOrderCtrl extends GetxController {
       'quantity': quantity,
       'extras': extras,
       'size_id': size,
-      'note': "note",
+      'note': note,
       'price': price,
     };
     if (userOrder.isEmpty) {

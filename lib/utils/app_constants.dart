@@ -1,5 +1,7 @@
 const String kPCurrency = '₪';
 
+const kFakeImage = 'img/sliders/16616866816673.png';
+
 class AppConstants {
   static const googleApiKey = 'AIzaSyDSPeDTWmjTol4rLhHw0fT9Nzrb7bAqs2M';
 

@@ -18,9 +18,8 @@ class ViewRestaurantProductScreen extends StatefulWidget {
   final String cover;
   final int productId;
   final int restaurantId;
-  //TODO: change type later
-  final List<Extra> sizes;
-  final List<Extra> extra;
+  final List<Sizes> sizes;
+  final List<Extras> extra;
 
   const ViewRestaurantProductScreen({
     Key? key,
@@ -77,7 +76,7 @@ class _ViewRestaurantProductScreenState extends State<ViewRestaurantProductScree
                     );
                     return;
                   }
-                  UserOrderCtrl.find.calculateTotal(counterKey.currentState!.price);
+                  UserOrderCtrl.find.calculateTotalPrice(counterKey.currentState!.price);
                   UserOrderCtrl.find.addProduct(
                     restaurantId: widget.restaurantId,
                     productId: widget.productId,
@@ -86,9 +85,8 @@ class _ViewRestaurantProductScreenState extends State<ViewRestaurantProductScree
                     extras: List.generate(extrasTest.length, (index) => {'extra_id': extrasTest[index]}),
                     note: noteCtrl.text,
                     price: counterKey.currentState!.price,
-                    extraId: 1,
                   );
-                  UserOrderCtrl.find.getProductQuantity(widget.productId);
+                  UserOrderCtrl.find.calculateTotalQuantity(counterKey.currentState!.counter);
                   Get.back(closeOverlays: true);
                 },
               )

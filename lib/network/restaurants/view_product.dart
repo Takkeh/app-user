@@ -5,10 +5,10 @@ import 'package:http/http.dart' as http;
 import 'package:takkeh/model/restaurants/view_product_model.dart';
 import 'package:takkeh/utils/api_url.dart';
 
-class ViewProductApi {
-  static Future<ViewProductModel?> data() async {
+class ViewRestaurantProductApi {
+  static Future<ViewRestaurantProductModel?> data(int id) async {
     try {
-      String url = '${ApiUrl.mainUrl}${ApiUrl.viewProduct}';
+      String url = '${ApiUrl.mainUrl}${ApiUrl.viewRestaurantProduct}$id';
       Uri uri = Uri.parse(url);
       var headers = {
         'Content-Type': 'application/json',
@@ -16,7 +16,7 @@ class ViewProductApi {
       log("Response:: ViewProductResponse\nUrl:: $url\nheaders:: $headers");
       http.Response response = await http.get(uri, headers: headers);
       log("ViewProductStatusCode:: ${response.statusCode}  ViewProductBody:: ${response.body}");
-      ViewProductModel viewProductModel = ViewProductModel.fromJson(json.decode(response.body));
+      ViewRestaurantProductModel viewProductModel = ViewRestaurantProductModel.fromJson(json.decode(response.body));
       if (response.statusCode == 200) {
         return viewProductModel;
       } else {

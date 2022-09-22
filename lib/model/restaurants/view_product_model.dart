@@ -1,128 +1,79 @@
-class ViewProductModel {
-  ViewProductModel({
+// To parse this JSON data, do
+//
+//     final viewRestaurantProductModel = viewRestaurantProductModelFromJson(jsonString);
+
+import 'dart:convert';
+
+ViewRestaurantProductModel viewRestaurantProductModelFromJson(String str) => ViewRestaurantProductModel.fromJson(json.decode(str));
+
+String viewRestaurantProductModelToJson(ViewRestaurantProductModel data) => json.encode(data.toJson());
+
+class ViewRestaurantProductModel {
+  ViewRestaurantProductModel({
     this.status,
     this.code,
     this.msg,
     this.data,
   });
 
-  ViewProductModel.fromJson(dynamic json) {
-    status = json['status'];
-    code = json['code'];
-    msg = json['msg'];
-    if (json['data'] != null) {
-      data = [];
-      json['data'].forEach((v) {
-        data?.add(Data.fromJson(v));
-      });
-    }
-  }
   bool? status;
   int? code;
   String? msg;
-  List<Data>? data;
+  Data? data;
 
-  Map<String, dynamic> toJson() {
-    final map = <String, dynamic>{};
-    map['status'] = status;
-    map['code'] = code;
-    map['msg'] = msg;
-    if (data != null) {
-      map['data'] = data?.map((v) => v.toJson()).toList();
-    }
-    return map;
-  }
+  factory ViewRestaurantProductModel.fromJson(Map<String, dynamic> json) => ViewRestaurantProductModel(
+        status: json["status"],
+        code: json["code"],
+        msg: json["msg"],
+        data: Data.fromJson(json["data"]),
+      );
+
+  Map<String, dynamic> toJson() => {
+        "status": status,
+        "code": code,
+        "msg": msg,
+        "data": data!.toJson(),
+      };
 }
 
 class Data {
   Data({
     this.id,
     this.name,
-    this.logo,
-    this.cover,
-    this.time,
-    this.products,
-  });
-
-  Data.fromJson(dynamic json) {
-    id = json['id'];
-    name = json['name'];
-    logo = json['logo'];
-    cover = json['cover'];
-    time = json['time'];
-    if (json['products'] != null) {
-      products = [];
-      json['products'].forEach((v) {
-        products?.add(Products.fromJson(v));
-      });
-    }
-  }
-  int? id;
-  String? name;
-  String? logo;
-  String? cover;
-  String? time;
-  List<Products>? products;
-
-  Map<String, dynamic> toJson() {
-    final map = <String, dynamic>{};
-    map['id'] = id;
-    map['name'] = name;
-    map['logo'] = logo;
-    map['cover'] = cover;
-    map['time'] = time;
-    if (products != null) {
-      map['products'] = products?.map((v) => v.toJson()).toList();
-    }
-    return map;
-  }
-}
-
-class Products {
-  Products({
-    this.id,
-    this.name,
+    this.price,
+    this.categorise,
     this.sizes,
     this.extras,
   });
 
-  Products.fromJson(dynamic json) {
-    id = json['id'];
-    name = json['name'];
-    if (json['sizes'] != null) {
-      sizes = [];
-      json['sizes'].forEach((v) {
-        sizes?.add(Sizes.fromJson(v));
-      });
-    }
-    if (json['extras'] != null) {
-      extras = [];
-      json['extras'].forEach((v) {
-        extras?.add(Extras.fromJson(v));
-      });
-    }
-  }
   int? id;
   String? name;
-  List<Sizes>? sizes;
-  List<Extras>? extras;
+  int? price;
+  String? categorise;
+  List<Extra>? sizes;
+  List<Extra>? extras;
 
-  Map<String, dynamic> toJson() {
-    final map = <String, dynamic>{};
-    map['id'] = id;
-    map['name'] = name;
-    if (sizes != null) {
-      map['sizes'] = sizes?.map((v) => v.toJson()).toList();
-    }
-    if (extras != null) {
-      map['extras'] = extras?.map((v) => v.toJson()).toList();
-    }
-    return map;
-  }
+  factory Data.fromJson(Map<String, dynamic> json) => Data(
+        id: json["id"],
+        name: json["name"],
+        price: json["price"],
+        categorise: json["categorise"],
+        sizes: List<Extra>.from(json["sizes"].map((x) => Extra.fromJson(x))),
+        extras: List<Extra>.from(json["extras"].map((x) => Extra.fromJson(x))),
+      );
+
+  Map<String, dynamic> toJson() => {
+        "id": id,
+        "name": name,
+        "price": price,
+        "categorise": categorise,
+        "sizes": List<dynamic>.from(sizes!.map((x) => x.toJson())),
+        "extras": List<dynamic>.from(extras!.map((x) => x.toJson())),
+      };
 }
 
-class Extras {
-  Extras({
+class Extra {
+  Extra({
     this.id,
     this.price,
     this.name,
@@ -131,66 +82,28 @@ class Extras {
     this.updatedAt,
   });
 
-  Extras.fromJson(dynamic json) {
-    id = json['id'];
-    price = json['price'];
-    name = json['name'];
-    productId = json['product_id'];
-    createdAt = json['created_at'];
-    updatedAt = json['updated_at'];
-  }
   int? id;
   int? price;
   String? name;
   int? productId;
-  String? createdAt;
-  String? updatedAt;
+  DateTime? createdAt;
+  DateTime? updatedAt;
 
-  Map<String, dynamic> toJson() {
-    final map = <String, dynamic>{};
-    map['id'] = id;
-    map['price'] = price;
-    map['name'] = name;
-    map['product_id'] = productId;
-    map['created_at'] = createdAt;
-    map['updated_at'] = updatedAt;
-    return map;
-  }
-}
+  factory Extra.fromJson(Map<String, dynamic> json) => Extra(
+        id: json["id"],
+        price: json["price"],
+        name: json["name"],
+        productId: json["product_id"],
+        createdAt: DateTime.parse(json["created_at"]),
+        updatedAt: DateTime.parse(json["updated_at"]),
+      );
 
-class Sizes {
-  Sizes({
-    this.id,
-    this.price,
-    this.name,
-    this.productId,
-    this.createdAt,
-    this.updatedAt,
-  });
-
-  Sizes.fromJson(dynamic json) {
-    id = json['id'];
-    price = json['price'];
-    name = json['name'];
-    productId = json['product_id'];
-    createdAt = json['created_at'];
-    updatedAt = json['updated_at'];
-  }
-  int? id;
-  int? price;
-  String? name;
-  int? productId;
-  String? createdAt;
-  String? updatedAt;
-
-  Map<String, dynamic> toJson() {
-    final map = <String, dynamic>{};
-    map['id'] = id;
-    map['price'] = price;
-    map['name'] = name;
-    map['product_id'] = productId;
-    map['created_at'] = createdAt;
-    map['updated_at'] = updatedAt;
-    return map;
-  }
+  Map<String, dynamic> toJson() => {
+        "id": id,
+        "price": price,
+        "name": name,
+        "product_id": productId,
+        "created_at": createdAt!.toIso8601String(),
+        "updated_at": updatedAt!.toIso8601String(),
+      };
 }

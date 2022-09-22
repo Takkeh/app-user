@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:takkeh/controller/restaurants/make_order.dart';
 import 'package:takkeh/controller/user_order_ctrl.dart';
 import 'package:takkeh/translation/service.dart';
 import 'package:takkeh/ui/screens/registration/widgets/custom_prefix_icon.dart';
+import 'package:takkeh/ui/screens/restaurants/confirm_order.dart';
 import 'package:takkeh/ui/screens/restaurants/widgets/basket_products_tile.dart';
 import 'package:takkeh/ui/screens/restaurants/widgets/custom_fab_button.dart';
 import 'package:takkeh/ui/screens/restaurants/widgets/custom_suffix_icon.dart';
@@ -28,9 +28,22 @@ class BasketScreen extends StatefulWidget {
 }
 
 class _BasketScreenState extends State<BasketScreen> {
-  //TODO: note:: very important
-  final myKey = GlobalKey<BasketProductTileState>();
-  //     print("value:: ${myKey.currentState!.counter}");
+  final keys = [];
+  late TextEditingController noteCtrl;
+  // final myKey = GlobalKey<BasketProductTileState>();
+  // //     print("value:: ${myKey.currentState!.counter}");
+
+  @override
+  void initState() {
+    super.initState();
+    noteCtrl = TextEditingController();
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
+    noteCtrl.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -43,7 +56,12 @@ class _BasketScreenState extends State<BasketScreen> {
             ? CustomFABButton(
                 title: TranslationService.getString('confirm_order_key'),
                 onPressed: () {
-                  MakeOrderCtrl.fetchMakeOrderData(context: context, restaurantId: widget.restaurantId);
+                  MakeOrderCtrl.fetchMakeOrderData(
+                    context: context,
+                    restaurantId: widget.restaurantId,
+                    generalNote: noteCtrl.text,
+                    route: const ConfirmOrderScreen(),
+                  );
                 },
               )
             : null,
@@ -59,82 +77,77 @@ class _BasketScreenState extends State<BasketScreen> {
               return ListView(
                 padding: const EdgeInsets.only(bottom: 100, top: 10),
                 children: [
-                  GetBuilder<UserOrderCtrl>(
-                    builder: (controller) {
-                      return ListBody(
-                        children: List.generate(
-                          controller.userOrder.length,
-                          (index) {
-                            return Padding(
-                              padding: const EdgeInsets.symmetric(horizontal: 30),
-                              child: BasketProductTile(
-                                key: index == 0 ? myKey : null,
-                                imageUrl: 'https://img.freepik.com/free-photo/top-view-pepperoni-pizza-with-mushroom-sausages-bell-pepper-olive-corn-black-wooden_141793-2158.jpg?w=2000',
-                                title: 'title',
-                                subTitle: 'subTitle',
-                                description: 'description',
-                                initialPrice: controller.userOrder[index]['price'],
-                                onTap: () {},
-                                notes: List.generate(
-                                  4,
-                                  (index) {
-                                    return index == 3
-                                        ? Row(
-                                            children: [
-                                              SvgPicture.asset(MyIcons.notes, height: 14),
-                                              const SizedBox(width: 3),
-                                              const Text("extra mayo"),
-                                            ],
-                                          )
-                                        : const Text("+ souce");
-                                  },
-                                ),
-                              ),
-                            );
-                          },
-                        ),
-                      );
-                    },
-                  ),
-                  // ...List.generate(
-                  //   UserOrderCtrl.find.userOrder.length,
-                  //   (index) {
-                  //     return Padding(
-                  //       padding: const EdgeInsets.symmetric(horizontal: 30),
-                  //       child: BasketProductTile(
-                  //         key: index == 0 ? myKey : null,
-                  //         imageUrl: 'https://img.freepik.com/free-photo/top-view-pepperoni-pizza-with-mushroom-sausages-bell-pepper-olive-corn-black-wooden_141793-2158.jpg?w=2000',
-                  //         title: 'title',
-                  //         subTitle: 'subTitle',
-                  //         description: 'description',
-                  //         initialPrice: index == 0 ? 22.5 : 11,
-                  //         onTap: () {},
-                  //         notes: List.generate(
-                  //           4,
-                  //           (index) {
-                  //             return index == 3
-                  //                 ? Row(
-                  //                     children: [
-                  //                       SvgPicture.asset(MyIcons.notes, height: 14),
-                  //                       const SizedBox(width: 3),
-                  //                       const Text("extra mayo"),
-                  //                     ],
-                  //                   )
-                  //                 : const Text("+ souce");
-                  //           },
-                  //         ),
+                  // GetBuilder<UserOrderCtrl>(
+                  //   builder: (controller) {
+                  //     return ListBody(
+                  //       children: List.generate(
+                  //         controller.userOrder.length,
+                  //         (index) {
+                  //           return Padding(
+                  //             padding: const EdgeInsets.symmetric(horizontal: 30),
+                  //             child: BasketProductTile(
+                  //               key: index == 0 ? myKey : null,
+                  //               imageUrl: 'https://img.freepik.com/free-photo/top-view-pepperoni-pizza-with-mushroom-sausages-bell-pepper-olive-corn-black-wooden_141793-2158.jpg?w=2000',
+                  //               title: 'title',
+                  //               subTitle: 'subTitle',
+                  //               description: 'description',
+                  //               initialPrice: controller.userOrder[index]['price'],
+                  //               onTap: () {},
+                  //               notes: List.generate(
+                  //                 4,
+                  //                 (index) {
+                  //                   return index == 3
+                  //                       ? Row(
+                  //                           children: [
+                  //                             SvgPicture.asset(MyIcons.notes, height: 14),
+                  //                             const SizedBox(width: 3),
+                  //                             const Text("extra mayo"),
+                  //                           ],
+                  //                         )
+                  //                       : const Text("+ souce");
+                  //                 },
+                  //               ),
+                  //             ),
+                  //           );
+                  //         },
                   //       ),
                   //     );
                   //   },
                   // ),
-                  const Padding(
-                    padding: EdgeInsets.symmetric(horizontal: 30),
+                  ...List.generate(
+                    MakeOrderCtrl.makeOrderModel!.data!.products!.length,
+                    (index) {
+                      keys.add(GlobalKey<BasketProductTileState>());
+                      final data = MakeOrderCtrl.makeOrderModel!.data!.products![index];
+                      return Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 30),
+                        child: BasketProductTile(
+                          key: keys[index],
+                          imageUrl: kFakeImage,
+                          title: data.productName!,
+                          index: index,
+                          subTitle: data.productName!,
+                          initialQuantity: data.quantity!,
+                          description: data.productName!,
+                          initialPrice: data.price!.toDouble(),
+                          note: data.note!,
+                          size: data.size!,
+                          extras: data.extras!.map((element) {
+                            return Text('+ ${element.name!}');
+                          }).toList(),
+                        ),
+                      );
+                    },
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 30),
                     child: CustomTextField(
+                      controller: noteCtrl,
                       keyboardType: TextInputType.multiline,
                       hintText: "do_you_have_notes_key",
                       minLines: 1,
                       maxLines: 3,
-                      prefixIcon: CustomPrefixIcon(
+                      prefixIcon: const CustomPrefixIcon(
                         icon: MyIcons.notes,
                       ),
                     ),
