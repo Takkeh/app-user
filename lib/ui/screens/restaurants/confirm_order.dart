@@ -2,10 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
+import 'package:takkeh/controller/restaurants/make_order.dart';
+import 'package:takkeh/controller/restaurants/update_order_ctrl.dart';
+import 'package:takkeh/controller/user_order_ctrl.dart';
 import 'package:takkeh/translation/service.dart';
 import 'package:takkeh/ui/screens/registration/widgets/custom_prefix_icon.dart';
-import 'package:takkeh/ui/screens/restaurants/order_status.dart';
-import 'package:takkeh/ui/screens/restaurants/widgets/custom_check_box.dart';
 import 'package:takkeh/ui/screens/restaurants/widgets/custom_fab_button.dart';
 import 'package:takkeh/ui/screens/restaurants/widgets/custom_suffix_icon.dart';
 import 'package:takkeh/ui/screens/restaurants/widgets/gradient_colors_box.dart';
@@ -17,16 +18,18 @@ import 'package:takkeh/utils/base/colors.dart';
 import 'package:takkeh/utils/base/icons.dart';
 
 class ConfirmOrderScreen extends StatefulWidget {
-  const ConfirmOrderScreen({Key? key}) : super(key: key);
+  final int orderId;
+
+  const ConfirmOrderScreen({
+    Key? key,
+    required this.orderId,
+  }) : super(key: key);
 
   @override
   State<ConfirmOrderScreen> createState() => _ConfirmOrderScreenState();
 }
 
 class _ConfirmOrderScreenState extends State<ConfirmOrderScreen> {
-  //TODO: transfer to controller later
-  List<bool> choose = [false, false, false];
-
   late GoogleMapController mapController;
 
   @override
@@ -47,7 +50,7 @@ class _ConfirmOrderScreenState extends State<ConfirmOrderScreen> {
             ? CustomFABButton(
                 title: TranslationService.getString('confirm_order_key'),
                 onPressed: () {
-                  Get.to(() => const OrderStatusScreen());
+                  UpdateOrderCtrl.fetchUpdateOrderData(orderId: widget.orderId, context: context);
                 },
               )
             : null,
@@ -74,6 +77,7 @@ class _ConfirmOrderScreenState extends State<ConfirmOrderScreen> {
                   ),
                   minSuffixWidth: 120,
                   maxSuffixWidth: 122,
+                  readOnly: true,
                   suffixIcon: CustomSuffixIcon(
                     title: TranslationService.getString('pre_order_key'),
                     icon: MyIcons.scooter,
@@ -94,23 +98,26 @@ class _ConfirmOrderScreenState extends State<ConfirmOrderScreen> {
                     fontWeight: FontWeight.w500,
                   ),
                 ),
-                ...List.generate(3, (index) {
-                  return CustomCheckBox(
-                    title: "Food",
-                    price: 99.2,
-                    shape: const CircleBorder(),
-                    onChanged: (value) {
-                      // setState(() {
-                      //   for (var element in choose) {
-                      //     final index = choose.indexOf(element);
-                      //     choose[index] = false;
-                      //   }
-                      //   choose[index] = value!;
-                      // });
-                    },
-                    value: choose[index],
-                  );
-                }),
+                ListTile(
+                  horizontalTitleGap: 0,
+                  contentPadding: EdgeInsets.zero,
+                  title: Text(TranslationService.getString("cash_only_key")),
+                  leading: Transform.scale(
+                    scale: 1.2,
+                    child: SizedBox(
+                      height: 24,
+                      width: 24,
+                      child: Checkbox(
+                        fillColor: MaterialStateProperty.all(MyColors.redPrimary),
+                        side: const BorderSide(color: MyColors.redPrimary),
+                        materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
+                        shape: const CircleBorder(),
+                        value: true,
+                        onChanged: null,
+                      ),
+                    ),
+                  ),
+                ),
                 const Divider(
                   indent: 15,
                   endIndent: 15,
@@ -123,30 +130,8 @@ class _ConfirmOrderScreenState extends State<ConfirmOrderScreen> {
                     fontWeight: FontWeight.w500,
                   ),
                 ),
-                Column(
-                  children: [
-                    Row(
-                      children: const [
-                        Text("x1", style: TextStyle(fontSize: 16, fontWeight: FontWeight.w500)),
-                        SizedBox(width: 16),
-                        Text("max chicken", style: TextStyle(fontSize: 16)),
-                        Spacer(),
-                        Text("22 $kPCurrency", style: TextStyle(fontSize: 16)),
-                      ],
-                    ),
-                    const Divider(
-                      height: 30,
-                      indent: 10,
-                      endIndent: 10,
-                    ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: const [
-                        Text("total", style: TextStyle(fontSize: 16)),
-                        Text("22 $kPCurrency", style: TextStyle(fontSize: 16, fontWeight: FontWeight.w500)),
-                      ],
-                    ),
-                  ],
+                OrderDetailsWidget(
+                  productName: MakeOrderCtrl.model!.data!.products!,
                 ),
               ],
             ),
@@ -154,5 +139,48 @@ class _ConfirmOrderScreenState extends State<ConfirmOrderScreen> {
         ],
       ),
     );
+  }
+}
+
+class OrderDetailsWidget extends StatelessWidget {
+  final List productName;
+
+  const OrderDetailsWidget({
+    Key? key,
+    required this.productName,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return GetBuilder<UserOrderCtrl>(builder: (controller) {
+      return Column(
+        children: [
+          ...controller.userOrder.map((element) {
+            final index = controller.userOrder.indexOf(element);
+            return Row(
+              children: [
+                Text("x${element['quantity']}", style: const TextStyle(fontSize: 16, fontWeight: FontWeight.w500)),
+                const SizedBox(width: 16),
+                Text(productName[index].productName, style: const TextStyle(fontSize: 16)),
+                const Spacer(),
+                Text("${element['price']} $kPCurrency", style: const TextStyle(fontSize: 16)),
+              ],
+            );
+          }).toList(),
+          const Divider(
+            height: 30,
+            indent: 10,
+            endIndent: 10,
+          ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              const Text("total", style: TextStyle(fontSize: 16)),
+              Text("${controller.totalPrice.value} $kPCurrency", style: const TextStyle(fontSize: 16, fontWeight: FontWeight.w500)),
+            ],
+          ),
+        ],
+      );
+    });
   }
 }

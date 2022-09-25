@@ -13,6 +13,7 @@ import 'package:takkeh/ui/screens/home/widgets/takkah_offers_builder.dart';
 import 'package:takkeh/ui/widgets/custom_network_image.dart';
 import 'package:takkeh/ui/widgets/failed_widget.dart';
 import 'package:takkeh/ui/widgets/title_widget.dart';
+import 'package:takkeh/utils/base/images.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({Key? key}) : super(key: key);
@@ -23,6 +24,11 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
   int currentIndex = 2;
+  final images = [
+    MyImages.restaurants,
+    MyImages.restaurants,
+    MyImages.restaurants,
+  ];
 
   @override
   void initState() {
@@ -50,6 +56,39 @@ class _HomeScreenState extends State<HomeScreen> {
               ],
             ),
             const SizedBox(height: 30),
+            // Padding(
+            //   padding: const EdgeInsets.symmetric(horizontal: 10.0, vertical: 30),
+            //   child: Row(
+            //     children: images.map((element) {
+            //       final index = images.indexOf(element);
+            //       return Expanded(
+            //         child: GestureDetector(
+            //           onTap: () {
+            //             switch (index) {
+            //               case 0:
+            //                 {
+            //                   Get.to(() => const RestaurantsHomeScreen(), binding: RestaurantsHomeBinding());
+            //                 }
+            //                 break;
+            //               case 1:
+            //                 {}
+            //                 break;
+            //               case 2:
+            //                 {}
+            //                 break;
+            //             }
+            //           },
+            //           child: Padding(
+            //             padding: const EdgeInsets.symmetric(horizontal: 5.0),
+            //             child: Image.asset(
+            //               element,
+            //             ),
+            //           ),
+            //         ),
+            //       );
+            //     }).toList(),
+            //   ),
+            // ),
             FutureBuilder<CategoriesModel?>(
               future: CategoriesController.categoriesData,
               builder: (context, snapshot) {

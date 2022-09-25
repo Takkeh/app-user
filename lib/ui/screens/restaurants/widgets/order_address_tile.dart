@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:takkeh/controller/user_location.dart';
 import 'package:takkeh/translation/service.dart';
 import 'package:takkeh/utils/base/colors.dart';
 import 'package:takkeh/utils/base/icons.dart';
@@ -27,9 +28,7 @@ class OrderAddressTile extends StatelessWidget {
         ),
       ),
       subtitle: Text(
-        TranslationService.getString(
-          'address from location',
-        ),
+        "${UserLocationCtrl.find.locality.value}, ${UserLocationCtrl.find.subLocality.value}\n${UserLocationCtrl.find.street}",
         style: const TextStyle(
           fontSize: 14,
           color: MyColors.grey070,

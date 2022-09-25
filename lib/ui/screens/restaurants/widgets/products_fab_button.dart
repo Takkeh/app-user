@@ -36,13 +36,11 @@ class ProductsFABButton extends StatelessWidget {
             MakeOrderCtrl.fetchMakeOrderData(
               context: context,
               restaurantId: restaurantId,
-              //TODO: api fix -> make empty string later
-              generalNote: 'a',
+              generalNote: '',
               route: BasketScreen(
                 restaurantId: restaurantId,
               ),
             );
-            // UserOrderCtrl.find.fetchMakeOrderData(context: context, restaurantId: restaurantId);
           },
           style: ElevatedButton.styleFrom(
             primary: controller.userOrder.isEmpty ? MyColors.redF98 : MyColors.redPrimary,
@@ -80,15 +78,17 @@ class ProductsFABButton extends StatelessWidget {
                   fontWeight: FontWeight.w500,
                 ),
               ),
-              GetBuilder<UserOrderCtrl>(builder: (controller) {
-                return Text(
-                  "${controller.totalPrice.value} $kPCurrency",
-                  style: const TextStyle(
-                    fontSize: 16,
-                    fontWeight: FontWeight.w500,
-                  ),
-                );
-              }),
+              GetBuilder<UserOrderCtrl>(
+                builder: (controller) {
+                  return Text(
+                    "${controller.totalPrice.value} $kPCurrency",
+                    style: const TextStyle(
+                      fontSize: 16,
+                      fontWeight: FontWeight.w500,
+                    ),
+                  );
+                },
+              ),
             ],
           ),
         );

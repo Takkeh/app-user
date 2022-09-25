@@ -1,20 +1,21 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:takkeh/binding/restaurants/restaurants_search_binding.dart';
 import 'package:takkeh/controller/restaurants/filter.dart';
 import 'package:takkeh/translation/service.dart';
+import 'package:takkeh/ui/screens/restaurants/restaurants_search.dart';
 import 'package:takkeh/ui/screens/restaurants/widgets/filter_widget.dart';
 import 'package:takkeh/ui/screens/restaurants/widgets/restaurants_filter_builder.dart';
 import 'package:takkeh/ui/screens/restaurants/widgets/search_field.dart';
 import 'package:takkeh/utils/base/colors.dart';
 
 class RestaurantsHeaderWidget extends StatelessWidget {
-  final TextEditingController controller;
   final Function(String) onChanged;
   final String title;
   final int index;
 
   const RestaurantsHeaderWidget({
     Key? key,
-    required this.controller,
     required this.onChanged,
     required this.title,
     required this.index,
@@ -41,8 +42,11 @@ class RestaurantsHeaderWidget extends StatelessWidget {
                   children: [
                     Expanded(
                       child: SearchField(
+                        readOnly: true,
+                        onTap: () {
+                          Get.to(() => const RestaurantsSearchScreen(), binding: RestaurantsSearchBinding());
+                        },
                         hintText: TranslationService.getString('what_to_search_key'),
-                        controller: controller,
                         onChanged: onChanged,
                       ),
                     ),

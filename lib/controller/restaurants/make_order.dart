@@ -10,7 +10,8 @@ import 'package:takkeh/utils/app_constants.dart';
 import 'package:takkeh/utils/base/colors.dart';
 
 class MakeOrderCtrl {
-  static MakeOrderModel? makeOrderModel;
+  static MakeOrderModel? model;
+  static int? orderId;
 
   static Future fetchMakeOrderData({
     required BuildContext context,
@@ -19,23 +20,24 @@ class MakeOrderCtrl {
     required dynamic route,
   }) async {
     OverLayLoader.showLoading(context, color: MyColors.redPrimary);
-    makeOrderModel = await MakeOrderApi.data(
+    model = await MakeOrderApi.data(
       generalNote: generalNote,
       userOrder: UserOrderCtrl.find.userOrder,
       total: UserOrderCtrl.find.totalPrice.value,
       restaurantId: restaurantId,
     );
-    if (makeOrderModel == null) {
+    if (model == null) {
       Fluttertoast.showToast(msg: AppConstants.failedMessage);
       Loader.hide();
       return;
     }
-    if (makeOrderModel!.code == 200) {
+    if (model!.code == 200) {
+      orderId = model!.data!.id;
       Get.to(
         route,
       );
     } else {
-      Fluttertoast.showToast(msg: makeOrderModel!.msg!);
+      Fluttertoast.showToast(msg: model!.msg!);
     }
     Loader.hide();
   }

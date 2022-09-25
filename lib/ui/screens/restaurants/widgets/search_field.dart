@@ -1,17 +1,21 @@
 import 'package:flutter/material.dart';
-import 'package:takkeh/ui/screens/registration//widgets/custom_prefix_icon.dart';
+import 'package:takkeh/ui/screens/registration/widgets/custom_prefix_icon.dart';
 import 'package:takkeh/utils/base/icons.dart';
 
 class SearchField extends StatelessWidget {
-  final TextEditingController controller;
   final Function(String) onChanged;
   final String hintText;
+  final bool readOnly;
+  final bool autofocus;
+  final VoidCallback? onTap;
 
   const SearchField({
     Key? key,
-    required this.controller,
     required this.onChanged,
     required this.hintText,
+    required this.readOnly,
+    this.onTap,
+    this.autofocus = false,
   }) : super(key: key);
 
   static const _border = 26.0;
@@ -19,8 +23,10 @@ class SearchField extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return TextFormField(
-      controller: controller,
+      autofocus: autofocus,
       onChanged: onChanged,
+      readOnly: readOnly,
+      onTap: onTap,
       decoration: InputDecoration(
         hintText: hintText,
         filled: true,

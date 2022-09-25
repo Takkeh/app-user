@@ -22,7 +22,6 @@ class RestaurantCategoriesBuilder extends StatelessWidget {
       children: [
         GetBuilder<RestaurantCategoriesController>(builder: (controller) {
           return RestaurantsHeaderWidget(
-            controller: TextEditingController(),
             onChanged: (value) {},
             title: controller.categoryTitle.value,
             index: controller.currentIndex.value,

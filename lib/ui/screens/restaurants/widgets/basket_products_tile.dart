@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:takkeh/controller/user_order_ctrl.dart';
+import 'package:takkeh/model/restaurants/make_order_model.dart';
 import 'package:takkeh/ui/screens/restaurants/widgets/quantity_button.dart';
 import 'package:takkeh/ui/widgets/custom_network_image.dart';
 import 'package:takkeh/utils/app_constants.dart';
@@ -8,12 +9,13 @@ import 'package:takkeh/utils/base/colors.dart';
 import 'package:takkeh/utils/base/icons.dart';
 
 class BasketProductTile extends StatefulWidget {
-  final String imageUrl, title, subTitle, description;
+  final String imageUrl, title, subTitle, description, note;
   final double initialPrice;
-  final String note, size;
   final int index;
   final List<Widget> extras;
-  final int initialQuantity;
+  final List<Extra> test;
+  final int initialQuantity, productId, restaurantId;
+  final int size;
 
   const BasketProductTile({
     Key? key,
@@ -27,6 +29,9 @@ class BasketProductTile extends StatefulWidget {
     required this.note,
     required this.index,
     required this.size,
+    required this.productId,
+    required this.restaurantId,
+    required this.test,
   }) : super(key: key);
 
   @override
@@ -36,18 +41,41 @@ class BasketProductTile extends StatefulWidget {
 class BasketProductTileState extends State<BasketProductTile> {
   late int newQuantity;
   late double newPrice;
+  late double originalPrice;
 
   void toggle(String status, double initialPrice) {
     if (status == 'add') {
       setState(() {
         newQuantity++;
-        newPrice = initialPrice * newQuantity;
+        newPrice = originalPrice * newQuantity;
+        UserOrderCtrl.find.calculateTotalQuantity(1, isAdd: true);
+        UserOrderCtrl.find.calculateTotalPrice(originalPrice, isAdd: true);
+        UserOrderCtrl.find.addProduct(
+          productId: widget.productId,
+          quantity: widget.initialQuantity,
+          size: widget.size,
+          extras: List.generate(widget.test.length, (index) => {'extra_id': widget.test[index].id!}),
+          note: widget.note,
+          price: originalPrice,
+          restaurantId: widget.restaurantId,
+        );
       });
     } else {
       if (newQuantity == 1) return;
       setState(() {
         newQuantity--;
-        newPrice = initialPrice * newQuantity;
+        newPrice = originalPrice * newQuantity;
+        UserOrderCtrl.find.calculateTotalQuantity(1, isAdd: false);
+        UserOrderCtrl.find.calculateTotalPrice(originalPrice, isAdd: false);
+        UserOrderCtrl.find.removeProduct(
+          productId: widget.productId,
+          quantity: widget.initialQuantity,
+          size: widget.size,
+          extras: List.generate(widget.test.length, (index) => {'extra_id': widget.test[index].id!}),
+          note: widget.note,
+          price: originalPrice,
+          restaurantId: widget.restaurantId,
+        );
       });
     }
   }
@@ -56,6 +84,7 @@ class BasketProductTileState extends State<BasketProductTile> {
   void initState() {
     newPrice = widget.initialPrice;
     newQuantity = widget.initialQuantity;
+    originalPrice = widget.initialPrice / widget.initialQuantity;
     super.initState();
   }
 
@@ -89,20 +118,22 @@ class BasketProductTileState extends State<BasketProductTile> {
                           fontSize: 18,
                         ),
                       ),
-                      Text(widget.size),
+                      Text(widget.size.toString()),
                       ...widget.extras,
                       const SizedBox(height: 12),
-                      Row(
-                        children: [
-                          SvgPicture.asset(MyIcons.notes, height: 14),
-                          Padding(
-                            padding: const EdgeInsetsDirectional.fromSTEB(3, 3, 0, 0),
-                            child: Text(
-                              widget.note,
+                      widget.note.isEmpty
+                          ? const SizedBox.shrink()
+                          : Row(
+                              children: [
+                                SvgPicture.asset(MyIcons.notes, height: 14),
+                                Padding(
+                                  padding: const EdgeInsetsDirectional.fromSTEB(3, 3, 0, 0),
+                                  child: Text(
+                                    widget.note,
+                                  ),
+                                ),
+                              ],
                             ),
-                          ),
-                        ],
-                      ),
                       AnimatedSwitcher(
                         duration: const Duration(milliseconds: 300),
                         transitionBuilder: (Widget child, Animation<double> animation) {

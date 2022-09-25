@@ -18,27 +18,43 @@ class UserOrderCtrl extends GetxController {
     return quantity;
   }
 
-  void calculateTotalQuantity(int quantity) {
-    totalQuantity.value = totalQuantity.value + quantity;
+  void calculateTotalQuantity(int quantity, {required bool isAdd}) {
+    if (isAdd) {
+      totalQuantity.value = totalQuantity.value + quantity;
+    } else {
+      totalQuantity.value = totalQuantity.value - quantity;
+    }
+
     update();
   }
 
-  void calculateTotalPrice(double price) {
-    totalPrice.value = totalPrice.value + price;
+  void calculateTotalPrice(double price, {required bool isAdd}) {
+    if (isAdd) {
+      totalPrice.value = totalPrice.value + price;
+    } else {
+      totalPrice.value = totalPrice.value - price;
+    }
+    update();
   }
 
-  bool checkIfItemAlreadyExist(Map<String, dynamic> productDetails) {
+  bool checkIfItemAlreadyExist(Map<String, dynamic> productDetails, {required bool isAdd}) {
     bool isPreExist = false;
     for (var element in userOrder) {
       var check = productDetails['product_id'].toString() == element['product_id'].toString() && productDetails['extras'].toString() == element['extras'].toString() && productDetails['size_id'].toString() == element['size_id'].toString() && productDetails['note'].toString() == element['note'].toString();
       if (check) {
-        element['quantity'] = element['quantity'] + productDetails['quantity'];
-        element['price'] = element['price'] + productDetails['price'];
+        if (isAdd) {
+          element['quantity'] = element['quantity'] + productDetails['quantity'];
+          element['price'] = element['price'] + productDetails['price'];
+        } else {
+          element['quantity'] = element['quantity'] - productDetails['quantity'];
+          element['price'] = element['price'] - productDetails['price'];
+        }
+
         isPreExist = true;
         break;
       }
     }
-    log("userOrder:: $userOrder -- length ${userOrder.length}");
+    // log("userOrder:: $userOrder -- length ${userOrder.length}");
     return isPreExist;
   }
 
@@ -62,7 +78,7 @@ class UserOrderCtrl extends GetxController {
     if (userOrder.isEmpty) {
       userOrder.add(productDetails);
     } else {
-      if (!checkIfItemAlreadyExist(productDetails)) {
+      if (!checkIfItemAlreadyExist(productDetails, isAdd: true)) {
         userOrder.add(productDetails);
       }
     }
@@ -74,25 +90,22 @@ class UserOrderCtrl extends GetxController {
     required int productId,
     required int quantity,
     required int size,
-    required List<int> extras,
+    required List<Map<String, int>> extras,
     required String note,
-    required int extraId,
     required double price,
+    required int restaurantId,
   }) {
     final productDetails = {
       'product_id': productId,
       'quantity': quantity,
-      'extras': [
-        {
-          'extra_id': extraId,
-        },
-      ],
+      'extras': extras,
       'size_id': size,
       'note': note,
-      'price': price
+      'price': price,
     };
-
-    userOrder.remove(productDetails);
+    if (!checkIfItemAlreadyExist(productDetails, isAdd: false)) {
+      userOrder.remove(productDetails);
+    }
     log("userOrder:: $userOrder -- length ${userOrder.length}");
     update();
   }

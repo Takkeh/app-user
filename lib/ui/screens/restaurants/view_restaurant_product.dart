@@ -76,7 +76,7 @@ class _ViewRestaurantProductScreenState extends State<ViewRestaurantProductScree
                     );
                     return;
                   }
-                  UserOrderCtrl.find.calculateTotalPrice(counterKey.currentState!.price);
+                  UserOrderCtrl.find.calculateTotalPrice(counterKey.currentState!.price, isAdd: true);
                   UserOrderCtrl.find.addProduct(
                     restaurantId: widget.restaurantId,
                     productId: widget.productId,
@@ -86,7 +86,7 @@ class _ViewRestaurantProductScreenState extends State<ViewRestaurantProductScree
                     note: noteCtrl.text,
                     price: counterKey.currentState!.price,
                   );
-                  UserOrderCtrl.find.calculateTotalQuantity(counterKey.currentState!.counter);
+                  UserOrderCtrl.find.calculateTotalQuantity(counterKey.currentState!.counter, isAdd: true);
                   Get.back(closeOverlays: true);
                 },
               )
