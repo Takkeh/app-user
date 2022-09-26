@@ -7,6 +7,7 @@ import 'package:takkeh/ui/screens/restaurants/view_restaurant.dart';
 import 'package:takkeh/ui/screens/restaurants/widgets/restaurants_app_bar.dart';
 import 'package:takkeh/ui/screens/restaurants/widgets/search_field.dart';
 import 'package:takkeh/ui/widgets/custom_list_tile.dart';
+import 'package:takkeh/ui/widgets/red_circular_indicator.dart';
 import 'package:takkeh/utils/base/colors.dart';
 
 class RestaurantsSearchScreen extends StatelessWidget {
@@ -37,18 +38,17 @@ class RestaurantsSearchScreen extends StatelessWidget {
               },
             ),
           ),
+          const SizedBox(height: 30),
           Obx(
             () => RestaurantsSearchCtrl.to.searchQuery.isEmpty
                 ? const SizedBox.shrink()
                 : RestaurantsSearchCtrl.to.isLoading.value
-                    ? const Center(child: CircularProgressIndicator())
+                    ? const RedCircularProgressIndicator()
                     : ListView.separated(
+                        padding: const EdgeInsetsDirectional.fromSTEB(20, 0, 20, 20),
                         physics: const NeverScrollableScrollPhysics(),
                         shrinkWrap: true,
-                        separatorBuilder: (context, index) => const Divider(
-                          indent: 8,
-                          endIndent: 8,
-                        ),
+                        separatorBuilder: (context, index) => const SizedBox(height: 15),
                         itemCount: RestaurantsSearchCtrl.to.model.value!.data!.length,
                         itemBuilder: (context, index) {
                           final data = RestaurantsSearchCtrl.to.model.value!.data![index];

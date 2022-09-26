@@ -66,7 +66,7 @@ class _ConfirmOrderScreenState extends State<ConfirmOrderScreen> {
             child: ListView(
               padding: const EdgeInsets.symmetric(horizontal: 30),
               children: [
-                const MapBubbleBuilder(),
+                const MapBubbleBuilder(visible: true),
                 const SizedBox(height: 20),
                 CustomTextField(
                   hintText: '30 - 40 min',

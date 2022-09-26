@@ -7,6 +7,7 @@ import 'package:takkeh/network/restaurants/update_order.dart';
 import 'package:takkeh/ui/screens/restaurants/order_status.dart';
 import 'package:takkeh/ui/widgets/components/overlay_loader.dart';
 import 'package:takkeh/utils/app_constants.dart';
+import 'package:takkeh/utils/base/colors.dart';
 
 class UpdateOrderCtrl {
   static UpdateOrderModel? model;
@@ -15,7 +16,7 @@ class UpdateOrderCtrl {
     required int orderId,
     required BuildContext context,
   }) async {
-    OverLayLoader.showLoading(context);
+    OverLayLoader.showLoading(context, color: MyColors.redPrimary);
     model = await UpdateOrderApi.data(orderId: orderId);
     if (model == null) {
       Fluttertoast.showToast(msg: AppConstants.failedMessage);

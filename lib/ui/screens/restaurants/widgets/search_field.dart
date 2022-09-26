@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:takkeh/ui/screens/registration/widgets/custom_prefix_icon.dart';
+import 'package:takkeh/utils/base/colors.dart';
 import 'package:takkeh/utils/base/icons.dart';
 
 class SearchField extends StatelessWidget {
@@ -23,6 +24,7 @@ class SearchField extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return TextFormField(
+      cursorColor: MyColors.redPrimary,
       autofocus: autofocus,
       onChanged: onChanged,
       readOnly: readOnly,

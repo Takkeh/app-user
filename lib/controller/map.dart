@@ -121,7 +121,7 @@ class MapController extends GetxController {
     GoogleMapController mapController,
     BuildContext context,
   ) async {
-    OverLayLoader.showLoading(context);
+    OverLayLoader.showLoading(context, color: MyColors.redPrimary);
     UserLocationCtrl.find.updateLocation(MapController.find.newLat!, MapController.find.newLng!);
     await UserLocationCtrl.find.getAddressDetails(MapController.find.newLat!, MapController.find.newLng!);
     CameraUpdate update = CameraUpdate.newCameraPosition(CameraPosition(target: LatLng(UserLocationCtrl.find.latitude.value!, UserLocationCtrl.find.longitude.value!), zoom: 15));

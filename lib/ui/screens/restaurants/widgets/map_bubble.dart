@@ -9,7 +9,8 @@ import 'package:takkeh/ui/widgets/custom_marker.dart';
 import 'package:takkeh/utils/base/colors.dart';
 
 class MapBubbleBuilder extends StatefulWidget {
-  const MapBubbleBuilder({Key? key}) : super(key: key);
+  final bool visible;
+  const MapBubbleBuilder({Key? key, required this.visible}) : super(key: key);
 
   @override
   State<MapBubbleBuilder> createState() => _MapBubbleBuilderState();
@@ -28,7 +29,7 @@ class _MapBubbleBuilderState extends State<MapBubbleBuilder> {
   Widget build(BuildContext context) {
     return GetBuilder<UserLocationCtrl>(builder: (controller) {
       return SizedBox(
-        height: 220,
+        height: widget.visible ? 220 : 180,
         child: Column(
           children: [
             Stack(
@@ -70,8 +71,11 @@ class _MapBubbleBuilderState extends State<MapBubbleBuilder> {
                 const CustomMarker(color: MyColors.redPrimary),
               ],
             ),
-            DeliveryInfoBox(
-              address: "${controller.subLocality.value!}, ${controller.street.value!}",
+            Visibility(
+              visible: widget.visible,
+              child: DeliveryInfoBox(
+                address: "${controller.subLocality.value!}, ${controller.street.value!}",
+              ),
             ),
           ],
         ),
