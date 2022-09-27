@@ -3,15 +3,18 @@ import 'package:get/get.dart';
 
 class GradientColorsBox extends StatelessWidget {
   final double height;
+  final EdgeInsetsGeometry? margin;
 
   const GradientColorsBox({
     Key? key,
     required this.height,
+    this.margin,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Container(
+      margin: margin,
       height: height,
       width: Get.width,
       decoration: BoxDecoration(

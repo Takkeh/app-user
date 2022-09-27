@@ -9,6 +9,7 @@ class BaseSwitchSlider extends StatelessWidget {
   final Function() onTap1;
   final Function() onTap2;
   final Color color;
+  final Color buttonColor;
   final EdgeInsetsGeometry margin;
 
   const BaseSwitchSlider({
@@ -20,6 +21,7 @@ class BaseSwitchSlider extends StatelessWidget {
     required this.isFirst,
     required this.color,
     required this.margin,
+    this.buttonColor = MyColors.primary,
   }) : super(key: key);
 
   static Widget buildField(String title, Function() onTap) {
@@ -65,7 +67,7 @@ class BaseSwitchSlider extends StatelessWidget {
               child: CustomElevatedButton(
                 title: "",
                 onPressed: () {},
-                color: MyColors.primary,
+                color: buttonColor,
               ),
             ),
           ),

@@ -59,6 +59,7 @@ class RestaurantsBuilder extends StatelessWidget {
                       title: controller.restaurants[index].name!,
                       cover: controller.restaurants[index].cover!,
                       restaurantId: controller.restaurants[index].id!,
+                      logo: controller.restaurants[index].logo!,
                     ),
                     binding: ProductBinding(id: controller.restaurants[index].id!),
                   );

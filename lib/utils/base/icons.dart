@@ -42,4 +42,6 @@ class MyIcons {
   static const String cardWhite = "${_path}card_white.svg";
   static const String currency = "${_path}currency.svg";
   static const String halfCircle = "${_path}half_circle.svg";
+  static const String emojiLove = "${_path}emoji_love.svg";
+  static const String phoneGreen = "${_path}phone_green.svg";
 }
