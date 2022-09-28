@@ -18,8 +18,8 @@ class ViewRestaurantProductScreen extends StatefulWidget {
   final String cover;
   final int productId;
   final int restaurantId;
-  final List<Sizes> sizes;
-  final List<Extras> extra;
+  final List<SizesV> sizes;
+  final List<ExtrasV> extra;
 
   const ViewRestaurantProductScreen({
     Key? key,

@@ -102,7 +102,7 @@ class ViewRestaurantBuilder extends StatelessWidget {
                             child: ProductsListTile(
                               index: number,
                               id: controller.viewRestaurants[index].id!,
-                              imageUrl: 'https://img.freepik.com/free-photo/chicken-wings-barbecue-sweetly-sour-sauce-picnic-summer-menu-tasty-food-top-view-flat-lay_2829-6471.jpg?w=2000',
+                              imageUrl: controller.viewRestaurants[index].image!,
                               title: controller.viewRestaurants[index].name!,
                               price: controller.viewRestaurants[index].price!,
                               subTitle: controller.viewRestaurants[index].categorise!,

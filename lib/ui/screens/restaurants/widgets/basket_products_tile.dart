@@ -11,9 +11,10 @@ import 'package:takkeh/utils/base/icons.dart';
 class BasketProductTile extends StatefulWidget {
   final String imageUrl, title, subTitle, description, note;
   final double initialPrice;
+  final double extraPrice;
   final int index;
-  final List<Widget> extras;
-  final List<Extra> test;
+  final List<Widget> extrasWidget;
+  final List<Extra> extrasList;
   final int initialQuantity, productId, restaurantId;
   final int size;
 
@@ -23,7 +24,7 @@ class BasketProductTile extends StatefulWidget {
     required this.title,
     required this.subTitle,
     required this.description,
-    required this.extras,
+    required this.extrasWidget,
     required this.initialPrice,
     required this.initialQuantity,
     required this.note,
@@ -31,7 +32,8 @@ class BasketProductTile extends StatefulWidget {
     required this.size,
     required this.productId,
     required this.restaurantId,
-    required this.test,
+    required this.extrasList,
+    required this.extraPrice,
   }) : super(key: key);
 
   @override
@@ -47,14 +49,14 @@ class BasketProductTileState extends State<BasketProductTile> {
     if (status == 'add') {
       setState(() {
         newQuantity++;
-        newPrice = originalPrice * newQuantity;
+        newPrice = originalPrice * newQuantity + widget.extraPrice;
         UserOrderCtrl.find.calculateTotalQuantity(1, isAdd: true);
         UserOrderCtrl.find.calculateTotalPrice(originalPrice, isAdd: true);
         UserOrderCtrl.find.addProduct(
           productId: widget.productId,
           quantity: widget.initialQuantity,
           size: widget.size,
-          extras: List.generate(widget.test.length, (index) => {'extra_id': widget.test[index].id!}),
+          extras: List.generate(widget.extrasList.length, (index) => {'extra_id': widget.extrasList[index].id!}),
           note: widget.note,
           price: originalPrice,
           restaurantId: widget.restaurantId,
@@ -71,7 +73,7 @@ class BasketProductTileState extends State<BasketProductTile> {
           productId: widget.productId,
           quantity: widget.initialQuantity,
           size: widget.size,
-          extras: List.generate(widget.test.length, (index) => {'extra_id': widget.test[index].id!}),
+          extras: List.generate(widget.extrasList.length, (index) => {'extra_id': widget.extrasList[index].id!}),
           note: widget.note,
           price: originalPrice,
           restaurantId: widget.restaurantId,
@@ -111,15 +113,17 @@ class BasketProductTileState extends State<BasketProductTile> {
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Text(
-                        widget.title,
-                        style: const TextStyle(
-                          color: MyColors.text,
-                          fontSize: 18,
+                      FittedBox(
+                        child: Text(
+                          widget.title,
+                          style: const TextStyle(
+                            color: MyColors.text,
+                            fontSize: 18,
+                          ),
                         ),
                       ),
                       Text(widget.size.toString()),
-                      ...widget.extras,
+                      ...widget.extrasWidget,
                       const SizedBox(height: 12),
                       widget.note.isEmpty
                           ? const SizedBox.shrink()

@@ -76,6 +76,7 @@ class ViewRestaurants {
   ViewRestaurants({
     this.id,
     this.name,
+    this.image,
     this.price,
     this.categorise,
     this.sizes,
@@ -84,23 +85,26 @@ class ViewRestaurants {
 
   int? id;
   String? name;
+  String? image;
   int? price;
   String? categorise;
-  List<Sizes>? sizes;
-  List<Extras>? extras;
+  List<SizesV>? sizes;
+  List<ExtrasV>? extras;
 
   factory ViewRestaurants.fromJson(Map<String, dynamic> json) => ViewRestaurants(
         id: json["id"],
         name: json["name"],
+        image: json["image"],
         price: json["price"],
         categorise: json["categorise"],
-        sizes: List<Sizes>.from(json["sizes"].map((x) => Sizes.fromJson(x))),
-        extras: List<Extras>.from(json["extras"].map((x) => Extras.fromJson(x))),
+        sizes: List<SizesV>.from(json["sizes"].map((x) => SizesV.fromJson(x))),
+        extras: List<ExtrasV>.from(json["extras"].map((x) => ExtrasV.fromJson(x))),
       );
 
   Map<String, dynamic> toJson() => {
         "id": id,
         "name": name,
+        "image": image,
         "price": price,
         "categorise": categorise,
         "sizes": List<dynamic>.from(sizes!.map((x) => x.toJson())),
@@ -108,8 +112,8 @@ class ViewRestaurants {
       };
 }
 
-class Sizes {
-  Sizes({
+class ExtrasV {
+  ExtrasV({
     this.id,
     this.price,
     this.name,
@@ -125,7 +129,7 @@ class Sizes {
   DateTime? createdAt;
   DateTime? updatedAt;
 
-  factory Sizes.fromJson(Map<String, dynamic> json) => Sizes(
+  factory ExtrasV.fromJson(Map<String, dynamic> json) => ExtrasV(
         id: json["id"],
         price: json["price"],
         name: json["name"],
@@ -144,8 +148,8 @@ class Sizes {
       };
 }
 
-class Extras {
-  Extras({
+class SizesV {
+  SizesV({
     this.id,
     this.price,
     this.name,
@@ -161,7 +165,7 @@ class Extras {
   DateTime? createdAt;
   DateTime? updatedAt;
 
-  factory Extras.fromJson(Map<String, dynamic> json) => Extras(
+  factory SizesV.fromJson(Map<String, dynamic> json) => SizesV(
         id: json["id"],
         price: json["price"],
         name: json["name"],

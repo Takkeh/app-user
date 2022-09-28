@@ -98,12 +98,13 @@ class _BasketScreenState extends State<BasketScreen> {
                             initialPrice: data.price!.toDouble(),
                             note: data.note!,
                             size: data.sizeId!,
-                            extras: data.extras!.map((element) {
+                            extrasWidget: data.extras!.map((element) {
                               return Text('+ ${element.name!}');
                             }).toList(),
                             productId: data.productId!,
                             restaurantId: widget.restaurantId,
-                            test: data.extras!,
+                            extrasList: data.extras!,
+                            extraPrice: data.extras![0].price!.toDouble(),
                           ),
                         );
                       },
