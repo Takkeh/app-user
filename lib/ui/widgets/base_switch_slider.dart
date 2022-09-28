@@ -10,6 +10,8 @@ class BaseSwitchSlider extends StatelessWidget {
   final Function() onTap2;
   final Color color;
   final Color buttonColor;
+  final Color textColor1;
+  final Color textColor2;
   final EdgeInsetsGeometry margin;
 
   const BaseSwitchSlider({
@@ -22,9 +24,11 @@ class BaseSwitchSlider extends StatelessWidget {
     required this.color,
     required this.margin,
     this.buttonColor = MyColors.primary,
+    this.textColor1 = MyColors.black109,
+    this.textColor2 = MyColors.black109,
   }) : super(key: key);
 
-  static Widget buildField(String title, Function() onTap) {
+  static Widget buildField(String title, Function() onTap, Color textColor) {
     return Expanded(
       child: GestureDetector(
         onTap: onTap,
@@ -33,8 +37,9 @@ class BaseSwitchSlider extends StatelessWidget {
           alignment: Alignment.center,
           child: Text(
             title,
-            style: const TextStyle(
-              color: MyColors.black109,
+            style: TextStyle(
+              color: textColor,
+              // color: Colors.white,
               fontSize: 16,
               fontWeight: FontWeight.w500,
             ),
@@ -73,9 +78,9 @@ class BaseSwitchSlider extends StatelessWidget {
           ),
           Row(
             children: [
-              buildField(title1, onTap1),
+              buildField(title1, onTap1, textColor1),
               const SizedBox(width: 20),
-              buildField(title2, onTap2),
+              buildField(title2, onTap2, textColor2),
             ],
           ),
         ],

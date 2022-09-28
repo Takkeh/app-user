@@ -30,6 +30,7 @@ class RestaurantInfoScreen extends StatefulWidget {
 class _RestaurantInfoScreenState extends State<RestaurantInfoScreen> {
   late PageController pageController;
   bool isInformation = true;
+  int currentIndex = 0;
 
   @override
   void initState() {
@@ -122,6 +123,8 @@ class _RestaurantInfoScreenState extends State<RestaurantInfoScreen> {
                     isFirst: MySharedPreferences.language == 'en' ? isInformation : !isInformation,
                     color: Colors.white,
                     buttonColor: MyColors.redPrimary,
+                    textColor1: currentIndex == 0 ? Colors.white : MyColors.black109,
+                    textColor2: currentIndex == 0 ? MyColors.black109 : Colors.white,
                   ),
                 ],
               ),
@@ -129,6 +132,11 @@ class _RestaurantInfoScreenState extends State<RestaurantInfoScreen> {
           ),
           Expanded(
             child: PageView(
+              onPageChanged: (value) {
+                setState(() {
+                  currentIndex = value;
+                });
+              },
               physics: const NeverScrollableScrollPhysics(),
               controller: pageController,
               children: [
