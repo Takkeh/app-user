@@ -1,6 +1,7 @@
 {
   "project_info": {
     "project_number": "308674443378",
+    "firebase_url": "https://takkeh-ab34f-default-rtdb.firebaseio.com",
     "project_id": "takkeh-ab34f",
     "storage_bucket": "takkeh-ab34f.appspot.com"
   },
@@ -10,6 +11,35 @@
         "mobilesdk_app_id": "1:308674443378:android:57684b301db0782c0daaeb",
         "android_client_info": {
           "package_name": "com.takkeh.wecan"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "308674443378-t0lv1b1kre9cjq4n8fuls5tomp0ql9h8.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCmppBilNY1xdR_o6J67qmGx1CDDIg0plY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "308674443378-t0lv1b1kre9cjq4n8fuls5tomp0ql9h8.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:308674443378:android:a30d4790f80f2f230daaeb",
+        "android_client_info": {
+          "package_name": "com.takkeh_driver.wecan"
         }
       },
       "oauth_client": [

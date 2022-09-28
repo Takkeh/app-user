@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:takkeh/controller/home/category.dart';
 import 'package:takkeh/controller/nav_bar_ctrl.dart';
@@ -39,6 +40,12 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      floatingActionButton: FloatingActionButton(
+        onPressed: () async {
+          var myDoc = await FirebaseFirestore.instance.collection('khaled').get();
+          print("test:: ${myDoc.docs[0].data()}");
+        },
+      ),
       onDrawerChanged: (isOpen) {
         NavBarCtrl.find.toggle(isOpen);
       },

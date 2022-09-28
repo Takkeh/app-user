@@ -16,6 +16,7 @@ import 'package:takkeh/utils/shared_prefrences.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
+
   await Firebase.initializeApp(
       // options: const FirebaseOptions(
       //   apiKey: "XXX",
