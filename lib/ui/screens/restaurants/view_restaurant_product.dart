@@ -9,6 +9,7 @@ import 'package:takkeh/ui/screens/restaurants/widgets/custom_fab_button.dart';
 import 'package:takkeh/ui/screens/restaurants/widgets/product_counter.dart';
 import 'package:takkeh/ui/screens/restaurants/widgets/view_product_app_bar.dart';
 import 'package:takkeh/ui/widgets/custom_text_field.dart';
+import 'package:takkeh/utils/app_constants.dart';
 import 'package:takkeh/utils/base/colors.dart';
 import 'package:takkeh/utils/base/icons.dart';
 
@@ -19,7 +20,7 @@ class ViewRestaurantProductScreen extends StatefulWidget {
   final int productId;
   final int restaurantId;
   final List<SizesV> sizes;
-  final List<ExtrasV> extra;
+  final List<ExtrasV> extras;
 
   const ViewRestaurantProductScreen({
     Key? key,
@@ -27,7 +28,7 @@ class ViewRestaurantProductScreen extends StatefulWidget {
     required this.subTitle,
     required this.price,
     required this.sizes,
-    required this.extra,
+    required this.extras,
     required this.cover,
     required this.productId,
     required this.restaurantId,
@@ -125,6 +126,7 @@ class _ViewRestaurantProductScreenState extends State<ViewRestaurantProductScree
                       fontWeight: FontWeight.w500,
                     ),
                   ),
+                  //TODO: sizes and extras, some has price some don't. handle with alaa
                   ...List.generate(
                     widget.sizes.length,
                     (index) {
@@ -132,14 +134,17 @@ class _ViewRestaurantProductScreenState extends State<ViewRestaurantProductScree
                         title: widget.sizes[index].name!,
                         price: widget.sizes[index].price!.toDouble(),
                         shape: const CircleBorder(),
+                        trailing: index == 0 ? Text('${widget.sizes[index].price!.toDouble()}') : Text('+ ${widget.sizes[index].price!.toDouble()} $kPCurrency'),
                         onChanged: (value) {
                           var id = widget.sizes[index].id;
                           setState(() {
                             if (sizeId == id) {
                               sizeId = null;
+                              counterKey.currentState!.price = counterKey.currentState!.price - widget.sizes[index].price!.toDouble();
                               return;
                             }
                             sizeId = id;
+                            counterKey.currentState!.price = counterKey.currentState!.price + widget.sizes[index].price!.toDouble();
                           });
                         },
                         value: sizeId == widget.sizes[index].id ? true : false,
@@ -155,14 +160,15 @@ class _ViewRestaurantProductScreenState extends State<ViewRestaurantProductScree
                     ),
                   ),
                   ...List.generate(
-                    widget.extra.length,
+                    widget.extras.length,
                     (index) {
                       return CustomCheckBox(
-                        title: "Sause",
+                        title: widget.extras[index].name!,
                         price: 80.0,
                         shape: null,
+                        trailing: index == 0 ? Text('${widget.extras[index].price!.toDouble()}') : Text('+ ${widget.extras[index].price!.toDouble()} $kPCurrency'),
                         onChanged: (value) {
-                          var id = widget.extra[index].id!;
+                          var id = widget.extras[index].id!;
                           setState(() {
                             if (extrasTest.contains(id)) {
                               extrasTest.remove(id);
@@ -172,7 +178,7 @@ class _ViewRestaurantProductScreenState extends State<ViewRestaurantProductScree
                           });
                           print("extras:: $extrasTest");
                         },
-                        value: extrasTest.contains(widget.extra[index].id!),
+                        value: extrasTest.contains(widget.extras[index].id!),
                         // value: true,
                       );
                     },

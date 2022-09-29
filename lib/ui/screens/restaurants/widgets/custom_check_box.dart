@@ -5,6 +5,7 @@ class CustomCheckBox extends StatelessWidget {
   final String title;
   final double price;
   final bool value;
+  final Widget trailing;
   final Function(bool?) onChanged;
   final OutlinedBorder? shape;
 
@@ -15,6 +16,7 @@ class CustomCheckBox extends StatelessWidget {
     required this.onChanged,
     required this.value,
     required this.shape,
+    required this.trailing,
   }) : super(key: key);
 
   @override
@@ -38,7 +40,7 @@ class CustomCheckBox extends StatelessWidget {
           ),
         ),
       ),
-      trailing: Text('$price'),
+      trailing: trailing,
     );
   }
 }

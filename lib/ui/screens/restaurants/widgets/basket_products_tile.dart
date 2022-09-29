@@ -11,7 +11,6 @@ import 'package:takkeh/utils/base/icons.dart';
 class BasketProductTile extends StatefulWidget {
   final String imageUrl, title, subTitle, description, note;
   final double initialPrice;
-  final double extraPrice;
   final int index;
   final List<Widget> extrasWidget;
   final List<Extra> extrasList;
@@ -33,7 +32,6 @@ class BasketProductTile extends StatefulWidget {
     required this.productId,
     required this.restaurantId,
     required this.extrasList,
-    required this.extraPrice,
   }) : super(key: key);
 
   @override
@@ -49,7 +47,7 @@ class BasketProductTileState extends State<BasketProductTile> {
     if (status == 'add') {
       setState(() {
         newQuantity++;
-        newPrice = originalPrice * newQuantity + widget.extraPrice;
+        newPrice = originalPrice * newQuantity;
         UserOrderCtrl.find.calculateTotalQuantity(1, isAdd: true);
         UserOrderCtrl.find.calculateTotalPrice(originalPrice, isAdd: true);
         UserOrderCtrl.find.addProduct(

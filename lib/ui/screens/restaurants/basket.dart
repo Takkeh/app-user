@@ -104,7 +104,6 @@ class _BasketScreenState extends State<BasketScreen> {
                             productId: data.productId!,
                             restaurantId: widget.restaurantId,
                             extrasList: data.extras!,
-                            extraPrice: data.extras![0].price!.toDouble(),
                           ),
                         );
                       },
