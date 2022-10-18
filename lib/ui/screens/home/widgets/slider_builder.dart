@@ -25,7 +25,7 @@ class SliderBuilder extends StatelessWidget {
               return AspectRatio(
                 aspectRatio: 2.5,
                 child: ListView.separated(
-                  padding: const EdgeInsets.symmetric(horizontal: 20),
+                  // padding: const EdgeInsets.symmetric(horizontal: 20),
                   separatorBuilder: (context, index) => const SizedBox(width: 15),
                   itemCount: snapshot.data!.sliders!.length,
                   scrollDirection: Axis.horizontal,
