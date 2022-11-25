@@ -17,8 +17,10 @@ class ChangePasswordScreen extends StatefulWidget {
 
 class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
   late TextEditingController currentPassCtrl, newPassCtrl, confirmNewPassCtrl;
-  final emailRegExp = RegExp(r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+");
-  final passwordRegExp = RegExp(r'^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[!@=#\$&*~]).{8,}$');
+  final emailRegExp = RegExp(
+      r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+");
+  final passwordRegExp =
+      RegExp(r'^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[!@=#\$&*~]).{8,}$');
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 
   @override
@@ -59,7 +61,9 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
                     controller.changeCurrentPasswordObscure();
                   },
                   child: SvgPicture.asset(
-                    controller.isCurrentPasswordObscure.value ? MyIcons.eyeCrossed : MyIcons.eye,
+                    controller.isCurrentPasswordObscure.value
+                        ? MyIcons.eyeCrossed
+                        : MyIcons.eye,
                   ),
                 ),
                 textDirection: TextDirection.ltr,
@@ -91,7 +95,9 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
                       controller.changeNewPasswordObscure();
                     },
                     child: SvgPicture.asset(
-                      controller.isNewPasswordObscure.value ? MyIcons.eyeCrossed : MyIcons.eye,
+                      controller.isNewPasswordObscure.value
+                          ? MyIcons.eyeCrossed
+                          : MyIcons.eye,
                     ),
                   ),
                   textDirection: TextDirection.ltr,
@@ -99,7 +105,8 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
                     if (value!.isEmpty) {
                       return TranslationService.getString('enter_password_key');
                     } else if (!passwordRegExp.hasMatch(value)) {
-                      return TranslationService.getString('invalid_password_key');
+                      return TranslationService.getString(
+                          'invalid_password_key');
                     }
                     return null;
                   },
@@ -122,7 +129,9 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
                     controller.changeConfirmNewPasswordObscure();
                   },
                   child: SvgPicture.asset(
-                    controller.isConfirmNewPasswordObscure.value ? MyIcons.eyeCrossed : MyIcons.eye,
+                    controller.isConfirmNewPasswordObscure.value
+                        ? MyIcons.eyeCrossed
+                        : MyIcons.eye,
                   ),
                 ),
                 textDirection: TextDirection.ltr,
@@ -130,7 +139,8 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
                   if (value!.isEmpty) {
                     return TranslationService.getString('confirm_password_key');
                   } else if (value != newPassCtrl.text) {
-                    return TranslationService.getString('password_does_not_match_key');
+                    return TranslationService.getString(
+                        'password_does_not_match_key');
                   }
                   return null;
                 },
@@ -142,8 +152,14 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
             child: CustomElevatedButton(
               title: TranslationService.getString('save_key'),
               onPressed: () {
+                ChangePassCtrl.find.updatePassword(
+                    oldPassword: currentPassCtrl.text,
+                    newPassword: newPassCtrl.text,
+                    newPasswordConfirm: confirmNewPassCtrl.text,
+                    context: context);
                 if (_formKey.currentState!.validate()) {
                   FocusManager.instance.primaryFocus?.unfocus();
+
                 }
               },
             ),

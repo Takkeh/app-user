@@ -25,4 +25,8 @@ class ApiUrl {
   static const String makeOrder = "/api/v1/make-order";
   static const String updateOrder = "/api/v1/update-order";
   static const String restaurantsSearch = "/api/v1/restaurants/search/";
+
+  //profile
+  static const String updateProfile = "/api/v1/update-profile";
+  static const String updatePassword = "/api/v1/update-password";
 }
