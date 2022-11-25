@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:takkeh/controller/restaurants/most_popular.dart';
+import 'package:takkeh/controller/restaurants/most_popular_products.dart';
 import 'package:takkeh/controller/restaurants/products_filter.dart';
 import 'package:takkeh/ui/screens/restaurants/widgets/most_popular_categories.dart';
 import 'package:takkeh/ui/widgets/back_leading_widget.dart';
@@ -23,7 +23,7 @@ class _ScrollTestState extends State<ScrollTest> {
     // TODO: implement initState
     super.initState();
     Get.lazyPut(() => ProductsFilterCtrl());
-    Get.lazyPut(() => MostPopularFilterCtrl());
+    Get.lazyPut(() => MostPopularProductsCtrl());
     scrollController = ScrollController();
     scrollController.addListener(() {
       print("aosifhasfio");

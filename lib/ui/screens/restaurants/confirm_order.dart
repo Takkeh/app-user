@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
-import 'package:takkeh/controller/restaurants/make_order.dart';
 import 'package:takkeh/controller/restaurants/update_order_ctrl.dart';
 import 'package:takkeh/controller/user_order_ctrl.dart';
 import 'package:takkeh/translation/service.dart';
@@ -130,9 +129,9 @@ class _ConfirmOrderScreenState extends State<ConfirmOrderScreen> {
                     fontWeight: FontWeight.w500,
                   ),
                 ),
-                OrderDetailsWidget(
-                  productName: MakeOrderCtrl.model!.data!.products!,
-                ),
+                // OrderDetailsWidget(
+                //   productName: MakeOrderCtrl.model!.data!.products!,
+                // ),
               ],
             ),
           ),
@@ -155,8 +154,8 @@ class OrderDetailsWidget extends StatelessWidget {
     return GetBuilder<UserOrderCtrl>(builder: (controller) {
       return Column(
         children: [
-          ...controller.userOrder.map((element) {
-            final index = controller.userOrder.indexOf(element);
+          ...controller.orderList.map((element) {
+            final index = controller.orderList.indexOf(element);
             return Row(
               children: [
                 Text("x${element['quantity']}", style: const TextStyle(fontSize: 16, fontWeight: FontWeight.w500)),

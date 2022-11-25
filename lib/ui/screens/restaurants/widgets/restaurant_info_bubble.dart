@@ -6,16 +6,17 @@ import 'package:takkeh/ui/screens/restaurants/restaurant_info.dart';
 import 'package:takkeh/utils/api_url.dart';
 import 'package:takkeh/utils/base/colors.dart';
 import 'package:takkeh/utils/base/icons.dart';
+import 'package:takkeh/utils/constants.dart';
 
 class RestaurantInfoBubble extends StatelessWidget {
-  final String title, logo, time, deliveryStatus, review, cover;
+  final String title, logo, time, cost, review, cover;
 
   const RestaurantInfoBubble({
     Key? key,
     required this.title,
     required this.logo,
     required this.time,
-    required this.deliveryStatus,
+    required this.cost,
     required this.review,
     required this.cover,
   }) : super(key: key);
@@ -102,8 +103,8 @@ class RestaurantInfoBubble extends StatelessWidget {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  getWidget('30 - 40 دقيقة'),
-                  getWidget('توصيل مجاني'),
+                  getWidget('$time $kMinute'),
+                  getWidget(cost),
                 ],
               ),
             ),
@@ -115,9 +116,9 @@ class RestaurantInfoBubble extends StatelessWidget {
               children: [
                 SvgPicture.asset(MyIcons.clock),
                 const SizedBox(width: 5),
-                const Text(
-                  'اشي فاخر',
-                  style: TextStyle(
+                Text(
+                  review,
+                  style: const TextStyle(
                     fontSize: 12,
                   ),
                 ),

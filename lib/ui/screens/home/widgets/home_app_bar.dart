@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
-import 'package:takkeh/controller/user_location.dart';
+import 'package:takkeh/controller/user_location_ctrl.dart';
 import 'package:takkeh/ui/base/notifications.dart';
-import 'package:takkeh/ui/screens/restaurants/widgets/custom_circular_progress_indicator.dart';
 import 'package:takkeh/utils/base/icons.dart';
 
 class HomeAppBar extends StatelessWidget implements PreferredSizeWidget {
@@ -29,24 +28,24 @@ class HomeAppBar extends StatelessWidget implements PreferredSizeWidget {
           ),
         ),
       ),
-      title: Row(
-        crossAxisAlignment: CrossAxisAlignment.baseline,
-        textBaseline: TextBaseline.ideographic,
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          SvgPicture.asset(MyIcons.marker),
-          const SizedBox(width: 5),
-          GetBuilder<UserLocationCtrl>(
-            builder: (controller) {
-              if (controller.locality.value == null || controller.subLocality.value == null) {
-                return const CustomCircularProgressIndicator(color: Colors.white);
-              }
-              return Text(
+      title: GetBuilder<UserLocationCtrl>(
+        builder: (controller) {
+          if (controller.locality.value.isEmpty && controller.subLocality.value.isEmpty) {
+            return const SizedBox.shrink();
+          }
+          return Row(
+            crossAxisAlignment: CrossAxisAlignment.baseline,
+            textBaseline: TextBaseline.ideographic,
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              SvgPicture.asset(MyIcons.marker),
+              const SizedBox(width: 5),
+              Text(
                 "${controller.locality.value}, ${controller.subLocality.value}",
-              );
-            },
-          ),
-        ],
+              ),
+            ],
+          );
+        },
       ),
       actions: [
         Padding(

@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:takkeh/controller/view_product_ctrl.dart';
 import 'package:takkeh/ui/screens/restaurants/widgets/quantity_button.dart';
 import 'package:takkeh/utils/base/colors.dart';
 
@@ -15,78 +17,61 @@ class ProductCounter extends StatefulWidget {
 }
 
 class ProductCounterState extends State<ProductCounter> {
-  int counter = 1;
-  late double price;
-
-  void toggle(String status) {
-    if (status == 'add') {
-      setState(() {
-        counter++;
-        price = widget.price * counter;
-      });
-    } else {
-      if (counter == 1) return;
-      setState(() {
-        counter--;
-        price = widget.price * counter;
-      });
-    }
-  }
-
   @override
   void initState() {
     super.initState();
-    price = widget.price;
+    ViewProductCtrl.find.finalPrice.value = widget.price;
   }
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(vertical: 12.0),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: [
-          AnimatedSwitcher(
-            duration: const Duration(milliseconds: 300),
-            transitionBuilder: (Widget child, Animation<double> animation) {
-              return ScaleTransition(scale: animation, child: child);
-            },
-            child: Text(
-              key: ValueKey(counter),
-              price.toString(),
-              style: const TextStyle(
-                fontSize: 20,
-                color: MyColors.redPrimary,
-                fontWeight: FontWeight.bold,
-              ),
-            ),
-          ),
-          Row(
-            children: [
-              QuantityButton(
-                icon: Icons.add,
-                onPressed: () {
-                  toggle('add');
-                },
-                color: MyColors.redPrimary,
-              ),
-              Text(
-                counter.toString(),
+    return GetBuilder<ViewProductCtrl>(builder: (controller) {
+      return Padding(
+        padding: const EdgeInsets.symmetric(vertical: 12.0),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            AnimatedSwitcher(
+              duration: const Duration(milliseconds: 300),
+              transitionBuilder: (Widget child, Animation<double> animation) {
+                return ScaleTransition(scale: animation, child: child);
+              },
+              child: Text(
+                controller.finalPrice.value.toString(),
                 style: const TextStyle(
-                  fontSize: 17,
+                  fontSize: 20,
+                  color: MyColors.redPrimary,
+                  fontWeight: FontWeight.bold,
                 ),
               ),
-              QuantityButton(
-                icon: Icons.remove,
-                onPressed: () {
-                  toggle('remove');
-                },
-                color: counter == 1 ? MyColors.redPrimary.withOpacity(0.60) : MyColors.redPrimary,
-              ),
-            ],
-          )
-        ],
-      ),
-    );
+            ),
+            Row(
+              children: [
+                QuantityButton(
+                  icon: Icons.add,
+                  onPressed: () {
+                    controller.calculateQuantity('add');
+                  },
+                  color: MyColors.redPrimary,
+                ),
+                Text(
+                  '${controller.quantity.value}',
+                  style: const TextStyle(
+                    fontSize: 17,
+                  ),
+                ),
+                QuantityButton(
+                  icon: Icons.remove,
+                  onPressed: () {
+                    controller.calculateQuantity('remove');
+                  },
+                  color: controller.quantity.value == 1 ? MyColors.redPrimary.withOpacity(0.60) : MyColors.redPrimary,
+                ),
+              ],
+            )
+          ],
+        ),
+      );
+    });
   }
 }

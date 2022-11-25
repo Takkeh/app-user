@@ -5,6 +5,8 @@ import 'package:takkeh/binding/restaurants/restaurants_home.dart';
 import 'package:takkeh/controller/home/category.dart';
 import 'package:takkeh/controller/home/slider.dart';
 import 'package:takkeh/controller/nav_bar_ctrl.dart';
+import 'package:takkeh/controller/restaurants/make_order.dart';
+import 'package:takkeh/controller/user_location_ctrl.dart';
 import 'package:takkeh/controller/user_order_ctrl.dart';
 import 'package:takkeh/model/home/categories_model.dart';
 import 'package:takkeh/translation/service.dart';
@@ -41,6 +43,9 @@ class _HomeScreenState extends State<HomeScreen> {
     Get.put(SliderController());
     Get.put(CategoriesController());
     Get.put(UserOrderCtrl(), permanent: true);
+    Get.put(UserLocationCtrl(), permanent: true);
+    //TODO: change location of this
+    Get.put(MakeOrderCtrl(), permanent: true);
     super.initState();
   }
 

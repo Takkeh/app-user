@@ -1,93 +1,61 @@
 // To parse this JSON data, do
 //
-//     final restaurantsModel = restaurantsModelFromJson(jsonString);
+//     final mostPopularProductsModel = mostPopularProductsModelFromJson(jsonString);
 
 import 'dart:convert';
 
-MostPopularModel restaurantsModelFromJson(String str) => MostPopularModel.fromJson(json.decode(str));
+MostPopularProductsModel mostPopularProductsModelFromJson(String str) => MostPopularProductsModel.fromJson(json.decode(str));
 
-String restaurantsModelToJson(MostPopularModel data) => json.encode(data.toJson());
+String mostPopularProductsModelToJson(MostPopularProductsModel data) => json.encode(data.toJson());
 
-class MostPopularModel {
-  MostPopularModel({
-    this.products,
-    this.total,
-    this.skip,
-    this.limit,
+class MostPopularProductsModel {
+  MostPopularProductsModel({
+    this.status,
+    this.code,
+    this.msg,
+    this.categorys,
   });
 
-  List<MostPopular>? products;
-  int? total;
-  String? skip;
-  int? limit;
+  bool? status;
+  int? code;
+  String? msg;
+  List<Category>? categorys;
 
-  factory MostPopularModel.fromJson(Map<String, dynamic> json) => MostPopularModel(
-        products: List<MostPopular>.from(json["products"].map((x) => MostPopular.fromJson(x))),
-        total: json["total"],
-        skip: json["skip"],
-        limit: json["limit"],
+  factory MostPopularProductsModel.fromJson(Map<String, dynamic> json) => MostPopularProductsModel(
+        status: json["status"],
+        code: json["code"],
+        msg: json["msg"],
+        categorys: List<Category>.from(json["Categorys"].map((x) => Category.fromJson(x))),
       );
 
   Map<String, dynamic> toJson() => {
-        "products": List<dynamic>.from(products!.map((x) => x.toJson())),
-        "total": total,
-        "skip": skip,
-        "limit": limit,
+        "status": status,
+        "code": code,
+        "msg": msg,
+        "Categorys": List<dynamic>.from(categorys!.map((x) => x.toJson())),
       };
 }
 
-class MostPopular {
-  MostPopular({
+class Category {
+  Category({
     this.id,
-    this.title,
-    this.price,
-    this.thumbnail,
-    this.rating,
-    this.description,
-    this.brand,
-    this.category,
-    this.images,
-    this.stock,
-    this.discountPercentage,
+    this.name,
+    this.image,
   });
 
   int? id;
-  String? title;
-  int? price;
-  String? thumbnail;
-  double? rating;
-  String? description;
-  String? brand;
-  String? category;
-  List<String>? images;
-  int? stock;
-  double? discountPercentage;
+  String? name;
+  String? image;
 
-  factory MostPopular.fromJson(Map<String, dynamic> json) => MostPopular(
+  factory Category.fromJson(Map<String, dynamic> json) => Category(
         id: json["id"],
-        title: json["title"],
-        price: json["price"],
-        thumbnail: json["thumbnail"],
-        rating: json["rating"].toDouble(),
-        description: json["description"],
-        brand: json["brand"],
-        category: json["category"],
-        images: List<String>.from(json["images"].map((x) => x)),
-        stock: json["stock"],
-        discountPercentage: json["discountPercentage"].toDouble(),
+        name: json["name"],
+        image: json["image"],
       );
 
   Map<String, dynamic> toJson() => {
         "id": id,
-        "title": title,
-        "price": price,
-        "thumbnail": thumbnail,
-        "rating": rating,
-        "description": description,
-        "brand": brand,
-        "category": category,
-        "images": List<dynamic>.from(images!.map((x) => x)),
-        "stock": stock,
-        "discountPercentage": discountPercentage,
+        "name": name,
+        "image": image,
       };
 }

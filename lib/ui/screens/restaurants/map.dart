@@ -5,7 +5,7 @@ import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:takkeh/controller/map.dart';
-import 'package:takkeh/controller/user_location.dart';
+import 'package:takkeh/controller/user_location_ctrl.dart';
 import 'package:takkeh/ui/widgets/custom_elevated_button.dart';
 import 'package:takkeh/ui/widgets/custom_marker.dart';
 import 'package:takkeh/ui/widgets/custom_text_field.dart';

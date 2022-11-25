@@ -3,7 +3,6 @@ import 'package:get/get.dart';
 import 'package:takkeh/controller/restaurants/make_order.dart';
 import 'package:takkeh/controller/user_order_ctrl.dart';
 import 'package:takkeh/translation/service.dart';
-import 'package:takkeh/ui/screens/restaurants/basket.dart';
 import 'package:takkeh/utils/app_constants.dart';
 import 'package:takkeh/utils/base/colors.dart';
 
@@ -22,7 +21,7 @@ class ProductsFABButton extends StatelessWidget {
       child: GetBuilder<UserOrderCtrl>(builder: (controller) {
         return ElevatedButton(
           onPressed: () {
-            if (controller.userOrder.isEmpty) {
+            if (controller.orderList.isEmpty) {
               Get.closeCurrentSnackbar();
               Get.snackbar(
                 '',
@@ -33,17 +32,17 @@ class ProductsFABButton extends StatelessWidget {
               );
               return;
             }
-            MakeOrderCtrl.fetchMakeOrderData(
+            MakeOrderCtrl.find.fetchData(
               context: context,
               restaurantId: restaurantId,
               generalNote: '',
-              route: BasketScreen(
-                restaurantId: restaurantId,
-              ),
+              // route: BasketScreen(
+              //   restaurantId: restaurantId,
+              // ),
             );
           },
           style: ElevatedButton.styleFrom(
-            primary: controller.userOrder.isEmpty ? MyColors.redF98 : MyColors.redPrimary,
+            primary: controller.orderList.isEmpty ? MyColors.redF98 : MyColors.redPrimary,
             shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(11)),
             fixedSize: const Size(double.infinity, 50),
             minimumSize: const Size(double.infinity, 50),
@@ -56,7 +55,7 @@ class ProductsFABButton extends StatelessWidget {
                 width: 35,
                 alignment: Alignment.center,
                 decoration: BoxDecoration(
-                  color: controller.userOrder.isEmpty ? MyColors.redPrimary : MyColors.redF98,
+                  color: controller.orderList.isEmpty ? MyColors.redPrimary : MyColors.redF98,
                   borderRadius: BorderRadius.circular(11),
                 ),
                 child: GetBuilder<UserOrderCtrl>(

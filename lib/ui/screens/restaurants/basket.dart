@@ -4,7 +4,6 @@ import 'package:takkeh/controller/restaurants/make_order.dart';
 import 'package:takkeh/controller/user_order_ctrl.dart';
 import 'package:takkeh/translation/service.dart';
 import 'package:takkeh/ui/screens/registration/widgets/custom_prefix_icon.dart';
-import 'package:takkeh/ui/screens/restaurants/confirm_order.dart';
 import 'package:takkeh/ui/screens/restaurants/widgets/basket_products_tile.dart';
 import 'package:takkeh/ui/screens/restaurants/widgets/custom_fab_button.dart';
 import 'package:takkeh/ui/screens/restaurants/widgets/custom_suffix_icon.dart';
@@ -17,10 +16,12 @@ import 'package:takkeh/utils/base/icons.dart';
 
 class BasketScreen extends StatefulWidget {
   final int restaurantId;
+  final int orderId;
 
   const BasketScreen({
     Key? key,
     required this.restaurantId,
+    required this.orderId,
   }) : super(key: key);
 
   @override
@@ -56,14 +57,14 @@ class _BasketScreenState extends State<BasketScreen> {
             ? CustomFABButton(
                 title: TranslationService.getString('confirm_order_key'),
                 onPressed: () {
-                  MakeOrderCtrl.fetchMakeOrderData(
-                    context: context,
-                    restaurantId: widget.restaurantId,
-                    generalNote: noteCtrl.text,
-                    route: ConfirmOrderScreen(
-                      orderId: MakeOrderCtrl.orderId!,
-                    ),
-                  );
+                  // MakeOrderCtrl.find.fetchData(
+                  //   context: context,
+                  //   restaurantId: widget.restaurantId,
+                  //   generalNote: noteCtrl.text,
+                  //   // route: ConfirmOrderScreen(
+                  //   //   orderId: MakeOrderCtrl.orderId!,
+                  //   // ),
+                  // );
                 },
               )
             : null,
@@ -81,10 +82,10 @@ class _BasketScreenState extends State<BasketScreen> {
                   padding: const EdgeInsets.only(bottom: 100, top: 10),
                   children: [
                     ...List.generate(
-                      MakeOrderCtrl.model!.data!.products!.length,
+                      MakeOrderCtrl.find.model!.data!.products!.length,
                       (index) {
                         keys.add(GlobalKey<BasketProductTileState>());
-                        final data = MakeOrderCtrl.model!.data!.products![index];
+                        final data = MakeOrderCtrl.find.model!.data!.products![index];
                         return Padding(
                           padding: const EdgeInsets.symmetric(horizontal: 30),
                           child: BasketProductTile(
@@ -97,13 +98,12 @@ class _BasketScreenState extends State<BasketScreen> {
                             description: data.productName!,
                             initialPrice: data.price!.toDouble(),
                             note: data.note!,
-                            size: data.sizeId!,
-                            extrasWidget: data.extras!.map((element) {
+                            extrasWidget: [].map((element) {
                               return Text('+ ${element.name!}');
                             }).toList(),
                             productId: data.productId!,
                             restaurantId: widget.restaurantId,
-                            extrasList: data.extras!,
+                            extrasList: [],
                           ),
                         );
                       },
@@ -194,12 +194,12 @@ class _BasketScreenState extends State<BasketScreen> {
                         ),
                       ),
                     ),
-                    Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 30.0),
-                      child: OrderDetailsWidget(
-                        productName: MakeOrderCtrl.model!.data!.products!,
-                      ),
-                    ),
+                    // Padding(
+                    //   padding: const EdgeInsets.symmetric(horizontal: 30.0),
+                    //   child: OrderDetailsWidget(
+                    //     productName: MakeOrderCtrl.model!.data!.products!,
+                    //   ),
+                    // ),
                   ],
                 );
               },

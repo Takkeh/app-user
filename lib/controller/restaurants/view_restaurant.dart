@@ -4,22 +4,28 @@ import 'package:takkeh/model/restaurants/view_restaurant.dart';
 import 'package:takkeh/network/restaurants/filter_category.dart';
 
 class ViewRestaurantCtrl extends GetxController {
-  final int id;
-  ViewRestaurantCtrl({required this.id});
+  final int restaurantId;
+  ViewRestaurantCtrl({required this.restaurantId});
 
   static ViewRestaurantCtrl get find => Get.find();
 
   ViewRestaurantModel? viewRestaurantModel;
-  late ScrollController scrollCtrl;
-  final viewRestaurants = <ViewRestaurants>[].obs;
-  final isLoading = false.obs;
-  final loadMore = false.obs;
-  final allLoaded = false.obs;
-  int limit = 1;
+  late Future<ViewRestaurantModel?> initialize;
 
+  final selectedIndex = 0.obs;
+  final restaurantProducts = <RestaurantProducts>[].obs;
   List<GlobalKey> itemKeys = [];
 
+  Future<ViewRestaurantModel?> fetchCategoriesData(int restaurantId) async {
+    viewRestaurantModel = await ViewRestaurantApi.data(restaurantId);
+    restaurantProducts.addAll(viewRestaurantModel!.data!);
+    update();
+    return viewRestaurantModel;
+  }
+
   Future scrollToItem(index) async {
+    selectedIndex.value = index;
+    update();
     await Scrollable.ensureVisible(
       itemKeys[index].currentContext!,
       alignment: 0.02,
@@ -28,62 +34,9 @@ class ViewRestaurantCtrl extends GetxController {
     );
   }
 
-  void detectPosition(int index) {
-    RenderBox box = itemKeys[index].currentContext!.findRenderObject() as RenderBox;
-    Offset position = box.localToGlobal(Offset.zero);
-    print("value:: $position - ${itemKeys.length}");
-  }
-
-  void toggleLoading(String loadingCase, bool status) {
-    switch (loadingCase) {
-      case "load_more":
-        {
-          loadMore.value = status;
-        }
-        break;
-      default:
-        {
-          isLoading.value = status;
-        }
-        break;
-    }
-    update();
-  }
-
-  Future<ViewRestaurantModel?> fetchViewRestaurantData(int page, String loadingCase, int id) async {
-    toggleLoading(loadingCase, true);
-    viewRestaurantModel = await ViewRestaurantApi.data(page, id);
-    if (viewRestaurantModel == null) {
-      toggleLoading(loadingCase, false);
-      return null;
-    }
-    if (viewRestaurantModel!.data!.products!.isNotEmpty) {
-      viewRestaurants.addAll(viewRestaurantModel!.data!.products!);
-      print("length::::: ${viewRestaurantModel!.data!.products!}");
-      limit++;
-    } else {
-      allLoaded.value = true;
-    }
-    update();
-    toggleLoading(loadingCase, false);
-    return viewRestaurantModel;
-  }
-
   @override
   void onInit() {
-    fetchViewRestaurantData(1, "default", id);
-
-    // itemKeys = List.generate(filterCategory.length, (index) => GlobalKey());
-    scrollCtrl = ScrollController()
-      ..addListener(() {
-        // detectPosition(1);
-        print("position:: ${scrollCtrl.position.atEdge}");
-        if (scrollCtrl.offset == scrollCtrl.position.maxScrollExtent) {
-          if (!allLoaded.value && !loadMore.value) {
-            fetchViewRestaurantData(limit, "load_more", id);
-          }
-        }
-      });
+    initialize = fetchCategoriesData(restaurantId);
     super.onInit();
   }
 }

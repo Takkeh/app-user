@@ -34,4 +34,7 @@ class MyColors {
   static const whiteDFE = Color(0xFFFDFDFE);
 
   static const facebook = Color(0xFF4267B2);
+
+  static const Color grey = Color.fromARGB(255, 162, 162, 162);
+  static const Color whiteFA = Color(0xFFF8FDFA);
 }

@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:takkeh/binding/restaurants/map.dart';
-import 'package:takkeh/controller/user_location.dart';
+import 'package:takkeh/controller/user_location_ctrl.dart';
 import 'package:takkeh/ui/screens/restaurants/map.dart';
 import 'package:takkeh/ui/screens/restaurants/widgets/delivery_info_box.dart';
 import 'package:takkeh/ui/widgets/custom_marker.dart';
@@ -74,7 +74,7 @@ class _MapBubbleBuilderState extends State<MapBubbleBuilder> {
             Visibility(
               visible: widget.visible,
               child: DeliveryInfoBox(
-                address: "${controller.subLocality.value!}, ${controller.street.value!}",
+                address: "${controller.subLocality.value}, ${controller.street.value}",
               ),
             ),
           ],

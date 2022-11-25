@@ -4,26 +4,27 @@ import 'dart:developer';
 import 'package:http/http.dart' as http;
 import 'package:takkeh/model/restaurants/make_order_model.dart';
 import 'package:takkeh/utils/api_url.dart';
+import 'package:takkeh/utils/shared_prefrences.dart';
 
 class MakeOrderApi {
   static Future<MakeOrderModel?> data({
-    required List userOrder,
-    required double total,
+    required List<Map<String, dynamic>> userOrder,
     required String generalNote,
-    required int restaurantId,
+    required double totalPrice,
+    required int restaurantsId,
   }) async {
     try {
       String url = '${ApiUrl.mainUrl}${ApiUrl.makeOrder}';
       Uri uri = Uri.parse(url);
       var headers = {
         'Content-Type': 'application/json',
+        'Authorization': MySharedPreferences.accessToken,
       };
       var body = jsonEncode({
-        //TODO: from shared pref
-        "user_id": 1,
-        "restaurant_id": restaurantId,
+        "user_id": MySharedPreferences.userId,
         "note": generalNote,
-        "total": total,
+        "total": totalPrice,
+        "restaurant_id": restaurantsId,
         "products": userOrder,
       });
       log("Response:: MakeOrderResponse\nUrl:: $url\nheaders:: $headers\nbody:: $body");

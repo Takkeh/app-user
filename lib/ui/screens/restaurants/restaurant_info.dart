@@ -1,14 +1,14 @@
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:get/get.dart';
 import 'package:takkeh/translation/service.dart';
 import 'package:takkeh/ui/screens/restaurants/widgets/custom_bubble_image.dart';
 import 'package:takkeh/ui/screens/restaurants/widgets/gradient_colors_box.dart';
 import 'package:takkeh/ui/screens/restaurants/widgets/restaurants_info_builder.dart';
 import 'package:takkeh/ui/screens/restaurants/widgets/restaurants_reviews_builder.dart';
 import 'package:takkeh/ui/widgets/base_switch_slider.dart';
+import 'package:takkeh/ui/widgets/custom_network_image.dart';
 import 'package:takkeh/ui/widgets/transparent_app_bar.dart';
-import 'package:takkeh/utils/api_url.dart';
 import 'package:takkeh/utils/base/colors.dart';
 import 'package:takkeh/utils/base/icons.dart';
 import 'package:takkeh/utils/shared_prefrences.dart';
@@ -46,6 +46,7 @@ class _RestaurantInfoScreenState extends State<RestaurantInfoScreen> {
 
   @override
   Widget build(BuildContext context) {
+    var distance = (Get.width - 60.0) / 4;
     return Scaffold(
       extendBodyBehindAppBar: true,
       appBar: TransparentAppBar(title: widget.title),
@@ -60,47 +61,51 @@ class _RestaurantInfoScreenState extends State<RestaurantInfoScreen> {
               Column(
                 children: [
                   Stack(
+                    clipBehavior: Clip.none,
                     alignment: Alignment.bottomCenter,
                     children: [
                       CustomBubbleImage(
                         imageUrl: widget.imageUrl,
                       ),
                       Positioned(
-                        bottom: 40,
-                        child: CircleAvatar(
-                          backgroundColor: MyColors.redPrimary,
-                          radius: 50,
-                          backgroundImage: CachedNetworkImageProvider('${ApiUrl.mainUrl}/${widget.logo}'),
+                        bottom: 15,
+                        child: CustomNetworkImage(
+                          radius: 100,
+                          height: 100,
+                          width: 100,
+                          url: widget.logo,
                         ),
                       ),
                       Positioned(
-                        bottom: 0,
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            CircleAvatar(
-                              backgroundColor: Colors.white,
-                              radius: 18,
-                              child: SvgPicture.asset(MyIcons.phoneGreen),
-                            ),
-                            const SizedBox(width: 100),
-                            CircleAvatar(
-                              backgroundColor: Colors.white,
-                              radius: 18,
-                              child: SvgPicture.asset(MyIcons.emojiLove),
-                            ),
-                          ],
+                        bottom: -10,
+                        child: Container(
+                          padding: EdgeInsets.symmetric(horizontal: distance + 9),
+                          width: Get.width,
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              CircleAvatar(
+                                backgroundColor: Colors.white,
+                                radius: 18,
+                                child: SvgPicture.asset(MyIcons.phoneGreen),
+                              ),
+                              CircleAvatar(
+                                backgroundColor: Colors.white,
+                                radius: 18,
+                                child: SvgPicture.asset(MyIcons.emojiLove),
+                              ),
+                            ],
+                          ),
                         ),
                       ),
                     ],
                   ),
                   BaseSwitchSlider(
-                    margin: const EdgeInsets.only(top: 20, bottom: 20, left: 30, right: 30),
+                    margin: const EdgeInsets.only(top: 30, bottom: 20, left: 30, right: 30),
                     title1: TranslationService.getString('information_key'),
                     title2: TranslationService.getString('reviews_key'),
                     onTap1: () {
                       setState(() {
-                        FocusManager.instance.primaryFocus?.unfocus();
                         isInformation = true;
                         pageController.animateToPage(
                           0,
@@ -110,7 +115,6 @@ class _RestaurantInfoScreenState extends State<RestaurantInfoScreen> {
                       });
                     },
                     onTap2: () {
-                      FocusManager.instance.primaryFocus?.unfocus();
                       setState(() {
                         isInformation = false;
                         pageController.animateToPage(

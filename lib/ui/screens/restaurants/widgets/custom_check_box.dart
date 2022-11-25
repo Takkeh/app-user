@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:takkeh/utils/app_constants.dart';
 import 'package:takkeh/utils/base/colors.dart';
 
 class CustomCheckBox extends StatelessWidget {
   final String title;
   final double price;
   final bool value;
-  final Widget trailing;
   final Function(bool?) onChanged;
   final OutlinedBorder? shape;
 
@@ -16,7 +16,6 @@ class CustomCheckBox extends StatelessWidget {
     required this.onChanged,
     required this.value,
     required this.shape,
-    required this.trailing,
   }) : super(key: key);
 
   @override
@@ -40,7 +39,7 @@ class CustomCheckBox extends StatelessWidget {
           ),
         ),
       ),
-      trailing: trailing,
+      trailing: price != 0.0 ? Text('+ $price $kPCurrency') : null,
     );
   }
 }

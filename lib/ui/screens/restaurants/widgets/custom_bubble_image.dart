@@ -17,7 +17,7 @@ class CustomBubbleImage extends StatelessWidget {
       child: CustomNetworkImage(
         url: imageUrl,
         radius: 0,
-        height: 250,
+        height: 240,
       ),
     );
   }

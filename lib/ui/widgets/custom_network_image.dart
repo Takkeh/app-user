@@ -9,6 +9,7 @@ class CustomNetworkImage extends StatelessWidget {
   final double radius;
   final double? width;
   final double? height;
+  final EdgeInsetsGeometry? margin;
 
   const CustomNetworkImage({
     Key? key,
@@ -16,6 +17,7 @@ class CustomNetworkImage extends StatelessWidget {
     required this.radius,
     this.width,
     this.height,
+    this.margin,
   }) : super(key: key);
 
   @override
@@ -25,6 +27,7 @@ class CustomNetworkImage extends StatelessWidget {
       imageBuilder: (context, imageProvider) => Container(
         width: width,
         height: height,
+        margin: margin,
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(radius),
           image: DecorationImage(
@@ -36,6 +39,7 @@ class CustomNetworkImage extends StatelessWidget {
       placeholder: (context, url) => Container(
         width: width,
         height: height,
+        margin: margin,
         decoration: BoxDecoration(
           color: MyColors.greyED0,
           borderRadius: BorderRadius.circular(radius),
@@ -49,6 +53,7 @@ class CustomNetworkImage extends StatelessWidget {
       errorWidget: (context, url, error) => Container(
         width: width,
         height: height,
+        margin: margin,
         // alignment: Alignment.center,
         decoration: BoxDecoration(
           color: MyColors.greyED0,

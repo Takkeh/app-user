@@ -39,135 +39,151 @@ class MakeOrderModel {
 class Data {
   Data({
     this.id,
-    this.userId,
-    this.driverId,
-    this.userName,
-    this.driverName,
-    this.restaurantId,
-    this.restaurantName,
-    this.note,
     this.status,
-    this.total,
+    this.paymentMethod,
+    this.note,
+    this.type,
     this.lat,
     this.long,
+    this.total,
+    this.tax,
+    this.deliveryFee,
+    this.discount,
+    this.percentage,
+    this.number,
+    this.orderValue,
     this.products,
+    this.review,
   });
 
   int? id;
-  int? userId;
-  int? driverId;
-  String? userName;
-  String? driverName;
-  int? restaurantId;
-  String? restaurantName;
-  String? note;
   String? status;
-  int? total;
-  dynamic lat;
-  dynamic long;
-  List<Product>? products;
+  String? paymentMethod;
+  String? note;
+  String? type;
+  String? lat;
+  String? long;
+  String? total;
+  String? tax;
+  String? deliveryFee;
+  String? discount;
+  String? percentage;
+  int? number;
+  String? orderValue;
+  List<UserProducts>? products;
+  String? review;
 
   factory Data.fromJson(Map<String, dynamic> json) => Data(
         id: json["id"],
-        userId: json["user_id"],
-        driverId: json["driver_id"],
-        userName: json["user_name"],
-        driverName: json["driver_name"],
-        restaurantId: json["restaurant_id"],
-        restaurantName: json["restaurant_name"],
-        note: json["note"],
         status: json["status"],
-        total: json["total"],
+        paymentMethod: json["payment_method"],
+        note: json["note"],
+        type: json["type"],
         lat: json["lat"],
         long: json["long"],
-        products: List<Product>.from(json["products"].map((x) => Product.fromJson(x))),
+        total: json["total"],
+        tax: json["tax"],
+        deliveryFee: json["delivery_fee"],
+        discount: json["discount"],
+        percentage: json["percentage"],
+        number: json["number"],
+        orderValue: json["order_value"],
+        products: List<UserProducts>.from(json["products"].map((x) => UserProducts.fromJson(x))),
+        review: json["review"],
       );
 
   Map<String, dynamic> toJson() => {
         "id": id,
-        "user_id": userId,
-        "driver_id": driverId,
-        "user_name": userName,
-        "driver_name": driverName,
-        "restaurant_id": restaurantId,
-        "restaurant_name": restaurantName,
-        "note": note,
         "status": status,
-        "total": total,
+        "payment_method": paymentMethod,
+        "note": note,
+        "type": type,
         "lat": lat,
         "long": long,
+        "total": total,
+        "tax": tax,
+        "delivery_fee": deliveryFee,
+        "discount": discount,
+        "percentage": percentage,
+        "number": number,
+        "order_value": orderValue,
         "products": List<dynamic>.from(products!.map((x) => x.toJson())),
+        "review": review,
       };
 }
 
-class Product {
-  Product({
+class UserProducts {
+  UserProducts({
     this.id,
     this.productId,
     this.productName,
+    this.productImage,
     this.quantity,
-    this.sizeId,
-    this.size,
-    this.extras,
+    this.items,
     this.note,
+    this.area,
     this.price,
   });
 
   int? id;
   int? productId;
   String? productName;
+  String? productImage;
   int? quantity;
-  int? sizeId;
-  String? size;
-  List<Extra>? extras;
+  List<UserItems>? items;
   String? note;
-  int? price;
+  String? area;
+  double? price;
 
-  factory Product.fromJson(Map<String, dynamic> json) => Product(
+  factory UserProducts.fromJson(Map<String, dynamic> json) => UserProducts(
         id: json["id"],
         productId: json["product_id"],
         productName: json["product_name"],
+        productImage: json["product_image"] ?? '',
         quantity: json["quantity"],
-        sizeId: json["size_id"],
-        size: json["size"],
-        extras: List<Extra>.from(json["extras"].map((x) => Extra.fromJson(x))),
+        items: List<UserItems>.from(json["items"].map((x) => UserItems.fromJson(x))),
         note: json["note"],
-        price: json["price"],
+        area: json["area"],
+        price: double.parse(json["price"].toString()),
       );
 
   Map<String, dynamic> toJson() => {
         "id": id,
         "product_id": productId,
         "product_name": productName,
+        "product_image": productImage,
         "quantity": quantity,
-        "size_id": sizeId,
-        "size": size,
-        "extras": List<dynamic>.from(extras!.map((x) => x.toJson())),
+        "items": List<dynamic>.from(items!.map((x) => x.toJson())),
         "note": note,
+        "area": area,
         "price": price,
       };
 }
 
-class Extra {
-  Extra({
+class UserItems {
+  UserItems({
     this.id,
-    this.name,
+    this.groupName,
+    this.itemName,
     this.price,
   });
 
   int? id;
-  String? name;
-  int? price;
+  String? groupName;
+  String? itemName;
+  String? price;
 
-  factory Extra.fromJson(Map<String, dynamic> json) => Extra(
+  factory UserItems.fromJson(Map<String, dynamic> json) => UserItems(
         id: json["id"],
-        name: json["name"],
+        groupName: json["group_name"],
+        itemName: json["item_name"],
         price: json["price"],
       );
 
   Map<String, dynamic> toJson() => {
         "id": id,
-        "name": name,
+        "group_name": groupName,
+        "item_name": itemName,
         "price": price,
       };
 }

@@ -8,7 +8,7 @@ import 'package:get/get.dart';
 import 'package:google_api_headers/google_api_headers.dart' show GoogleApiHeaders;
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:google_maps_webservice/places.dart';
-import 'package:takkeh/controller/user_location.dart';
+import 'package:takkeh/controller/user_location_ctrl.dart';
 import 'package:takkeh/ui/widgets/components/overlay_loader.dart';
 import 'package:takkeh/utils/app_constants.dart';
 import 'package:takkeh/utils/base/colors.dart';
@@ -122,8 +122,8 @@ class MapController extends GetxController {
     BuildContext context,
   ) async {
     OverLayLoader.showLoading(context, color: MyColors.redPrimary);
-    UserLocationCtrl.find.updateLocation(MapController.find.newLat!, MapController.find.newLng!);
-    await UserLocationCtrl.find.getAddressDetails(MapController.find.newLat!, MapController.find.newLng!);
+    UserLocationCtrl.find.getLocation(MapController.find.newLat!, MapController.find.newLng!);
+    await UserLocationCtrl.find.getAddress(MapController.find.newLat!, MapController.find.newLng!);
     CameraUpdate update = CameraUpdate.newCameraPosition(CameraPosition(target: LatLng(UserLocationCtrl.find.latitude.value!, UserLocationCtrl.find.longitude.value!), zoom: 15));
     mapController.animateCamera(update);
     Loader.hide();
