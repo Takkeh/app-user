@@ -12,7 +12,7 @@ import 'package:takkeh/ui/widgets/search_box_widget.dart';
 import 'package:takkeh/utils/base/colors.dart';
 
 class ViewRestaurantScreen extends StatelessWidget {
-  final String title, cover, logo;
+  final String title, cover, logo, time, cost, review;
   final int restaurantId;
 
   const ViewRestaurantScreen({
@@ -21,6 +21,9 @@ class ViewRestaurantScreen extends StatelessWidget {
     required this.cover,
     required this.restaurantId,
     required this.logo,
+    required this.time,
+    required this.cost,
+    required this.review,
   }) : super(key: key);
 
   @override
@@ -76,10 +79,10 @@ class ViewRestaurantScreen extends StatelessWidget {
                             bottom: -37,
                             child: RestaurantInfoBubble(
                               title: title,
-                              logo: cover,
-                              time: '30 - 40 دقيقة',
-                              deliveryStatus: 'توصيل مجاني',
-                              review: 'اشي فاخر',
+                              logo: logo,
+                              time: time,
+                              cost: cost,
+                              review: review,
                               cover: cover,
                             ),
                           )
@@ -112,7 +115,9 @@ class ViewRestaurantScreen extends StatelessWidget {
               child: ProductsFilterBuilder(),
             ),
           ),
-          ViewRestaurantBuilder(restaurantId: restaurantId),
+          SliverToBoxAdapter(
+            child: ViewRestaurantBuilder(restaurantId: restaurantId),
+          ),
           const SliverToBoxAdapter(
             child: SizedBox(height: 80),
           ),

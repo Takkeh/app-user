@@ -22,7 +22,7 @@ class MakeOrderCtrl {
     OverLayLoader.showLoading(context, color: MyColors.redPrimary);
     model = await MakeOrderApi.data(
       generalNote: generalNote,
-      userOrder: UserOrderCtrl.find.userOrder,
+      userOrder: UserOrderCtrl.find.orderList,
       total: UserOrderCtrl.find.totalPrice.value,
       restaurantId: restaurantId,
     );

@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:takkeh/ui/widgets/custom_shimmer_loading.dart';
 
-class CustomListLoading extends StatelessWidget {
+class CustomVerticalListLoading extends StatelessWidget {
   final EdgeInsetsGeometry padding;
   final bool shrinkWrap;
 
-  const CustomListLoading({
+  const CustomVerticalListLoading({
     Key? key,
     required this.padding,
     this.shrinkWrap = false,
@@ -40,20 +40,20 @@ class CustomListLoading extends StatelessWidget {
                     CustomShimmerLoading(
                       radius: 17,
                       height: 10,
-                      width: 100,
-                      margin: EdgeInsetsDirectional.only(end: 10, bottom: 10),
+                      width: 130,
+                      margin: EdgeInsetsDirectional.only(bottom: 10),
                     ),
                     CustomShimmerLoading(
                       radius: 17,
                       height: 10,
-                      width: 170,
-                      margin: EdgeInsetsDirectional.only(end: 20, bottom: 10),
+                      width: 200,
+                      margin: EdgeInsetsDirectional.only(bottom: 15),
                     ),
                     CustomShimmerLoading(
                       radius: 17,
                       height: 10,
                       width: double.infinity,
-                      margin: EdgeInsetsDirectional.only(end: 30),
+                      margin: EdgeInsetsDirectional.only(end: 10),
                     ),
                   ],
                 ),

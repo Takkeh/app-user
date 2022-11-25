@@ -4,8 +4,8 @@ import 'package:takkeh/binding/restaurants/products.dart';
 import 'package:takkeh/controller/restaurants/restaurants.dart';
 import 'package:takkeh/model/restaurants/restaurants_model.dart';
 import 'package:takkeh/ui/screens/restaurants/view_restaurant.dart';
-import 'package:takkeh/ui/widgets/custom_list_loading.dart';
 import 'package:takkeh/ui/widgets/custom_list_tile.dart';
+import 'package:takkeh/ui/widgets/custom_vertical_list_loading.dart';
 import 'package:takkeh/ui/widgets/failed_widget.dart';
 
 class RestaurantsBuilder extends StatelessWidget {
@@ -19,7 +19,7 @@ class RestaurantsBuilder extends StatelessWidget {
         switch (snapshot.connectionState) {
           case ConnectionState.waiting:
             return const Expanded(
-              child: CustomListLoading(
+              child: CustomVerticalListLoading(
                 padding: EdgeInsets.all(20.0),
               ),
             );
@@ -48,6 +48,9 @@ class RestaurantsBuilder extends StatelessWidget {
                             cover: data.cover!,
                             restaurantId: data.id!,
                             logo: data.logo!,
+                            time: data.time!,
+                            cost: data.cost!,
+                            review: data.review!,
                           ),
                           binding: ProductBinding(id: data.id!),
                         );

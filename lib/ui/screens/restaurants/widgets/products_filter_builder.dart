@@ -1,11 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:takkeh/controller/restaurants/products_filter.dart';
 import 'package:takkeh/controller/restaurants/view_restaurant.dart';
-import 'package:takkeh/ui/screens/restaurants/widgets/custom_circular_progress_indicator.dart';
-import 'package:takkeh/ui/screens/restaurants/widgets/products_filter_loading.dart';
+import 'package:takkeh/ui/widgets/restaurant_product_categories_loading.dart';
 import 'package:takkeh/utils/base/colors.dart';
-import 'package:takkeh/utils/base/images.dart';
 
 class ProductsFilterBuilder extends StatelessWidget {
   const ProductsFilterBuilder({
@@ -14,49 +11,34 @@ class ProductsFilterBuilder extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return GetBuilder<ProductsFilterCtrl>(
+    return GetBuilder<ViewRestaurantCtrl>(
       builder: (controller) {
-        if (controller.isLoading.value) {
-          return const ProductsFilterLoading();
+        if (controller.restaurantProducts.isEmpty) {
+          return const RestaurantProductCategoriesLoading();
         }
-
-        if (controller.productsFilterModel == null) {
-          return Center(child: Image.asset(MyImages.failedImage));
-        }
-
         return Container(
           color: Colors.white,
           height: 50,
           child: ListView.separated(
-            controller: controller.scrollCtrl,
-            padding: EdgeInsetsDirectional.fromSTEB(20, 8, controller.allLoaded.value ? 15 : 35, 8),
+            padding: const EdgeInsetsDirectional.fromSTEB(20, 8, 20, 8),
             separatorBuilder: (context, index) => const SizedBox(width: 5),
             scrollDirection: Axis.horizontal,
-            itemCount: controller.filters.length,
+            itemCount: controller.restaurantProducts.length,
             itemBuilder: (context, index) {
-              if (index + 1 == controller.filters.length) {
-                if (controller.loadMore.value) {
-                  return const CustomCircularProgressIndicator(color: MyColors.redPrimary);
-                } else {
-                  return const SizedBox.shrink();
-                }
-              }
+              final data = controller.restaurantProducts[index];
               return ElevatedButton(
                 style: ElevatedButton.styleFrom(
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(9),
-                  ),
-                  primary: controller.currentIndex.value == index ? MyColors.redPrimary : Colors.transparent,
+                  shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(9)),
+                  backgroundColor: controller.selectedIndex.value == index ? MyColors.redPrimary : Colors.transparent,
                   elevation: 0,
                 ),
                 onPressed: () {
                   ViewRestaurantCtrl.find.scrollToItem(index);
-                  controller.toggle(index);
                 },
                 child: Text(
-                  controller.filters[index].title!,
+                  data.name!,
                   style: TextStyle(
-                    color: controller.currentIndex.value == index ? Colors.white : MyColors.text,
+                    color: controller.selectedIndex.value == index ? Colors.white : MyColors.text,
                     fontSize: 16,
                     fontWeight: FontWeight.w500,
                   ),

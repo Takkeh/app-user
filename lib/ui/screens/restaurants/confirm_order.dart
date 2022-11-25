@@ -155,8 +155,8 @@ class OrderDetailsWidget extends StatelessWidget {
     return GetBuilder<UserOrderCtrl>(builder: (controller) {
       return Column(
         children: [
-          ...controller.userOrder.map((element) {
-            final index = controller.userOrder.indexOf(element);
+          ...controller.orderList.map((element) {
+            final index = controller.orderList.indexOf(element);
             return Row(
               children: [
                 Text("x${element['quantity']}", style: const TextStyle(fontSize: 16, fontWeight: FontWeight.w500)),

@@ -97,7 +97,6 @@ class _BasketScreenState extends State<BasketScreen> {
                             description: data.productName!,
                             initialPrice: data.price!.toDouble(),
                             note: data.note!,
-                            size: data.sizeId!,
                             extrasWidget: data.extras!.map((element) {
                               return Text('+ ${element.name!}');
                             }).toList(),

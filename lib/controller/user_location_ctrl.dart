@@ -12,63 +12,57 @@ import 'package:takkeh/utils/shared_prefrences.dart';
 class UserLocationCtrl extends GetxController {
   static UserLocationCtrl get find => Get.find();
 
-  final latitude = Rxn<double>();
-  final longitude = Rxn<double>();
-  final subLocality = Rxn<String>();
-  final street = Rxn<String>();
-  final locality = Rxn<String>();
   late LocationPermission permission;
 
+  final latitude = Rxn<double>();
+  final longitude = Rxn<double>();
+
+  final subLocality = ''.obs;
+  final street = ''.obs;
+  final locality = ''.obs;
+
+  //TODO: delete
   final savedAddresses = [
     'home',
     'work',
   ].obs;
 
-  Future<String?> determinePosition() async {
+  Future<LocationPermission> getPermission() async {
     bool serviceEnabled;
 
     serviceEnabled = await Geolocator.isLocationServiceEnabled();
+
     if (!serviceEnabled) {
-      return "No Service";
+      permission = LocationPermission.unableToDetermine;
     }
 
     permission = await Geolocator.checkPermission();
+
     if (permission == LocationPermission.denied) {
       permission = await Geolocator.requestPermission();
-      if (permission == LocationPermission.denied) {
-        return "Denied";
-      }
+      return permission;
     }
 
-    if (permission == LocationPermission.deniedForever) {
-      return "Denied Forever";
-    }
+    final position = await Geolocator.getCurrentPosition(desiredAccuracy: LocationAccuracy.bestForNavigation);
+    getLocation(position.latitude, position.longitude);
+    getAddress(position.latitude, position.longitude);
 
-    final position = await Geolocator.getCurrentPosition(desiredAccuracy: LocationAccuracy.high);
-
-    updateLocation(position.latitude, position.longitude);
-    await getAddressDetails(position.latitude, position.longitude);
-
-    log("location:: lat: ${position.latitude}  lng: ${position.longitude}");
-    return null;
+    return permission;
   }
 
-  void updateLocation(double lat, double lng) {
+  void getLocation(double lat, double lng) {
     latitude.value = lat;
     longitude.value = lng;
+    log("location:: lat: ${latitude.value}  lng: ${longitude.value}");
     update();
   }
 
-  Future getAddressDetails(double lat, double lng) async {
+  Future getAddress(double lat, double lng) async {
     List<Placemark> placeMarks = await placemarkFromCoordinates(lat, lng, localeIdentifier: MySharedPreferences.language);
-
-    locality.value = placeMarks[1].locality!.isEmpty ? "Unknown" : placeMarks[1].locality;
-    subLocality.value = placeMarks[1].subLocality!.isEmpty ? "Unknown" : placeMarks[1].subLocality;
-    street.value = placeMarks[1].street!.isEmpty ? "Unknown" : placeMarks[1].street;
-
-    log("placeMarkers:: $placeMarks");
+    locality.value = placeMarks[0].locality!;
+    subLocality.value = placeMarks[0].subLocality!;
+    street.value = placeMarks[0].street!;
     log("address:: ${subLocality.value} -- ${street.value}");
-
     update();
   }
 
@@ -89,12 +83,11 @@ class UserLocationCtrl extends GetxController {
               title: "Ask for permission".tr,
               onPressed: () async {
                 Get.back();
-                await determinePosition().then((value) {
-                  if (value == "No service") {
+                await getPermission().then((value) {
+                  if (value == LocationPermission.unableToDetermine) {
                     Fluttertoast.showToast(msg: "Device location services are not enabled".tr);
-                    return;
                   }
-                  if (value == "Denied Forever") {
+                  if (value == LocationPermission.deniedForever) {
                     ScaffoldMessenger.of(context).showSnackBar(
                       SnackBar(
                         backgroundColor: MyColors.primary,
@@ -122,7 +115,7 @@ class UserLocationCtrl extends GetxController {
 
   @override
   void onInit() {
-    determinePosition();
+    getPermission();
     super.onInit();
   }
 }

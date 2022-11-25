@@ -19,86 +19,47 @@ class ViewRestaurantModel {
   bool? status;
   int? code;
   String? msg;
-  Data? data;
+  List<RestaurantProducts>? data;
 
   factory ViewRestaurantModel.fromJson(Map<String, dynamic> json) => ViewRestaurantModel(
         status: json["status"],
         code: json["code"],
         msg: json["msg"],
-        data: Data.fromJson(json["data"]),
+        data: List<RestaurantProducts>.from(json["data"].map((x) => RestaurantProducts.fromJson(x))),
       );
 
   Map<String, dynamic> toJson() => {
         "status": status,
         "code": code,
         "msg": msg,
-        "data": data!.toJson(),
+        "data": List<dynamic>.from(data!.map((x) => x.toJson())),
       };
 }
 
-class Data {
-  Data({
-    this.id,
-    this.name,
-    this.logo,
-    this.cover,
-    this.time,
-    this.products,
-  });
-
-  int? id;
-  String? name;
-  String? logo;
-  String? cover;
-  String? time;
-  List<ViewRestaurants>? products;
-
-  factory Data.fromJson(Map<String, dynamic> json) => Data(
-        id: json["id"],
-        name: json["name"],
-        logo: json["logo"],
-        cover: json["cover"],
-        time: json["time"],
-        products: List<ViewRestaurants>.from(json["products"].map((x) => ViewRestaurants.fromJson(x))),
-      );
-
-  Map<String, dynamic> toJson() => {
-        "id": id,
-        "name": name,
-        "logo": logo,
-        "cover": cover,
-        "time": time,
-        "products": List<dynamic>.from(products!.map((x) => x.toJson())),
-      };
-}
-
-class ViewRestaurants {
-  ViewRestaurants({
+class RestaurantProducts {
+  RestaurantProducts({
     this.id,
     this.name,
     this.image,
     this.price,
     this.categorise,
-    this.sizes,
-    this.extras,
+    this.groups,
   });
 
   int? id;
   String? name;
   String? image;
-  int? price;
+  double? price;
   String? categorise;
-  List<SizesV>? sizes;
-  List<ExtrasV>? extras;
+  List<ProductGroup>? groups;
 
-  factory ViewRestaurants.fromJson(Map<String, dynamic> json) => ViewRestaurants(
+  factory RestaurantProducts.fromJson(Map<String, dynamic> json) => RestaurantProducts(
         id: json["id"],
         name: json["name"],
-        image: json["image"],
-        price: json["price"],
+        image: json["image"] ?? '',
+        price: double.parse(json["price"].toString()),
         categorise: json["categorise"],
-        sizes: List<SizesV>.from(json["sizes"].map((x) => SizesV.fromJson(x))),
-        extras: List<ExtrasV>.from(json["extras"].map((x) => ExtrasV.fromJson(x))),
+        groups: List<ProductGroup>.from(json["groups"].map((x) => ProductGroup.fromJson(x))),
       );
 
   Map<String, dynamic> toJson() => {
@@ -107,79 +68,58 @@ class ViewRestaurants {
         "image": image,
         "price": price,
         "categorise": categorise,
-        "sizes": List<dynamic>.from(sizes!.map((x) => x.toJson())),
-        "extras": List<dynamic>.from(extras!.map((x) => x.toJson())),
+        "groups": List<dynamic>.from(groups!.map((x) => x.toJson())),
       };
 }
 
-class ExtrasV {
-  ExtrasV({
+class ProductGroup {
+  ProductGroup({
     this.id,
-    this.price,
     this.name,
-    this.productId,
-    this.createdAt,
-    this.updatedAt,
+    this.type,
+    this.items,
   });
 
   int? id;
-  int? price;
   String? name;
-  int? productId;
-  DateTime? createdAt;
-  DateTime? updatedAt;
+  String? type;
+  List<GroupItem>? items;
 
-  factory ExtrasV.fromJson(Map<String, dynamic> json) => ExtrasV(
+  factory ProductGroup.fromJson(Map<String, dynamic> json) => ProductGroup(
         id: json["id"],
-        price: json["price"],
         name: json["name"],
-        productId: json["product_id"],
-        createdAt: DateTime.parse(json["created_at"]),
-        updatedAt: DateTime.parse(json["updated_at"]),
+        type: json["type"],
+        items: List<GroupItem>.from(json["items"].map((x) => GroupItem.fromJson(x))),
       );
 
   Map<String, dynamic> toJson() => {
         "id": id,
-        "price": price,
         "name": name,
-        "product_id": productId,
-        "created_at": createdAt!.toIso8601String(),
-        "updated_at": updatedAt!.toIso8601String(),
+        "type": type,
+        "items": List<dynamic>.from(items!.map((x) => x.toJson())),
       };
 }
 
-class SizesV {
-  SizesV({
+class GroupItem {
+  GroupItem({
     this.id,
-    this.price,
     this.name,
-    this.productId,
-    this.createdAt,
-    this.updatedAt,
+    this.price,
   });
 
   int? id;
-  int? price;
   String? name;
-  int? productId;
-  DateTime? createdAt;
-  DateTime? updatedAt;
+  double? price;
 
-  factory SizesV.fromJson(Map<String, dynamic> json) => SizesV(
+  factory GroupItem.fromJson(Map<String, dynamic> json) => GroupItem(
         id: json["id"],
-        price: json["price"],
-        name: json["name"],
-        productId: json["product_id"],
-        createdAt: DateTime.parse(json["created_at"]),
-        updatedAt: DateTime.parse(json["updated_at"]),
+        name: json["name "],
+        price: double.parse(json["price"].toString()),
       );
 
   Map<String, dynamic> toJson() => {
         "id": id,
+        "name ": name,
         "price": price,
-        "name": name,
-        "product_id": productId,
-        "created_at": createdAt!.toIso8601String(),
-        "updated_at": updatedAt!.toIso8601String(),
       };
 }

@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:takkeh/controller/user_order_ctrl.dart';
 import 'package:takkeh/model/restaurants/make_order_model.dart';
 import 'package:takkeh/ui/screens/restaurants/widgets/quantity_button.dart';
 import 'package:takkeh/ui/widgets/custom_network_image.dart';
@@ -15,7 +14,6 @@ class BasketProductTile extends StatefulWidget {
   final List<Widget> extrasWidget;
   final List<Extra> extrasList;
   final int initialQuantity, productId, restaurantId;
-  final int size;
 
   const BasketProductTile({
     Key? key,
@@ -28,7 +26,6 @@ class BasketProductTile extends StatefulWidget {
     required this.initialQuantity,
     required this.note,
     required this.index,
-    required this.size,
     required this.productId,
     required this.restaurantId,
     required this.extrasList,
@@ -42,43 +39,43 @@ class BasketProductTileState extends State<BasketProductTile> {
   late int newQuantity;
   late double newPrice;
   late double originalPrice;
-
-  void toggle(String status, double initialPrice) {
-    if (status == 'add') {
-      setState(() {
-        newQuantity++;
-        newPrice = originalPrice * newQuantity;
-        UserOrderCtrl.find.calculateTotalQuantity(1, isAdd: true);
-        UserOrderCtrl.find.calculateTotalPrice(originalPrice, isAdd: true);
-        UserOrderCtrl.find.addProduct(
-          productId: widget.productId,
-          quantity: widget.initialQuantity,
-          size: widget.size,
-          extras: List.generate(widget.extrasList.length, (index) => {'extra_id': widget.extrasList[index].id!}),
-          note: widget.note,
-          price: originalPrice,
-          restaurantId: widget.restaurantId,
-        );
-      });
-    } else {
-      if (newQuantity == 1) return;
-      setState(() {
-        newQuantity--;
-        newPrice = originalPrice * newQuantity;
-        UserOrderCtrl.find.calculateTotalQuantity(1, isAdd: false);
-        UserOrderCtrl.find.calculateTotalPrice(originalPrice, isAdd: false);
-        UserOrderCtrl.find.removeProduct(
-          productId: widget.productId,
-          quantity: widget.initialQuantity,
-          size: widget.size,
-          extras: List.generate(widget.extrasList.length, (index) => {'extra_id': widget.extrasList[index].id!}),
-          note: widget.note,
-          price: originalPrice,
-          restaurantId: widget.restaurantId,
-        );
-      });
-    }
-  }
+  //
+  // void toggle(String status, double initialPrice) {
+  //   if (status == 'add') {
+  //     setState(() {
+  //       // newQuantity++;
+  //       // newPrice = originalPrice * newQuantity;
+  //       // UserOrderCtrl.find.calculateTotalQuantity(1, isAdd: true);
+  //       // UserOrderCtrl.find.calculateTotalPrice(originalPrice, isAdd: true);
+  //       // UserOrderCtrl.find.addProduct(
+  //       //   productId: widget.productId,
+  //       //   quantity: widget.initialQuantity,
+  //       //   size: widget.size,
+  //       //   extras: List.generate(widget.extrasList.length, (index) => {'extra_id': widget.extrasList[index].id!}),
+  //       //   note: widget.note,
+  //       //   price: originalPrice,
+  //       //   restaurantId: widget.restaurantId,
+  //       // );
+  //     });
+  //   } else {
+  //     if (newQuantity == 1) return;
+  //     setState(() {
+  //       newQuantity--;
+  //       newPrice = originalPrice * newQuantity;
+  //       UserOrderCtrl.find.calculateTotalQuantity(1, isAdd: false);
+  //       UserOrderCtrl.find.calculateTotalPrice(originalPrice, isAdd: false);
+  //       UserOrderCtrl.find.removeProduct(
+  //         productId: widget.productId,
+  //         quantity: widget.initialQuantity,
+  //         size: widget.size,
+  //         extras: List.generate(widget.extrasList.length, (index) => {'extra_id': widget.extrasList[index].id!}),
+  //         note: widget.note,
+  //         price: originalPrice,
+  //         restaurantId: widget.restaurantId,
+  //       );
+  //     });
+  //   }
+  // }
 
   @override
   void initState() {
@@ -120,7 +117,7 @@ class BasketProductTileState extends State<BasketProductTile> {
                           ),
                         ),
                       ),
-                      Text(widget.size.toString()),
+                      // Text(widget.size.toString()),
                       ...widget.extrasWidget,
                       const SizedBox(height: 12),
                       widget.note.isEmpty
@@ -158,10 +155,10 @@ class BasketProductTileState extends State<BasketProductTile> {
                       QuantityButton(
                         icon: Icons.add,
                         onPressed: () {
-                          toggle('add', widget.initialPrice);
-                          UserOrderCtrl.find.userOrder[widget.index]['price'] = newPrice;
-                          UserOrderCtrl.find.userOrder[widget.index]['quantity'] = newQuantity;
-                          print("newOrder:: ${UserOrderCtrl.find.userOrder}");
+                          // toggle('add', widget.initialPrice);
+                          // UserOrderCtrl.find.userOrder[widget.index]['price'] = newPrice;
+                          // UserOrderCtrl.find.userOrder[widget.index]['quantity'] = newQuantity;
+                          // print("newOrder:: ${UserOrderCtrl.find.userOrder}");
                         },
                         color: MyColors.redPrimary,
                       ),
@@ -174,7 +171,7 @@ class BasketProductTileState extends State<BasketProductTile> {
                       QuantityButton(
                         icon: Icons.remove,
                         onPressed: () {
-                          toggle('remove', widget.initialPrice);
+                          // toggle('remove', widget.initialPrice);
                         },
                         color: newQuantity == 1 ? MyColors.redPrimary.withOpacity(0.60) : MyColors.redPrimary,
                       ),
