@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:takkeh/translation/service.dart';
 import 'package:takkeh/ui/screens/profile/change_password.dart';
 import 'package:takkeh/ui/screens/profile/profile_info.dart';
 import 'package:takkeh/ui/widgets/base_switch_slider.dart';
+import 'package:takkeh/ui/widgets/custom_network_image.dart';
 import 'package:takkeh/ui/widgets/transparent_app_bar.dart';
 import 'package:takkeh/utils/base/colors.dart';
 import 'package:takkeh/utils/base/icons.dart';
@@ -21,6 +23,17 @@ class _ProfileScreenState extends State<ProfileScreen> {
   late PageController pageController;
   bool isProfileInfo = true;
 
+  XFile? imageXFile;
+
+  Future openGalleyForMainImages() async {
+    final ImagePicker picker = ImagePicker();
+    final XFile? pickedFile =
+    await picker.pickImage(source: ImageSource.gallery);
+    setState(() {
+      imageXFile = pickedFile;
+    });
+  }
+
   @override
   void initState() {
     pageController = PageController();
@@ -37,7 +50,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: MyColors.blue6FA,
-      appBar: TransparentAppBar(title: TranslationService.getString('edit_profile_key')),
+      appBar: TransparentAppBar(
+          title: TranslationService.getString('edit_profile_key')),
       body: Column(
         children: [
           Stack(
@@ -55,11 +69,18 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   ),
                 ),
               ),
-              SvgPicture.asset(MyIcons.camera),
+              if (isProfileInfo)
+                InkWell(
+                  onTap: () {
+                    openGalleyForMainImages();
+                  },
+                  child: SvgPicture.asset(MyIcons.camera),
+                ),
             ],
           ),
           BaseSwitchSlider(
-            margin: const EdgeInsets.only(top: 20, bottom: 20, left: 30, right: 30),
+            margin:
+                const EdgeInsets.only(top: 20, bottom: 20, left: 30, right: 30),
             title1: TranslationService.getString('profile_info_key'),
             title2: TranslationService.getString('password_key'),
             onTap1: () {
@@ -84,16 +105,18 @@ class _ProfileScreenState extends State<ProfileScreen> {
                 );
               });
             },
-            isFirst: MySharedPreferences.language == 'en' ? isProfileInfo : !isProfileInfo,
+            isFirst: MySharedPreferences.language == 'en'
+                ? isProfileInfo
+                : !isProfileInfo,
             color: Colors.white,
           ),
           Expanded(
             child: PageView(
               physics: const NeverScrollableScrollPhysics(),
               controller: pageController,
-              children: const [
-                ProfileInfoScreen(),
-                ChangePasswordScreen(),
+              children: [
+                ProfileInfoScreen(imageXFile: imageXFile,),
+                const ChangePasswordScreen(),
               ],
             ),
           ),
