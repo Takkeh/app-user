@@ -17,7 +17,7 @@ class UpdatePasswordApi {
       Uri uri = Uri.parse(url);
       var headers = {
         'Content-Type': 'application/json',
-        'Authorization': MySharedPreferences.accessToken,
+        'Authorization': 'Bearer ${MySharedPreferences.accessToken}',
       };
       var body = jsonEncode({
         "password": oldPassword,
