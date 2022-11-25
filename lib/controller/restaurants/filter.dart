@@ -6,9 +6,15 @@ class RestaurantsFilterController extends GetxController {
   static RestaurantsFilterController get find => Get.find();
 
   final isFilterActive = false.obs;
+  final selectedFilter = 0.obs;
 
   void toggle() {
     isFilterActive.value = !isFilterActive.value;
+    update();
+  }
+
+  void changeSelected(int filterId) {
+    selectedFilter.value = filterId;
     update();
   }
 

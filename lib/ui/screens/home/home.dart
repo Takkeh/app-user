@@ -1,7 +1,11 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
+import 'package:get/get.dart';
+import 'package:takkeh/binding/restaurants/restaurants_home.dart';
 import 'package:takkeh/controller/home/category.dart';
+import 'package:takkeh/controller/home/slider.dart';
 import 'package:takkeh/controller/nav_bar_ctrl.dart';
+import 'package:takkeh/controller/user_order_ctrl.dart';
 import 'package:takkeh/model/home/categories_model.dart';
 import 'package:takkeh/translation/service.dart';
 import 'package:takkeh/ui/base/drawer.dart';
@@ -11,6 +15,7 @@ import 'package:takkeh/ui/screens/home/widgets/home_image_loading.dart';
 import 'package:takkeh/ui/screens/home/widgets/slider_builder.dart';
 import 'package:takkeh/ui/screens/home/widgets/special_offers_builder.dart';
 import 'package:takkeh/ui/screens/home/widgets/takkah_offers_builder.dart';
+import 'package:takkeh/ui/screens/restaurants/restaurants_home.dart';
 import 'package:takkeh/ui/widgets/custom_network_image.dart';
 import 'package:takkeh/ui/widgets/failed_widget.dart';
 import 'package:takkeh/ui/widgets/title_widget.dart';
@@ -33,19 +38,22 @@ class _HomeScreenState extends State<HomeScreen> {
 
   @override
   void initState() {
-    CategoriesController.categoriesData = CategoriesController.fetchCategoriesData();
+    Get.put(SliderController());
+    Get.put(CategoriesController());
+    Get.put(UserOrderCtrl(), permanent: true);
     super.initState();
+  }
+
+  @override
+  void dispose() {
+    Get.delete<SliderController>();
+    Get.delete<CategoriesController>();
+    super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      floatingActionButton: FloatingActionButton(
-        onPressed: () async {
-          var myDoc = await FirebaseFirestore.instance.collection('khaled').get();
-          print("test:: ${myDoc.docs[0].data()}");
-        },
-      ),
       onDrawerChanged: (isOpen) {
         NavBarCtrl.find.toggle(isOpen);
       },
@@ -97,7 +105,7 @@ class _HomeScreenState extends State<HomeScreen> {
             //   ),
             // ),
             FutureBuilder<CategoriesModel?>(
-              future: CategoriesController.categoriesData,
+              future: CategoriesController.find.initialize,
               builder: (context, snapshot) {
                 switch (snapshot.connectionState) {
                   case ConnectionState.waiting:
@@ -108,28 +116,43 @@ class _HomeScreenState extends State<HomeScreen> {
                       return Padding(
                         padding: const EdgeInsets.symmetric(horizontal: 20.0, vertical: 30),
                         child: Row(
-                          children: const [
+                          children: [
                             Expanded(
-                              child: CustomNetworkImage(
-                                height: 100,
-                                url: 'img/cats/16616923551881.svg',
-                                radius: 15,
+                              child: GestureDetector(
+                                onTap: () {
+                                  Get.to(() => const RestaurantsHomeScreen(), binding: RestaurantsHomeBinding());
+                                },
+                                child: CustomNetworkImage(
+                                  height: 100,
+                                  url: snapshot.data!.categorys![0].image!,
+                                  radius: 15,
+                                ),
                               ),
                             ),
-                            SizedBox(width: 10),
+                            const SizedBox(width: 10),
                             Expanded(
-                              child: CustomNetworkImage(
-                                height: 100,
-                                url: 'img/cats/16616923551881.svg',
-                                radius: 15,
+                              child: GestureDetector(
+                                onTap: () {
+                                  Fluttertoast.showToast(msg: 'Coming Soon!'.tr);
+                                },
+                                child: CustomNetworkImage(
+                                  height: 100,
+                                  url: snapshot.data!.categorys![1].image!,
+                                  radius: 15,
+                                ),
                               ),
                             ),
-                            SizedBox(width: 10),
+                            const SizedBox(width: 10),
                             Expanded(
-                              child: CustomNetworkImage(
-                                height: 100,
-                                url: 'img/cats/16616923551881.svg',
-                                radius: 15,
+                              child: GestureDetector(
+                                onTap: () {
+                                  Fluttertoast.showToast(msg: 'Coming Soon!'.tr);
+                                },
+                                child: CustomNetworkImage(
+                                  height: 100,
+                                  url: snapshot.data!.categorys![2].image!,
+                                  radius: 15,
+                                ),
                               ),
                             ),
                           ],

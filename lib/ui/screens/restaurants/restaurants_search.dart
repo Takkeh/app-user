@@ -68,6 +68,7 @@ class RestaurantsSearchScreen extends StatelessWidget {
                                 binding: ProductBinding(id: data.id!),
                               );
                             },
+                            reviewIcon: '',
                           );
                         },
                       ),

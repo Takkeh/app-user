@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:takkeh/ui/widgets/custom_shimmer_loading.dart';
-import 'package:takkeh/utils/base/colors.dart';
 
 class FilterCategoryLoading extends StatelessWidget {
   const FilterCategoryLoading({Key? key}) : super(key: key);
@@ -14,7 +13,6 @@ class FilterCategoryLoading extends StatelessWidget {
             margin: EdgeInsets.symmetric(horizontal: 15),
             radius: 17,
             height: 120,
-            highlightColor: MyColors.redPrimary,
           );
         }),
       ),

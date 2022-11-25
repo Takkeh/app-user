@@ -17,7 +17,9 @@ class SignInApi {
         'Content-Type': 'application/json',
       };
       var body = jsonEncode({
-        "phone": '+962$phone',
+        //TODO: fix from api
+        // "phone": '+962$phone',
+        "phone": '0795401109',
         "password": password,
       });
       log("Response:: SignInResponse\nUrl:: $url\nheaders:: $headers\nbody:: $body");

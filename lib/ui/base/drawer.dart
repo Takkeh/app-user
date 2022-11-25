@@ -16,8 +16,25 @@ import 'package:takkeh/utils/base/colors.dart';
 import 'package:takkeh/utils/base/icons.dart';
 import 'package:takkeh/utils/shared_prefrences.dart';
 
-class BaseDrawer extends StatelessWidget {
+class BaseDrawer extends StatefulWidget {
   const BaseDrawer({Key? key}) : super(key: key);
+
+  @override
+  State<BaseDrawer> createState() => _BaseDrawerState();
+}
+
+class _BaseDrawerState extends State<BaseDrawer> {
+  @override
+  void initState() {
+    Get.lazyPut(() => LogOutController());
+    super.initState();
+  }
+
+  @override
+  void dispose() {
+    Get.delete<LogOutController>();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -80,7 +97,7 @@ class BaseDrawer extends StatelessWidget {
                 ),
                 TextButton.icon(
                   onPressed: () {
-                    LogOutController.fetchLogOutData(context);
+                    LogOutController.find.fetchLogOutData(context);
                   },
                   label: const Text(
                     "  Sign out  ",

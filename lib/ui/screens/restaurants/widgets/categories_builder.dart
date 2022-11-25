@@ -20,13 +20,15 @@ class RestaurantCategoriesBuilder extends StatelessWidget {
   Widget build(BuildContext context) {
     return ListBody(
       children: [
-        GetBuilder<RestaurantCategoriesController>(builder: (controller) {
-          return RestaurantsHeaderWidget(
-            onChanged: (value) {},
-            title: controller.categoryTitle.value,
-            index: controller.currentIndex.value,
-          );
-        }),
+        GetBuilder<RestaurantCategoriesController>(
+          builder: (controller) {
+            return RestaurantsHeaderWidget(
+              onChanged: (value) {},
+              title: controller.categoryTitle.value,
+              index: controller.currentIndex.value,
+            );
+          },
+        ),
         Stack(
           alignment: Alignment.center,
           children: [
@@ -58,7 +60,7 @@ class RestaurantCategoriesBuilder extends StatelessWidget {
                         child: NotificationListener<ScrollNotification>(
                           onNotification: (scrollNotification) {
                             if (scrollNotification is ScrollEndNotification) {
-                              RestaurantsCtrl.find.fetchCategoriesData(1, 'default', snapshot.data!.categorys![RestaurantCategoriesController.find.currentIndex.value].id!);
+                              RestaurantsCtrl.find.fetchCategoriesData(1, snapshot.data!.categorys![RestaurantCategoriesController.find.currentIndex.value].id!);
                             }
                             return true;
                           },
@@ -77,13 +79,15 @@ class RestaurantCategoriesBuilder extends StatelessWidget {
                                     alignment: Alignment.center,
                                     width: 30,
                                     child: element.id == 1
-                                        ? GetBuilder<RestaurantCategoriesController>(builder: (controller) {
-                                            return SvgPicture.network(
-                                              '${ApiUrl.mainUrl}/${element.image!}',
-                                              height: 80,
-                                              color: controller.currentIndex.value == 0 ? Colors.white : MyColors.primary,
-                                            );
-                                          })
+                                        ? GetBuilder<RestaurantCategoriesController>(
+                                            builder: (controller) {
+                                              return SvgPicture.network(
+                                                '${ApiUrl.mainUrl}/${element.image!}',
+                                                height: 80,
+                                                color: controller.currentIndex.value == 0 ? Colors.white : MyColors.primary,
+                                              );
+                                            },
+                                          )
                                         : SvgPicture.network(
                                             '${ApiUrl.mainUrl}/${element.image!}',
                                             height: 80,
