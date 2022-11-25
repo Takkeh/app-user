@@ -65,7 +65,7 @@ class Datum {
         reviewIcon: json["review_icon"],
         cost: json["cost"],
         time: json["time"],
-        review: json["review"],
+        review: json["review"] ?? 'Review',
       );
 
   Map<String, dynamic> toJson() => {

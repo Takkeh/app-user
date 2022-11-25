@@ -45,4 +45,5 @@ final Map<String, String> ar = {
   MyStrings.fullNameLabelKey: "أدخل الإسم",
   "": "",
   "Coming Soon!": "قريبا!",
+  "Minute": "دقيقة",
 };

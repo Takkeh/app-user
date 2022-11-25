@@ -6,7 +6,7 @@ class CustomShimmerLoading extends StatelessWidget {
   final double radius;
   final double? height;
   final EdgeInsets? padding;
-  final EdgeInsets? margin;
+  final EdgeInsetsDirectional? margin;
 
   const CustomShimmerLoading({
     Key? key,

@@ -56,7 +56,6 @@ class RestaurantsSearchScreen extends StatelessWidget {
                             imageUrl: data.logo!,
                             title: data.name!,
                             description: data.name!,
-                            subTitle: data.name!,
                             onTap: () {
                               Get.to(
                                 () => ViewRestaurantScreen(
@@ -69,6 +68,9 @@ class RestaurantsSearchScreen extends StatelessWidget {
                               );
                             },
                             reviewIcon: '',
+                            review: '',
+                            time: '',
+                            cost: '',
                           );
                         },
                       ),

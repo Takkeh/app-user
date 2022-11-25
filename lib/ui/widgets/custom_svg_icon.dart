@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:takkeh/utils/api_url.dart';
+import 'package:takkeh/utils/base/colors.dart';
 import 'package:takkeh/utils/base/images.dart';
 
 class CustomSvgIcon extends StatelessWidget {
@@ -16,11 +17,13 @@ class CustomSvgIcon extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SvgPicture.network(
-      '${ApiUrl.mainUrl}$reviewIcon',
+      '${ApiUrl.mainUrl}/$reviewIcon',
       width: width,
       placeholderBuilder: (context) {
+        //TODO: place holder image
         return const CircleAvatar(
-          radius: 20,
+          radius: 12,
+          backgroundColor: MyColors.grey4F9,
           backgroundImage: AssetImage(MyImages.logo),
         );
       },

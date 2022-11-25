@@ -1,20 +1,24 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:takkeh/ui/widgets/custom_network_image.dart';
-import 'package:takkeh/ui/widgets/custom_svg_icon.dart';
+import 'package:takkeh/ui/widgets/restaurant_info_box.dart';
 import 'package:takkeh/utils/base/colors.dart';
+import 'package:takkeh/utils/base/icons.dart';
 
 class CustomListTile extends StatelessWidget {
-  final String imageUrl, title, subTitle, description, reviewIcon;
+  final String imageUrl, title, description, reviewIcon, review, time, cost;
   final Function() onTap;
 
   const CustomListTile({
     Key? key,
     required this.imageUrl,
     required this.title,
-    required this.subTitle,
     required this.description,
     required this.onTap,
     required this.reviewIcon,
+    required this.review,
+    required this.time,
+    required this.cost,
   }) : super(key: key);
 
   @override
@@ -55,34 +59,28 @@ class CustomListTile extends StatelessWidget {
                       fontSize: 14,
                     ),
                   ),
-                  Row(
-                    children: [
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.start,
-                        children: [
-                          CustomSvgIcon(reviewIcon: reviewIcon),
-                          const SizedBox(width: 5),
-                          Text(
-                            subTitle,
-                            style: const TextStyle(
-                              color: MyColors.greyEB3,
-                            ),
-                          ),
-                        ],
-                      ),
-                      Text(
-                        subTitle,
-                        style: const TextStyle(
-                          color: MyColors.greyEB3,
+                  const SizedBox(height: 6),
+                  FittedBox(
+                    child: Row(
+                      children: [
+                        RestaurantInfoBox(
+                          networkIcon: reviewIcon,
+                          text: review,
+                          isNetwork: true,
                         ),
-                      ),
-                      Text(
-                        subTitle,
-                        style: const TextStyle(
-                          color: MyColors.greyEB3,
+                        const SizedBox(width: 5),
+                        RestaurantInfoBox(
+                          text: cost,
+                          //TODO: change
+                          assetIcon: MyIcons.clock,
                         ),
-                      ),
-                    ],
+                        const SizedBox(width: 5),
+                        RestaurantInfoBox(
+                          text: '$time ${'Minute'.tr}',
+                          assetIcon: MyIcons.clock,
+                        ),
+                      ],
+                    ),
                   ),
                 ],
               ),
