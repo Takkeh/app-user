@@ -44,4 +44,5 @@ final Map<String, String> ar = {
   MyStrings.emailOrPhoneAlreadyRegisteredKey: "الحساب مسجل مسبقا",
   MyStrings.fullNameLabelKey: "أدخل الإسم",
   "": "",
+  "Coming Soon!": "قريبا!",
 };

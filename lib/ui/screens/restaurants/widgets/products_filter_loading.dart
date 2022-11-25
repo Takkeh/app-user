@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:takkeh/ui/widgets/custom_shimmer_loading.dart';
-import 'package:takkeh/utils/base/colors.dart';
 
 class ProductsFilterLoading extends StatelessWidget {
   const ProductsFilterLoading({Key? key}) : super(key: key);
@@ -20,7 +19,6 @@ class ProductsFilterLoading extends StatelessWidget {
             radius: 9,
             height: 50,
             width: 80,
-            highlightColor: MyColors.redPrimary,
           );
         },
       ),

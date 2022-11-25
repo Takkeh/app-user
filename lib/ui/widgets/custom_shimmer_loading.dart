@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:shimmer/shimmer.dart';
-import 'package:takkeh/utils/base/colors.dart';
 
 class CustomShimmerLoading extends StatelessWidget {
   final double? width;
@@ -8,14 +7,12 @@ class CustomShimmerLoading extends StatelessWidget {
   final double? height;
   final EdgeInsets? padding;
   final EdgeInsets? margin;
-  final Color highlightColor;
 
   const CustomShimmerLoading({
     Key? key,
     this.width,
     required this.radius,
     this.height,
-    this.highlightColor = MyColors.primary,
     this.padding,
     this.margin,
   }) : super(key: key);
@@ -23,8 +20,8 @@ class CustomShimmerLoading extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Shimmer.fromColors(
-      baseColor: MyColors.greyED0,
-      highlightColor: highlightColor,
+      baseColor: Colors.grey.shade300,
+      highlightColor: Colors.grey.shade100,
       child: Container(
         margin: margin,
         padding: padding,

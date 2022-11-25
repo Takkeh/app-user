@@ -3,11 +3,13 @@ import 'dart:developer';
 
 import 'package:http/http.dart' as http;
 import 'package:takkeh/model/restaurants/filter_model.dart';
+import 'package:takkeh/utils/api_url.dart';
 
 class FilterApi {
   static Future<FilterModel?> data() async {
     try {
-      String url = 'http://api.brightlifeapp.com/public/api/v1/categories';
+      //TODO: change later to another url
+      String url = '${ApiUrl.mainUrl}${ApiUrl.offers}';
       Uri uri = Uri.parse(url);
       var headers = {
         'Content-Type': 'application/json',

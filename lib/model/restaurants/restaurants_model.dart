@@ -19,13 +19,13 @@ class RestaurantsModel {
   bool? status;
   int? code;
   String? msg;
-  List<Restaurants>? data;
+  List<Datum>? data;
 
   factory RestaurantsModel.fromJson(Map<String, dynamic> json) => RestaurantsModel(
         status: json["status"],
         code: json["code"],
         msg: json["msg"],
-        data: List<Restaurants>.from(json["data"].map((x) => Restaurants.fromJson(x))),
+        data: List<Datum>.from(json["data"].map((x) => Datum.fromJson(x))),
       );
 
   Map<String, dynamic> toJson() => {
@@ -36,17 +36,16 @@ class RestaurantsModel {
       };
 }
 
-class Restaurants {
-  Restaurants({
+class Datum {
+  Datum({
     this.id,
     this.name,
     this.logo,
     this.cover,
     this.reviewIcon,
-    this.review,
     this.cost,
     this.time,
-    this.categories,
+    this.review,
   });
 
   int? id;
@@ -54,21 +53,19 @@ class Restaurants {
   String? logo;
   String? cover;
   String? reviewIcon;
-  String? review;
   String? cost;
   String? time;
-  List<Category>? categories;
+  String? review;
 
-  factory Restaurants.fromJson(Map<String, dynamic> json) => Restaurants(
+  factory Datum.fromJson(Map<String, dynamic> json) => Datum(
         id: json["id"],
         name: json["name"],
         logo: json["logo"],
         cover: json["cover"],
         reviewIcon: json["review_icon"],
-        review: json["review"],
         cost: json["cost"],
         time: json["time"],
-        categories: List<Category>.from(json["categories"].map((x) => Category.fromJson(x))),
+        review: json["review"],
       );
 
   Map<String, dynamic> toJson() => {
@@ -77,33 +74,8 @@ class Restaurants {
         "logo": logo,
         "cover": cover,
         "review_icon": reviewIcon,
-        "review": review,
         "cost": cost,
         "time": time,
-        "categories": List<dynamic>.from(categories!.map((x) => x.toJson())),
-      };
-}
-
-class Category {
-  Category({
-    this.id,
-    this.name,
-    this.image,
-  });
-
-  int? id;
-  String? name;
-  String? image;
-
-  factory Category.fromJson(Map<String, dynamic> json) => Category(
-        id: json["id"],
-        name: json["name"],
-        image: json["image"],
-      );
-
-  Map<String, dynamic> toJson() => {
-        "id": id,
-        "name": name,
-        "image": image,
+        "review": review,
       };
 }

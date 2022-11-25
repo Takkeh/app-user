@@ -9,19 +9,23 @@ class SpecialOffersLoading extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.only(top: 15.0, bottom: 50),
+      padding: const EdgeInsets.only(top: 20.0, bottom: 20),
       child: CarouselSlider(
         options: CarouselOptions(
-          height: 370.0,
-          viewportFraction: 0.70,
-          enlargeCenterPage: true,
+          initialPage: 2,
+          height: 120.0,
+          viewportFraction: 0.90,
+          // enlargeCenterPage: true,
         ),
         items: [1, 2, 3].map((element) {
           return Builder(
             builder: (BuildContext context) {
-              return CustomShimmerLoading(
-                radius: 23,
-                width: Get.width,
+              return Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                child: CustomShimmerLoading(
+                  radius: 23,
+                  width: Get.width,
+                ),
               );
             },
           );

@@ -1,10 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
-import 'package:takkeh/binding/restaurants/restaurants_home.dart';
 import 'package:takkeh/controller/home/slider.dart';
 import 'package:takkeh/model/home/slider_model.dart';
 import 'package:takkeh/ui/screens/home/widgets/category_loading.dart';
-import 'package:takkeh/ui/screens/restaurants/restaurants_home.dart';
 import 'package:takkeh/ui/widgets/custom_network_image.dart';
 import 'package:takkeh/ui/widgets/failed_widget.dart';
 
@@ -25,21 +22,16 @@ class SliderBuilder extends StatelessWidget {
               return AspectRatio(
                 aspectRatio: 2.5,
                 child: ListView.separated(
-                  // padding: const EdgeInsets.symmetric(horizontal: 20),
+                  padding: const EdgeInsets.symmetric(horizontal: 20),
                   separatorBuilder: (context, index) => const SizedBox(width: 15),
                   itemCount: snapshot.data!.sliders!.length,
                   scrollDirection: Axis.horizontal,
                   itemBuilder: (context, index) {
-                    return GestureDetector(
-                      onTap: () {
-                        Get.to(() => const RestaurantsHomeScreen(), binding: RestaurantsHomeBinding());
-                      },
-                      child: AspectRatio(
-                        aspectRatio: 2,
-                        child: CustomNetworkImage(
-                          url: snapshot.data!.sliders![index].image!,
-                          radius: 16,
-                        ),
+                    return AspectRatio(
+                      aspectRatio: 2,
+                      child: CustomNetworkImage(
+                        url: snapshot.data!.sliders![index].image!,
+                        radius: 16,
                       ),
                     );
                   },

@@ -11,15 +11,13 @@ class RestaurantCategoriesController extends GetxController {
   int filterId = 1;
 
   void updateCategories(id) {
-    RestaurantsCtrl.find.fetchCategoriesData(1, 'default', id);
+    RestaurantsCtrl.find.fetchCategoriesData(1, id);
   }
 
   void onPageChanged(index, name, id) {
     currentIndex.value = index;
     categoryTitle.value = name;
     filterId = id;
-    RestaurantsCtrl.find.restaurants.clear();
-    RestaurantsCtrl.find.limit = 1;
     update();
   }
 

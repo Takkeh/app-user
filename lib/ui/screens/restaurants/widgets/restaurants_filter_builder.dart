@@ -1,12 +1,9 @@
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:takkeh/controller/restaurants/filter.dart';
 import 'package:takkeh/model/restaurants/filter_model.dart';
+import 'package:takkeh/ui/screens/restaurants/widgets/filter_bubble.dart';
 import 'package:takkeh/ui/widgets/failed_widget.dart';
-import 'package:takkeh/utils/api_url.dart';
-import 'package:takkeh/utils/base/colors.dart';
-import 'package:takkeh/utils/base/images.dart';
 
 class RestaurantsFilterBuilder extends StatelessWidget {
   const RestaurantsFilterBuilder({Key? key}) : super(key: key);
@@ -22,52 +19,35 @@ class RestaurantsFilterBuilder extends StatelessWidget {
           case ConnectionState.done:
           default:
             if (snapshot.hasData) {
-              return GetBuilder<RestaurantsFilterController>(builder: (controller) {
-                return AnimatedContainer(
-                  alignment: Alignment.center,
-                  duration: const Duration(milliseconds: 250),
-                  height: controller.isFilterActive.value ? 100 : 0,
-                  margin: const EdgeInsets.only(bottom: 30),
-                  child: ListView.separated(
-                    physics: const BouncingScrollPhysics(),
-                    separatorBuilder: (context, index) => const SizedBox(width: 5),
-                    scrollDirection: Axis.horizontal,
-                    itemCount: snapshot.data!.categorys!.length,
-                    itemBuilder: (context, index) {
-                      return Container(
-                        alignment: Alignment.center,
-                        width: 80,
-                        padding: const EdgeInsets.all(8.0),
-                        decoration: BoxDecoration(
-                          color: MyColors.redB3A,
-                          borderRadius: BorderRadius.circular(27),
-                        ),
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Flexible(
-                              child: CachedNetworkImage(
-                                imageUrl: "${ApiUrl.mainUrl}/${snapshot.data!.categorys![index].image!}",
-                                placeholder: (context, url) => Image.asset(MyImages.placeHolder),
-                                errorWidget: (context, url, error) => Image.asset(MyImages.placeHolder),
-                              ),
-                            ),
-                            const SizedBox(height: 5),
-                            Flexible(
-                              child: FittedBox(
-                                child: Text(
-                                  snapshot.data!.categorys![index].name!,
-                                  maxLines: 1,
-                                ),
-                              ),
-                            ),
-                          ],
-                        ),
-                      );
-                    },
-                  ),
-                );
-              });
+              return GetBuilder<RestaurantsFilterController>(
+                builder: (controller) {
+                  return AnimatedContainer(
+                    alignment: Alignment.center,
+                    duration: const Duration(milliseconds: 250),
+                    height: controller.isFilterActive.value ? 100 : 0,
+                    margin: const EdgeInsets.only(bottom: 30),
+                    child: ListView.separated(
+                      padding: const EdgeInsets.symmetric(horizontal: 10.0),
+                      physics: const BouncingScrollPhysics(),
+                      separatorBuilder: (context, index) => const SizedBox(width: 5),
+                      scrollDirection: Axis.horizontal,
+                      itemCount: snapshot.data!.offers!.length,
+                      itemBuilder: (context, index) {
+                        final data = snapshot.data!.offers![index];
+                        return FilterBubble(
+                          //TODO: change this
+                          title: index == 0 ? ' توصيل مجاني توصيل مجاني' : 'free',
+                          imageUrl: data.image!,
+                          onTap: () {
+                            controller.changeSelected(data.id!);
+                          },
+                          isSelected: controller.selectedFilter.value == data.id!,
+                        );
+                      },
+                    ),
+                  );
+                },
+              );
             } else if (snapshot.hasError) {
               return const FailedWidget();
             } else {

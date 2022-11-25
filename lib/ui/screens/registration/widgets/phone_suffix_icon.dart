@@ -21,6 +21,7 @@ class PhoneSuffixIcon extends StatelessWidget {
             color: MyColors.text,
             fontSize: 16,
           ),
+          textDirection: TextDirection.ltr,
         ),
         SizedBox(width: 6),
         VerticalDivider(

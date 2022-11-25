@@ -1,3 +1,13 @@
+// To parse this JSON data, do
+//
+//     final specialOffersModel = specialOffersModelFromJson(jsonString);
+
+import 'dart:convert';
+
+SpecialOffersModel specialOffersModelFromJson(String str) => SpecialOffersModel.fromJson(json.decode(str));
+
+String specialOffersModelToJson(SpecialOffersModel data) => json.encode(data.toJson());
+
 class SpecialOffersModel {
   SpecialOffersModel({
     this.status,
@@ -6,51 +16,42 @@ class SpecialOffersModel {
     this.specials,
   });
 
-  SpecialOffersModel.fromJson(dynamic json) {
-    status = json['status'];
-    code = json['code'];
-    msg = json['msg'];
-    if (json['Specials'] != null) {
-      specials = [];
-      json['Specials'].forEach((v) {
-        specials?.add(Specials.fromJson(v));
-      });
-    }
-  }
   bool? status;
   int? code;
   String? msg;
-  List<Specials>? specials;
+  List<Special>? specials;
 
-  Map<String, dynamic> toJson() {
-    final map = <String, dynamic>{};
-    map['status'] = status;
-    map['code'] = code;
-    map['msg'] = msg;
-    if (specials != null) {
-      map['Specials'] = specials?.map((v) => v.toJson()).toList();
-    }
-    return map;
-  }
+  factory SpecialOffersModel.fromJson(Map<String, dynamic> json) => SpecialOffersModel(
+        status: json["status"],
+        code: json["code"],
+        msg: json["msg"],
+        specials: List<Special>.from(json["Specials"].map((x) => Special.fromJson(x))),
+      );
+
+  Map<String, dynamic> toJson() => {
+        "status": status,
+        "code": code,
+        "msg": msg,
+        "Specials": List<dynamic>.from(specials!.map((x) => x.toJson())),
+      };
 }
 
-class Specials {
-  Specials({
+class Special {
+  Special({
     this.id,
     this.image,
   });
 
-  Specials.fromJson(dynamic json) {
-    id = json['id'];
-    image = json['image'];
-  }
   int? id;
   String? image;
 
-  Map<String, dynamic> toJson() {
-    final map = <String, dynamic>{};
-    map['id'] = id;
-    map['image'] = image;
-    return map;
-  }
+  factory Special.fromJson(Map<String, dynamic> json) => Special(
+        id: json["id"],
+        image: json["image"],
+      );
+
+  Map<String, dynamic> toJson() => {
+        "id": id,
+        "image": image,
+      };
 }

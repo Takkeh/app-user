@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:takkeh/ui/widgets/custom_network_image.dart';
+import 'package:takkeh/ui/widgets/custom_svg_icon.dart';
 import 'package:takkeh/utils/base/colors.dart';
 
 class CustomListTile extends StatelessWidget {
-  final String imageUrl, title, subTitle, description;
+  final String imageUrl, title, subTitle, description, reviewIcon;
   final Function() onTap;
 
   const CustomListTile({
@@ -13,6 +14,7 @@ class CustomListTile extends StatelessWidget {
     required this.subTitle,
     required this.description,
     required this.onTap,
+    required this.reviewIcon,
   }) : super(key: key);
 
   @override
@@ -47,17 +49,40 @@ class CustomListTile extends StatelessWidget {
                     ),
                   ),
                   Text(
-                    subTitle,
-                    style: const TextStyle(
-                      color: MyColors.greyEB3,
-                    ),
-                  ),
-                  Text(
                     description,
                     style: const TextStyle(
-                      color: MyColors.text,
-                      fontSize: 12,
+                      color: MyColors.greyEB3,
+                      fontSize: 14,
                     ),
+                  ),
+                  Row(
+                    children: [
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        children: [
+                          CustomSvgIcon(reviewIcon: reviewIcon),
+                          const SizedBox(width: 5),
+                          Text(
+                            subTitle,
+                            style: const TextStyle(
+                              color: MyColors.greyEB3,
+                            ),
+                          ),
+                        ],
+                      ),
+                      Text(
+                        subTitle,
+                        style: const TextStyle(
+                          color: MyColors.greyEB3,
+                        ),
+                      ),
+                      Text(
+                        subTitle,
+                        style: const TextStyle(
+                          color: MyColors.greyEB3,
+                        ),
+                      ),
+                    ],
                   ),
                 ],
               ),

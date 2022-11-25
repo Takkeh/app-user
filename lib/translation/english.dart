@@ -44,4 +44,5 @@ final Map<String, String> en = {
   MyStrings.emailOrPhoneAlreadyRegisteredKey: 'Email or Phone Already registered',
   MyStrings.fullNameLabelKey: 'Enter your full name',
   "": "",
+  "Coming Soon!": "Coming Soon!",
 };

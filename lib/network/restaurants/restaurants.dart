@@ -8,7 +8,8 @@ import 'package:takkeh/utils/api_url.dart';
 class RestaurantsApi {
   static Future<RestaurantsModel?> data(int page, int filter) async {
     try {
-      String url = '${ApiUrl.mainUrl}${ApiUrl.restaurants}?page=$page&filter=$filter';
+      //TODO: change url based on two param
+      String url = '${ApiUrl.mainUrl}${ApiUrl.restaurants}';
       Uri uri = Uri.parse(url);
       var headers = {
         'Content-Type': 'application/json',
