@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CLIENT_ID</key>
+	<string>308674443378-d7vjt2uk6pbh1q9hu6rb9unq6gfj0cu4.apps.googleusercontent.com</string>
+	<key>REVERSED_CLIENT_ID</key>
+	<string>com.googleusercontent.apps.308674443378-d7vjt2uk6pbh1q9hu6rb9unq6gfj0cu4</string>
+	<key>API_KEY</key>
+	<string>AIzaSyCitQf-geX-XpcQpMdLRE6GSJVmz_XV6yQ</string>
+	<key>GCM_SENDER_ID</key>
+	<string>308674443378</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>com.wecan.takkeh</string>
+	<key>PROJECT_ID</key>
+	<string>takkeh-ab34f</string>
+	<key>STORAGE_BUCKET</key>
+	<string>takkeh-ab34f.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<false></false>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true></true>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:308674443378:ios:90fac42ba44034530daaeb</string>
+	<key>DATABASE_URL</key>
+	<string>https://takkeh-ab34f-default-rtdb.firebaseio.com</string>
+</dict>
+</plist>
