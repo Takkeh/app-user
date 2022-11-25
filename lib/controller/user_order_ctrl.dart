@@ -5,7 +5,7 @@ import 'package:get/get.dart';
 class UserOrderCtrl extends GetxController {
   static UserOrderCtrl get find => Get.find();
 
-  int companyId = 0;
+  int restaurantId = 0;
 
   final orderList = <Map<String, dynamic>>[].obs;
   final totalPrice = 0.0.obs;

@@ -3,7 +3,6 @@ import 'package:get/get.dart';
 import 'package:takkeh/controller/restaurants/make_order.dart';
 import 'package:takkeh/controller/user_order_ctrl.dart';
 import 'package:takkeh/translation/service.dart';
-import 'package:takkeh/ui/screens/restaurants/basket.dart';
 import 'package:takkeh/utils/app_constants.dart';
 import 'package:takkeh/utils/base/colors.dart';
 
@@ -33,13 +32,13 @@ class ProductsFABButton extends StatelessWidget {
               );
               return;
             }
-            MakeOrderCtrl.fetchMakeOrderData(
+            MakeOrderCtrl.find.fetchData(
               context: context,
               restaurantId: restaurantId,
               generalNote: '',
-              route: BasketScreen(
-                restaurantId: restaurantId,
-              ),
+              // route: BasketScreen(
+              //   restaurantId: restaurantId,
+              // ),
             );
           },
           style: ElevatedButton.styleFrom(

@@ -66,6 +66,7 @@ dependencies:
   rect_getter: ^1.1.0
   sunmi_printer_plus: ^2.1.1
   esc_pos_utils: ^1.1.0
+  loading_animation_widget: ^1.2.0+3
 
 dev_dependencies:
   flutter_test:

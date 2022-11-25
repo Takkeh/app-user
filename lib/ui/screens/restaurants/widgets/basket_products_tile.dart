@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:takkeh/model/restaurants/make_order_model.dart';
 import 'package:takkeh/ui/screens/restaurants/widgets/quantity_button.dart';
 import 'package:takkeh/ui/widgets/custom_network_image.dart';
 import 'package:takkeh/utils/app_constants.dart';
@@ -12,7 +11,7 @@ class BasketProductTile extends StatefulWidget {
   final double initialPrice;
   final int index;
   final List<Widget> extrasWidget;
-  final List<Extra> extrasList;
+  final List extrasList;
   final int initialQuantity, productId, restaurantId;
 
   const BasketProductTile({
