@@ -23,7 +23,7 @@ class MySharedPreferences {
     isLogIn = false;
     email = "";
     name = "";
-    userId = "";
+    userId = 0;
     language = "";
     deviceToken = "";
     phone = "";
@@ -48,8 +48,8 @@ class MySharedPreferences {
   static String get name => _sharedPreferences.getString(keyName) ?? "";
   static set name(String value) => _sharedPreferences.setString(keyName, value);
 
-  static String get userId => _sharedPreferences.getString(keyUserId) ?? "";
-  static set userId(String value) => _sharedPreferences.setString(keyUserId, value);
+  static int get userId => _sharedPreferences.getInt(keyUserId) ?? 0;
+  static set userId(int value) => _sharedPreferences.setInt(keyUserId, value);
 
   static String get deviceToken => _sharedPreferences.getString(keyDeviceToken) ?? "";
   static set deviceToken(String value) => _sharedPreferences.setString(keyDeviceToken, value);

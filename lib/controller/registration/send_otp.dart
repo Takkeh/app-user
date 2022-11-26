@@ -33,7 +33,7 @@ class SendOtpController {
       MySharedPreferences.accessToken = token;
       MySharedPreferences.email = email;
       MySharedPreferences.name = name;
-      MySharedPreferences.userId = name;
+      MySharedPreferences.userId = int.tryParse(userId)!;
       MySharedPreferences.phone = "+962$phone";
       MySharedPreferences.isLogIn = true;
       Get.offAll(() => const BaseNavBar(), binding: NavBarBinding());

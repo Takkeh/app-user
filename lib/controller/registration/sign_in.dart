@@ -39,7 +39,7 @@ class SignInController extends GetxController {
       MySharedPreferences.accessToken = signInModel!.data!.token!;
       MySharedPreferences.email = signInModel!.data!.user!.email!;
       MySharedPreferences.name = signInModel!.data!.user!.name!;
-      MySharedPreferences.name = signInModel!.data!.user!.id!.toString();
+      MySharedPreferences.userId = signInModel!.data!.user!.id!;
       MySharedPreferences.image = signInModel!.data!.user!.image!;
       MySharedPreferences.phone = signInModel!.data!.user!.phone!;
       MySharedPreferences.isLogIn = true;
