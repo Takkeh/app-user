@@ -10,7 +10,7 @@ class ViewRestaurantApi {
     try {
       //TODO: change later
       // String url = '${ApiUrl.mainUrl}${ApiUrl.viewRestaurants}$id';
-      String url = '${ApiUrl.mainUrl}${ApiUrl.viewRestaurants}';
+      String url = '${ApiUrl.mainUrl}${ApiUrl.viewRestaurants}$id';
       Uri uri = Uri.parse(url);
       var headers = {
         'Content-Type': 'application/json',

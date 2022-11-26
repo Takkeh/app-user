@@ -28,6 +28,7 @@ class ProductsFABButton extends StatelessWidget {
                 TranslationService.getString('your_basket_is_empty_key'),
                 titleText: const SizedBox.shrink(),
                 colorText: Colors.white,
+                margin: const EdgeInsets.all(10.0),
                 backgroundColor: MyColors.redPrimary,
               );
               return;

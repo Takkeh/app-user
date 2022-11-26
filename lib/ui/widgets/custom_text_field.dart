@@ -24,6 +24,7 @@ class CustomTextField extends StatelessWidget {
   final double? minSuffixWidth;
   final double? maxSuffixWidth;
   final bool? filled;
+  final EdgeInsetsGeometry? padding;
   final Color? fillColor;
   final List<TextInputFormatter>? inputFormatters;
 
@@ -52,67 +53,71 @@ class CustomTextField extends StatelessWidget {
     this.maxSuffixWidth = 70,
     this.filled,
     this.fillColor,
+    this.padding,
   }) : super(key: key);
 
   static const _border = 26.0;
 
   @override
   Widget build(BuildContext context) {
-    return TextFormField(
-      inputFormatters: inputFormatters,
-      autovalidateMode: autoValidateMode,
-      onTap: onTap,
-      textAlign: textAlign ?? TextAlign.start,
-      maxLines: maxLines,
-      minLines: minLines,
-      readOnly: readOnly,
-      style: const TextStyle(color: MyColors.text, fontSize: 16),
-      keyboardType: keyboardType,
-      textDirection: textDirection,
-      obscureText: obscureText,
-      validator: validator,
-      controller: controller,
-      decoration: InputDecoration(
-        filled: filled,
-        fillColor: fillColor,
-        label: label == null ? null : Text(label!),
-        hintText: hintText,
-        hintStyle: hintStyle,
-        labelStyle: const TextStyle(color: MyColors.greyED0),
-        prefixIcon: prefixIcon,
-        suffixIcon: suffixIcon,
-        contentPadding: EdgeInsets.symmetric(horizontal: horizontalPadding ?? 0, vertical: 20),
-        suffixIconConstraints: BoxConstraints(
-          maxHeight: 50,
-          minWidth: minSuffixWidth == null ? 70 : minSuffixWidth!,
-          maxWidth: maxSuffixWidth == null ? 70 : maxSuffixWidth!,
+    return Padding(
+      padding: padding ?? EdgeInsets.zero,
+      child: TextFormField(
+        inputFormatters: inputFormatters,
+        autovalidateMode: autoValidateMode,
+        onTap: onTap,
+        textAlign: textAlign ?? TextAlign.start,
+        maxLines: maxLines,
+        minLines: minLines,
+        readOnly: readOnly,
+        style: const TextStyle(color: MyColors.text, fontSize: 16),
+        keyboardType: keyboardType,
+        textDirection: textDirection,
+        obscureText: obscureText,
+        validator: validator,
+        controller: controller,
+        decoration: InputDecoration(
+          filled: filled,
+          fillColor: fillColor,
+          label: label == null ? null : Text(label!),
+          hintText: hintText,
+          hintStyle: hintStyle,
+          labelStyle: const TextStyle(color: MyColors.greyED0),
+          prefixIcon: prefixIcon,
+          suffixIcon: suffixIcon,
+          contentPadding: EdgeInsets.symmetric(horizontal: horizontalPadding ?? 0, vertical: 20),
+          suffixIconConstraints: BoxConstraints(
+            maxHeight: 50,
+            minWidth: minSuffixWidth == null ? 70 : minSuffixWidth!,
+            maxWidth: maxSuffixWidth == null ? 70 : maxSuffixWidth!,
+          ),
+          prefixIconConstraints: const BoxConstraints(
+            maxHeight: 50,
+            minWidth: 70,
+            maxWidth: 70,
+          ),
+          enabledBorder: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(_border),
+            borderSide: const BorderSide(color: MyColors.grey9F4),
+          ),
+          disabledBorder: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(_border),
+            borderSide: const BorderSide(color: MyColors.grey9F4),
+          ),
+          focusedBorder: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(_border),
+            borderSide: const BorderSide(color: MyColors.primary),
+          ),
+          errorBorder: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(_border),
+            borderSide: const BorderSide(color: Color(0xFFE70044)),
+          ),
+          focusedErrorBorder: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(_border),
+            borderSide: const BorderSide(color: Color(0xFFE70044)),
+          ),
+          errorStyle: const TextStyle(color: Color(0xFFE70044)),
         ),
-        prefixIconConstraints: const BoxConstraints(
-          maxHeight: 50,
-          minWidth: 70,
-          maxWidth: 70,
-        ),
-        enabledBorder: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(_border),
-          borderSide: const BorderSide(color: MyColors.grey9F4),
-        ),
-        disabledBorder: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(_border),
-          borderSide: const BorderSide(color: MyColors.grey9F4),
-        ),
-        focusedBorder: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(_border),
-          borderSide: const BorderSide(color: MyColors.primary),
-        ),
-        errorBorder: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(_border),
-          borderSide: const BorderSide(color: Color(0xFFE70044)),
-        ),
-        focusedErrorBorder: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(_border),
-          borderSide: const BorderSide(color: Color(0xFFE70044)),
-        ),
-        errorStyle: const TextStyle(color: Color(0xFFE70044)),
       ),
     );
   }

@@ -32,8 +32,9 @@ class ViewRestaurantBuilder extends StatelessWidget {
             if (snapshot.hasData) {
               return Column(
                 children: List.generate(
-                  3,
+                  snapshot.data!.categories!.length,
                   (number) {
+                    final info = snapshot.data!.categories![number];
                     ViewRestaurantCtrl.find.itemKeys.add(GlobalKey());
                     //TODO: re-comment later
                     return Padding(
@@ -42,7 +43,7 @@ class ViewRestaurantBuilder extends StatelessWidget {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Text(
-                            "position for $number",
+                            info.name!,
                             key: ViewRestaurantCtrl.find.itemKeys[number],
                             style: const TextStyle(
                               fontSize: 20,
@@ -50,9 +51,9 @@ class ViewRestaurantBuilder extends StatelessWidget {
                             ),
                           ),
                           ...List.generate(
-                            snapshot.data!.data!.length,
+                            snapshot.data!.categories!.length,
                             (index) {
-                              final data = snapshot.data!.data![index];
+                              final data = snapshot.data!.categories![number].products![index];
                               return Padding(
                                 padding: const EdgeInsets.symmetric(vertical: 6.0),
                                 child: ProductsListTile(
@@ -60,12 +61,12 @@ class ViewRestaurantBuilder extends StatelessWidget {
                                   imageUrl: data.image!,
                                   title: data.name!,
                                   price: data.price!,
-                                  subTitle: data.categorise!,
+                                  subTitle: data.description!,
                                   onTap: () {
                                     Get.to(
                                       () => ViewRestaurantProductScreen(
                                         title: data.name!,
-                                        subTitle: data.categorise!,
+                                        subTitle: data.description!,
                                         price: data.price!.toDouble(),
                                         cover: data.image!,
                                         productId: data.id!,

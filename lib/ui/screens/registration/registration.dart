@@ -35,7 +35,7 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
     return Scaffold(
       body: SafeArea(
         child: Padding(
-          padding: const EdgeInsets.fromLTRB(20, 20, 20, 0),
+          padding: const EdgeInsets.fromLTRB(0, 20, 0, 0),
           child: Column(
             children: [
               Image.asset(
@@ -43,7 +43,7 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                 height: 150,
               ),
               BaseSwitchSlider(
-                margin: const EdgeInsets.only(top: 20, bottom: 40),
+                margin: const EdgeInsets.only(top: 20, bottom: 40, left: 20, right: 20),
                 color: MyColors.grey5FA,
                 title1: MyStrings.signInKey,
                 title2: MyStrings.signUpKey,

@@ -13,26 +13,26 @@ class ViewRestaurantModel {
     this.status,
     this.code,
     this.msg,
-    this.data,
+    this.categories,
   });
 
   bool? status;
   int? code;
   String? msg;
-  List<RestaurantProducts>? data;
+  List<RestaurantProducts>? categories;
 
   factory ViewRestaurantModel.fromJson(Map<String, dynamic> json) => ViewRestaurantModel(
         status: json["status"],
         code: json["code"],
         msg: json["msg"],
-        data: List<RestaurantProducts>.from(json["data"].map((x) => RestaurantProducts.fromJson(x))),
+        categories: List<RestaurantProducts>.from(json["categories"].map((x) => RestaurantProducts.fromJson(x))),
       );
 
   Map<String, dynamic> toJson() => {
         "status": status,
         "code": code,
         "msg": msg,
-        "data": List<dynamic>.from(data!.map((x) => x.toJson())),
+        "categories": List<dynamic>.from(categories!.map((x) => x.toJson())),
       };
 }
 
@@ -40,34 +40,58 @@ class RestaurantProducts {
   RestaurantProducts({
     this.id,
     this.name,
+    this.products,
+  });
+
+  int? id;
+  String? name;
+  List<Product>? products;
+
+  factory RestaurantProducts.fromJson(Map<String, dynamic> json) => RestaurantProducts(
+        id: json["id"],
+        name: json["name"],
+        products: List<Product>.from(json["products"].map((x) => Product.fromJson(x))),
+      );
+
+  Map<String, dynamic> toJson() => {
+        "id": id,
+        "name": name,
+        "products": List<dynamic>.from(products!.map((x) => x.toJson())),
+      };
+}
+
+class Product {
+  Product({
+    this.id,
+    this.name,
+    this.description,
     this.image,
     this.price,
-    this.categorise,
     this.groups,
   });
 
   int? id;
   String? name;
+  String? description;
   String? image;
   double? price;
-  String? categorise;
   List<ProductGroup>? groups;
 
-  factory RestaurantProducts.fromJson(Map<String, dynamic> json) => RestaurantProducts(
+  factory Product.fromJson(Map<String, dynamic> json) => Product(
         id: json["id"],
         name: json["name"],
+        description: json["description"],
         image: json["image"] ?? '',
         price: double.parse(json["price"].toString()),
-        categorise: json["categorise"],
         groups: List<ProductGroup>.from(json["groups"].map((x) => ProductGroup.fromJson(x))),
       );
 
   Map<String, dynamic> toJson() => {
         "id": id,
         "name": name,
+        "description": description,
         "image": image,
         "price": price,
-        "categorise": categorise,
         "groups": List<dynamic>.from(groups!.map((x) => x.toJson())),
       };
 }
