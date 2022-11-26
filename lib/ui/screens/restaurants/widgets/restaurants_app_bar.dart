@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
-import 'package:takkeh/controller/user_location_ctrl.dart';
-import 'package:takkeh/ui/screens/restaurants/widgets/custom_circular_progress_indicator.dart';
+import 'package:takkeh/controller/restaurants/make_order.dart';
+import 'package:takkeh/controller/user_order_ctrl.dart';
+import 'package:takkeh/translation/service.dart';
+import 'package:takkeh/ui/widgets/adress_widget.dart';
 import 'package:takkeh/utils/base/colors.dart';
 import 'package:takkeh/utils/base/icons.dart';
 
@@ -30,51 +32,57 @@ class RestaurantsAppBar extends StatelessWidget implements PreferredSizeWidget {
           ),
         ),
       ),
-      title: Row(
-        crossAxisAlignment: CrossAxisAlignment.baseline,
-        textBaseline: TextBaseline.ideographic,
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          SvgPicture.asset(MyIcons.marker),
-          const SizedBox(width: 5),
-          GetBuilder<UserLocationCtrl>(
-            builder: (controller) {
-              if (controller.locality.value == null || controller.subLocality.value == null) {
-                return const CustomCircularProgressIndicator(color: Colors.white);
-              }
-              return Text(
-                "${controller.locality.value}, ${controller.subLocality.value}",
-              );
-            },
-          ),
-        ],
-      ),
+      title: const AddressWidget(),
       actions: [
-        Stack(
-          clipBehavior: Clip.none,
-          alignment: Alignment.topRight,
-          children: [
-            Center(
-              child: SvgPicture.asset(
-                MyIcons.shoppingCart,
-              ),
-            ),
-            const Positioned(
-              //TODO: check language change position + icon
-              right: -8,
-              top: 8,
-              child: CircleAvatar(
-                backgroundColor: Colors.white,
-                radius: 8,
-                child: Center(
-                  child: Text(
-                    "5",
-                    style: TextStyle(color: MyColors.text),
+        GetBuilder<UserOrderCtrl>(
+          builder: (controller) {
+            return GestureDetector(
+              onTap: () {
+                if (controller.orderList.isEmpty) {
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    SnackBar(
+                      content: Text(TranslationService.getString('your_basket_is_empty_key')),
+                    ),
+                  );
+                  return;
+                }
+                MakeOrderCtrl.find.fetchData(
+                  context: context,
+                  restaurantId: controller.restaurantId,
+                  generalNote: '',
+                  // route: BasketScreen(
+                  //   restaurantId: restaurantId,
+                  // ),
+                );
+              },
+              child: Stack(
+                clipBehavior: Clip.none,
+                alignment: Alignment.topRight,
+                children: [
+                  Center(
+                    child: SvgPicture.asset(
+                      MyIcons.shoppingCart,
+                    ),
                   ),
-                ),
+                  Positioned(
+                    //TODO: check language change position + icon
+                    right: -8,
+                    top: 8,
+                    child: CircleAvatar(
+                      backgroundColor: Colors.white,
+                      radius: 8,
+                      child: Center(
+                        child: Text(
+                          controller.totalQuantity.value.toString(),
+                          style: const TextStyle(color: MyColors.text),
+                        ),
+                      ),
+                    ),
+                  ),
+                ],
               ),
-            ),
-          ],
+            );
+          },
         ),
         const SizedBox(width: 15),
       ],

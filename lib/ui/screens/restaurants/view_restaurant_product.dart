@@ -99,10 +99,11 @@ class _ViewRestaurantProductScreenState extends State<ViewRestaurantProductScree
                     }
                     //TODO: specify the required field and scroll to it for next version
                     Get.snackbar(
-                      "Required Field".tr,
-                      "you need to check one the required fields".tr,
+                      TranslationService.getString('required_field_key'),
+                      TranslationService.getString('check_required_field_key'),
                       colorText: Colors.white,
-                      backgroundColor: MyColors.primary,
+                      margin: const EdgeInsets.all(10.0),
+                      backgroundColor: MyColors.redPrimary,
                     );
                     return;
                   }

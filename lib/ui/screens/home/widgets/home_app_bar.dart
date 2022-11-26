@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
-import 'package:takkeh/controller/user_location_ctrl.dart';
 import 'package:takkeh/ui/base/notifications.dart';
+import 'package:takkeh/ui/widgets/adress_widget.dart';
 import 'package:takkeh/utils/base/icons.dart';
 
 class HomeAppBar extends StatelessWidget implements PreferredSizeWidget {
@@ -28,25 +28,7 @@ class HomeAppBar extends StatelessWidget implements PreferredSizeWidget {
           ),
         ),
       ),
-      title: GetBuilder<UserLocationCtrl>(
-        builder: (controller) {
-          if (controller.locality.value.isEmpty && controller.subLocality.value.isEmpty) {
-            return const SizedBox.shrink();
-          }
-          return Row(
-            crossAxisAlignment: CrossAxisAlignment.baseline,
-            textBaseline: TextBaseline.ideographic,
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              SvgPicture.asset(MyIcons.marker),
-              const SizedBox(width: 5),
-              Text(
-                "${controller.locality.value}, ${controller.subLocality.value}",
-              ),
-            ],
-          );
-        },
-      ),
+      title: const AddressWidget(),
       actions: [
         Padding(
           padding: const EdgeInsetsDirectional.fromSTEB(0, 0, 15, 0),

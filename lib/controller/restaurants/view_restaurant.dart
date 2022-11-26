@@ -18,7 +18,7 @@ class ViewRestaurantCtrl extends GetxController {
 
   Future<ViewRestaurantModel?> fetchCategoriesData(int restaurantId) async {
     viewRestaurantModel = await ViewRestaurantApi.data(restaurantId);
-    restaurantProducts.addAll(viewRestaurantModel!.data!);
+    restaurantProducts.addAll(viewRestaurantModel!.categories!);
     update();
     return viewRestaurantModel;
   }
