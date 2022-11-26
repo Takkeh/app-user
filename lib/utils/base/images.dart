@@ -13,5 +13,7 @@ class MyImages {
   static const String driver = "${_path}driver.png";
   static const String halfCircleHorizontal = "${_path}half_circle_hori.png";
   static const String help = "${_path}help.png";
-  static const String semiCircle = "${_path}semi_circle.png";
+  static const String leftSemiCircle = "${_path}left_semi_circle.png";
+  static const String rightSemiCircle = "${_path}right_semi_circle.png";
+  static const String intro = "${_path}intro.png";
 }

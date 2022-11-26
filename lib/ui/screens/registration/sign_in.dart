@@ -171,7 +171,7 @@ class SignInScreenState extends State<SignInScreen> {
             children: [
               //TODO: another picture for english
               Image.asset(
-                MyImages.semiCircle,
+                MyImages.leftSemiCircle,
                 height: 110,
               ),
               Column(
