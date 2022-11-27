@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
-import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:takkeh/controller/restaurants/update_order_ctrl.dart';
 import 'package:takkeh/controller/user_order_ctrl.dart';
 import 'package:takkeh/translation/service.dart';
@@ -29,13 +28,13 @@ class ConfirmOrderScreen extends StatefulWidget {
 }
 
 class _ConfirmOrderScreenState extends State<ConfirmOrderScreen> {
-  late GoogleMapController mapController;
+  // late GoogleMapController mapController;
 
-  @override
-  void dispose() {
-    super.dispose();
-    mapController.dispose();
-  }
+  // @override
+  // void dispose() {
+  //   super.dispose();
+  //   mapController.dispose();
+  // }
 
   @override
   Widget build(BuildContext context) {
