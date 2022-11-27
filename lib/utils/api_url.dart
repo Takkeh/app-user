@@ -35,4 +35,7 @@ class ApiUrl {
   static const String promoCodes = "/api/v1/promo-code";
   static const String addPromoCode = "/api/v1/add-code-to-order";
 
+  // orders
+  static const String myOrders = "/api/v1/my-orders";
+
 }

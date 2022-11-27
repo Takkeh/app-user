@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:intl/intl.dart';
 import 'package:takkeh/model/notification/notification_model.dart';
 import 'package:takkeh/utils/base/colors.dart';
 import 'package:takkeh/utils/base/icons.dart';
@@ -90,7 +91,7 @@ class NotificationsBox extends StatelessWidget {
                               Padding(
                                 padding: const EdgeInsets.only(top: 2.5),
                                 child: Text(
-                                  '${notifications[index].createdAt.toDate().day}',
+                                  DateFormat('a h:mm dd.MM.yyyy').format(notifications[index].createdAt.toDate()),
                                   style: const TextStyle(
                                     color: MyColors.greyEB3,
                                     fontSize: 12,

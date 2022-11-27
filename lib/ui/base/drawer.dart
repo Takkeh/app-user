@@ -3,6 +3,7 @@ import 'dart:math' as math;
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
+import 'package:takkeh/binding/my_orders/my_orders_binding.dart';
 import 'package:takkeh/controller/registration/log_out.dart';
 import 'package:takkeh/controller/user_order_ctrl.dart';
 import 'package:takkeh/translation/service.dart';
@@ -11,6 +12,7 @@ import 'package:takkeh/ui/base/widgets/drawer_background_image.dart';
 import 'package:takkeh/ui/base/widgets/drawer_list_tile.dart';
 import 'package:takkeh/ui/base/widgets/drawer_profile_info.dart';
 import 'package:takkeh/ui/screens/help/help.dart';
+import 'package:takkeh/ui/screens/my_orders/my_orders.dart';
 import 'package:takkeh/ui/screens/profile/profile.dart';
 import 'package:takkeh/ui/screens/registration/registration.dart';
 import 'package:takkeh/ui/screens/wallet/wallet.dart';
@@ -68,7 +70,9 @@ class _BaseDrawerState extends State<BaseDrawer> {
                       DrawerListTile(
                         title: TranslationService.getString('orders_key'),
                         icon: MyIcons.timePast,
-                        onTap: () {},
+                        onTap: () {
+                          Get.to(()=> const MyOrdersScreen(),binding: MyOrdersBinding());
+                        },
                       ),
                       DrawerListTile(
                         title: TranslationService.getString('wallet_key'),
