@@ -72,7 +72,7 @@ class Data {
   String? workTime;
   String? deliveryTime;
   int? minimum;
-  double? deliveryFee;
+  dynamic deliveryFee;
   int? salesTax;
   dynamic isTaxable;
   List<Review>? reviews;
