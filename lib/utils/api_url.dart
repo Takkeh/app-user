@@ -20,9 +20,14 @@ class ApiUrl {
   //restaurants
   static const String restaurantCategories = "/api/v1/categories";
   static const String viewRestaurantProduct = "/api/v1/products/";
-  static const String restaurants = "/api/v1/restaurants";
+  static const String restaurants = "/api/v1/restaurant/catpro/search";
   static const String viewRestaurants = "/api/v1/restaurant/products/";
   static const String makeOrder = "/api/v1/make-order";
   static const String updateOrder = "/api/v1/update-order";
   static const String restaurantsSearch = "/api/v1/restaurants/search/";
+  static const String tags = "/api/v1/tags";
+
+  //promo codes
+  static const String promoCodes = "/api/v1/promo-code";
+  static const String addPromoCode = "/api/v1/add-code-to-order";
 }

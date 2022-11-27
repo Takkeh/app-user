@@ -51,7 +51,8 @@ class ViewRestaurantBuilder extends StatelessWidget {
                             ),
                           ),
                           ...List.generate(
-                            snapshot.data!.categories!.length,
+                            //TODO: missing api data
+                            snapshot.data!.categories![number].products!.length,
                             (index) {
                               final data = snapshot.data!.categories![number].products![index];
                               return Padding(
@@ -61,12 +62,12 @@ class ViewRestaurantBuilder extends StatelessWidget {
                                   imageUrl: data.image!,
                                   title: data.name!,
                                   price: data.price!,
-                                  subTitle: data.description!,
+                                  subTitle: data.name!,
                                   onTap: () {
                                     Get.to(
                                       () => ViewRestaurantProductScreen(
                                         title: data.name!,
-                                        subTitle: data.description!,
+                                        subTitle: data.name!,
                                         price: data.price!.toDouble(),
                                         cover: data.image!,
                                         productId: data.id!,

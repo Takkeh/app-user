@@ -2,13 +2,13 @@ import 'dart:convert';
 import 'dart:developer';
 
 import 'package:http/http.dart' as http;
-import 'package:takkeh/controller/user_location_ctrl.dart';
 import 'package:takkeh/model/restaurants/update_order_model.dart';
 import 'package:takkeh/utils/api_url.dart';
 
 class UpdateOrderApi {
-  static Future<UpdateOrderModel?> data({
+  Future<UpdateOrderModel?> data({
     required int orderId,
+    required int addressId,
   }) async {
     try {
       String url = '${ApiUrl.mainUrl}${ApiUrl.updateOrder}';
@@ -18,8 +18,7 @@ class UpdateOrderApi {
       };
       var body = jsonEncode({
         "order_id": orderId,
-        "lat": UserLocationCtrl.find.latitude.value.toString(),
-        "long": UserLocationCtrl.find.longitude.value.toString(),
+        "address_id": addressId,
       });
       log("Response:: UpdateOrderResponse\nUrl:: $url\nheaders:: $headers\nbody:: $body");
       http.Response response = await http.post(uri, body: body, headers: headers);

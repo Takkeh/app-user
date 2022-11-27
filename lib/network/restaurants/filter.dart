@@ -9,7 +9,7 @@ class FilterApi {
   static Future<FilterModel?> data() async {
     try {
       //TODO: change later to another url
-      String url = '${ApiUrl.mainUrl}${ApiUrl.offers}';
+      String url = '${ApiUrl.mainUrl}${ApiUrl.tags}';
       Uri uri = Uri.parse(url);
       var headers = {
         'Content-Type': 'application/json',

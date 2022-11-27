@@ -49,7 +49,8 @@ class _ConfirmOrderScreenState extends State<ConfirmOrderScreen> {
             ? CustomFABButton(
                 title: TranslationService.getString('confirm_order_key'),
                 onPressed: () {
-                  UpdateOrderCtrl.fetchUpdateOrderData(orderId: widget.orderId, context: context);
+                  UpdateOrderCtrl().fetchUpdateOrderData(orderId: widget.orderId, context: context);
+                  // UpdateOrderCtrl.fetchUpdateOrderData(orderId: widget.orderId, context: context);
                 },
               )
             : null,

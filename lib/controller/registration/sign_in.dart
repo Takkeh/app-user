@@ -39,9 +39,9 @@ class SignInController extends GetxController {
       MySharedPreferences.accessToken = signInModel!.data!.token!;
       MySharedPreferences.email = signInModel!.data!.user!.email!;
       MySharedPreferences.name = signInModel!.data!.user!.name!;
-      MySharedPreferences.name = signInModel!.data!.user!.id!.toString();
       MySharedPreferences.image = signInModel!.data!.user!.image!;
       MySharedPreferences.phone = signInModel!.data!.user!.phone!;
+      MySharedPreferences.userId = signInModel!.data!.user!.id!;
       MySharedPreferences.isLogIn = true;
     } else if (signInModel!.code == 500) {
       Fluttertoast.showToast(msg: TranslationService.getString('incorrect_email_or_password_key'));

@@ -19,13 +19,13 @@ class RestaurantsModel {
   bool? status;
   int? code;
   String? msg;
-  List<Datum>? data;
+  List<RestaurantList>? data;
 
   factory RestaurantsModel.fromJson(Map<String, dynamic> json) => RestaurantsModel(
         status: json["status"],
         code: json["code"],
         msg: json["msg"],
-        data: List<Datum>.from(json["data"].map((x) => Datum.fromJson(x))),
+        data: List<RestaurantList>.from(json["data"].map((x) => RestaurantList.fromJson(x))),
       );
 
   Map<String, dynamic> toJson() => {
@@ -36,8 +36,8 @@ class RestaurantsModel {
       };
 }
 
-class Datum {
-  Datum({
+class RestaurantList {
+  RestaurantList({
     this.id,
     this.name,
     this.logo,
@@ -45,7 +45,8 @@ class Datum {
     this.reviewIcon,
     this.cost,
     this.time,
-    this.review,
+    this.isBusy,
+    this.description,
   });
 
   int? id;
@@ -55,17 +56,19 @@ class Datum {
   String? reviewIcon;
   String? cost;
   String? time;
-  String? review;
+  int? isBusy;
+  String? description;
 
-  factory Datum.fromJson(Map<String, dynamic> json) => Datum(
+  factory RestaurantList.fromJson(Map<String, dynamic> json) => RestaurantList(
         id: json["id"],
         name: json["name"],
         logo: json["logo"],
         cover: json["cover"],
-        reviewIcon: json["review_icon"],
+        reviewIcon: json["review_icon"] ?? '',
         cost: json["cost"],
         time: json["time"],
-        review: json["review"] ?? 'Review',
+        isBusy: json["is_busy"],
+        description: json["description"],
       );
 
   Map<String, dynamic> toJson() => {
@@ -76,6 +79,7 @@ class Datum {
         "review_icon": reviewIcon,
         "cost": cost,
         "time": time,
-        "review": review,
+        "is_busy": isBusy,
+        "description": description,
       };
 }

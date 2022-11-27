@@ -23,7 +23,7 @@ class ViewRestaurantProductScreen extends StatefulWidget {
   final String cover;
   final int productId;
   final int restaurantId;
-  final List<ProductGroup> groups;
+  final List<Groups> groups;
 
   const ViewRestaurantProductScreen({
     Key? key,
@@ -160,16 +160,13 @@ class _ViewRestaurantProductScreenState extends State<ViewRestaurantProductScree
                                   fontWeight: FontWeight.w500,
                                 ),
                               ),
-                              //TODO: uncomment
-                              // if (data.type == 'required')
-                              if (index == 0)
+                              if (data.type == 'required')
                                 RequiredCheckBox2(
                                   items: data.items!,
                                   groupId: data.id!,
                                 ),
-                              //TODO: uncomment
-                              if (index == 1)
-                                // if (data.type == 'opp')
+                              //TODO: ask if it's opp
+                              if (data.type == 'opp' || data.type == 'remove')
                                 OptionalCheckBox2(
                                   items: data.items!,
                                   groupId: data.id!,
