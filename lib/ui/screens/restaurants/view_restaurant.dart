@@ -84,6 +84,7 @@ class ViewRestaurantScreen extends StatelessWidget {
                               cost: cost,
                               review: review,
                               cover: cover,
+                              restaurantId: restaurantId,
                             ),
                           )
                         ],

@@ -26,6 +26,7 @@ class ApiUrl {
   static const String updateOrder = "/api/v1/update-order";
   static const String restaurantsSearch = "/api/v1/restaurants/search/";
   static const String tags = "/api/v1/tags";
+  static const String restaurantReviews = "/api/v1/restaurant/reviews/";
 
   //profile
   static const String updateProfile = "/api/v1/update-profile";

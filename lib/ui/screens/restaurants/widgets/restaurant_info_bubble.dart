@@ -2,6 +2,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
+import 'package:takkeh/binding/restaurants/restauratns_info.dart';
 import 'package:takkeh/ui/screens/restaurants/restaurant_info.dart';
 import 'package:takkeh/utils/api_url.dart';
 import 'package:takkeh/utils/base/colors.dart';
@@ -10,6 +11,7 @@ import 'package:takkeh/utils/constants.dart';
 
 class RestaurantInfoBubble extends StatelessWidget {
   final String title, logo, time, cost, review, cover;
+  final int restaurantId;
 
   const RestaurantInfoBubble({
     Key? key,
@@ -19,6 +21,7 @@ class RestaurantInfoBubble extends StatelessWidget {
     required this.cost,
     required this.review,
     required this.cover,
+    required this.restaurantId,
   }) : super(key: key);
 
   static Widget getWidget(String text) {
@@ -56,7 +59,9 @@ class RestaurantInfoBubble extends StatelessWidget {
                     title: title,
                     imageUrl: cover,
                     logo: logo,
+                    restaurantId: restaurantId,
                   ),
+                  binding: RestaurantInfoBinding(),
                 );
               },
               child: Stack(
@@ -65,7 +70,8 @@ class RestaurantInfoBubble extends StatelessWidget {
                   CircleAvatar(
                     backgroundColor: MyColors.redPrimary,
                     radius: 50,
-                    backgroundImage: CachedNetworkImageProvider('${ApiUrl.mainUrl}/$logo'),
+                    backgroundImage:
+                        CachedNetworkImageProvider('${ApiUrl.mainUrl}/$logo'),
                   ),
                   Stack(
                     clipBehavior: Clip.none,
