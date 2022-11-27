@@ -68,7 +68,7 @@ class NotificationsBox extends StatelessWidget {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Text(
-                            notifications[index].type,
+                            notifications[index].title,
                             style: const TextStyle(
                               color: MyColors.text,
                               fontSize: 18,

@@ -1,5 +1,4 @@
 import 'package:get/get.dart';
-import 'package:takkeh/controller/restaurants/restaurants.dart';
 import 'package:takkeh/model/restaurants/restaurant_categories_model.dart';
 import 'package:takkeh/network/restaurants/restaurant_categories.dart';
 
@@ -9,10 +8,6 @@ class RestaurantCategoriesController extends GetxController {
   final currentIndex = 0.obs;
   final categoryTitle = "".obs;
   int filterId = 1;
-
-  void updateCategories(id) {
-    RestaurantsCtrl.find.fetchCategoriesData(1, id);
-  }
 
   void onPageChanged(index, name, id) {
     currentIndex.value = index;

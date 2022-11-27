@@ -21,7 +21,7 @@ class RestaurantInfoBox extends StatelessWidget {
     return Row(
       mainAxisAlignment: MainAxisAlignment.start,
       children: [
-        isNetwork ? CustomSvgIcon(reviewIcon: networkIcon!) : SvgPicture.asset(assetIcon!),
+        isNetwork ? CustomSvgIcon(iconUrl: networkIcon!) : SvgPicture.asset(assetIcon!),
         const SizedBox(width: 3),
         Text(
           text,

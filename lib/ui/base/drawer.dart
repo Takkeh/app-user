@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:takkeh/controller/registration/log_out.dart';
+import 'package:takkeh/controller/user_order_ctrl.dart';
 import 'package:takkeh/translation/service.dart';
 import 'package:takkeh/ui/base/widgets/drawer_app_bar.dart';
 import 'package:takkeh/ui/base/widgets/drawer_background_image.dart';
@@ -11,6 +12,7 @@ import 'package:takkeh/ui/base/widgets/drawer_list_tile.dart';
 import 'package:takkeh/ui/base/widgets/drawer_profile_info.dart';
 import 'package:takkeh/ui/screens/help/help.dart';
 import 'package:takkeh/ui/screens/profile/profile.dart';
+import 'package:takkeh/ui/screens/registration/registration.dart';
 import 'package:takkeh/ui/screens/wallet/wallet.dart';
 import 'package:takkeh/utils/base/colors.dart';
 import 'package:takkeh/utils/base/icons.dart';
@@ -97,7 +99,10 @@ class _BaseDrawerState extends State<BaseDrawer> {
                 ),
                 TextButton.icon(
                   onPressed: () {
-                    LogOutController.find.fetchLogOutData(context);
+                    MySharedPreferences.clearProfile();
+                    Get.delete<UserOrderCtrl>(force: true);
+                    Get.offAll(() => const RegistrationScreen());
+                    // LogOutController.find.fetchLogOutData(context);
                   },
                   label: const Text(
                     "  Sign out  ",

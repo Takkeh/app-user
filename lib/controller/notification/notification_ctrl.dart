@@ -42,7 +42,6 @@ class NotificationCtrl extends GetxController {
       notifications.add(older);
       return notifications;
     } catch (e) {
-      print('error');
       return null;
     }
   }

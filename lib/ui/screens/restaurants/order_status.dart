@@ -1,11 +1,10 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:takkeh/binding/nav_bar.dart';
-import 'package:takkeh/controller/restaurants/update_order_ctrl.dart';
+import 'package:takkeh/model/restaurants/order_details_model.dart';
 import 'package:takkeh/translation/service.dart';
 import 'package:takkeh/ui/base/nav_bar.dart';
-import 'package:takkeh/ui/screens/restaurants/confirm_order.dart';
-import 'package:takkeh/ui/screens/restaurants/widgets/captain_widget.dart';
 import 'package:takkeh/ui/screens/restaurants/widgets/custom_fab_button.dart';
 import 'package:takkeh/ui/screens/restaurants/widgets/gradient_colors_box.dart';
 import 'package:takkeh/ui/screens/restaurants/widgets/order_address_tile.dart';
@@ -20,6 +19,28 @@ class OrderStatusScreen extends StatelessWidget {
     Key? key,
     required this.orderId,
   }) : super(key: key);
+
+  static final moviesRef = FirebaseFirestore.instance.collection('orders').withConverter<FireOrderDetails>(
+        fromFirestore: (snapshot, _) => FireOrderDetails.fromJson(snapshot.data()!),
+        toFirestore: (order, _) => order.toJson(),
+      );
+
+  static Widget myWidget() {
+    return StreamBuilder<QuerySnapshot<FireOrderDetails>>(
+      stream: moviesRef.snapshots(),
+      builder: (BuildContext context, snapshot) {
+        if (snapshot.hasError) {
+          return Text('Something went wrong');
+        }
+
+        if (snapshot.connectionState == ConnectionState.waiting) {
+          return Text("Loading");
+        }
+
+        return Text(snapshot.data!.docs[0].data().userAddress);
+      },
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -63,7 +84,7 @@ class OrderStatusScreen extends StatelessWidget {
                     indent: 15,
                     endIndent: 15,
                   ),
-                  CaptainWidget(name: UpdateOrderCtrl.model!.data!.driverName!),
+                  // CaptainWidget(name: UpdateOrderCtrl.model!.data!.driverName!),
                   const Divider(
                     height: 30,
                     indent: 15,
@@ -76,7 +97,7 @@ class OrderStatusScreen extends StatelessWidget {
                       fontWeight: FontWeight.w500,
                     ),
                   ),
-                  OrderDetailsWidget(productName: UpdateOrderCtrl.model!.data!.products!),
+                  // OrderDetailsWidget(productName: UpdateOrderCtrl.model!.data!.products!),
                 ],
               ),
             ),

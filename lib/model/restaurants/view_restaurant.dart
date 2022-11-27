@@ -64,7 +64,6 @@ class Product {
   Product({
     this.id,
     this.name,
-    this.description,
     this.image,
     this.price,
     this.groups,
@@ -72,32 +71,29 @@ class Product {
 
   int? id;
   String? name;
-  String? description;
   String? image;
   double? price;
-  List<ProductGroup>? groups;
+  List<Groups>? groups;
 
   factory Product.fromJson(Map<String, dynamic> json) => Product(
         id: json["id"],
         name: json["name"],
-        description: json["description"],
         image: json["image"] ?? '',
         price: double.parse(json["price"].toString()),
-        groups: List<ProductGroup>.from(json["groups"].map((x) => ProductGroup.fromJson(x))),
+        groups: List<Groups>.from(json["groups"].map((x) => Groups.fromJson(x))),
       );
 
   Map<String, dynamic> toJson() => {
         "id": id,
         "name": name,
-        "description": description,
         "image": image,
         "price": price,
         "groups": List<dynamic>.from(groups!.map((x) => x.toJson())),
       };
 }
 
-class ProductGroup {
-  ProductGroup({
+class Groups {
+  Groups({
     this.id,
     this.name,
     this.type,
@@ -109,7 +105,7 @@ class ProductGroup {
   String? type;
   List<GroupItem>? items;
 
-  factory ProductGroup.fromJson(Map<String, dynamic> json) => ProductGroup(
+  factory Groups.fromJson(Map<String, dynamic> json) => Groups(
         id: json["id"],
         name: json["name"],
         type: json["type"],

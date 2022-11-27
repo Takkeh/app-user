@@ -3,6 +3,7 @@ import 'package:flutter_overlay_loader/flutter_overlay_loader.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
 import 'package:loading_animation_widget/loading_animation_widget.dart';
+import 'package:takkeh/binding/restaurants/basket_binding.dart';
 import 'package:takkeh/controller/user_order_ctrl.dart';
 import 'package:takkeh/model/restaurants/make_order_model.dart';
 import 'package:takkeh/network/restaurants/make_order.dart';
@@ -26,7 +27,7 @@ class MakeOrderCtrl extends GetxController {
       progressIndicator: Center(
         child: LoadingAnimationWidget.flickr(
           leftDotColor: MyColors.text,
-          rightDotColor: MyColors.yellow,
+          rightDotColor: MyColors.redPrimary,
           size: 50,
         ),
       ),
@@ -49,6 +50,7 @@ class MakeOrderCtrl extends GetxController {
           orderId: model!.data!.id!,
           restaurantId: restaurantId,
         ),
+        binding: PromoCodesBinding(),
       );
     } else {
       Fluttertoast.showToast(msg: model!.msg!);

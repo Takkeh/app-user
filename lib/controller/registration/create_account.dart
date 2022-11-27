@@ -34,7 +34,7 @@ class CreateAccountController {
                 name: signUpModel!.data!.user!.name!,
                 email: signUpModel!.data!.user!.email!,
                 token: signUpModel!.data!.token!,
-                userId: signUpModel!.data!.user!.id!.toString(),
+                userId: signUpModel!.data!.user!.id!,
               ),
           binding: CodeTimerBinding());
     } else if (signUpModel!.code == 500) {

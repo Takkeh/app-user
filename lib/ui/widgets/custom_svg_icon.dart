@@ -5,20 +5,23 @@ import 'package:takkeh/utils/base/colors.dart';
 import 'package:takkeh/utils/base/images.dart';
 
 class CustomSvgIcon extends StatelessWidget {
-  final String reviewIcon;
-  final double width;
+  final String iconUrl;
+  final double? width;
+  final Color? color;
 
   const CustomSvgIcon({
     Key? key,
-    required this.reviewIcon,
-    this.width = 20.0,
+    required this.iconUrl,
+    this.width,
+    this.color,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return SvgPicture.network(
-      '${ApiUrl.mainUrl}/$reviewIcon',
+      '${ApiUrl.mainUrl}/$iconUrl',
       width: width,
+      color: color,
       placeholderBuilder: (context) {
         //TODO: place holder image
         return const CircleAvatar(

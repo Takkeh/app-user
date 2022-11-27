@@ -6,20 +6,27 @@ import 'package:takkeh/model/restaurants/restaurants_model.dart';
 import 'package:takkeh/utils/api_url.dart';
 
 class RestaurantsApi {
-  static Future<RestaurantsModel?> data(int page, int filter) async {
+  static Future<RestaurantsModel?> data({
+    required int tagId,
+    required int categoryId,
+    required int pageKey,
+  }) async {
     try {
-      //TODO: change url based on two param
-      String url = '${ApiUrl.mainUrl}${ApiUrl.restaurants}';
+      String url = '${ApiUrl.mainUrl}${ApiUrl.restaurants}?page=$pageKey';
       Uri uri = Uri.parse(url);
       var headers = {
         'Content-Type': 'application/json',
       };
-      log("Response:: RestaurantsResponse\nUrl:: $url\nheaders:: $headers");
-      http.Response response = await http.get(uri, headers: headers);
+      var body = jsonEncode({
+        "category_id": categoryId,
+        "tag_id": tagId,
+      });
+      log("Response:: RestaurantsResponse\nUrl:: $url\nheaders:: $headers\nbody:: $body");
+      http.Response response = await http.post(uri, body: body, headers: headers);
       log("RestaurantsStatusCode:: ${response.statusCode}  RestaurantsBody:: ${response.body}");
-      RestaurantsModel restaurantsModel = RestaurantsModel.fromJson(json.decode(response.body));
+      RestaurantsModel model = RestaurantsModel.fromJson(json.decode(response.body));
       if (response.statusCode == 200) {
-        return restaurantsModel;
+        return model;
       } else {
         throw "Restaurants Error";
       }

@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
@@ -8,7 +9,6 @@ import 'package:takkeh/controller/nav_bar_ctrl.dart';
 import 'package:takkeh/controller/restaurants/make_order.dart';
 import 'package:takkeh/controller/user_location_ctrl.dart';
 import 'package:takkeh/controller/user_order_ctrl.dart';
-import 'package:takkeh/model/home/categories_model.dart';
 import 'package:takkeh/translation/service.dart';
 import 'package:takkeh/ui/base/drawer.dart';
 import 'package:takkeh/ui/screens/home/widgets/home_app_bar.dart';
@@ -76,41 +76,8 @@ class _HomeScreenState extends State<HomeScreen> {
               ],
             ),
             const SizedBox(height: 30),
-            // Padding(
-            //   padding: const EdgeInsets.symmetric(horizontal: 10.0, vertical: 30),
-            //   child: Row(
-            //     children: images.map((element) {
-            //       final index = images.indexOf(element);
-            //       return Expanded(
-            //         child: GestureDetector(
-            //           onTap: () {
-            //             switch (index) {
-            //               case 0:
-            //                 {
-            //                   Get.to(() => const RestaurantsHomeScreen(), binding: RestaurantsHomeBinding());
-            //                 }
-            //                 break;
-            //               case 1:
-            //                 {}
-            //                 break;
-            //               case 2:
-            //                 {}
-            //                 break;
-            //             }
-            //           },
-            //           child: Padding(
-            //             padding: const EdgeInsets.symmetric(horizontal: 5.0),
-            //             child: Image.asset(
-            //               element,
-            //             ),
-            //           ),
-            //         ),
-            //       );
-            //     }).toList(),
-            //   ),
-            // ),
-            FutureBuilder<CategoriesModel?>(
-              future: CategoriesController.find.initialize,
+            FutureBuilder<QuerySnapshot<Map<String, dynamic>>>(
+              future: FirebaseFirestore.instance.collection('categories').orderBy('order').get(),
               builder: (context, snapshot) {
                 switch (snapshot.connectionState) {
                   case ConnectionState.waiting:
@@ -129,7 +96,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                 },
                                 child: CustomNetworkImage(
                                   height: 100,
-                                  url: snapshot.data!.categorys![0].image!,
+                                  url: snapshot.data!.docs[0].data()['image'],
                                   radius: 15,
                                 ),
                               ),
@@ -142,7 +109,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                 },
                                 child: CustomNetworkImage(
                                   height: 100,
-                                  url: snapshot.data!.categorys![1].image!,
+                                  url: snapshot.data!.docs[1].data()['image'],
                                   radius: 15,
                                 ),
                               ),
@@ -155,7 +122,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                 },
                                 child: CustomNetworkImage(
                                   height: 100,
-                                  url: snapshot.data!.categorys![2].image!,
+                                  url: snapshot.data!.docs[2].data()['image'],
                                   radius: 15,
                                 ),
                               ),
@@ -163,8 +130,6 @@ class _HomeScreenState extends State<HomeScreen> {
                           ],
                         ),
                       );
-                    } else if (snapshot.hasError) {
-                      return const FailedWidget();
                     } else {
                       return const FailedWidget();
                     }

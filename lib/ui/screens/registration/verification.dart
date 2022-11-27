@@ -14,7 +14,9 @@ import 'package:takkeh/utils/base/icons.dart';
 import 'package:takkeh/utils/base/images.dart';
 
 class VerificationScreen extends StatefulWidget {
-  final String phoneNum, name, email, token, userId;
+  final String phoneNum, name, email, token;
+  final int userId;
+
   const VerificationScreen({
     Key? key,
     required this.phoneNum,

@@ -31,17 +31,16 @@ class RestaurantsFilterBuilder extends StatelessWidget {
                       physics: const BouncingScrollPhysics(),
                       separatorBuilder: (context, index) => const SizedBox(width: 5),
                       scrollDirection: Axis.horizontal,
-                      itemCount: snapshot.data!.offers!.length,
+                      itemCount: snapshot.data!.data!.length,
                       itemBuilder: (context, index) {
-                        final data = snapshot.data!.offers![index];
+                        final data = snapshot.data!.data![index];
                         return FilterBubble(
-                          //TODO: change this
-                          title: index == 0 ? ' توصيل مجاني توصيل مجاني' : 'free',
+                          title: data.name!,
                           imageUrl: data.image!,
                           onTap: () {
                             controller.changeSelected(data.id!);
                           },
-                          isSelected: controller.selectedFilter.value == data.id!,
+                          isSelected: controller.selectedTagId.value == data.id!,
                         );
                       },
                     ),

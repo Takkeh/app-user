@@ -42,6 +42,8 @@ class SignInScreenState extends State<SignInScreen> {
 
   @override
   Widget build(BuildContext context) {
+    var show = MediaQuery.of(context).viewInsets.bottom == 0.0;
+    print("show:: $show");
     return Stack(
       children: [
         SingleChildScrollView(
@@ -61,7 +63,8 @@ class SignInScreenState extends State<SignInScreen> {
                   suffixIcon: PhoneFieldHelper.toggleSuffixIcon(),
                   validator: (value) {
                     if (value!.isEmpty) {
-                      return TranslationService.getString('enter_phone_number_key');
+                      return TranslationService.getString(
+                          'enter_phone_number_key');
                     }
                     return null;
                   },
@@ -80,13 +83,17 @@ class SignInScreenState extends State<SignInScreen> {
                           controller.changeObscure();
                         },
                         icon: SvgPicture.asset(
-                          controller.isObscure.value ? MyIcons.eyeCrossed : MyIcons.eye,
+                          controller.isObscure.value
+                              ? MyIcons.eyeCrossed
+                              : MyIcons.eye,
                         ),
                       ),
-                      prefixIcon: const CustomPrefixIcon(icon: MyIcons.shieldPlus),
+                      prefixIcon:
+                          const CustomPrefixIcon(icon: MyIcons.shieldPlus),
                       validator: (value) {
                         if (value!.isEmpty) {
-                          return TranslationService.getString('enter_password_key');
+                          return TranslationService.getString(
+                              'enter_password_key');
                         }
                         return null;
                       },
@@ -164,32 +171,35 @@ class SignInScreenState extends State<SignInScreen> {
           ),
         ),
         //TODO: refactor and add functionality
-        Align(
-          alignment: const AlignmentDirectional(1, 1),
-          child: Stack(
-            alignment: const AlignmentDirectional(0.5, 0.3),
-            children: [
-              //TODO: another picture for english
-              Image.asset(
-                MyImages.leftSemiCircle,
-                height: 110,
-              ),
-              Column(
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  const Icon(
-                    Icons.arrow_forward_ios,
-                    color: Colors.white,
-                    size: 30,
-                  ),
-                  const SizedBox(height: 5),
-                  Text(
-                    TranslationService.getString("skip_key"),
-                    style: const TextStyle(color: Colors.white),
-                  ),
-                ],
-              ),
-            ],
+        Visibility(
+          visible: false,
+          child: Align(
+            alignment: const AlignmentDirectional(1, 1),
+            child: Stack(
+              alignment: const AlignmentDirectional(0.5, 0.3),
+              children: [
+                //TODO: another picture for english
+                Image.asset(
+                  MyImages.leftSemiCircle,
+                  height: 110,
+                ),
+                Column(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    const Icon(
+                      Icons.arrow_forward_ios,
+                      color: Colors.white,
+                      size: 30,
+                    ),
+                    const SizedBox(height: 5),
+                    Text(
+                      TranslationService.getString("skip_key"),
+                      style: const TextStyle(color: Colors.white),
+                    ),
+                  ],
+                ),
+              ],
+            ),
           ),
         ),
       ],

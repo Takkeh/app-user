@@ -1,15 +1,15 @@
 // To parse this JSON data, do
 //
-//     final filterModel = filterModelFromJson(jsonString);
+//     final promoCodesModel = promoCodesModelFromJson(jsonString);
 
 import 'dart:convert';
 
-FilterModel filterModelFromJson(String str) => FilterModel.fromJson(json.decode(str));
+PromoCodesModel promoCodesModelFromJson(String str) => PromoCodesModel.fromJson(json.decode(str));
 
-String filterModelToJson(FilterModel data) => json.encode(data.toJson());
+String promoCodesModelToJson(PromoCodesModel data) => json.encode(data.toJson());
 
-class FilterModel {
-  FilterModel({
+class PromoCodesModel {
+  PromoCodesModel({
     this.status,
     this.code,
     this.msg,
@@ -21,7 +21,7 @@ class FilterModel {
   String? msg;
   List<Datum>? data;
 
-  factory FilterModel.fromJson(Map<String, dynamic> json) => FilterModel(
+  factory PromoCodesModel.fromJson(Map<String, dynamic> json) => PromoCodesModel(
         status: json["status"],
         code: json["code"],
         msg: json["msg"],
@@ -40,22 +40,30 @@ class Datum {
   Datum({
     this.id,
     this.name,
-    this.image,
+    this.code,
+    this.type,
+    this.value,
   });
 
   int? id;
   String? name;
-  String? image;
+  String? code;
+  String? type;
+  int? value;
 
   factory Datum.fromJson(Map<String, dynamic> json) => Datum(
         id: json["id"],
         name: json["name"],
-        image: json["image"],
+        code: json["code"],
+        type: json["type"],
+        value: json["value"],
       );
 
   Map<String, dynamic> toJson() => {
         "id": id,
         "name": name,
-        "image": image,
+        "code": code,
+        "type": type,
+        "value": value,
       };
 }
