@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:takkeh/ui/widgets/custom_network_image.dart';
 import 'package:takkeh/utils/base/colors.dart';
 import 'package:takkeh/utils/base/icons.dart';
 import 'package:takkeh/utils/base/images.dart';
@@ -26,10 +27,8 @@ class DrawerProfileInfo extends StatelessWidget {
                 decoration: BoxDecoration(
                   color: MyColors.grey070,
                   borderRadius: BorderRadius.circular(17),
-                  image: const DecorationImage(
-                    image: AssetImage(MyImages.notifications),
-                  ),
                 ),
+                child: CustomNetworkImage(url: MySharedPreferences.image, radius: 17),
               ),
               Positioned(
                 top: -2.2,

@@ -64,11 +64,9 @@ class _ProfileScreenState extends State<ProfileScreen> {
                 decoration: BoxDecoration(
                   color: MyColors.grey070,
                   borderRadius: BorderRadius.circular(17),
-                  image: const DecorationImage(
-                    image: AssetImage(MyImages.logo),
                   ),
+                child: CustomNetworkImage(url: MySharedPreferences.image, radius: 17),
                 ),
-              ),
               if (isProfileInfo)
                 InkWell(
                   onTap: () {
