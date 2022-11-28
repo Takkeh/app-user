@@ -41,4 +41,8 @@ class ApiUrl {
   //drawer
   static const String myOrders = "/api/v1/my-orders";
   static const String faq = '/api/v1/faq';
+
+  //wallet
+  static const String walletView = '/api/v1/my-wallet';
+  static const String transaction = '/api/v1/transaction';
 }
