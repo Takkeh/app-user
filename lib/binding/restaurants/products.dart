@@ -10,7 +10,7 @@ class ProductBinding implements Bindings {
   @override
   void dependencies() {
     Get.lazyPut(() => ProductsFilterCtrl());
-    Get.lazyPut(() => MostPopularProductsCtrl());
+    Get.lazyPut(() => MostPopularProductsCtrl(restaurantId: id));
     Get.lazyPut(() => ViewRestaurantCtrl(restaurantId: id));
   }
 }

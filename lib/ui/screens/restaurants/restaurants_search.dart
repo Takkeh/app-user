@@ -66,6 +66,7 @@ class RestaurantsSearchScreen extends StatelessWidget {
                                   time: '',
                                   cost: '',
                                   review: '',
+                                  reviewIcon: '',
                                 ),
                                 binding: ProductBinding(id: data.id!),
                               );

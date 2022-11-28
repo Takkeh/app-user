@@ -24,9 +24,10 @@ class ApiUrl {
   static const String viewRestaurants = "/api/v1/restaurant/products/";
   static const String makeOrder = "/api/v1/make-order";
   static const String updateOrder = "/api/v1/update-order";
-  static const String restaurantsSearch = "/api/v1/restaurants/search/";
+  static const String restaurantsSearch = "/api/v1/restaurants/search";
   static const String tags = "/api/v1/tags";
   static const String restaurantReviews = "/api/v1/restaurant/reviews/";
+  static const String mostPopular = "/api/v1/restaurant/most-popular/";
 
   //profile
   static const String updateProfile = "/api/v1/update-profile";
@@ -39,5 +40,4 @@ class ApiUrl {
   //drawer
   static const String myOrders = "/api/v1/my-orders";
   static const String faq = '/api/v1/faq';
-
 }

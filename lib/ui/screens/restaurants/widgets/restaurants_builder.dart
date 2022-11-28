@@ -5,9 +5,11 @@ import 'package:takkeh/binding/restaurants/products.dart';
 import 'package:takkeh/controller/restaurants/restaurants.dart';
 import 'package:takkeh/controller/user_order_ctrl.dart';
 import 'package:takkeh/model/restaurants/restaurants_model.dart';
+import 'package:takkeh/translation/service.dart';
 import 'package:takkeh/ui/screens/restaurants/view_restaurant.dart';
 import 'package:takkeh/ui/widgets/custom_list_tile.dart';
 import 'package:takkeh/ui/widgets/custom_restaurants_loading.dart';
+import 'package:takkeh/ui/widgets/restaurant_cpi.dart';
 
 class RestaurantsBuilder extends StatelessWidget {
   const RestaurantsBuilder({Key? key}) : super(key: key);
@@ -21,17 +23,17 @@ class RestaurantsBuilder extends StatelessWidget {
       context: context,
       builder: (BuildContext context) {
         return AlertDialog(
-          title: Text('Start a new basket?'.tr),
-          content: Text('A new order will clear your basket.'.tr),
+          title: Text(TranslationService.getString('start_new_basket_key')),
+          content: Text(TranslationService.getString('new_order_will_clear_basket_key')),
           actions: <Widget>[
             TextButton(
-              child: Text('Cancel'.tr),
+              child: Text(TranslationService.getString('cancel_key')),
               onPressed: () {
                 Get.back();
               },
             ),
             ElevatedButton(
-              child: Text('Start'.tr),
+              child: Text(TranslationService.getString('start_key')),
               onPressed: () {
                 Get.delete<UserOrderCtrl>(force: true);
                 Get.put(UserOrderCtrl(), permanent: true);
@@ -45,7 +47,8 @@ class RestaurantsBuilder extends StatelessWidget {
                     logo: data.logo!,
                     time: data.time!,
                     cost: data.cost!,
-                    review: 'data.review!',
+                    review: data.review!,
+                    reviewIcon: data.reviewIcon!,
                   ),
                   binding: ProductBinding(id: data.id!),
                 );
@@ -68,14 +71,16 @@ class RestaurantsBuilder extends StatelessWidget {
           firstPageProgressIndicatorBuilder: (context) {
             return const CustomRestaurantsLoading();
           },
+          newPageProgressIndicatorBuilder: (context) {
+            return const RestaurantCPI();
+          },
           itemBuilder: (context, data, index) {
-            //TODO: missing api data
             return CustomListTile(
               imageUrl: data.logo!,
               title: data.name!,
               description: data.description!,
               reviewIcon: data.reviewIcon!,
-              review: 'data.review!',
+              review: data.review!,
               time: data.time!,
               cost: data.cost!,
               onTap: () {
@@ -91,7 +96,8 @@ class RestaurantsBuilder extends StatelessWidget {
                       logo: data.logo!,
                       time: data.time!,
                       cost: data.cost!,
-                      review: 'data.review!',
+                      review: data.review!,
+                      reviewIcon: data.reviewIcon!,
                     ),
                     binding: ProductBinding(id: data.id!),
                   );

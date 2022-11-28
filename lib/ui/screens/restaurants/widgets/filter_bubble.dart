@@ -23,6 +23,7 @@ class FilterBubble extends StatelessWidget {
       child: Container(
         alignment: Alignment.center,
         width: 80,
+        height: 40,
         padding: const EdgeInsets.all(8.0),
         decoration: BoxDecoration(
           color: MyColors.redB3A,
@@ -38,6 +39,7 @@ class FilterBubble extends StatelessWidget {
                 url: imageUrl,
                 radius: 0,
                 height: 50,
+                boxFit: BoxFit.contain,
               ),
               const SizedBox(height: 5),
               AutoSizeText(
@@ -45,7 +47,7 @@ class FilterBubble extends StatelessWidget {
                 textAlign: TextAlign.center,
                 minFontSize: 7,
                 maxLines: 2,
-                style: const TextStyle(color: MyColors.white),
+                style: const TextStyle(color: MyColors.white, fontSize: 12),
               ),
             ],
           ),

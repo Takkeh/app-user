@@ -4,6 +4,7 @@ import 'dart:developer';
 import 'package:http/http.dart' as http;
 import 'package:takkeh/model/restaurants/update_order_model.dart';
 import 'package:takkeh/utils/api_url.dart';
+import 'package:takkeh/utils/shared_prefrences.dart';
 
 class UpdateOrderApi {
   Future<UpdateOrderModel?> data({
@@ -15,6 +16,7 @@ class UpdateOrderApi {
       Uri uri = Uri.parse(url);
       var headers = {
         'Content-Type': 'application/json',
+        'Authorization': 'Bearer ${MySharedPreferences.accessToken}',
       };
       var body = jsonEncode({
         "order_id": orderId,

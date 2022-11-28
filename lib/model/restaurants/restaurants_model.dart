@@ -45,8 +45,10 @@ class RestaurantList {
     this.reviewIcon,
     this.cost,
     this.time,
-    this.isBusy,
     this.description,
+    this.isBusy,
+    this.reviewAverage,
+    this.review,
   });
 
   int? id;
@@ -56,19 +58,23 @@ class RestaurantList {
   String? reviewIcon;
   String? cost;
   String? time;
-  int? isBusy;
   String? description;
+  int? isBusy;
+  double? reviewAverage;
+  String? review;
 
   factory RestaurantList.fromJson(Map<String, dynamic> json) => RestaurantList(
         id: json["id"],
         name: json["name"],
         logo: json["logo"],
         cover: json["cover"],
-        reviewIcon: json["review_icon"] ?? '',
+        reviewIcon: json["review_icon"],
         cost: json["cost"],
         time: json["time"],
-        isBusy: json["is_busy"],
         description: json["description"],
+        isBusy: json["is_busy"],
+        reviewAverage: json["review_average"] != null ? double.parse(json["review_average"].toString()) : 4.0,
+        review: json["review"] ?? '',
       );
 
   Map<String, dynamic> toJson() => {
@@ -79,7 +85,9 @@ class RestaurantList {
         "review_icon": reviewIcon,
         "cost": cost,
         "time": time,
-        "is_busy": isBusy,
         "description": description,
+        "is_busy": isBusy,
+        "review_average": reviewAverage,
+        "review": review,
       };
 }

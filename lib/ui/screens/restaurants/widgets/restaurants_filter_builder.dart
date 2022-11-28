@@ -24,7 +24,7 @@ class RestaurantsFilterBuilder extends StatelessWidget {
                   return AnimatedContainer(
                     alignment: Alignment.center,
                     duration: const Duration(milliseconds: 250),
-                    height: controller.isFilterActive.value ? 100 : 0,
+                    height: controller.isFilterActive.value ? 110 : 0,
                     margin: const EdgeInsets.only(bottom: 30),
                     child: ListView.separated(
                       padding: const EdgeInsets.symmetric(horizontal: 10.0),

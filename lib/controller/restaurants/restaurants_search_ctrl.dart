@@ -2,13 +2,13 @@ import 'dart:async';
 
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
-import 'package:takkeh/model/restaurants/restaurants_search_model.dart';
+import 'package:takkeh/model/restaurants/restaurants_model.dart';
 import 'package:takkeh/network/restaurants/restaursnts_search.dart';
 
 class RestaurantsSearchCtrl extends GetxController {
   static RestaurantsSearchCtrl get to => Get.find();
 
-  final model = Rxn<RestaurantsSearchModel>();
+  final model = Rxn<RestaurantsModel>();
   // RestaurantsSearchModel? model;
   final isLoading = false.obs;
   final searchQuery = "".obs;

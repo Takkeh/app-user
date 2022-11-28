@@ -3,7 +3,6 @@ import 'dart:math' as math;
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
-import 'package:takkeh/binding/help/faq_binding.dart';
 import 'package:takkeh/binding/my_orders/my_orders_binding.dart';
 import 'package:takkeh/controller/registration/log_out.dart';
 import 'package:takkeh/controller/user_order_ctrl.dart';
@@ -72,7 +71,7 @@ class _BaseDrawerState extends State<BaseDrawer> {
                         title: TranslationService.getString('orders_key'),
                         icon: MyIcons.timePast,
                         onTap: () {
-                          Get.to(()=> const MyOrdersScreen(),binding: MyOrdersBinding());
+                          Get.to(() => const MyOrdersScreen(), binding: MyOrdersBinding());
                         },
                       ),
                       DrawerListTile(
@@ -91,7 +90,7 @@ class _BaseDrawerState extends State<BaseDrawer> {
                         title: TranslationService.getString('help_key'),
                         icon: MyIcons.questionMark,
                         onTap: () {
-                          Get.to(() => const HelpScreen(),binding: FAQsBinding());
+                          Get.to(() => const HelpScreen());
                         },
                       ),
                       DrawerListTile(

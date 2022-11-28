@@ -21,6 +21,7 @@ class SignInApi {
         // "phone": '+962$phone',
         "phone": '0795401109',
         "password": password,
+        "type": 'user',
       });
       log("Response:: SignInResponse\nUrl:: $url\nheaders:: $headers\nbody:: $body");
       http.Response response = await http.post(uri, body: body, headers: headers);

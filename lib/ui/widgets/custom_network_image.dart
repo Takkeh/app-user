@@ -10,6 +10,7 @@ class CustomNetworkImage extends StatelessWidget {
   final double? width;
   final double? height;
   final EdgeInsetsGeometry? margin;
+  final BoxFit boxFit;
 
   const CustomNetworkImage({
     Key? key,
@@ -18,6 +19,7 @@ class CustomNetworkImage extends StatelessWidget {
     this.width,
     this.height,
     this.margin,
+    this.boxFit = BoxFit.cover,
   }) : super(key: key);
 
   @override
@@ -32,7 +34,7 @@ class CustomNetworkImage extends StatelessWidget {
           borderRadius: BorderRadius.circular(radius),
           image: DecorationImage(
             image: imageProvider,
-            fit: BoxFit.cover,
+            fit: boxFit,
           ),
         ),
       ),

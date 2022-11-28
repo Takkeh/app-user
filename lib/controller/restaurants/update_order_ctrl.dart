@@ -27,7 +27,7 @@ class UpdateOrderCtrl {
       ),
     );
     //TODO: change later
-    model = await UpdateOrderApi().data(orderId: 75, addressId: 7);
+    model = await UpdateOrderApi().data(orderId: orderId, addressId: 7);
     if (model == null) {
       Fluttertoast.showToast(msg: AppConstants.failedMessage);
       Loader.hide();

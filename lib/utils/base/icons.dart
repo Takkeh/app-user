@@ -44,4 +44,10 @@ class MyIcons {
   static const String halfCircle = "${_path}half_circle.svg";
   static const String emojiLove = "${_path}emoji_love.svg";
   static const String phoneGreen = "${_path}phone_green.svg";
+  static const String arrowUp = "${_path}arrow_up.svg";
+  static const String rider = "${_path}rider.svg";
+
+  static String getReviewIcon(String icon) {
+    return '$_path$icon';
+  }
 }

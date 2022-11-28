@@ -25,14 +25,14 @@ class MostPopularCategoriesBuilder extends StatelessWidget {
                 child: ListView.separated(
                   padding: const EdgeInsets.symmetric(horizontal: 28),
                   separatorBuilder: (context, index) => const SizedBox(width: 10),
-                  itemCount: snapshot.data!.categorys!.length,
+                  itemCount: snapshot.data!.mostPopular!.mostPopularProducts!.length,
                   scrollDirection: Axis.horizontal,
                   itemBuilder: (context, index) {
-                    final data = snapshot.data!.categorys![index];
+                    final data = snapshot.data!.mostPopular!.mostPopularProducts![index];
                     return MostPopularBox(
                       title: data.name!,
                       imageUrl: data.image!,
-                      price: 33.0,
+                      price: data.price!,
                     );
                   },
                 ),

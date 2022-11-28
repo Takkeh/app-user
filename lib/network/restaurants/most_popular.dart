@@ -6,10 +6,9 @@ import 'package:takkeh/model/restaurants/most_popular_model.dart';
 import 'package:takkeh/utils/api_url.dart';
 
 class MostPopularApi {
-  static Future<MostPopularProductsModel?> data() async {
+  static Future<MostPopularProductsModel?> data(int restaurantId) async {
     try {
-      //TODO: change api url
-      String url = '${ApiUrl.mainUrl}${ApiUrl.categories}';
+      String url = '${ApiUrl.mainUrl}${ApiUrl.mostPopular}$restaurantId';
       Uri uri = Uri.parse(url);
       var headers = {
         'Content-Type': 'application/json',

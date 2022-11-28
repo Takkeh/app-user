@@ -64,15 +64,13 @@ class CustomListTile extends StatelessWidget {
                     child: Row(
                       children: [
                         RestaurantInfoBox(
-                          networkIcon: reviewIcon,
+                          assetIcon: MyIcons.getReviewIcon(reviewIcon),
                           text: review,
-                          isNetwork: true,
                         ),
                         const SizedBox(width: 5),
                         RestaurantInfoBox(
                           text: cost,
-                          //TODO: change
-                          assetIcon: MyIcons.clock,
+                          assetIcon: MyIcons.rider,
                         ),
                         const SizedBox(width: 5),
                         RestaurantInfoBox(

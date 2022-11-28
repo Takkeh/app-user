@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:get/get.dart';
+import 'package:takkeh/controller/restaurants/filter.dart';
 import 'package:takkeh/utils/base/icons.dart';
 
 class FilterWidget extends StatelessWidget {
@@ -17,7 +19,13 @@ class FilterWidget extends StatelessWidget {
         color: Colors.white,
         borderRadius: BorderRadius.circular(26),
       ),
-      child: SvgPicture.asset(MyIcons.filter),
+      child: GetBuilder<RestaurantsFilterController>(builder: (controller) {
+        if (controller.isFilterActive.value) {
+          return SvgPicture.asset(MyIcons.arrowUp, height: 20);
+        } else {
+          return SvgPicture.asset(MyIcons.filter);
+        }
+      }),
     );
   }
 }

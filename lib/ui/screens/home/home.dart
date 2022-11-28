@@ -95,6 +95,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                   Get.to(() => const RestaurantsHomeScreen(), binding: RestaurantsHomeBinding());
                                 },
                                 child: CustomNetworkImage(
+                                  boxFit: BoxFit.contain,
                                   height: 100,
                                   url: snapshot.data!.docs[0].data()['image'],
                                   radius: 15,
@@ -108,6 +109,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                   Fluttertoast.showToast(msg: 'Coming Soon!'.tr);
                                 },
                                 child: CustomNetworkImage(
+                                  boxFit: BoxFit.contain,
                                   height: 100,
                                   url: snapshot.data!.docs[1].data()['image'],
                                   radius: 15,
@@ -121,6 +123,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                   Fluttertoast.showToast(msg: 'Coming Soon!'.tr);
                                 },
                                 child: CustomNetworkImage(
+                                  boxFit: BoxFit.contain,
                                   height: 100,
                                   url: snapshot.data!.docs[2].data()['image'],
                                   radius: 15,

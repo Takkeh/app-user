@@ -6,9 +6,19 @@ import 'package:takkeh/ui/widgets/transparent_app_bar.dart';
 import 'package:takkeh/utils/base/colors.dart';
 import 'package:takkeh/utils/base/images.dart';
 
-
-class MyOrdersScreen extends StatelessWidget {
+class MyOrdersScreen extends StatefulWidget {
   const MyOrdersScreen({Key? key}) : super(key: key);
+
+  @override
+  State<MyOrdersScreen> createState() => _MyOrdersScreenState();
+}
+
+class _MyOrdersScreenState extends State<MyOrdersScreen> {
+  @override
+  void initState() {
+    //TODO: get.put here and remove binding
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -29,10 +39,10 @@ class MyOrdersScreen extends StatelessWidget {
           appBar: TransparentAppBar(title: TranslationService.getString('my_orders_key')),
           body: Column(
             children: const [
+              //TODO: put the the widgets inside MyOrdersBuilder here and remove the column and expanded and replace the loadings
               MyOrdersBuilder(),
             ],
           ),
-
         ),
       ],
     );

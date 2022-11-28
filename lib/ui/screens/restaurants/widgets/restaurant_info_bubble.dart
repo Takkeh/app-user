@@ -3,14 +3,14 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:takkeh/binding/restaurants/restauratns_info.dart';
+import 'package:takkeh/translation/service.dart';
 import 'package:takkeh/ui/screens/restaurants/restaurant_info.dart';
 import 'package:takkeh/utils/api_url.dart';
 import 'package:takkeh/utils/base/colors.dart';
 import 'package:takkeh/utils/base/icons.dart';
-import 'package:takkeh/utils/constants.dart';
 
 class RestaurantInfoBubble extends StatelessWidget {
-  final String title, logo, time, cost, review, cover;
+  final String title, logo, time, cost, review, cover, reviewIcon;
   final int restaurantId;
 
   const RestaurantInfoBubble({
@@ -22,14 +22,15 @@ class RestaurantInfoBubble extends StatelessWidget {
     required this.review,
     required this.cover,
     required this.restaurantId,
+    required this.reviewIcon,
   }) : super(key: key);
 
-  static Widget getWidget(String text) {
+  static Widget getWidget(String text, String icon) {
     return Column(
       mainAxisAlignment: MainAxisAlignment.center,
       crossAxisAlignment: CrossAxisAlignment.center,
       children: [
-        SvgPicture.asset(MyIcons.clock),
+        SvgPicture.asset(icon),
         const SizedBox(height: 5),
         Text(
           text,
@@ -70,8 +71,7 @@ class RestaurantInfoBubble extends StatelessWidget {
                   CircleAvatar(
                     backgroundColor: MyColors.redPrimary,
                     radius: 50,
-                    backgroundImage:
-                        CachedNetworkImageProvider('${ApiUrl.mainUrl}/$logo'),
+                    backgroundImage: CachedNetworkImageProvider('${ApiUrl.mainUrl}/$logo'),
                   ),
                   Stack(
                     clipBehavior: Clip.none,
@@ -89,10 +89,10 @@ class RestaurantInfoBubble extends StatelessWidget {
                         color: Colors.transparent,
                         margin: const EdgeInsets.only(bottom: 7),
                         padding: const EdgeInsets.only(top: 0),
-                        child: const FittedBox(
+                        child: FittedBox(
                           child: Text(
-                            "information",
-                            style: TextStyle(fontSize: 12),
+                            TranslationService.getString('information_key'),
+                            style: const TextStyle(fontSize: 12),
                           ),
                         ),
                       ),
@@ -109,8 +109,8 @@ class RestaurantInfoBubble extends StatelessWidget {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  getWidget('$time $kMinute'),
-                  getWidget(cost),
+                  getWidget('$time ${'Minute'.tr}', MyIcons.clock),
+                  getWidget(cost, MyIcons.rider),
                 ],
               ),
             ),
@@ -120,7 +120,11 @@ class RestaurantInfoBubble extends StatelessWidget {
             child: Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                SvgPicture.asset(MyIcons.clock),
+                SvgPicture.asset(
+                  MyIcons.getReviewIcon(reviewIcon),
+                  height: 20,
+                  width: 18,
+                ),
                 const SizedBox(width: 5),
                 Text(
                   review,

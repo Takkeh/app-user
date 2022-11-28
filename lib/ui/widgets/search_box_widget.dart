@@ -9,6 +9,7 @@ class SearchBoxWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
+      //TODO: bisher: this is where you navigate product search
       onTap: () {},
       child: Container(
         height: 50,

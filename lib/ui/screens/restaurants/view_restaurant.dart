@@ -12,7 +12,7 @@ import 'package:takkeh/ui/widgets/search_box_widget.dart';
 import 'package:takkeh/utils/base/colors.dart';
 
 class ViewRestaurantScreen extends StatelessWidget {
-  final String title, cover, logo, time, cost, review;
+  final String title, cover, logo, time, cost, review, reviewIcon;
   final int restaurantId;
 
   const ViewRestaurantScreen({
@@ -24,6 +24,7 @@ class ViewRestaurantScreen extends StatelessWidget {
     required this.time,
     required this.cost,
     required this.review,
+    required this.reviewIcon,
   }) : super(key: key);
 
   @override
@@ -85,6 +86,7 @@ class ViewRestaurantScreen extends StatelessWidget {
                               review: review,
                               cover: cover,
                               restaurantId: restaurantId,
+                              reviewIcon: reviewIcon,
                             ),
                           )
                         ],

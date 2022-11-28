@@ -32,10 +32,17 @@ class MostPopularBox extends StatelessWidget {
               margin: const EdgeInsets.only(bottom: 3),
             ),
           ),
-          Text(
-            title,
-            style: const TextStyle(
-              fontSize: 15,
+          FittedBox(
+            child: Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 3.0),
+              child: Text(
+                title,
+                style: const TextStyle(
+                  fontSize: 15,
+                ),
+                maxLines: 1,
+                textAlign: TextAlign.center,
+              ),
             ),
           ),
           Text(
