@@ -1,7 +1,7 @@
 import 'dart:convert';
 
-class RestaurantReviewsModel {
-  RestaurantReviewsModel({
+class RestaurantInfoModel {
+  RestaurantInfoModel({
     this.status,
     this.code,
     this.msg,
@@ -13,11 +13,11 @@ class RestaurantReviewsModel {
   String? msg;
   Data? data;
 
-  RestaurantReviewsModel restaurantReviewsModelFromJson(String str) => RestaurantReviewsModel.fromJson(json.decode(str));
+  RestaurantInfoModel restaurantReviewsModelFromJson(String str) => RestaurantInfoModel.fromJson(json.decode(str));
 
   String restaurantReviewsModelToJson() => json.encode(toJson());
 
-  factory RestaurantReviewsModel.fromJson(Map<String, dynamic> json) => RestaurantReviewsModel(
+  factory RestaurantInfoModel.fromJson(Map<String, dynamic> json) => RestaurantInfoModel(
     status: json["status"],
     code: json["code"],
     msg: json["msg"],
@@ -86,21 +86,21 @@ class Data {
     name: json["name"]??'',
     logo: json["logo"]??'',
     cover: json["cover"]??'',
-    cost: json["cost"],
+    cost: json["cost"]??0,
     time: json["time"]??'',
     isBusy: json["is_busy"],
     description: json["description"]??'',
-    reviewAverage: json["review_average"],
+    reviewAverage: json["review_average"]??0,
     review: json["review"]??'',
     reviewIcon: json["review_icon"]??'',
     address: json["address"]??'',
     phone: json["phone"]??'',
     workTime: json["Work_time"]??'',
     deliveryTime: json["delivery_time"]??'',
-    minimum: json["minimum"],
-    deliveryFee: json["delivery_fee"],
-    salesTax: json["sales_tax"],
-    isTaxable: json["is_taxable"],
+    minimum: json["minimum"]??0,
+    deliveryFee: json["delivery_fee"]??0,
+    salesTax: json["sales_tax"]??0,
+    isTaxable: json["is_taxable"]??0,
     reviews: List<Review>.from(json["reviews"].map((x) => Review.fromJson(x))),
   );
 

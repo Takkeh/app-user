@@ -146,7 +146,7 @@ class _RestaurantInfoScreenState extends State<RestaurantInfoScreen> {
               physics: const NeverScrollableScrollPhysics(),
               controller: pageController,
               children: [
-                const RestaurantsInfoBuilder(),
+                RestaurantsInfoBuilder(restaurantId: widget.restaurantId,),
                 RestaurantsReviewsBuilder(imageUrl: widget.imageUrl,restaurantId:widget.restaurantId),
               ],
             ),

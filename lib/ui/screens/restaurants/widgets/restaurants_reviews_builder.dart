@@ -3,7 +3,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:infinite_scroll_pagination/infinite_scroll_pagination.dart';
 import 'package:takkeh/controller/restaurants/restaurant_reviews.dart';
-import 'package:takkeh/model/restaurants/restaurant_reviews_model.dart';
+import 'package:takkeh/model/restaurants/restaurant_info_model.dart';
 import 'package:takkeh/ui/screens/restaurants/widgets/restaurant_reviews_loading.dart';
 import 'package:takkeh/ui/widgets/custom_network_image.dart';
 import 'package:takkeh/ui/widgets/restaurant_cpi.dart';

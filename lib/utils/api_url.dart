@@ -28,6 +28,7 @@ class ApiUrl {
   static const String tags = "/api/v1/tags";
   static const String restaurantReviews = "/api/v1/restaurant/reviews/";
   static const String mostPopular = "/api/v1/restaurant/most-popular/";
+  static const String restaurantInfo = "/api/v1/restaurant/info/";
 
   //profile
   static const String updateProfile = "/api/v1/update-profile";

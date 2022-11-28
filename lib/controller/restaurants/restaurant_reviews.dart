@@ -1,6 +1,6 @@
 import 'package:get/get.dart';
 import 'package:infinite_scroll_pagination/infinite_scroll_pagination.dart';
-import 'package:takkeh/model/restaurants/restaurant_reviews_model.dart';
+import 'package:takkeh/model/restaurants/restaurant_info_model.dart';
 import 'package:takkeh/network/restaurants/restaurant_reviews.dart';
 
 class RestaurantReviewsCtrl extends GetxController {

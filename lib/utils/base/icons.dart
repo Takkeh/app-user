@@ -46,6 +46,13 @@ class MyIcons {
   static const String phoneGreen = "${_path}phone_green.svg";
   static const String arrowUp = "${_path}arrow_up.svg";
   static const String rider = "${_path}rider.svg";
+  static const String badgePercent = "${_path}badge-percent.svg";
+  static const String basket = "${_path}basket.svg";
+  static const String biking = "${_path}biking.svg";
+  static const String clockThree = "${_path}clock-three.svg";
+  static const String dollar = "${_path}dollar.svg";
+  static const String mapMarker = "${_path}map-marker.svg";
+  static const String moneyCheck = "${_path}money-check-edit.svg";
 
   static String getReviewIcon(String icon) {
     return '$_path$icon';
