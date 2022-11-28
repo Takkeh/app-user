@@ -26,8 +26,18 @@ class ApiUrl {
   static const String updateOrder = "/api/v1/update-order";
   static const String restaurantsSearch = "/api/v1/restaurants/search/";
   static const String tags = "/api/v1/tags";
+  static const String restaurantReviews = "/api/v1/restaurant/reviews/";
+
+  //profile
+  static const String updateProfile = "/api/v1/update-profile";
+  static const String updatePassword = "/api/v1/update-password";
 
   //promo codes
   static const String promoCodes = "/api/v1/promo-code";
   static const String addPromoCode = "/api/v1/add-code-to-order";
+
+  //drawer
+  static const String myOrders = "/api/v1/my-orders";
+  static const String faq = '/api/v1/faq';
+
 }

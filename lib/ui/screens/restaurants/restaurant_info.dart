@@ -15,12 +15,14 @@ import 'package:takkeh/utils/shared_prefrences.dart';
 
 class RestaurantInfoScreen extends StatefulWidget {
   final String title, imageUrl, logo;
+  final int restaurantId;
 
   const RestaurantInfoScreen({
     Key? key,
     required this.title,
     required this.imageUrl,
     required this.logo,
+    required this.restaurantId
   }) : super(key: key);
 
   @override
@@ -145,7 +147,7 @@ class _RestaurantInfoScreenState extends State<RestaurantInfoScreen> {
               controller: pageController,
               children: [
                 const RestaurantsInfoBuilder(),
-                RestaurantsReviewsBuilder(imageUrl: widget.imageUrl),
+                RestaurantsReviewsBuilder(imageUrl: widget.imageUrl,restaurantId:widget.restaurantId),
               ],
             ),
           ),

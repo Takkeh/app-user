@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 class LogOutModel {
   LogOutModel({
     this.status,
@@ -5,20 +7,23 @@ class LogOutModel {
     this.msg,
   });
 
-  LogOutModel.fromJson(dynamic json) {
-    status = json['status'];
-    code = json['code'];
-    msg = json['msg'];
-  }
   bool? status;
   int? code;
   String? msg;
 
-  Map<String, dynamic> toJson() {
-    final map = <String, dynamic>{};
-    map['status'] = status;
-    map['code'] = code;
-    map['msg'] = msg;
-    return map;
-  }
+  LogOutModel updateProfileModelFromJson(String str) => LogOutModel.fromJson(json.decode(str));
+
+  String updateProfileModelToJson() => json.encode(toJson());
+
+  factory LogOutModel.fromJson(Map<String, dynamic> json) => LogOutModel(
+    status: json["status"],
+    code: json["code"],
+    msg: json["msg"],
+  );
+
+  Map<String, dynamic> toJson() => {
+    "status": status,
+    "code": code,
+    "msg": msg,
+  };
 }

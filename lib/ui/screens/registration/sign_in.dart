@@ -63,7 +63,8 @@ class SignInScreenState extends State<SignInScreen> {
                   suffixIcon: PhoneFieldHelper.toggleSuffixIcon(),
                   validator: (value) {
                     if (value!.isEmpty) {
-                      return TranslationService.getString('enter_phone_number_key');
+                      return TranslationService.getString(
+                          'enter_phone_number_key');
                     }
                     return null;
                   },
@@ -82,13 +83,17 @@ class SignInScreenState extends State<SignInScreen> {
                           controller.changeObscure();
                         },
                         icon: SvgPicture.asset(
-                          controller.isObscure.value ? MyIcons.eyeCrossed : MyIcons.eye,
+                          controller.isObscure.value
+                              ? MyIcons.eyeCrossed
+                              : MyIcons.eye,
                         ),
                       ),
-                      prefixIcon: const CustomPrefixIcon(icon: MyIcons.shieldPlus),
+                      prefixIcon:
+                          const CustomPrefixIcon(icon: MyIcons.shieldPlus),
                       validator: (value) {
                         if (value!.isEmpty) {
-                          return TranslationService.getString('enter_password_key');
+                          return TranslationService.getString(
+                              'enter_password_key');
                         }
                         return null;
                       },
@@ -175,7 +180,7 @@ class SignInScreenState extends State<SignInScreen> {
               children: [
                 //TODO: another picture for english
                 Image.asset(
-                  MyImages.semiCircle,
+                  MyImages.leftSemiCircle,
                   height: 110,
                 ),
                 Column(

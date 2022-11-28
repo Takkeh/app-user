@@ -49,16 +49,18 @@ class TransactionsScreen extends StatelessWidget {
               padding: const EdgeInsets.symmetric(horizontal: 30, vertical: 30),
               itemCount: 3,
               itemBuilder: (context, index) {
-                return NotificationsBox(
-                  day: "Yesterday",
-                  itemCount: 5,
-                  onTap: () {},
-                  icon: MyIcons.handUp,
-                  title: "title",
-                  description: "description",
-                  subTitle: "subTitle",
-                  time: "time",
-                );
+                /// TODO: fix later
+                // return NotificationsBox(
+                //   day: "Yesterday",
+                //   itemCount: 5,
+                //   onTap: () {},
+                //   icon: MyIcons.handUp,
+                //   title: "title",
+                //   description: "description",
+                //   subTitle: "subTitle",
+                //   time: "time",
+                // );
+                return SizedBox();
               },
             ),
     );

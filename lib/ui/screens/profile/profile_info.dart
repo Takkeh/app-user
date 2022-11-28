@@ -1,12 +1,20 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
+import 'package:image_picker/image_picker.dart';
+import 'package:takkeh/controller/profile/change_info.dart';
 import 'package:takkeh/translation/service.dart';
 import 'package:takkeh/ui/screens/registration/widgets/custom_prefix_icon.dart';
 import 'package:takkeh/ui/widgets/custom_elevated_button.dart';
 import 'package:takkeh/ui/widgets/custom_text_field.dart';
 import 'package:takkeh/utils/base/icons.dart';
+import 'package:takkeh/utils/shared_prefrences.dart';
+import 'package:get/get.dart';
 
 class ProfileInfoScreen extends StatefulWidget {
-  const ProfileInfoScreen({Key? key}) : super(key: key);
+  final XFile? imageXFile;
+  const ProfileInfoScreen({Key? key,this.imageXFile}) : super(key: key);
 
   @override
   State<ProfileInfoScreen> createState() => _ProfileInfoScreenState();
@@ -20,8 +28,9 @@ class _ProfileInfoScreenState extends State<ProfileInfoScreen> {
   @override
   void initState() {
     super.initState();
-    nameCtrl = TextEditingController();
-    emailCtrl = TextEditingController();
+    Get.lazyPut(()=>ChangeInfoCtrl());
+    nameCtrl = TextEditingController(text: MySharedPreferences.name);
+    emailCtrl = TextEditingController(text: MySharedPreferences.email);
   }
 
   @override
@@ -54,6 +63,7 @@ class _ProfileInfoScreenState extends State<ProfileInfoScreen> {
           Padding(
             padding: const EdgeInsets.only(top: 20.0, bottom: 50),
             child: CustomTextField(
+              readOnly: true,
               filled: true,
               fillColor: Colors.white,
               horizontalPadding: 12,
@@ -76,8 +86,20 @@ class _ProfileInfoScreenState extends State<ProfileInfoScreen> {
             child: CustomElevatedButton(
               title: TranslationService.getString('save_key'),
               onPressed: () {
-                if (_formKey.currentState!.validate()) {
+                if (_formKey.currentState!.validate()){
                   FocusManager.instance.primaryFocus?.unfocus();
+                  bool check = nameCtrl.text != MySharedPreferences.name ||
+                      widget.imageXFile != null;
+                  if (check) {
+                    ChangeInfoCtrl.find.fetchUpdateProfileData(
+                        email: emailCtrl.text,
+                        name: nameCtrl.text,
+                        image:
+                            widget.imageXFile == null ? null : File(widget.imageXFile!.path),
+                        context: context);
+                  } else {
+                    Fluttertoast.showToast(msg: 'Nothing has changed');
+                  }
                 }
               },
             ),

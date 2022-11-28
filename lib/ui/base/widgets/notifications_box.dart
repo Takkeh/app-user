@@ -1,24 +1,23 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:intl/intl.dart';
+import 'package:takkeh/model/notification/notification_model.dart';
 import 'package:takkeh/utils/base/colors.dart';
 import 'package:takkeh/utils/base/icons.dart';
 
 class NotificationsBox extends StatelessWidget {
-  final String day, icon, title, description, subTitle, time;
+  final List<NotificationModel> notifications;
+  final String day;
   final int itemCount;
   final Function() onTap;
 
-  const NotificationsBox({
-    Key? key,
-    required this.day,
-    required this.itemCount,
-    required this.onTap,
-    required this.icon,
-    required this.title,
-    required this.description,
-    required this.subTitle,
-    required this.time,
-  }) : super(key: key);
+  const NotificationsBox(
+      {Key? key,
+      required this.notifications,
+      required this.itemCount,
+      required this.onTap,
+      required this.day})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -45,7 +44,8 @@ class NotificationsBox extends StatelessWidget {
                   borderRadius: BorderRadius.circular(17),
                   color: const Color(0xFFFDFDFE),
                 ),
-                padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 13),
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 10, vertical: 13),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.start,
                   children: [
@@ -57,7 +57,11 @@ class NotificationsBox extends StatelessWidget {
                         color: MyColors.primary.withOpacity(0.50),
                         borderRadius: BorderRadius.circular(9.0),
                       ),
-                      child: SvgPicture.asset(icon),
+                      child: SvgPicture.asset(
+                        notifications[index].type == 'promo'
+                            ? MyIcons.ticket
+                            : MyIcons.handUp,
+                      ),
                     ),
                     const SizedBox(width: 10),
                     Expanded(
@@ -65,7 +69,7 @@ class NotificationsBox extends StatelessWidget {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Text(
-                            title,
+                            notifications[index].title,
                             style: const TextStyle(
                               color: MyColors.text,
                               fontSize: 18,
@@ -73,7 +77,7 @@ class NotificationsBox extends StatelessWidget {
                             ),
                           ),
                           Text(
-                            subTitle,
+                            notifications[index].content,
                             style: const TextStyle(
                               fontSize: 16,
                               color: MyColors.grey070,
@@ -87,7 +91,7 @@ class NotificationsBox extends StatelessWidget {
                               Padding(
                                 padding: const EdgeInsets.only(top: 2.5),
                                 child: Text(
-                                  time,
+                                  DateFormat('a h:mm dd.MM.yyyy').format(notifications[index].createdAt.toDate()),
                                   style: const TextStyle(
                                     color: MyColors.greyEB3,
                                     fontSize: 12,

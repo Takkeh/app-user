@@ -10,7 +10,7 @@ class FilterCategoryLoading extends StatelessWidget {
       child: Column(
         children: List.generate(10, (index) {
           return const CustomShimmerLoading(
-            margin: EdgeInsetsDirectional.symmetric(horizontal: 15),
+            margin: EdgeInsetsDirectional.only(start: 15,end: 15),
             radius: 17,
             height: 120,
           );

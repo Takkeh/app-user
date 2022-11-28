@@ -13,7 +13,7 @@ class LogOutApi {
       Uri uri = Uri.parse(url);
       var headers = {
         'Content-Type': 'application/json',
-        'Authorization': MySharedPreferences.accessToken,
+        'Authorization': 'Bearer ${MySharedPreferences.accessToken}',
       };
       log("Response:: LogOutResponse\nUrl:: $url\nheaders:: $headers");
       http.Response response = await http.get(uri, headers: headers);
