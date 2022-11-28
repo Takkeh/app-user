@@ -60,11 +60,11 @@ class Data {
   String? name;
   String? logo;
   String? cover;
-  int? cost;
+  dynamic cost;
   String? time;
   int? isBusy;
   String? description;
-  double? reviewAverage;
+  dynamic reviewAverage;
   String? review;
   String? reviewIcon;
   String? address;
@@ -73,7 +73,7 @@ class Data {
   String? deliveryTime;
   int? minimum;
   dynamic deliveryFee;
-  int? salesTax;
+  dynamic salesTax;
   dynamic isTaxable;
   List<Review>? reviews;
 

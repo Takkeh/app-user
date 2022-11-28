@@ -6,10 +6,8 @@ class RestaurantReviewsLoading extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ListView.builder(
-      padding: EdgeInsets.zero,
-      itemCount: 10,
-      itemBuilder: (context, index) {
+    return Column(
+      children: List.generate(12, (index) {
         return Container(
           margin: index == 0
               ? const EdgeInsets.only(bottom: 15.0)
@@ -62,7 +60,7 @@ class RestaurantReviewsLoading extends StatelessWidget {
             ],
           ),
         );
-      },
+      }),
     );
   }
 }

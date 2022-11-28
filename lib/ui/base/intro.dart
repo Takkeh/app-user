@@ -65,7 +65,7 @@ class IntroScreen extends StatelessWidget {
           Align(
             alignment: const AlignmentDirectional(-1, 1),
             child: InkWell(
-              onTap: (){
+              onTap: () {
                 Get.to(() => const RegistrationScreen());
                 MySharedPreferences.isPassedIntro = true;
               },
@@ -73,7 +73,9 @@ class IntroScreen extends StatelessWidget {
                 alignment: const AlignmentDirectional(0, 0.2),
                 children: [
                   Image.asset(
-                    MyImages.rightSemiCircle,
+                    MySharedPreferences.language == "en"
+                        ? MyImages.leftSemiCircle
+                        : MyImages.rightSemiCircle,
                     height: 110,
                   ),
                   const Icon(

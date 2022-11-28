@@ -8,9 +8,10 @@ import 'package:takkeh/utils/api_url.dart';
 class RestaurantReviewsApi {
   static Future<RestaurantReviewsModel?> data({
     required int id,
+    required int pageKey,
   }) async {
     try {
-      String url = '${ApiUrl.mainUrl}${ApiUrl.restaurantReviews}$id';
+      String url = '${ApiUrl.mainUrl}${ApiUrl.restaurantReviews}$id?page=$pageKey';
       Uri uri = Uri.parse(url);
       var headers = {
         'Content-Type': 'application/json',
