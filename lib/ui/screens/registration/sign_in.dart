@@ -43,7 +43,6 @@ class SignInScreenState extends State<SignInScreen> {
   @override
   Widget build(BuildContext context) {
     var show = MediaQuery.of(context).viewInsets.bottom == 0.0;
-    print("show:: $show");
     return Stack(
       children: [
         SingleChildScrollView(
@@ -63,8 +62,7 @@ class SignInScreenState extends State<SignInScreen> {
                   suffixIcon: PhoneFieldHelper.toggleSuffixIcon(),
                   validator: (value) {
                     if (value!.isEmpty) {
-                      return TranslationService.getString(
-                          'enter_phone_number_key');
+                      return TranslationService.getString('enter_phone_number_key');
                     }
                     return null;
                   },
@@ -83,17 +81,13 @@ class SignInScreenState extends State<SignInScreen> {
                           controller.changeObscure();
                         },
                         icon: SvgPicture.asset(
-                          controller.isObscure.value
-                              ? MyIcons.eyeCrossed
-                              : MyIcons.eye,
+                          controller.isObscure.value ? MyIcons.eyeCrossed : MyIcons.eye,
                         ),
                       ),
-                      prefixIcon:
-                          const CustomPrefixIcon(icon: MyIcons.shieldPlus),
+                      prefixIcon: const CustomPrefixIcon(icon: MyIcons.shieldPlus),
                       validator: (value) {
                         if (value!.isEmpty) {
-                          return TranslationService.getString(
-                              'enter_password_key');
+                          return TranslationService.getString('enter_password_key');
                         }
                         return null;
                       },

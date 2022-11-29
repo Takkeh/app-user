@@ -18,7 +18,6 @@ class RestaurantsBuilder extends StatelessWidget {
     BuildContext context, {
     required RestaurantList data,
   }) async {
-    //TODO: translate
     return showDialog<void>(
       context: context,
       builder: (BuildContext context) {
@@ -69,7 +68,7 @@ class RestaurantsBuilder extends StatelessWidget {
         pagingController: RestaurantsCtrl.find.pagingController,
         builderDelegate: PagedChildBuilderDelegate<RestaurantList>(
           firstPageProgressIndicatorBuilder: (context) {
-            return const CustomRestaurantsLoading();
+            return const BaseVerticalListLoading();
           },
           newPageProgressIndicatorBuilder: (context) {
             return const RestaurantCPI();

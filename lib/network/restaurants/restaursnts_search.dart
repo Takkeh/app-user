@@ -8,14 +8,17 @@ import 'package:takkeh/utils/api_url.dart';
 class RestaurantsSearchApi {
   static Future<RestaurantsModel?> data({
     required String query,
+    required int pageKey,
   }) async {
     try {
-      String url = '${ApiUrl.mainUrl}${ApiUrl.restaurantsSearch}$query';
+      String url = '${ApiUrl.mainUrl}${ApiUrl.restaurantsSearch}?page=$pageKey';
       Uri uri = Uri.parse(url);
       var headers = {
         'Content-Type': 'application/json',
       };
-      var body = jsonEncode({});
+      var body = jsonEncode({
+        'keyword': query,
+      });
       log("Response:: RestaurantsSearchResponse\nUrl:: $url\nheaders:: $headers\nbody:: $body");
       http.Response response = await http.post(uri, body: body, headers: headers);
       log("RestaurantsSearchStatusCode:: ${response.statusCode}  RestaurantsSearchBody:: ${response.body}");
