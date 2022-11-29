@@ -49,8 +49,8 @@ class TransactionsScreen extends StatelessWidget {
               padding: const EdgeInsets.symmetric(horizontal: 30, vertical: 30),
               itemCount: 3,
               itemBuilder: (context, index) {
-                /// TODO: fix later
-                // return NotificationsBox(
+                /// TODO: missing api data
+                //   return NotificationsBox(
                 //   day: "Yesterday",
                 //   itemCount: 5,
                 //   onTap: () {},
