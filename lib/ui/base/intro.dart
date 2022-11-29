@@ -43,6 +43,7 @@ class IntroScreen extends StatelessWidget {
                 children: [
                   Text(
                     TranslationService.getString("intro_title_key"),
+                    textAlign: TextAlign.center,
                     style: const TextStyle(
                       fontSize: 28,
                       color: MyColors.text,
@@ -53,6 +54,7 @@ class IntroScreen extends StatelessWidget {
                   ),
                   Text(
                     TranslationService.getString("intro_description_key"),
+                    textAlign: TextAlign.center,
                     style: const TextStyle(
                       fontSize: 20,
                       color: MyColors.text,
