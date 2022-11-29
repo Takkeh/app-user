@@ -5,11 +5,12 @@ import 'package:takkeh/utils/base/colors.dart';
 import 'package:takkeh/utils/base/icons.dart';
 
 class WalletCard extends StatelessWidget {
-  final double amount;
+  final String name,amount;
   final Function() onTap;
 
   const WalletCard({
     Key? key,
+    required this.name,
     required this.amount,
     required this.onTap,
   }) : super(key: key);
@@ -37,14 +38,14 @@ class WalletCard extends StatelessWidget {
                   child: SvgPicture.asset(MyIcons.wallet),
                 ),
                 Column(
-                  children: const [
-                    Text(
+                  children: [
+                    const Text(
                       "Wallet",
                       style: TextStyle(fontSize: 20),
                     ),
                     Text(
-                      "Wallet",
-                      style: TextStyle(fontSize: 16, color: MyColors.grey070),
+                      name,
+                      style: const TextStyle(fontSize: 16, color: MyColors.grey070),
                     ),
                   ],
                 ),

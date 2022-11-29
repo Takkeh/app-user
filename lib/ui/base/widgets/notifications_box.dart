@@ -21,99 +21,105 @@ class NotificationsBox extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Text(
-          day,
-          style: const TextStyle(
-            fontSize: 20,
-            fontWeight: FontWeight.w500,
-          ),
-        ),
-        ListView.separated(
-          physics: const NeverScrollableScrollPhysics(),
-          shrinkWrap: true,
-          separatorBuilder: (context, index) => const SizedBox(height: 10),
-          itemCount: itemCount,
-          itemBuilder: (context, index) {
-            return GestureDetector(
-              onTap: onTap,
-              child: Container(
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(17),
-                  color: const Color(0xFFFDFDFE),
+    return itemCount == 0
+        ? const SizedBox()
+        : Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                day,
+                style: const TextStyle(
+                  fontSize: 20,
+                  fontWeight: FontWeight.w500,
                 ),
-                padding:
-                    const EdgeInsets.symmetric(horizontal: 10, vertical: 13),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  children: [
-                    Container(
-                      width: 80,
-                      height: 80,
-                      alignment: Alignment.center,
+              ),
+              ListView.separated(
+                physics: const NeverScrollableScrollPhysics(),
+                shrinkWrap: true,
+                separatorBuilder: (context, index) =>
+                    const SizedBox(height: 10),
+                itemCount: itemCount,
+                itemBuilder: (context, index) {
+                  return GestureDetector(
+                    onTap: onTap,
+                    child: Container(
                       decoration: BoxDecoration(
-                        color: MyColors.primary.withOpacity(0.50),
-                        borderRadius: BorderRadius.circular(9.0),
+                        borderRadius: BorderRadius.circular(17),
+                        color: const Color(0xFFFDFDFE),
                       ),
-                      child: SvgPicture.asset(
-                        notifications[index].type == 'promo'
-                            ? MyIcons.ticket
-                            : MyIcons.handUp,
-                      ),
-                    ),
-                    const SizedBox(width: 10),
-                    Expanded(
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
+                      padding: const EdgeInsets.symmetric(
+                          horizontal: 10, vertical: 13),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.start,
                         children: [
-                          Text(
-                            notifications[index].title,
-                            style: const TextStyle(
-                              color: MyColors.text,
-                              fontSize: 18,
-                              fontWeight: FontWeight.w500,
+                          Container(
+                            width: 80,
+                            height: 80,
+                            alignment: Alignment.center,
+                            decoration: BoxDecoration(
+                              color: MyColors.primary.withOpacity(0.50),
+                              borderRadius: BorderRadius.circular(9.0),
+                            ),
+                            child: SvgPicture.asset(
+                              notifications[index].type == 'promo'
+                                  ? MyIcons.ticket
+                                  : MyIcons.handUp,
                             ),
                           ),
-                          Text(
-                            notifications[index].content,
-                            style: const TextStyle(
-                              fontSize: 16,
-                              color: MyColors.grey070,
-                            ),
-                          ),
-                          const SizedBox(height: 7),
-                          Row(
-                            children: [
-                              SvgPicture.asset(MyIcons.clockWhite),
-                              const SizedBox(width: 5),
-                              Padding(
-                                padding: const EdgeInsets.only(top: 2.5),
-                                child: Text(
-                                  DateFormat('a h:mm dd.MM.yyyy').format(notifications[index].createdAt.toDate()),
+                          const SizedBox(width: 10),
+                          Expanded(
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text(
+                                  notifications[index].title,
                                   style: const TextStyle(
-                                    color: MyColors.greyEB3,
-                                    fontSize: 12,
+                                    color: MyColors.text,
+                                    fontSize: 18,
+                                    fontWeight: FontWeight.w500,
                                   ),
                                 ),
-                              ),
-                            ],
+                                Text(
+                                  notifications[index].content,
+                                  style: const TextStyle(
+                                    fontSize: 16,
+                                    color: MyColors.grey070,
+                                  ),
+                                ),
+                                const SizedBox(height: 7),
+                                Row(
+                                  children: [
+                                    SvgPicture.asset(MyIcons.clockWhite),
+                                    const SizedBox(width: 5),
+                                    Padding(
+                                      padding: const EdgeInsets.only(top: 2.5),
+                                      child: Text(
+                                        DateFormat('a h:mm dd.MM.yyyy').format(
+                                            notifications[index]
+                                                .createdAt
+                                                .toDate()),
+                                        style: const TextStyle(
+                                          color: MyColors.greyEB3,
+                                          fontSize: 12,
+                                        ),
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ],
+                            ),
+                          ),
+                          const Icon(
+                            Icons.navigate_next,
+                            color: MyColors.text,
                           ),
                         ],
                       ),
                     ),
-                    const Icon(
-                      Icons.navigate_next,
-                      color: MyColors.text,
-                    ),
-                  ],
-                ),
+                  );
+                },
               ),
-            );
-          },
-        ),
-      ],
-    );
+            ],
+          );
   }
 }

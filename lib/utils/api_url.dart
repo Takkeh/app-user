@@ -28,6 +28,7 @@ class ApiUrl {
   static const String tags = "/api/v1/tags";
   static const String restaurantReviews = "/api/v1/restaurant/reviews/";
   static const String mostPopular = "/api/v1/restaurant/most-popular/";
+  static const String restaurantInfo = "/api/v1/restaurant/info/";
 
   //profile
   static const String updateProfile = "/api/v1/update-profile";
@@ -40,4 +41,8 @@ class ApiUrl {
   //drawer
   static const String myOrders = "/api/v1/my-orders";
   static const String faq = '/api/v1/faq';
+
+  //wallet
+  static const String walletView = '/api/v1/my-wallet';
+  static const String transaction = '/api/v1/transaction';
 }
