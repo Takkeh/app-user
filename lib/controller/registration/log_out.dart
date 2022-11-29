@@ -27,7 +27,7 @@ class LogOutController extends GetxController {
     if (logOutModel!.code == 200) {
       FirebaseAuth.instance.signOut();
       MySharedPreferences.clearProfile();
-      Get.delete<UserOrderCtrl>(force: true);
+      Get.deleteAll(force: true);
       Get.offAll(() => const RegistrationScreen());
     } else {
       Fluttertoast.showToast(msg: logOutModel!.msg!);

@@ -23,7 +23,7 @@ class SignUpScreenState extends State<SignUpScreen> {
   late TextEditingController nameCtrl, emailCtrl, passwordCtrl, confirmPasswordCtrl;
 
   final emailRegExp = RegExp(r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+");
-  final passwordRegExp = RegExp(r'^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[!@=#\$&*~]).{8,}$');
+  // final passwordRegExp = RegExp(r'^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[!@=#\$&*~]).{8,}$');
 
   @override
   void initState() {
@@ -101,7 +101,7 @@ class SignUpScreenState extends State<SignUpScreen> {
                     validator: (value) {
                       if (value!.isEmpty) {
                         return TranslationService.getString('enter_password_key');
-                      } else if (!passwordRegExp.hasMatch(value)) {
+                      } else if (value.length < 8) {
                         return TranslationService.getString('invalid_password_key');
                       }
                       return null;
@@ -130,8 +130,8 @@ class SignUpScreenState extends State<SignUpScreen> {
                   validator: (value) {
                     if (value!.isEmpty) {
                       return TranslationService.getString('confirm_password_key');
-                    } else if (value != passwordCtrl.text) {
-                      return TranslationService.getString('password_does_not_match_key');
+                    } else if (value.length < 8) {
+                      return TranslationService.getString('invalid_password_key');
                     }
                     return null;
                   },

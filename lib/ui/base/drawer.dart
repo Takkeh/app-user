@@ -78,7 +78,7 @@ class _BaseDrawerState extends State<BaseDrawer> {
                         title: TranslationService.getString('wallet_key'),
                         icon: MyIcons.wallet,
                         onTap: () {
-                          Get.to(() => const WalletScreen(),binding: WalletBinding());
+                          Get.to(() => const WalletScreen(), binding: WalletBinding());
                         },
                       ),
                       DrawerListTile(
@@ -104,7 +104,7 @@ class _BaseDrawerState extends State<BaseDrawer> {
                 TextButton.icon(
                   onPressed: () {
                     MySharedPreferences.clearProfile();
-                    Get.delete<UserOrderCtrl>(force: true);
+                    Get.deleteAll(force: true);
                     Get.offAll(() => const RegistrationScreen());
                     // LogOutController.find.fetchLogOutData(context);
                   },
