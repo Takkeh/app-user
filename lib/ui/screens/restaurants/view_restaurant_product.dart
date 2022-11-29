@@ -23,7 +23,7 @@ class ViewRestaurantProductScreen extends StatefulWidget {
   final String cover;
   final int productId;
   final int restaurantId;
-  final List<Groups> groups;
+  final List<dynamic> groups;
 
   const ViewRestaurantProductScreen({
     Key? key,
@@ -44,8 +44,7 @@ class _ViewRestaurantProductScreenState extends State<ViewRestaurantProductScree
   late TextEditingController noteCtrl;
 
   bool isAlreadyExist(List<Map<String, dynamic>> groups) {
-    var data =
-        UserOrderCtrl.find.orderList.where((element) => element['product_id'] == widget.productId && element["note"] == noteCtrl.text.trim() && element["groups"].toString() == groups.toString());
+    var data = UserOrderCtrl.find.orderList.where((element) => element['product_id'] == widget.productId && element["note"] == noteCtrl.text.trim() && element["groups"].toString() == groups.toString());
     if (data.isEmpty) return false;
     data.first.update('price', (value) => value + ViewProductCtrl.find.finalPrice.value);
     data.first.update('quantity', (value) => value + ViewProductCtrl.find.quantity.value);

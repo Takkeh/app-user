@@ -8,7 +8,7 @@ import 'package:takkeh/ui/screens/restaurants/widgets/custom_check_box.dart';
 
 class RequiredCheckBox2 extends StatefulWidget {
   final int groupId;
-  final List<GroupItem> items;
+  final List<dynamic> items;
 
   const RequiredCheckBox2({
     Key? key,
