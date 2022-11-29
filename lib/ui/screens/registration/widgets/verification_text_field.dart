@@ -35,6 +35,7 @@ class VerificationTextField extends StatelessWidget {
       textAlign: textAlign ?? TextAlign.start,
       keyboardType: keyboardType,
       focusNode: focusNode,
+      textDirection: TextDirection.ltr,
       initialValue: initialValue,
       controller: controller,
       onChanged: onChanged,

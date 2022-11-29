@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:takkeh/controller/registration/code_timer_controller.dart';
 import 'package:takkeh/controller/registration/reset_pass/step1.dart';
+import 'package:takkeh/translation/service.dart';
 import 'package:takkeh/utils/base/colors.dart';
 
 class OtpCounterWidget extends StatelessWidget {
@@ -19,12 +20,14 @@ class OtpCounterWidget extends StatelessWidget {
       child: GetBuilder<CodeTimerController>(
         builder: (controller) {
           if (controller.counter.value == 0) {
-            return ElevatedButton(
+            return TextButton(
               onPressed: () {
                 controller.counter.value = 60;
                 ResetPassStep1Controller.fetchOtpData(context: context, phone: phone);
               },
-              child: const Text("resend_otp_key"),
+              child: Text(
+                TranslationService.getString('resend_otp_key'),
+              ),
             );
           } else {
             return RichText(

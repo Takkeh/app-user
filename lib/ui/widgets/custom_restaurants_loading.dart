@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:takkeh/ui/widgets/custom_shimmer_loading.dart';
 
-class CustomRestaurantsLoading extends StatelessWidget {
-  const CustomRestaurantsLoading({Key? key}) : super(key: key);
+class BaseVerticalListLoading extends StatelessWidget {
+  const BaseVerticalListLoading({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

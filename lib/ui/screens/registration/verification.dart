@@ -80,6 +80,7 @@ class _VerificationScreenState extends State<VerificationScreen> {
             Padding(
               padding: const EdgeInsets.fromLTRB(35, 35, 35, 20),
               child: VerificationTextField(
+                textAlign: TextAlign.center,
                 initialValue: "+962${widget.phoneNum}",
                 prefixIcon: SvgPicture.asset(
                   MyIcons.pencil,

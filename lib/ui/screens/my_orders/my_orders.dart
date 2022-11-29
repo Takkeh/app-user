@@ -1,15 +1,14 @@
-import 'package:get/get.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:infinite_scroll_pagination/infinite_scroll_pagination.dart';
+import 'package:takkeh/controller/my_orders/my_orders_ctrl.dart';
+import 'package:takkeh/model/my_orders/my_orders_model.dart';
+import 'package:takkeh/translation/service.dart';
+import 'package:takkeh/ui/screens/my_orders/widget/my_order_tile.dart';
+import 'package:takkeh/ui/widgets/custom_restaurants_loading.dart';
+import 'package:takkeh/ui/widgets/transparent_app_bar.dart';
 import 'package:takkeh/utils/base/colors.dart';
 import 'package:takkeh/utils/base/images.dart';
-import 'package:takkeh/translation/service.dart';
-import 'package:takkeh/ui/widgets/transparent_app_bar.dart';
-import 'package:takkeh/model/my_orders/my_orders_model.dart';
-import 'package:takkeh/controller/my_orders/my_orders_ctrl.dart';
-import 'package:takkeh/ui/widgets/custom_restaurants_loading.dart';
-import 'package:takkeh/ui/screens/my_orders/widget/my_order_tile.dart';
-import 'package:infinite_scroll_pagination/infinite_scroll_pagination.dart';
-
 
 class MyOrdersScreen extends StatefulWidget {
   const MyOrdersScreen({Key? key}) : super(key: key);
@@ -21,7 +20,7 @@ class MyOrdersScreen extends StatefulWidget {
 class _MyOrdersScreenState extends State<MyOrdersScreen> {
   @override
   void initState() {
-    Get.put(() => MyOrdersCtrl());
+    Get.put(MyOrdersCtrl());
     super.initState();
   }
 
@@ -49,8 +48,7 @@ class _MyOrdersScreenState extends State<MyOrdersScreen> {
               height: 15,
             ),
             builderDelegate: PagedChildBuilderDelegate<OrdersList>(
-                firstPageProgressIndicatorBuilder: (context) =>
-                const CustomRestaurantsLoading(),
+                firstPageProgressIndicatorBuilder: (context) => const BaseVerticalListLoading(),
                 itemBuilder: (context, data, index) {
                   return MyOrderTile(
                     onTap: () {},
