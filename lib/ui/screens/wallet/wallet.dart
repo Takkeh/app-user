@@ -8,6 +8,7 @@ import 'package:takkeh/ui/screens/wallet/deposite.dart';
 import 'package:takkeh/ui/screens/wallet/payment_options.dart';
 import 'package:takkeh/ui/screens/wallet/transactions.dart';
 import 'package:takkeh/ui/screens/wallet/widgets/wallet_card.dart';
+import 'package:takkeh/ui/screens/wallet/widgets/wallet_loading.dart';
 import 'package:takkeh/ui/screens/wallet/widgets/wallet_option_card.dart';
 import 'package:takkeh/ui/widgets/custom_elevated_button.dart';
 import 'package:takkeh/ui/widgets/failed_widget.dart';
@@ -23,12 +24,16 @@ class WalletScreen extends StatelessWidget {
     return Scaffold(
       backgroundColor: MyColors.blue6FA,
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
-      floatingActionButton: CustomElevatedButton(
-        width: Get.width - 100,
-        title: TranslationService.getString('deposit_key'),
-        onPressed: () {
-          Get.to(() => const DepositScreen());
-        },
+      floatingActionButton: GetBuilder<WalletCtrl>(
+        builder: (controller) {
+          return CustomElevatedButton(
+            width: Get.width - 100,
+            title: TranslationService.getString('deposit_key'),
+            onPressed: controller.walletId.value!=0?(){
+              Get.to(() => const DepositScreen());
+            }:null,
+          );
+        }
       ),
       appBar: TransparentAppBar(title: TranslationService.getString('wallet_key')),
       body: FutureBuilder<WalletViewModel?>(
@@ -36,7 +41,7 @@ class WalletScreen extends StatelessWidget {
           builder: (context, snapshot) {
             switch (snapshot.connectionState) {
               case ConnectionState.waiting:
-                return const CustomCircularProgressIndicator();
+                return const WalletLoading();
               case ConnectionState.done:
               default:
                 if (snapshot.hasData) {
