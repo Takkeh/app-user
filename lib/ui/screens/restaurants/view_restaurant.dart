@@ -105,7 +105,7 @@ class ViewRestaurantScreen extends StatelessWidget {
                             ),
                           ),
                         ),
-                        const MostPopularCategoriesBuilder(),
+                        MostPopularCategoriesBuilder(restaurantId: restaurantId),
                       ],
                     ),
                   ],

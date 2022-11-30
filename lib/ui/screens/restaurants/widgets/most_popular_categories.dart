@@ -1,12 +1,21 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:takkeh/binding/restaurants/view_product.dart';
 import 'package:takkeh/controller/restaurants/most_popular_products.dart';
 import 'package:takkeh/model/restaurants/most_popular_model.dart';
+import 'package:takkeh/model/restaurants/view_restaurant.dart';
+import 'package:takkeh/ui/screens/restaurants/view_restaurant_product.dart';
 import 'package:takkeh/ui/screens/restaurants/widgets/most_popular_loading.dart';
 import 'package:takkeh/ui/screens/restaurants/widgets/most_poular_box.dart';
 import 'package:takkeh/ui/widgets/failed_widget.dart';
 
 class MostPopularCategoriesBuilder extends StatelessWidget {
-  const MostPopularCategoriesBuilder({Key? key}) : super(key: key);
+  final int restaurantId;
+
+  const MostPopularCategoriesBuilder({
+    Key? key,
+    required this.restaurantId,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -33,6 +42,21 @@ class MostPopularCategoriesBuilder extends StatelessWidget {
                       title: data.name!,
                       imageUrl: data.image!,
                       price: data.price!,
+                      onTap: () {
+                        Get.to(
+                          () => ViewRestaurantProductScreen(
+                            title: data.name!,
+                            subTitle: data.name!,
+                            price: data.price!.toDouble(),
+                            cover: data.image!,
+                            productId: data.id!,
+                            restaurantId: restaurantId,
+                            groups: data.groups!,
+                          ),
+                          binding: ViewProductBinding(),
+                        );
+                      },
+                      productId: data.id!,
                     );
                   },
                 ),

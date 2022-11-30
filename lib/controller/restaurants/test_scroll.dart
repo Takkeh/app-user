@@ -87,7 +87,7 @@ class _ScrollTestState extends State<ScrollTest> {
                               ),
                             ),
                           ),
-                          MostPopularCategoriesBuilder(),
+                          // MostPopularCategoriesBuilder(),
                         ],
                       ),
                     ],
