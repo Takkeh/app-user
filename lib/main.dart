@@ -27,7 +27,7 @@ Future<void> main() async {
       );
   await MySharedPreferences.init();
   //TODO: change later for both
-  MySharedPreferences.language = "";
+  // MySharedPreferences.language = "";
   if (MySharedPreferences.language.isEmpty) {
     // MySharedPreferences.language = Get.deviceLocale!.languageCode;
     MySharedPreferences.language = 'ar';
