@@ -24,7 +24,7 @@ class MySharedPreferences {
     email = "";
     name = "";
     userId = 0;
-    language = "";
+    // language = "";
     deviceToken = "";
     phone = "";
     image = "";

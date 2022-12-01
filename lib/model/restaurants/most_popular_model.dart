@@ -74,7 +74,7 @@ class MostPopular {
         time: json["time"],
         isBusy: json["is_busy"],
         description: json["description"],
-        reviewAverage: json["review_average"].toDouble(),
+        reviewAverage: json["review_average"] == null ? 0.0 : double.parse(json["review_average"].toString()),
         review: json["review"],
         reviewIcon: json["review_icon"],
         mostPopularProducts: List<MostPopularProducts>.from(json["products"].map((x) => MostPopularProducts.fromJson(x))),
