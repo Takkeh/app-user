@@ -14,7 +14,7 @@ class AddPromoCodeCtrl extends GetxController {
 
   AddPromoCodeModel? addPromoCodeModel;
 
-  Future fetchCategoriesData(int orderId, int promoId, BuildContext context) async {
+  Future fetchData(int orderId, int promoId, BuildContext context) async {
     Loader.show(
       context,
       progressIndicator: Center(

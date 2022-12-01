@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:loader_overlay/loader_overlay.dart';
 import 'package:takkeh/ui/screens/restaurants/widgets/categories_builder.dart';
 import 'package:takkeh/ui/screens/restaurants/widgets/gradient_colors_box.dart';
 import 'package:takkeh/ui/screens/restaurants/widgets/restaurants_app_bar.dart';
@@ -28,25 +29,27 @@ class _RestaurantsHomeScreenState extends State<RestaurantsHomeScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      resizeToAvoidBottomInset: false,
-      appBar: const RestaurantsAppBar(),
-      body: Column(
-        children: [
-          Stack(
-            clipBehavior: Clip.none,
-            alignment: Alignment.bottomCenter,
-            children: const [
-              Positioned(
-                bottom: -5,
-                child: GradientColorsBox(height: 136),
-              ),
-              RestaurantCategoriesBuilder(),
-            ],
-          ),
-          const SizedBox(height: 20),
-          const RestaurantsBuilder(),
-        ],
+    return LoaderOverlay(
+      child: Scaffold(
+        resizeToAvoidBottomInset: false,
+        appBar: RestaurantsAppBar(myContext: context),
+        body: Column(
+          children: [
+            Stack(
+              clipBehavior: Clip.none,
+              alignment: Alignment.bottomCenter,
+              children: const [
+                Positioned(
+                  bottom: -5,
+                  child: GradientColorsBox(height: 136),
+                ),
+                RestaurantCategoriesBuilder(),
+              ],
+            ),
+            const SizedBox(height: 20),
+            const RestaurantsBuilder(),
+          ],
+        ),
       ),
     );
   }

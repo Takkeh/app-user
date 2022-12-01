@@ -9,7 +9,12 @@ import 'package:takkeh/utils/base/colors.dart';
 import 'package:takkeh/utils/base/icons.dart';
 
 class RestaurantsAppBar extends StatelessWidget implements PreferredSizeWidget {
-  const RestaurantsAppBar({Key? key}) : super(key: key);
+  final BuildContext myContext;
+
+  const RestaurantsAppBar({
+    Key? key,
+    required this.myContext,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -47,7 +52,7 @@ class RestaurantsAppBar extends StatelessWidget implements PreferredSizeWidget {
                   return;
                 }
                 MakeOrderCtrl.find.fetchData(
-                  context: context,
+                  context: myContext,
                   restaurantId: controller.restaurantId,
                   generalNote: '',
                   // route: BasketScreen(
@@ -65,7 +70,6 @@ class RestaurantsAppBar extends StatelessWidget implements PreferredSizeWidget {
                     ),
                   ),
                   Positioned(
-                    //TODO: check language change position + icon
                     right: -8,
                     top: 8,
                     child: CircleAvatar(

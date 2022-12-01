@@ -2,14 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter_overlay_loader/flutter_overlay_loader.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
-import 'package:loading_animation_widget/loading_animation_widget.dart';
+import 'package:loader_overlay/loader_overlay.dart';
 import 'package:takkeh/binding/restaurants/basket_binding.dart';
 import 'package:takkeh/controller/user_order_ctrl.dart';
 import 'package:takkeh/model/restaurants/make_order_model.dart';
 import 'package:takkeh/network/restaurants/make_order.dart';
 import 'package:takkeh/ui/screens/restaurants/basket.dart';
 import 'package:takkeh/utils/app_constants.dart';
-import 'package:takkeh/utils/base/colors.dart';
 
 class MakeOrderCtrl extends GetxController {
   static MakeOrderCtrl get find => Get.find();
@@ -22,16 +21,18 @@ class MakeOrderCtrl extends GetxController {
     required int restaurantId,
     required BuildContext context,
   }) async {
-    Loader.show(
-      context,
-      progressIndicator: Center(
-        child: LoadingAnimationWidget.flickr(
-          leftDotColor: MyColors.text,
-          rightDotColor: MyColors.redPrimary,
-          size: 50,
-        ),
-      ),
-    );
+    context.loaderOverlay.show();
+    // Loader.show(
+    //   isAppbarOverlay: true,
+    //   context,
+    //   progressIndicator: Center(
+    //     child: LoadingAnimationWidget.flickr(
+    //       leftDotColor: MyColors.text,
+    //       rightDotColor: MyColors.redPrimary,
+    //       size: 50,
+    //     ),
+    //   ),
+    // );
     model = await MakeOrderApi.data(
       userOrder: UserOrderCtrl.find.orderList,
       generalNote: generalNote,
@@ -55,6 +56,7 @@ class MakeOrderCtrl extends GetxController {
     } else {
       Fluttertoast.showToast(msg: model!.msg!);
     }
-    Loader.hide();
+    // Loader.hide();
+    context.loaderOverlay.hide();
   }
 }
