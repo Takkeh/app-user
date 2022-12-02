@@ -46,4 +46,5 @@ final Map<String, String> ar = {
   "": "",
   "Coming Soon!": "قريبا!",
   "Minute": "دقيقة",
+  "Something went Wrong, try again later": "حدث خطأ ما, الرجاء المحاولة لاحقاً",
 };

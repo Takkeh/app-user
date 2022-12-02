@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:loader_overlay/loader_overlay.dart';
 import 'package:takkeh/translation/service.dart';
 import 'package:takkeh/ui/screens/home/home.dart';
 import 'package:takkeh/ui/screens/restaurants/widgets/most_popular_categories.dart';
@@ -35,99 +34,97 @@ class ViewRestaurantScreen extends StatelessWidget {
       floatingActionButton: ProductsFABButton(
         restaurantId: restaurantId,
       ),
-      body: LoaderOverlay(
-        child: CustomScrollView(
-          // controller: ViewRestaurantCtrl.find.scrollCtrl,
-          physics: const ClampingScrollPhysics(),
-          slivers: [
-            SliverAppBar(
-              pinned: true,
-              backgroundColor: MyColors.redPrimary,
-              leadingWidth: 73,
-              leading: const BackLeadingWidget(),
-              actions: const [
-                SearchBoxWidget(),
-              ],
-              expandedHeight: 530,
-              collapsedHeight: kToolbarHeight + 50,
-              centerTitle: true,
-              title: Text(
-                title,
-                style: const TextStyle(
-                  color: Colors.white,
-                  fontWeight: FontWeight.bold,
-                  fontSize: 20,
-                ),
+      body: CustomScrollView(
+        // controller: ViewRestaurantCtrl.find.scrollCtrl,
+        physics: const ClampingScrollPhysics(),
+        slivers: [
+          SliverAppBar(
+            pinned: true,
+            backgroundColor: MyColors.redPrimary,
+            leadingWidth: 73,
+            leading: const BackLeadingWidget(),
+            actions: const [
+              SearchBoxWidget(),
+            ],
+            expandedHeight: 530,
+            collapsedHeight: kToolbarHeight + 50,
+            centerTitle: true,
+            title: Text(
+              title,
+              style: const TextStyle(
+                color: Colors.white,
+                fontWeight: FontWeight.bold,
+                fontSize: 20,
               ),
-              flexibleSpace: FlexibleSpaceBar(
-                collapseMode: CollapseMode.pin,
-                background: Container(
-                  color: Colors.white,
-                  padding: const EdgeInsets.only(bottom: 60),
-                  child: Column(
-                    children: [
-                      Expanded(
-                        child: Stack(
-                          clipBehavior: Clip.none,
-                          alignment: Alignment.center,
-                          children: [
-                            ClipPath(
-                              clipper: CustomClipPath(),
-                              child: CustomNetworkImage(
-                                url: cover,
-                                radius: 0,
-                              ),
-                            ),
-                            Positioned(
-                              bottom: -37,
-                              child: RestaurantInfoBubble(
-                                title: title,
-                                logo: logo,
-                                time: time,
-                                cost: cost,
-                                review: review,
-                                cover: cover,
-                                restaurantId: restaurantId,
-                                reviewIcon: reviewIcon,
-                              ),
-                            )
-                          ],
-                        ),
-                      ),
-                      Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
+            ),
+            flexibleSpace: FlexibleSpaceBar(
+              collapseMode: CollapseMode.pin,
+              background: Container(
+                color: Colors.white,
+                padding: const EdgeInsets.only(bottom: 60),
+                child: Column(
+                  children: [
+                    Expanded(
+                      child: Stack(
+                        clipBehavior: Clip.none,
+                        alignment: Alignment.center,
                         children: [
-                          Padding(
-                            padding: const EdgeInsetsDirectional.fromSTEB(28, 70, 0, 10),
-                            child: Text(
-                              TranslationService.getString('most_popular_key'),
-                              style: const TextStyle(
-                                fontSize: 18,
-                                fontWeight: FontWeight.bold,
-                              ),
+                          ClipPath(
+                            clipper: CustomClipPath(),
+                            child: CustomNetworkImage(
+                              url: cover,
+                              radius: 0,
                             ),
                           ),
-                          MostPopularCategoriesBuilder(restaurantId: restaurantId),
+                          Positioned(
+                            bottom: -37,
+                            child: RestaurantInfoBubble(
+                              title: title,
+                              logo: logo,
+                              time: time,
+                              cost: cost,
+                              review: review,
+                              cover: cover,
+                              restaurantId: restaurantId,
+                              reviewIcon: reviewIcon,
+                            ),
+                          )
                         ],
                       ),
-                    ],
-                  ),
-                  // child: getMostPopular(),
+                    ),
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Padding(
+                          padding: const EdgeInsetsDirectional.fromSTEB(28, 70, 0, 10),
+                          child: Text(
+                            TranslationService.getString('most_popular_key'),
+                            style: const TextStyle(
+                              fontSize: 18,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                        ),
+                        MostPopularCategoriesBuilder(restaurantId: restaurantId),
+                      ],
+                    ),
+                  ],
                 ),
-              ),
-              bottom: const PreferredSize(
-                preferredSize: Size.fromHeight(0.0),
-                child: ProductsFilterBuilder(),
+                // child: getMostPopular(),
               ),
             ),
-            SliverToBoxAdapter(
-              child: ViewRestaurantBuilder(restaurantId: restaurantId),
+            bottom: const PreferredSize(
+              preferredSize: Size.fromHeight(0.0),
+              child: ProductsFilterBuilder(),
             ),
-            const SliverToBoxAdapter(
-              child: SizedBox(height: 80),
-            ),
-          ],
-        ),
+          ),
+          SliverToBoxAdapter(
+            child: ViewRestaurantBuilder(restaurantId: restaurantId),
+          ),
+          const SliverToBoxAdapter(
+            child: SizedBox(height: 80),
+          ),
+        ],
       ),
     );
   }

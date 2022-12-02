@@ -16,8 +16,10 @@ class LocationPermissionScreen extends StatelessWidget {
     OverLayLoader.flickrLoading(context);
     await UserLocationCtrl.find.getPermission().then((value) {
       if (value == LocationPermission.unableToDetermine) {
+        Loader.hide();
         Fluttertoast.showToast(msg: TranslationService.getString('device_location_service_disabled_key'));
       } else if (value == LocationPermission.deniedForever) {
+        Loader.hide();
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
             backgroundColor: MyColors.primary,
@@ -31,11 +33,12 @@ class LocationPermissionScreen extends StatelessWidget {
           ),
         );
       } else if (value == LocationPermission.denied) {
+        Loader.hide();
         Fluttertoast.showToast(msg: TranslationService.getString('permission_denied_key'));
       } else {
+        Loader.hide();
         Get.back();
       }
-      Loader.hide();
     });
   }
 

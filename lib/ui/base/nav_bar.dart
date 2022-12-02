@@ -2,15 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:persistent_bottom_nav_bar/persistent-tab-view.dart';
 import 'package:takkeh/controller/nav_bar_ctrl.dart';
+import 'package:takkeh/helper/guest_user_helper.dart';
 import 'package:takkeh/ui/screens/help/help.dart';
 import 'package:takkeh/ui/screens/home/home.dart';
 import 'package:takkeh/ui/screens/my_orders/my_orders.dart';
 import 'package:takkeh/ui/screens/profile/profile.dart';
-import 'package:takkeh/ui/widgets/components/guest_dialog.dart';
 import 'package:takkeh/ui/widgets/custom_nav_bar_icon.dart';
 import 'package:takkeh/utils/base/colors.dart';
 import 'package:takkeh/utils/base/icons.dart';
-import 'package:takkeh/utils/shared_prefrences.dart';
 
 bool isHidden = false;
 
@@ -25,10 +24,8 @@ class BaseNavBar extends StatefulWidget {
 
 class BaseNavBarState extends State<BaseNavBar> {
   void toggleGuestUser(int index) {
-    if (MySharedPreferences.isLogIn) {
+    if (GuestUserHelper.check()) {
       navBarController.index = index;
-    } else {
-      GuestDialog.show(context);
     }
   }
 

@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_overlay_loader/flutter_overlay_loader.dart';
 import 'package:fluttertoast/fluttertoast.dart';
@@ -43,6 +45,7 @@ class SignInController extends GetxController {
       MySharedPreferences.image = signInModel!.data!.user!.image!;
       MySharedPreferences.phone = signInModel!.data!.user!.phone!;
       MySharedPreferences.isLogIn = true;
+      log("route:: $route");
       if (route == kHome) {
         Get.offAll(() => const BaseNavBar(), binding: NavBarBinding());
       }

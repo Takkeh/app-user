@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:takkeh/binding/addresses.dart';
-import 'package:takkeh/controller/user_location_ctrl.dart';
 import 'package:takkeh/translation/service.dart';
 import 'package:takkeh/ui/screens/addresses/add_new_address_screen.dart';
 import 'package:takkeh/utils/base/colors.dart';
@@ -26,10 +25,7 @@ class AddNewAddressButton extends StatelessWidget {
           fixedSize: Size(Get.width, 60),
         ),
         onPressed: () async {
-          var isGranted = await UserLocationCtrl.find.checkPermission(context);
-          if (isGranted) {
-            Get.to(() => const AddNewAddressScreen(), binding: CreateAddressBinding());
-          }
+          Get.to(() => const AddNewAddressScreen(), binding: CreateAddressBinding());
         },
         label: Text(
           TranslationService.getString('add_new_address_key'),

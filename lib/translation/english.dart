@@ -46,4 +46,5 @@ final Map<String, String> en = {
   "": "",
   "Coming Soon!": "Coming Soon!",
   "Minute": "Minute",
+  "Something went Wrong, try again later": "Something went Wrong, try again later",
 };

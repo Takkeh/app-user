@@ -33,6 +33,7 @@ class _PickAddressDialogState extends State<PickAddressDialog> {
                   color: MyColors.redPrimary,
                   fontSize: 22,
                 ),
+                textAlign: TextAlign.center,
               ),
             ),
           ],
