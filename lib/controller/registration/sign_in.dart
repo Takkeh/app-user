@@ -25,6 +25,7 @@ class SignInController extends GetxController {
   Future fetchSignInData({
     required String phone,
     required String password,
+    required String route,
     required BuildContext context,
   }) async {
     OverLayLoader.showLoading(context);
@@ -35,7 +36,6 @@ class SignInController extends GetxController {
       return;
     }
     if (signInModel!.code == 200) {
-      Get.offAll(() => const BaseNavBar(), binding: NavBarBinding());
       MySharedPreferences.accessToken = signInModel!.data!.token!;
       MySharedPreferences.email = signInModel!.data!.user!.email!;
       MySharedPreferences.name = signInModel!.data!.user!.name!;
@@ -43,6 +43,12 @@ class SignInController extends GetxController {
       MySharedPreferences.image = signInModel!.data!.user!.image!;
       MySharedPreferences.phone = signInModel!.data!.user!.phone!;
       MySharedPreferences.isLogIn = true;
+      if (route == kHome) {
+        Get.offAll(() => const BaseNavBar(), binding: NavBarBinding());
+      }
+      if (route == kBack) {
+        Get.back();
+      }
     } else if (signInModel!.code == 500) {
       Fluttertoast.showToast(msg: TranslationService.getString('incorrect_email_or_password_key'));
     } else {

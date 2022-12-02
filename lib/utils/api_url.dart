@@ -45,4 +45,8 @@ class ApiUrl {
   //wallet
   static const String walletView = '/api/v1/my-wallet';
   static const String transaction = '/api/v1/transaction';
+
+  //addresses
+  static const String myAddresses = '/api/v1/my-address';
+  static const String createAddress = '/api/v1/address-create';
 }

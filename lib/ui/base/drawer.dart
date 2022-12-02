@@ -3,14 +3,17 @@ import 'dart:math' as math;
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
+import 'package:takkeh/binding/registration/sign_in.dart';
 import 'package:takkeh/binding/wallet/wallet_binding.dart';
 import 'package:takkeh/controller/registration/log_out.dart';
-import 'package:takkeh/controller/user_order_ctrl.dart';
+import 'package:takkeh/controller/user_location_ctrl.dart';
 import 'package:takkeh/translation/service.dart';
 import 'package:takkeh/ui/base/widgets/drawer_app_bar.dart';
 import 'package:takkeh/ui/base/widgets/drawer_background_image.dart';
 import 'package:takkeh/ui/base/widgets/drawer_list_tile.dart';
 import 'package:takkeh/ui/base/widgets/drawer_profile_info.dart';
+import 'package:takkeh/ui/screens/addresses/location_permission_screen.dart';
+import 'package:takkeh/ui/screens/addresses/my_addresses_screen.dart';
 import 'package:takkeh/ui/screens/help/help.dart';
 import 'package:takkeh/ui/screens/my_orders/my_orders.dart';
 import 'package:takkeh/ui/screens/profile/profile.dart';
@@ -75,6 +78,21 @@ class _BaseDrawerState extends State<BaseDrawer> {
                         },
                       ),
                       DrawerListTile(
+                        title: TranslationService.getString('my_addresses_key'),
+                        icon: MyIcons.wallet,
+                        onTap: () {
+                          if (UserLocationCtrl.find.deniedPermissions.contains(UserLocationCtrl.find.permission.value)) {
+                            Get.to(() => const LocationPermissionScreen())!.then((value) {
+                              if (!UserLocationCtrl.find.deniedPermissions.contains(UserLocationCtrl.find.permission.value)) {
+                                Get.to(() => const MyAddressesScreen());
+                              }
+                            });
+                          } else {
+                            Get.to(() => const MyAddressesScreen());
+                          }
+                        },
+                      ),
+                      DrawerListTile(
                         title: TranslationService.getString('wallet_key'),
                         icon: MyIcons.wallet,
                         onTap: () {
@@ -105,7 +123,7 @@ class _BaseDrawerState extends State<BaseDrawer> {
                   onPressed: () {
                     MySharedPreferences.clearProfile();
                     Get.deleteAll(force: true);
-                    Get.offAll(() => const RegistrationScreen());
+                    Get.offAll(() => const RegistrationScreen(), binding: RegistrationBinding());
                     // LogOutController.find.fetchLogOutData(context);
                   },
                   label: const Text(

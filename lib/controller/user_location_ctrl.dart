@@ -1,10 +1,14 @@
 import 'dart:developer';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_overlay_loader/flutter_overlay_loader.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:geocoding/geocoding.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:get/get.dart';
+import 'package:takkeh/controller/addresses/my_addresses_ctrl.dart';
+import 'package:takkeh/translation/service.dart';
+import 'package:takkeh/ui/widgets/components/overlay_loader.dart';
 import 'package:takkeh/ui/widgets/custom_button.dart';
 import 'package:takkeh/utils/base/colors.dart';
 import 'package:takkeh/utils/shared_prefrences.dart';
@@ -12,11 +16,21 @@ import 'package:takkeh/utils/shared_prefrences.dart';
 class UserLocationCtrl extends GetxController {
   static UserLocationCtrl get find => Get.find();
 
-  late LocationPermission permission;
+  final permission = Rxn<LocationPermission>();
 
-  final latitude = Rxn<double>();
-  final longitude = Rxn<double>();
+  final grantedPermissions = [
+    LocationPermission.always,
+    LocationPermission.whileInUse,
+  ];
 
+  final deniedPermissions = [
+    LocationPermission.denied,
+    LocationPermission.deniedForever,
+    LocationPermission.unableToDetermine,
+  ];
+
+  final latitude = 0.0.obs;
+  final longitude = 0.0.obs;
   final subLocality = ''.obs;
   final street = ''.obs;
   final locality = ''.obs;
@@ -33,21 +47,33 @@ class UserLocationCtrl extends GetxController {
     serviceEnabled = await Geolocator.isLocationServiceEnabled();
 
     if (!serviceEnabled) {
-      permission = LocationPermission.unableToDetermine;
+      permission.value = LocationPermission.unableToDetermine;
+      return permission.value!;
     }
 
-    permission = await Geolocator.checkPermission();
+    permission.value = await Geolocator.checkPermission();
 
-    if (permission == LocationPermission.denied) {
-      permission = await Geolocator.requestPermission();
-      return permission;
+    if (permission.value == LocationPermission.denied) {
+      permission.value = await Geolocator.requestPermission();
+    }
+
+    if (permission.value == LocationPermission.denied) {
+      permission.value = LocationPermission.denied;
+      return permission.value!;
+    }
+
+    if (permission.value == LocationPermission.deniedForever) {
+      permission.value = LocationPermission.deniedForever;
+      return permission.value!;
     }
 
     final position = await Geolocator.getCurrentPosition(desiredAccuracy: LocationAccuracy.bestForNavigation);
     getLocation(position.latitude, position.longitude);
-    getAddress(position.latitude, position.longitude);
-
-    return permission;
+    await getAddress(position.latitude, position.longitude);
+    if (MyAddressesCtrl.find.myAddresses.isEmpty && MySharedPreferences.accessToken.isNotEmpty) {
+      await MyAddressesCtrl.find.fetchData();
+    }
+    return permission.value!;
   }
 
   void getLocation(double lat, double lng) {
@@ -66,34 +92,38 @@ class UserLocationCtrl extends GetxController {
     update();
   }
 
-  Future<bool> checkPermission(BuildContext context) {
-    var isDenied = permission == LocationPermission.denied || permission == LocationPermission.deniedForever || permission == LocationPermission.unableToDetermine;
+  Future<bool> checkPermission(BuildContext context) async {
+    OverLayLoader.flickrLoading(context);
+    await getPermission();
+    var isDenied = permission.value == LocationPermission.denied || permission.value == LocationPermission.deniedForever || permission.value == LocationPermission.unableToDetermine;
     if (isDenied) {
       Get.defaultDialog(
-        title: "Location Permission".tr,
+        title: TranslationService.getString('location_permission_title_key'),
         contentPadding: const EdgeInsets.all(16.0),
         titlePadding: const EdgeInsets.all(16.0),
         content: Column(
           children: [
             Text(
-              "allow location permission to be able to use our service".tr,
+              TranslationService.getString('location_permission_body_key'),
             ),
             const SizedBox(height: 20),
             CustomButton(
-              title: "Ask for permission".tr,
+              title: TranslationService.getString('ask_for_permission_key'),
               onPressed: () async {
                 Get.back();
+                OverLayLoader.flickrLoading(context);
                 await getPermission().then((value) {
+                  log("value:: $value");
                   if (value == LocationPermission.unableToDetermine) {
-                    Fluttertoast.showToast(msg: "Device location services are not enabled".tr);
+                    Fluttertoast.showToast(msg: TranslationService.getString('device_location_service_disabled_key'));
                   }
                   if (value == LocationPermission.deniedForever) {
                     ScaffoldMessenger.of(context).showSnackBar(
                       SnackBar(
                         backgroundColor: MyColors.primary,
-                        content: Text("Permission is denied. to enable it, edit your device settings".tr),
+                        content: Text(TranslationService.getString('permission_denied_edit_setting_key')),
                         action: SnackBarAction(
-                          label: "Edit".tr,
+                          label: TranslationService.getString('edit_key'),
                           onPressed: () {
                             Geolocator.openLocationSettings();
                           },
@@ -101,14 +131,17 @@ class UserLocationCtrl extends GetxController {
                       ),
                     );
                   }
+                  Loader.hide();
                 });
               },
             ),
           ],
         ),
       );
+      Loader.hide();
       return Future.value(false);
     } else {
+      Loader.hide();
       return Future.value(true);
     }
   }

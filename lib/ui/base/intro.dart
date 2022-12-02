@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:takkeh/binding/registration/sign_in.dart';
 import 'package:takkeh/translation/service.dart';
 import 'package:takkeh/ui/screens/registration/registration.dart';
-import 'package:takkeh/utils/app_constants.dart';
 import 'package:takkeh/utils/base/colors.dart';
 import 'package:takkeh/utils/base/images.dart';
 import 'package:takkeh/utils/shared_prefrences.dart';
@@ -68,16 +68,14 @@ class IntroScreen extends StatelessWidget {
             alignment: const AlignmentDirectional(-1, 1),
             child: InkWell(
               onTap: () {
-                Get.to(() => const RegistrationScreen());
+                Get.to(() => const RegistrationScreen(), binding: RegistrationBinding());
                 MySharedPreferences.isPassedIntro = true;
               },
               child: Stack(
                 alignment: const AlignmentDirectional(0, 0.2),
                 children: [
                   Image.asset(
-                    MySharedPreferences.language == "en"
-                        ? MyImages.leftSemiCircle
-                        : MyImages.rightSemiCircle,
+                    MySharedPreferences.language == "en" ? MyImages.leftSemiCircle : MyImages.rightSemiCircle,
                     height: 110,
                   ),
                   const Icon(

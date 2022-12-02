@@ -4,48 +4,26 @@ import 'package:flutter/material.dart';
 import 'package:flutter_google_places/flutter_google_places.dart';
 import 'package:flutter_overlay_loader/flutter_overlay_loader.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:geocoding/geocoding.dart';
 import 'package:get/get.dart';
 import 'package:google_api_headers/google_api_headers.dart' show GoogleApiHeaders;
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:google_maps_webservice/places.dart';
-import 'package:takkeh/controller/user_location_ctrl.dart';
+import 'package:takkeh/controller/addresses/my_addresses_ctrl.dart';
 import 'package:takkeh/ui/widgets/components/overlay_loader.dart';
 import 'package:takkeh/utils/app_constants.dart';
-import 'package:takkeh/utils/base/colors.dart';
 import 'package:takkeh/utils/base/images.dart';
+import 'package:takkeh/utils/shared_prefrences.dart';
 
 class MapController extends GetxController {
   static MapController get find => Get.find();
 
-  final markers = <Marker>{}.obs;
-  final circles = <Circle>{}.obs;
   GoogleMapController? mapController;
-
-  double? newLat;
-  double? newLng;
-
-  void addMarker(LatLng pos) {
-    markers.clear();
-    markers.add(
-      Marker(
-        markerId: const MarkerId("1"),
-        position: pos,
-      ),
-    );
-  }
-
-  void addCircle(LatLng pos) {
-    circles.clear();
-    circles.add(
-      Circle(
-        strokeWidth: 0,
-        fillColor: MyColors.primary.withOpacity(0.50),
-        circleId: const CircleId("221"),
-        center: LatLng(pos.latitude, pos.longitude),
-        radius: 300,
-      ),
-    );
-  }
+  double? mapLat;
+  double? mapLng;
+  final mapSubLocality = ''.obs;
+  final mapStreet = ''.obs;
+  final mapLocality = ''.obs;
 
   Future displayPrediction(Prediction? p) async {
     if (p == null) return;
@@ -56,20 +34,11 @@ class MapController extends GetxController {
     PlacesDetailsResponse detail = await places.getDetailsByPlaceId(p.placeId!);
     final lat = detail.result.geometry!.location.lat;
     final lng = detail.result.geometry!.location.lng;
+    mapLat = lat;
+    mapLng = lng;
     log("result:: $lat -- $lng");
-    animateCamera(lat, lng);
-    // CameraUpdate update = CameraUpdate.newCameraPosition(CameraPosition(target: LatLng(lat, lng), zoom: 15));
-    // await mapController!.animateCamera(update);
-    // addMarker(LatLng(lat, lng));
-    // addCircle(LatLng(lat, lng));
-  }
-
-  Future animateCamera(lat, lng) async {
     CameraUpdate update = CameraUpdate.newCameraPosition(CameraPosition(target: LatLng(lat, lng), zoom: 15));
-
     await mapController!.animateCamera(update);
-    addMarker(LatLng(lat, lng));
-    addCircle(LatLng(lat, lng));
   }
 
   Future<void> showSearchField(BuildContext context) async {
@@ -121,19 +90,30 @@ class MapController extends GetxController {
     GoogleMapController mapController,
     BuildContext context,
   ) async {
-    OverLayLoader.showLoading(context, color: MyColors.redPrimary);
-    UserLocationCtrl.find.getLocation(MapController.find.newLat!, MapController.find.newLng!);
-    await UserLocationCtrl.find.getAddress(MapController.find.newLat!, MapController.find.newLng!);
-    CameraUpdate update = CameraUpdate.newCameraPosition(CameraPosition(target: LatLng(UserLocationCtrl.find.latitude.value!, UserLocationCtrl.find.longitude.value!), zoom: 15));
-    mapController.animateCamera(update);
+    OverLayLoader.flickrLoading(context);
+    await getAddress(mapLat!, mapLng!);
+    CameraUpdate update = CameraUpdate.newCameraPosition(CameraPosition(target: LatLng(mapLat!, mapLng!), zoom: 15));
+    await mapController.animateCamera(update);
     Loader.hide();
     Get.back();
   }
 
+  Future getAddress(double lat, double lng) async {
+    List<Placemark> placeMarks = await placemarkFromCoordinates(lat, lng, localeIdentifier: MySharedPreferences.language);
+    mapLocality.value = placeMarks[0].locality!;
+    mapSubLocality.value = placeMarks[0].subLocality!;
+    mapStreet.value = placeMarks[0].street!;
+    log("address:: ${mapLocality.value} -- ${mapStreet.value}");
+    update();
+  }
+
   @override
   void onInit() {
-    addMarker(LatLng(UserLocationCtrl.find.latitude.value!, UserLocationCtrl.find.longitude.value!));
-    addCircle(LatLng(UserLocationCtrl.find.latitude.value!, UserLocationCtrl.find.longitude.value!));
+    mapLat = MyAddressesCtrl.find.selectedLat.value;
+    mapLng = MyAddressesCtrl.find.selectedLng.value;
+    mapLocality.value = MyAddressesCtrl.find.locality.value;
+    mapSubLocality.value = MyAddressesCtrl.find.subLocality.value;
+    mapStreet.value = MyAddressesCtrl.find.street.value;
     super.onInit();
   }
 }

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:takkeh/controller/addresses/create_address_ctrl.dart';
 import 'package:takkeh/translation/service.dart';
 import 'package:takkeh/ui/screens/restaurants/widgets/custom_fab_button.dart';
 import 'package:takkeh/ui/screens/restaurants/widgets/gradient_colors_box.dart';
@@ -16,6 +17,7 @@ class AddNewAddressScreen extends StatefulWidget {
 class _AddNewAddressScreenState extends State<AddNewAddressScreen> {
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 
+  late TextEditingController titleCtrl;
   late TextEditingController regionCtrl;
   late TextEditingController streetCtrl;
   late TextEditingController buildingNumCtrl;
@@ -33,6 +35,7 @@ class _AddNewAddressScreenState extends State<AddNewAddressScreen> {
   @override
   void initState() {
     super.initState();
+    titleCtrl = TextEditingController();
     regionCtrl = TextEditingController();
     streetCtrl = TextEditingController();
     buildingNumCtrl = TextEditingController();
@@ -44,6 +47,7 @@ class _AddNewAddressScreenState extends State<AddNewAddressScreen> {
   @override
   void dispose() {
     super.dispose();
+    titleCtrl.dispose();
     regionCtrl.dispose();
     streetCtrl.dispose();
     buildingNumCtrl.dispose();
@@ -61,7 +65,22 @@ class _AddNewAddressScreenState extends State<AddNewAddressScreen> {
         child: CustomFABButton(
           title: TranslationService.getString('save_address_key'),
           onPressed: () {
-            if (_formKey.currentState!.validate()) {}
+            if (_formKey.currentState!.validate()) {
+              FocusManager.instance.primaryFocus?.unfocus();
+              CreateAddressCtrl.find.fetchData(
+                name: titleCtrl.text,
+                region: regionCtrl.text,
+                street: streetCtrl.text,
+                buildingNum: buildingNumCtrl.text,
+                additionalTips: notesCtrl.text,
+                floor: floorNumCtrl.text,
+                apartmentNum: apartmentNumCtrl.text,
+                //TODO: ask about these
+                city: 'city',
+                phone: '+962791595029',
+                context: context,
+              );
+            }
           },
         ),
       ),
@@ -76,53 +95,57 @@ class _AddNewAddressScreenState extends State<AddNewAddressScreen> {
             const GradientColorsBox(height: 136),
             Expanded(
               child: ListView(
-                padding: const EdgeInsets.fromLTRB(30, 0, 30, 30),
+                padding: const EdgeInsets.fromLTRB(30, 0, 30, 60),
                 children: [
                   const MapBubbleBuilder(visible: false),
                   // const SizedBox(height: 15),
+                  CustomTextField(
+                    padding: const EdgeInsets.only(bottom: 10.0),
+                    controller: titleCtrl,
+                    hintText: TranslationService.getString('address_title_key'),
+                    horizontalPadding: 20,
+                    validator: fieldValidator,
+                  ),
                   CustomTextField(
                     controller: regionCtrl,
                     hintText: TranslationService.getString('region_key'),
                     horizontalPadding: 20,
                     validator: fieldValidator,
                   ),
-                  Padding(
+                  CustomTextField(
                     padding: const EdgeInsets.symmetric(vertical: 10.0),
-                    child: CustomTextField(
-                      controller: regionCtrl,
-                      hintText: TranslationService.getString('street_key'),
-                      horizontalPadding: 20,
-                      validator: fieldValidator,
-                    ),
+                    controller: streetCtrl,
+                    hintText: TranslationService.getString('street_key'),
+                    horizontalPadding: 20,
+                    validator: fieldValidator,
                   ),
                   CustomTextField(
-                    controller: regionCtrl,
+                    keyboardType: TextInputType.number,
+                    controller: buildingNumCtrl,
                     hintText: TranslationService.getString('building_num_key'),
                     horizontalPadding: 20,
                     validator: fieldValidator,
                   ),
-                  Padding(
+                  CustomTextField(
+                    keyboardType: TextInputType.number,
                     padding: const EdgeInsets.symmetric(vertical: 10.0),
-                    child: CustomTextField(
-                      controller: regionCtrl,
-                      hintText: TranslationService.getString('floor_num_key'),
-                      horizontalPadding: 20,
-                      validator: fieldValidator,
-                    ),
+                    controller: floorNumCtrl,
+                    hintText: TranslationService.getString('floor_num_key'),
+                    horizontalPadding: 20,
+                    validator: fieldValidator,
                   ),
                   CustomTextField(
-                    controller: regionCtrl,
+                    keyboardType: TextInputType.number,
+                    controller: apartmentNumCtrl,
                     hintText: TranslationService.getString('apartment_num_key'),
                     horizontalPadding: 20,
                     validator: fieldValidator,
                   ),
-                  Padding(
+                  CustomTextField(
                     padding: const EdgeInsets.only(top: 10.0, bottom: 30),
-                    child: CustomTextField(
-                      controller: regionCtrl,
-                      hintText: TranslationService.getString('notes_key'),
-                      horizontalPadding: 20,
-                    ),
+                    controller: notesCtrl,
+                    hintText: TranslationService.getString('notes_key'),
+                    horizontalPadding: 20,
                   ),
                 ],
               ),

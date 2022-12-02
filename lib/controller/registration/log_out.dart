@@ -3,7 +3,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter_overlay_loader/flutter_overlay_loader.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
-import 'package:takkeh/controller/user_order_ctrl.dart';
+import 'package:takkeh/binding/registration/sign_in.dart';
 import 'package:takkeh/model/registration/log_out_model.dart';
 import 'package:takkeh/network/registration/log_out.dart';
 import 'package:takkeh/ui/screens/registration/registration.dart';
@@ -28,7 +28,7 @@ class LogOutController extends GetxController {
       FirebaseAuth.instance.signOut();
       MySharedPreferences.clearProfile();
       Get.deleteAll(force: true);
-      Get.offAll(() => const RegistrationScreen());
+      Get.offAll(() => const RegistrationScreen(), binding: RegistrationBinding());
     } else {
       Fluttertoast.showToast(msg: logOutModel!.msg!);
     }

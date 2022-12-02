@@ -6,9 +6,11 @@ import 'package:takkeh/ui/screens/help/help.dart';
 import 'package:takkeh/ui/screens/home/home.dart';
 import 'package:takkeh/ui/screens/my_orders/my_orders.dart';
 import 'package:takkeh/ui/screens/profile/profile.dart';
+import 'package:takkeh/ui/widgets/components/guest_dialog.dart';
 import 'package:takkeh/ui/widgets/custom_nav_bar_icon.dart';
 import 'package:takkeh/utils/base/colors.dart';
 import 'package:takkeh/utils/base/icons.dart';
+import 'package:takkeh/utils/shared_prefrences.dart';
 
 bool isHidden = false;
 
@@ -22,18 +24,35 @@ class BaseNavBar extends StatefulWidget {
 }
 
 class BaseNavBarState extends State<BaseNavBar> {
+  void toggleGuestUser(int index) {
+    if (MySharedPreferences.isLogIn) {
+      navBarController.index = index;
+    } else {
+      GuestDialog.show(context);
+    }
+  }
+
   List<PersistentBottomNavBarItem> _navBarsItems() {
     return [
       PersistentBottomNavBarItem(
         icon: CustomNavBaaButton(icon: MyIcons.home, isChosen: navBarController.index == 0 ? true : false),
       ),
       PersistentBottomNavBarItem(
+        onPressed: (value) {
+          toggleGuestUser(1);
+        },
         icon: CustomNavBaaButton(icon: MyIcons.timePast, isChosen: navBarController.index == 1 ? true : false),
       ),
       PersistentBottomNavBarItem(
+        onPressed: (value) {
+          toggleGuestUser(2);
+        },
         icon: CustomNavBaaButton(icon: MyIcons.headset, isChosen: navBarController.index == 2 ? true : false),
       ),
       PersistentBottomNavBarItem(
+        onPressed: (value) {
+          toggleGuestUser(3);
+        },
         icon: CustomNavBaaButton(icon: MyIcons.user, isChosen: navBarController.index == 3 ? true : false),
       ),
     ];
@@ -46,14 +65,6 @@ class BaseNavBarState extends State<BaseNavBar> {
       const HelpScreen(),
       const ProfileScreen(),
     ];
-  }
-
-  void toggleBar(bool isDrawerOpen) {
-    if (isDrawerOpen) {
-      setState(() {
-        isHidden = isDrawerOpen;
-      });
-    }
   }
 
   @override

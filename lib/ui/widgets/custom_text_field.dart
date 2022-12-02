@@ -27,6 +27,7 @@ class CustomTextField extends StatelessWidget {
   final EdgeInsetsGeometry? padding;
   final Color? fillColor;
   final List<TextInputFormatter>? inputFormatters;
+  final Function(String)? onChanged;
 
   const CustomTextField({
     Key? key,
@@ -54,6 +55,7 @@ class CustomTextField extends StatelessWidget {
     this.filled,
     this.fillColor,
     this.padding,
+    this.onChanged,
   }) : super(key: key);
 
   static const _border = 26.0;
@@ -63,6 +65,7 @@ class CustomTextField extends StatelessWidget {
     return Padding(
       padding: padding ?? EdgeInsets.zero,
       child: TextFormField(
+        onChanged: onChanged,
         inputFormatters: inputFormatters,
         autovalidateMode: autoValidateMode,
         onTap: onTap,

@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
 import 'package:takkeh/binding/restaurants/restaurants_home.dart';
+import 'package:takkeh/controller/addresses/my_addresses_ctrl.dart';
 import 'package:takkeh/controller/home/category.dart';
 import 'package:takkeh/controller/home/slider.dart';
 import 'package:takkeh/controller/nav_bar_ctrl.dart';
@@ -43,9 +44,11 @@ class _HomeScreenState extends State<HomeScreen> {
     Get.put(SliderController());
     Get.put(CategoriesController());
     Get.put(UserOrderCtrl(), permanent: true);
+    Get.put(MyAddressesCtrl(), permanent: true);
     Get.put(UserLocationCtrl(), permanent: true);
     //TODO: change location of this
     Get.put(MakeOrderCtrl(), permanent: true);
+
     super.initState();
   }
 

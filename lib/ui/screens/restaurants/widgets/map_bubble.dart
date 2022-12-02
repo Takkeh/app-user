@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
-import 'package:takkeh/binding/restaurants/map.dart';
-import 'package:takkeh/controller/user_location_ctrl.dart';
+import 'package:takkeh/controller/map.dart';
 import 'package:takkeh/ui/screens/restaurants/map.dart';
 import 'package:takkeh/ui/screens/restaurants/widgets/delivery_info_box.dart';
 import 'package:takkeh/ui/widgets/custom_marker.dart';
@@ -20,66 +19,61 @@ class _MapBubbleBuilderState extends State<MapBubbleBuilder> {
   late GoogleMapController mapController;
 
   @override
+  void initState() {
+    Get.lazyPut(() => MapController());
+    super.initState();
+  }
+
+  @override
   void dispose() {
     super.dispose();
+    Get.delete<MapController>();
     mapController.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
-    return GetBuilder<UserLocationCtrl>(builder: (controller) {
-      return SizedBox(
-        height: widget.visible ? 220 : 180,
-        child: Column(
-          children: [
-            Stack(
-              alignment: Alignment.center,
+    return GetBuilder<MapController>(
+      builder: (controller) {
+        return ClipRRect(
+          borderRadius: BorderRadius.circular(20),
+          child: SizedBox(
+            //TODO: remove this
+            height: widget.visible ? 220 : 220,
+            child: Column(
               children: [
-                SizedBox(
-                  height: 156,
-                  child: GoogleMap(
-                    zoomControlsEnabled: false,
-                    onMapCreated: (mapCtrl) {
-                      mapController = mapCtrl;
-                    },
-                    onTap: (value) {
-                      Get.to(
-                        () => MapScreen(mapController: mapController),
-                        binding: MapBinding(),
-                      )!
-                          .then((value) {
-                        //   setState(() {
-                        //     _regionController.text =
-                        //     UserLocationController.find.region.value!;
-                        //     _streetController.text =
-                        //     UserLocationController.find.street.value!;
-                        //   });
-                      });
-                    },
-                    // markers: {
-                    //   Marker(
-                    //     markerId: const MarkerId("556"),
-                    //     position: LatLng(controller.latitude.value!, controller.longitude.value!),
-                    //   ),
-                    // },
-                    initialCameraPosition: CameraPosition(
-                      target: LatLng(controller.latitude.value!, controller.longitude.value!),
-                      zoom: 15,
+                Stack(
+                  alignment: Alignment.center,
+                  children: [
+                    SizedBox(
+                      height: 156,
+                      child: GoogleMap(
+                        zoomControlsEnabled: false,
+                        onMapCreated: (mapCtrl) {
+                          mapController = mapCtrl;
+                        },
+                        onTap: (value) {
+                          Get.to(
+                            () => MapScreen(mapController: mapController),
+                          );
+                        },
+                        initialCameraPosition: CameraPosition(
+                          target: LatLng(controller.mapLat!, controller.mapLng!),
+                          zoom: 15,
+                        ),
+                      ),
                     ),
-                  ),
+                    const CustomMarker(color: MyColors.redPrimary),
+                  ],
                 ),
-                const CustomMarker(color: MyColors.redPrimary),
+                DeliveryInfoBox(
+                  address: "${controller.mapSubLocality.value}, ${controller.mapStreet.value}",
+                ),
               ],
             ),
-            Visibility(
-              visible: widget.visible,
-              child: DeliveryInfoBox(
-                address: "${controller.subLocality.value}, ${controller.street.value}",
-              ),
-            ),
-          ],
-        ),
-      );
-    });
+          ),
+        );
+      },
+    );
   }
 }

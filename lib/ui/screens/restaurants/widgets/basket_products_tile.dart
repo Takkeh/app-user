@@ -58,7 +58,6 @@ class BasketProductTileState extends State<BasketProductTile> {
           ),
           TextButton(
             onPressed: () {
-              print("index:: ${widget.index}");
               MakeOrderCtrl.find.orderList.removeAt(widget.index);
               UserOrderCtrl.find.orderList.removeAt(widget.index);
               UserOrderCtrl.find.calculateTotalPrice(originalPrice, status: 'remove');
@@ -67,8 +66,6 @@ class BasketProductTileState extends State<BasketProductTile> {
               if (UserOrderCtrl.find.orderList.isEmpty) {
                 Get.back();
               }
-              log("userOrder:: userOrder ${UserOrderCtrl.find.orderList}");
-              log("userOrder:: makeOrder ${MakeOrderCtrl.find.orderList[0].price}");
             },
             child: Text('Confirm'.tr),
           ),
@@ -95,15 +92,15 @@ class BasketProductTileState extends State<BasketProductTile> {
     } else {
       if (quantity == 1) {
         _showMyDialog();
-        return;
+      } else {
+        setState(() {
+          quantity--;
+          newPrice = originalPrice * quantity;
+        });
+        UserOrderCtrl.find.calculateTotalPrice(originalPrice, status: 'remove');
+        UserOrderCtrl.find.calculateTotalQuantity(1, status: 'remove');
+        toggleProduct();
       }
-      setState(() {
-        quantity--;
-        newPrice = originalPrice * quantity;
-      });
-      UserOrderCtrl.find.calculateTotalPrice(originalPrice, status: 'remove');
-      UserOrderCtrl.find.calculateTotalQuantity(1, status: 'remove');
-      toggleProduct();
     }
   }
 
@@ -147,7 +144,6 @@ class BasketProductTileState extends State<BasketProductTile> {
                           ),
                         ),
                         const SizedBox(height: 5),
-                        // Text(widget.size.toString()),
                         ...widget.items.map((element) {
                           //TODO: missing type for + sign
                           return Text("+ ${element.itemName}");

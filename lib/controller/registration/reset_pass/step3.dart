@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_overlay_loader/flutter_overlay_loader.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
+import 'package:takkeh/binding/registration/sign_in.dart';
 import 'package:takkeh/model/registration/reset_password/reset_pass_step3_model.dart';
 import 'package:takkeh/network/registration/reset_password/step3.dart';
 import 'package:takkeh/ui/screens/registration/registration.dart';
@@ -37,7 +38,7 @@ class ResetPassStep3Controller extends GetxController {
     }
     if (resetPassStep3Model!.code == 200) {
       Fluttertoast.showToast(msg: "password changed successfully");
-      Get.offAll(() => const RegistrationScreen());
+      Get.offAll(() => const RegistrationScreen(), binding: RegistrationBinding());
     } else if (resetPassStep3Model!.code == 500) {
       Fluttertoast.showToast(msg: "incorrect otp");
     } else {

@@ -6,6 +6,8 @@ import 'package:takkeh/controller/restaurants/promo_codes_ctrl.dart';
 import 'package:takkeh/model/restaurants/promo_codes_model.dart';
 import 'package:takkeh/translation/service.dart';
 import 'package:takkeh/ui/screens/registration/widgets/custom_prefix_icon.dart';
+import 'package:takkeh/ui/screens/restaurants/confirm_order.dart';
+import 'package:takkeh/ui/screens/restaurants/widgets/basket_products_tile.dart';
 import 'package:takkeh/ui/screens/restaurants/widgets/custom_fab_button.dart';
 import 'package:takkeh/ui/screens/restaurants/widgets/custom_suffix_icon.dart';
 import 'package:takkeh/ui/screens/restaurants/widgets/gradient_colors_box.dart';
@@ -111,17 +113,7 @@ class _BasketScreenState extends State<BasketScreen> {
             ? CustomFABButton(
                 title: TranslationService.getString('confirm_order_key'),
                 onPressed: () {
-                  print('status:: ${MakeOrderCtrl.find.orderList.length}');
-                  // MakeOrderCtrl.find.orderList.removeAt(0);
-                  // Get.to(() => ConfirmOrderScreen(orderId: widget.orderId));
-                  // MakeOrderCtrl.find.fetchData(
-                  //   context: context,
-                  //   restaurantId: widget.restaurantId,
-                  //   generalNote: noteCtrl.text,
-                  //   // route: ConfirmOrderScreen(
-                  //   //   orderId: MakeOrderCtrl.orderId!,
-                  //   // ),
-                  // );
+                  Get.to(() => ConfirmOrderScreen(orderId: widget.orderId));
                 },
               )
             : null,
@@ -136,113 +128,29 @@ class _BasketScreenState extends State<BasketScreen> {
             child: ListView(
               padding: const EdgeInsets.only(bottom: 100, top: 10),
               children: [
-                // ListView.builder(
-                //     shrinkWrap: true,
-                //     itemCount: myList.length,
-                //     itemBuilder: (context, index) {
-                //       final data = myList[index];
-                //       return GestureDetector(
-                //         onTap: () {
-                //           setState(() {
-                //             myList.remove(data);
-                //           });
-                //           print("test:: $myList");
-                //         },
-                //         child: Container(
-                //           height: 100,
-                //           margin: const EdgeInsets.all(10),
-                //           color: Colors.orange,
-                //           child: Column(
-                //             mainAxisAlignment: MainAxisAlignment.center,
-                //             children: [
-                //               Text("$index"),
-                //               Text("${data['product_id']}"),
-                //               Text("${data['quantity']}"),
-                //               Text("${data['product_name']}"),
-                //             ],
-                //           ),
-                //         ),
-                //       );
-                //     }),
-                // ...myList.map((element) {
-                //   final index = myList.indexOf(element);
-                //   return GestureDetector(
-                //     onTap: () {
-                //       setState(() {
-                //         // print("test:: ${myList.elementAt(index)}");
-                //         myList.removeWhere((value) => value["product_id"] == element["product_id"]);
-                //       });
-                //     },
-                //     child: Container(
-                //       height: 100,
-                //       margin: const EdgeInsets.all(10),
-                //       color: Colors.orange,
-                //       child: Column(
-                //         mainAxisAlignment: MainAxisAlignment.center,
-                //         children: [
-                //           Text("$index"),
-                //           Text("${element['product_id']}"),
-                //           Text("${element['quantity']}"),
-                //           Text("${element['product_name']}"),
-                //         ],
-                //       ),
-                //     ),
-                //   );
-                // }).toList(),
                 Obx(() {
                   return ListView.builder(
+                      padding: EdgeInsets.zero,
                       shrinkWrap: true,
                       itemCount: MakeOrderCtrl.find.orderList.length,
                       itemBuilder: (context, index) {
                         final data = MakeOrderCtrl.find.orderList[index];
-                        print("test:: $index -- ${data.id}");
-                        return GestureDetector(
-                            onTap: () {
-                              // print("element:: ${MakeOrderCtrl.find.orderList[0].id} ${MakeOrderCtrl.find.orderList[1].id}");
-                              MakeOrderCtrl.find.orderList.removeAt(index);
-                              // print("index:: ${MakeOrderCtrl.find.orderList[0].id} ${MakeOrderCtrl.find.orderList[0].productName}");
-                            },
-                            child: Container(
-                              margin: const EdgeInsets.all(10),
-                              height: 100,
-                              color: Colors.orange,
-                              child: Column(
-                                children: [
-                                  Text("$index"),
-                                  Text("${data.productId}"),
-                                  Text("${data.productName}"),
-                                  Text("${data.quantity}"),
-                                ],
-                              ),
-                            ));
+                        return BasketProductTile(
+                          imageUrl: data.productImage!,
+                          title: data.productName!,
+                          index: index,
+                          subTitle: data.productName!,
+                          initialQuantity: data.quantity!,
+                          description: data.productName!,
+                          initialPrice: data.price!.toDouble(),
+                          note: data.note!,
+                          productId: data.productId!,
+                          restaurantId: widget.restaurantId,
+                          items: data.items!,
+                          element: data,
+                        );
                       });
                 }),
-                //TODO: fix dialog bug
-                // ...MakeOrderCtrl.find.orderList.map((element) {
-                //   final index = MakeOrderCtrl.find.orderList.indexOf(element);
-                //   return Padding(
-                //     padding: const EdgeInsets.symmetric(horizontal: 25),
-                //     child: GestureDetector(
-                //       onTap: () {
-                //         print("index:: $index");
-                //       },
-                //       child: BasketProductTile(
-                //         imageUrl: element.productImage!,
-                //         title: element.productName!,
-                //         index: index,
-                //         subTitle: element.productName!,
-                //         initialQuantity: element.quantity!,
-                //         description: element.productName!,
-                //         initialPrice: element.price!.toDouble(),
-                //         note: element.note!,
-                //         productId: element.productId!,
-                //         restaurantId: widget.restaurantId,
-                //         items: element.items!,
-                //         element: element,
-                //       ),
-                //     ),
-                //   );
-                // }).toList(),
                 Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 30),
                   child: CustomTextField(
@@ -335,6 +243,12 @@ class _BasketScreenState extends State<BasketScreen> {
                                 Padding(
                                   padding: const EdgeInsets.fromLTRB(30, 10, 30, 10),
                                   child: CustomTextField(
+                                    onChanged: (value) {
+                                      if (value.isEmpty) {
+                                        controller.selectedPromo.value = null;
+                                        controller.update();
+                                      }
+                                    },
                                     controller: controller.promoCtrl.value,
                                     hintText: TranslationService.getString('enter_coupon_num_key'),
                                     minLines: 1,
@@ -393,18 +307,3 @@ class _BasketScreenState extends State<BasketScreen> {
     );
   }
 }
-
-// BasketProductTile(
-// imageUrl: data.productImage!,
-// title: data.productName!,
-// index: index,
-// subTitle: data.productName!,
-// initialQuantity: data.quantity!,
-// description: data.productName!,
-// initialPrice: data.price!.toDouble(),
-// note: data.note!,
-// productId: data.productId!,
-// restaurantId: widget.restaurantId,
-// items: data.items!,
-// element: data,
-// ),

@@ -2,13 +2,16 @@ import 'package:flutter/material.dart';
 import 'package:takkeh/ui/screens/registration//sign_in.dart';
 import 'package:takkeh/ui/screens/registration//sign_up.dart';
 import 'package:takkeh/ui/widgets/base_switch_slider.dart';
+import 'package:takkeh/utils/app_constants.dart';
 import 'package:takkeh/utils/base/colors.dart';
 import 'package:takkeh/utils/base/images.dart';
 import 'package:takkeh/utils/shared_prefrences.dart';
 import 'package:takkeh/utils/strings.dart';
 
 class RegistrationScreen extends StatefulWidget {
-  const RegistrationScreen({Key? key}) : super(key: key);
+  final String route;
+
+  const RegistrationScreen({Key? key, this.route = kHome}) : super(key: key);
 
   @override
   State<RegistrationScreen> createState() => _RegistrationScreenState();
@@ -32,6 +35,7 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final bool isKeyboardVisible = MediaQuery.of(context).viewInsets.bottom == 0.0;
     return Scaffold(
       body: SafeArea(
         child: Padding(
@@ -75,9 +79,9 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                 child: PageView(
                   physics: const NeverScrollableScrollPhysics(),
                   controller: pageController,
-                  children: const [
-                    SignInScreen(),
-                    SignUpScreen(),
+                  children: [
+                    SignInScreen(isKeyboardVisible: isKeyboardVisible, route: widget.route),
+                    const SignUpScreen(),
                   ],
                 ),
               ),
