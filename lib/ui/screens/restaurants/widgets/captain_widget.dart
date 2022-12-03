@@ -4,16 +4,18 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:takkeh/translation/service.dart';
 import 'package:takkeh/ui/widgets/custom_network_image.dart';
+import 'package:takkeh/utils/base/colors.dart';
 import 'package:takkeh/utils/base/icons.dart';
 import 'package:takkeh/utils/base/images.dart';
 import 'package:takkeh/utils/shared_prefrences.dart';
 
 class CaptainWidget extends StatelessWidget {
-  final String name;
+  final String name, imageUrl;
 
   const CaptainWidget({
     Key? key,
     required this.name,
+    required this.imageUrl,
   }) : super(key: key);
 
   @override
@@ -24,8 +26,8 @@ class CaptainWidget extends StatelessWidget {
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          const CustomNetworkImage(
-            url: 'https://image.shutterstock.com/image-photo/profile-picture-smiling-millennial-asian-260nw-1836020740.jpg',
+          CustomNetworkImage(
+            url: imageUrl,
             radius: 10,
             height: 80,
             width: 80,
@@ -40,7 +42,7 @@ class CaptainWidget extends StatelessWidget {
               ),
               Text(
                 name,
-                style: const TextStyle(fontSize: 18),
+                style: const TextStyle(fontSize: 18, color: MyColors.primary),
               ),
             ],
           ),
