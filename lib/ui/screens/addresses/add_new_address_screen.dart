@@ -9,6 +9,7 @@ import 'package:takkeh/ui/screens/restaurants/widgets/map_bubble.dart';
 import 'package:takkeh/ui/widgets/custom_text_field.dart';
 import 'package:takkeh/ui/widgets/transparent_app_bar.dart';
 import 'package:takkeh/utils/app_constants.dart';
+import 'package:takkeh/utils/shared_prefrences.dart';
 
 class AddNewAddressScreen extends StatefulWidget {
   const AddNewAddressScreen({Key? key}) : super(key: key);
@@ -66,15 +67,14 @@ class _AddNewAddressScreenState extends State<AddNewAddressScreen> {
               FocusManager.instance.primaryFocus?.unfocus();
               CreateAddressCtrl.find.fetchData(
                 name: titleCtrl.text,
+                city: MapController.find.mapLocality.value,
                 region: MapController.find.regionCtrl.value.text,
                 street: MapController.find.streetCtrl.value.text,
                 buildingNum: buildingNumCtrl.text,
                 additionalTips: notesCtrl.text,
                 floor: floorNumCtrl.text,
                 apartmentNum: apartmentNumCtrl.text,
-                //TODO: ask about these
-                city: 'city',
-                phone: '+962791595029',
+                phone: MySharedPreferences.phone,
                 context: context,
               );
             }
@@ -97,6 +97,7 @@ class _AddNewAddressScreenState extends State<AddNewAddressScreen> {
                   const MapBubbleBuilder(route: kMap),
                   // const SizedBox(height: 15),
                   CustomTextField(
+                    autoValidateMode: null,
                     padding: const EdgeInsets.only(bottom: 10.0),
                     controller: titleCtrl,
                     hintText: TranslationService.getString('address_title_key'),
@@ -106,6 +107,7 @@ class _AddNewAddressScreenState extends State<AddNewAddressScreen> {
                   GetX<MapController>(
                     builder: (controller) {
                       return CustomTextField(
+                        autoValidateMode: null,
                         controller: controller.regionCtrl.value,
                         hintText: TranslationService.getString('region_key'),
                         horizontalPadding: 20,
@@ -116,6 +118,7 @@ class _AddNewAddressScreenState extends State<AddNewAddressScreen> {
                   GetX<MapController>(
                     builder: (controller) {
                       return CustomTextField(
+                        autoValidateMode: null,
                         padding: const EdgeInsets.symmetric(vertical: 10.0),
                         controller: controller.streetCtrl.value,
                         hintText: TranslationService.getString('street_key'),
@@ -125,6 +128,7 @@ class _AddNewAddressScreenState extends State<AddNewAddressScreen> {
                     },
                   ),
                   CustomTextField(
+                    autoValidateMode: null,
                     keyboardType: TextInputType.number,
                     controller: buildingNumCtrl,
                     hintText: TranslationService.getString('building_num_key'),
@@ -132,6 +136,7 @@ class _AddNewAddressScreenState extends State<AddNewAddressScreen> {
                     validator: fieldValidator,
                   ),
                   CustomTextField(
+                    autoValidateMode: null,
                     keyboardType: TextInputType.number,
                     padding: const EdgeInsets.symmetric(vertical: 10.0),
                     controller: floorNumCtrl,
@@ -140,6 +145,7 @@ class _AddNewAddressScreenState extends State<AddNewAddressScreen> {
                     validator: fieldValidator,
                   ),
                   CustomTextField(
+                    autoValidateMode: null,
                     keyboardType: TextInputType.number,
                     controller: apartmentNumCtrl,
                     hintText: TranslationService.getString('apartment_num_key'),
@@ -147,6 +153,7 @@ class _AddNewAddressScreenState extends State<AddNewAddressScreen> {
                     validator: fieldValidator,
                   ),
                   CustomTextField(
+                    autoValidateMode: null,
                     padding: const EdgeInsets.only(top: 10.0, bottom: 30),
                     controller: notesCtrl,
                     hintText: TranslationService.getString('notes_key'),

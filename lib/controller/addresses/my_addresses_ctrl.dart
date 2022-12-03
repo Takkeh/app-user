@@ -33,8 +33,9 @@ class MyAddressesCtrl extends GetxController {
 
   void addAddress(MyAddresses newAddress, int addressId) {
     myAddresses.insert(0, newAddress);
-    selectedAddressId.value = addressId;
-    MySharedPreferences.addressId = addressId;
+    selectAddress(addressId);
+    // selectedAddressId.value = addressId;
+    // MySharedPreferences.addressId = addressId;
     update();
   }
 

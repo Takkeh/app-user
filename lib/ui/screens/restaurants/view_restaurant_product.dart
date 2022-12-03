@@ -5,7 +5,6 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:takkeh/controller/user_order_ctrl.dart';
 import 'package:takkeh/controller/view_product_ctrl.dart';
-import 'package:takkeh/model/restaurants/view_restaurant.dart';
 import 'package:takkeh/translation/service.dart';
 import 'package:takkeh/ui/screens/registration/widgets/custom_prefix_icon.dart';
 import 'package:takkeh/ui/screens/restaurants/widgets/custom_fab_button.dart';
@@ -44,7 +43,8 @@ class _ViewRestaurantProductScreenState extends State<ViewRestaurantProductScree
   late TextEditingController noteCtrl;
 
   bool isAlreadyExist(List<Map<String, dynamic>> groups) {
-    var data = UserOrderCtrl.find.orderList.where((element) => element['product_id'] == widget.productId && element["note"] == noteCtrl.text.trim() && element["groups"].toString() == groups.toString());
+    var data =
+        UserOrderCtrl.find.orderList.where((element) => element['product_id'] == widget.productId && element["note"] == noteCtrl.text.trim() && element["groups"].toString() == groups.toString());
     if (data.isEmpty) return false;
     data.first.update('price', (value) => value + ViewProductCtrl.find.finalPrice.value);
     data.first.update('quantity', (value) => value + ViewProductCtrl.find.quantity.value);

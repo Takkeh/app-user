@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:loading_animation_widget/loading_animation_widget.dart';
 import 'package:takkeh/translation/service.dart';
 import 'package:takkeh/utils/base/colors.dart';
 
@@ -15,20 +16,21 @@ class CaptainSearchBox extends StatelessWidget {
         borderRadius: BorderRadius.circular(13),
       ),
       child: Row(
-        crossAxisAlignment: CrossAxisAlignment.end,
+        crossAxisAlignment: CrossAxisAlignment.center,
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          const Icon(
-            Icons.search,
-            color: MyColors.primary,
-            size: 33,
+          LoadingAnimationWidget.staggeredDotsWave(
+            color: MyColors.redPrimary,
+            size: 50,
           ),
-          const SizedBox(width: 8),
-          Text(
-            TranslationService.getString('searching_for_captain_key'),
-            style: const TextStyle(
-              fontSize: 18,
-              fontWeight: FontWeight.bold,
+          const SizedBox(width: 12),
+          Flexible(
+            child: Text(
+              TranslationService.getString('searching_for_captain_key'),
+              style: const TextStyle(
+                fontSize: 18,
+                fontWeight: FontWeight.bold,
+              ),
             ),
           ),
         ],

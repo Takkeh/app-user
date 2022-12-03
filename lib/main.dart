@@ -26,8 +26,6 @@ Future<void> main() async {
       // ),
       );
   await MySharedPreferences.init();
-  //TODO: change later for both
-  // MySharedPreferences.language = "";
   if (MySharedPreferences.language.isEmpty) {
     // MySharedPreferences.language = Get.deviceLocale!.languageCode;
     MySharedPreferences.language = 'ar';
@@ -46,7 +44,7 @@ class MyApp extends StatefulWidget {
 
 class _MyAppState extends State<MyApp> {
   Widget _toggleScreen() {
-    if (MySharedPreferences.isLogIn && MySharedPreferences.accessToken.isNotEmpty) {
+    if (MySharedPreferences.isLogIn) {
       return const BaseNavBar();
     } else if (!MySharedPreferences.isLogIn && !MySharedPreferences.isPassedIntro) {
       return const IntroScreen();
@@ -55,12 +53,12 @@ class _MyAppState extends State<MyApp> {
     }
   }
 
-  Bindings _initialBinding() {
-    //TODO: test and edit
+  Bindings? _initialBinding() {
     if (MySharedPreferences.isLogIn) {
       return NavBarBinding();
+    } else if (!MySharedPreferences.isLogIn && !MySharedPreferences.isPassedIntro) {
+      return null;
     } else {
-      // return SignInBinding();
       return RegistrationBinding();
     }
   }

@@ -49,7 +49,7 @@ class OrderStatusScreen extends StatelessWidget {
           }
 
           if (snapshot.connectionState == ConnectionState.waiting) {
-            return Scaffold(body: Text('Locaing'));
+            return const Scaffold(body: Text('Loading'));
           }
 
           final data = snapshot.data!.docs[0].data();

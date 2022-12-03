@@ -121,9 +121,9 @@ class _BaseDrawerState extends State<BaseDrawer> {
                     Get.offAll(() => const RegistrationScreen(), binding: RegistrationBinding());
                     // LogOutController.find.fetchLogOutData(context);
                   },
-                  label: const Text(
-                    "  Sign out  ",
-                    style: TextStyle(
+                  label: Text(
+                    TranslationService.getString('sign_out_key'),
+                    style: const TextStyle(
                       color: MyColors.text,
                       fontSize: 20,
                     ),

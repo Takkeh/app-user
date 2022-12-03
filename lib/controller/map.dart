@@ -103,11 +103,12 @@ class MapController extends GetxController {
 
   Future getAddress(double lat, double lng) async {
     List<Placemark> placeMarks = await placemarkFromCoordinates(lat, lng, localeIdentifier: MySharedPreferences.language);
-    mapLocality.value = placeMarks[0].locality!;
-    mapSubLocality.value = placeMarks[0].subLocality!;
-    mapStreet.value = placeMarks[0].street!;
+    mapLocality.value = placeMarks[1].locality!;
+    mapSubLocality.value = placeMarks[1].subLocality!;
+    mapStreet.value = placeMarks[1].street!;
     regionCtrl.value.text = mapSubLocality.value;
     streetCtrl.value.text = mapStreet.value;
+    log("placeMarks:: $placeMarks");
     log("address:: ${mapLocality.value} -- ${mapStreet.value}");
     update();
   }

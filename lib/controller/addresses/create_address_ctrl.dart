@@ -3,6 +3,7 @@ import 'package:flutter_overlay_loader/flutter_overlay_loader.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
 import 'package:takkeh/controller/addresses/my_addresses_ctrl.dart';
+import 'package:takkeh/controller/map.dart';
 import 'package:takkeh/model/addresses/create_address_model.dart';
 import 'package:takkeh/model/addresses/my_addresses_model.dart';
 import 'package:takkeh/network/addresses/create_address_api.dart';
@@ -39,6 +40,8 @@ class CreateAddressCtrl extends GetxController {
       floor: floor,
       apartmentNum: apartmentNum,
       city: city,
+      lat: MapController.find.mapLat!,
+      lng: MapController.find.mapLng!,
     );
     if (model == null) {
       Fluttertoast.showToast(msg: AppConstants.failedMessage);
@@ -46,14 +49,13 @@ class CreateAddressCtrl extends GetxController {
       return;
     }
     if (model!.code == 200) {
-      final data = model!.data!;
       MyAddressesCtrl.find.addAddress(
         MyAddresses(
           region: region,
           street: street,
           userId: MySharedPreferences.userId,
-          long: MyAddressesCtrl.find.selectedLng.value,
-          lat: MyAddressesCtrl.find.selectedLat.value,
+          long: MapController.find.mapLng!,
+          lat: MapController.find.mapLat!,
           floorNumber: floor,
           city: city,
           buildingNumber: buildingNum,

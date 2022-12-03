@@ -2,7 +2,6 @@ import 'dart:convert';
 import 'dart:developer';
 
 import 'package:http/http.dart' as http;
-import 'package:takkeh/controller/addresses/my_addresses_ctrl.dart';
 import 'package:takkeh/model/addresses/create_address_model.dart';
 import 'package:takkeh/utils/api_url.dart';
 import 'package:takkeh/utils/shared_prefrences.dart';
@@ -18,6 +17,8 @@ class CreateAddressApi {
     required String floor,
     required String apartmentNum,
     required String city,
+    required double lat,
+    required double lng,
   }) async {
     try {
       String url = '${ApiUrl.mainUrl}${ApiUrl.createAddress}';
@@ -28,8 +29,8 @@ class CreateAddressApi {
       };
       var body = jsonEncode({
         "user_id": MySharedPreferences.userId,
-        "lat": MyAddressesCtrl.find.selectedLat.value,
-        "long": MyAddressesCtrl.find.selectedLng.value,
+        "lat": lat,
+        "long": lng,
         "region": region,
         "street": street,
         "building_number": buildingNum,

@@ -33,7 +33,7 @@ class RestaurantProductsSearchScreen extends StatelessWidget {
                 },
               ),
               controller.searchQuery.value.isEmpty
-                  ? Text("Search Something")
+                  ? const Text("Search Something")
                   : FutureBuilder<RestaurantProductsSearchModel?>(
                       future: controller.initialize,
                       builder: (context, snapshot) {
@@ -48,7 +48,7 @@ class RestaurantProductsSearchScreen extends StatelessWidget {
                           default:
                             if (snapshot.hasData) {
                               if (snapshot.data!.data!.products!.isEmpty) {
-                                return Text("No Result");
+                                return const Text("No Result");
                               }
                               return Expanded(
                                 child: ListView.separated(

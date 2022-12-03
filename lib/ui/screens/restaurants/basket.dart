@@ -230,19 +230,6 @@ class _BasketScreenState extends State<BasketScreen> {
                                                 ),
                                               ),
                                             );
-                                            return ChoiceChip(
-                                              onSelected: null,
-                                              shape: RoundedRectangleBorder(
-                                                side: const BorderSide(color: MyColors.grey9F4),
-                                                borderRadius: BorderRadius.circular(20),
-                                              ),
-                                              disabledColor: Colors.transparent,
-                                              selectedColor: MyColors.redPrimary,
-                                              label: Text(
-                                                data.code!,
-                                              ),
-                                              selected: false,
-                                            );
                                           },
                                         ),
                                       ),

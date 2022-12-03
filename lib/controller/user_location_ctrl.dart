@@ -73,9 +73,10 @@ class UserLocationCtrl extends GetxController {
 
   Future getAddress(double lat, double lng) async {
     List<Placemark> placeMarks = await placemarkFromCoordinates(lat, lng, localeIdentifier: MySharedPreferences.language);
-    locality.value = placeMarks[0].locality!;
-    subLocality.value = placeMarks[0].subLocality!;
-    street.value = placeMarks[0].street!;
+    locality.value = placeMarks[1].locality!;
+    subLocality.value = placeMarks[1].subLocality!;
+    street.value = placeMarks[1].street!;
+    log("placeMarks:: $placeMarks");
     log("address:: ${subLocality.value} -- ${street.value}");
     update();
   }

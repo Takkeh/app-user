@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:takkeh/ui/screens/home/home.dart';
 import 'package:takkeh/ui/widgets/custom_network_image.dart';
+import 'package:takkeh/utils/custom_clip_path.dart';
 
 class CustomBubbleImage extends StatelessWidget {
   final String imageUrl;

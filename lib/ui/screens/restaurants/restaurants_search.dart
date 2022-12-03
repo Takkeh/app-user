@@ -40,7 +40,7 @@ class RestaurantsSearchScreen extends StatelessWidget {
                   pagingController: controller.pagingController,
                   builderDelegate: PagedChildBuilderDelegate<RestaurantList>(
                     noItemsFoundIndicatorBuilder: (context) {
-                      return Text("No Result");
+                      return const Text("No Result");
                     },
                     firstPageProgressIndicatorBuilder: (context) {
                       return const BaseVerticalListLoading();

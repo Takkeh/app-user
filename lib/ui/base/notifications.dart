@@ -5,7 +5,6 @@ import 'package:takkeh/ui/base/widgets/notifications_box.dart';
 import 'package:takkeh/ui/widgets/failed_widget.dart';
 import 'package:takkeh/ui/widgets/transparent_app_bar.dart';
 import 'package:takkeh/utils/base/colors.dart';
-import 'package:takkeh/utils/base/icons.dart';
 import 'package:takkeh/utils/base/images.dart';
 
 class NotificationsScreen extends StatelessWidget {
@@ -43,8 +42,7 @@ class NotificationsScreen extends StatelessWidget {
                         padding: EdgeInsets.only(top: 50.0, bottom: 10),
                         child: Text(
                           "You have no notifications for now",
-                          style: TextStyle(
-                              fontSize: 20, fontWeight: FontWeight.w700),
+                          style: TextStyle(fontSize: 20, fontWeight: FontWeight.w700),
                         ),
                       ),
                       const Text(
@@ -70,10 +68,8 @@ class NotificationsScreen extends StatelessWidget {
                       default:
                         if (snapshot.hasData) {
                           return ListView.separated(
-                            separatorBuilder: (context, index) =>
-                                const SizedBox(height: 30),
-                            padding: const EdgeInsets.symmetric(
-                                horizontal: 30, vertical: 30),
+                            separatorBuilder: (context, index) => const SizedBox(height: 30),
+                            padding: const EdgeInsets.symmetric(horizontal: 30, vertical: 30),
                             itemCount: 3,
                             itemBuilder: (context, index) {
                               return NotificationsBox(

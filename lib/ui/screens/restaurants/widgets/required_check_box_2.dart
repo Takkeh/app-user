@@ -3,7 +3,6 @@ import 'dart:developer';
 
 import 'package:flutter/material.dart';
 import 'package:takkeh/controller/view_product_ctrl.dart';
-import 'package:takkeh/model/restaurants/view_restaurant.dart';
 import 'package:takkeh/ui/screens/restaurants/widgets/custom_check_box.dart';
 
 class RequiredCheckBox2 extends StatefulWidget {

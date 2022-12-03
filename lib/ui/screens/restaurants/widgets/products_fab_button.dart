@@ -50,7 +50,7 @@ class ProductsFABButton extends StatelessWidget {
             // }
           },
           style: ElevatedButton.styleFrom(
-            primary: controller.orderList.isEmpty ? MyColors.redF98 : MyColors.redPrimary,
+            backgroundColor: controller.orderList.isEmpty ? MyColors.redF98 : MyColors.redPrimary,
             shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(11)),
             fixedSize: const Size(double.infinity, 50),
             minimumSize: const Size(double.infinity, 50),
