@@ -3,14 +3,13 @@ import 'package:fluttertoast/fluttertoast.dart';
 import 'package:takkeh/controller/restaurants/update_order_ctrl.dart';
 import 'package:takkeh/translation/service.dart';
 import 'package:takkeh/ui/screens/registration/widgets/custom_prefix_icon.dart';
+import 'package:takkeh/ui/screens/restaurants/widgets/confirm_order_map_bubble.dart';
 import 'package:takkeh/ui/screens/restaurants/widgets/custom_fab_button.dart';
 import 'package:takkeh/ui/screens/restaurants/widgets/custom_suffix_icon.dart';
 import 'package:takkeh/ui/screens/restaurants/widgets/gradient_colors_box.dart';
-import 'package:takkeh/ui/screens/restaurants/widgets/map_bubble.dart';
 import 'package:takkeh/ui/widgets/custom_text_field.dart';
 import 'package:takkeh/ui/widgets/order_details_box.dart';
 import 'package:takkeh/ui/widgets/transparent_app_bar.dart';
-import 'package:takkeh/utils/app_constants.dart';
 import 'package:takkeh/utils/base/colors.dart';
 import 'package:takkeh/utils/base/icons.dart';
 
@@ -59,12 +58,13 @@ class _ConfirmOrderScreenState extends State<ConfirmOrderScreen> {
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          const GradientColorsBox(height: 136),
+          const GradientColorsBox(height: 120),
           Expanded(
             child: ListView(
-              padding: const EdgeInsets.fromLTRB(30, 0, 30, 80),
+              padding: const EdgeInsets.fromLTRB(30, 10, 30, 80),
               children: [
-                const MapBubbleBuilder(route: kAddress),
+                const ConfirmOrderMapBubble(),
+                // const MapBubbleBuilder(route: kAddress),
                 const SizedBox(height: 20),
                 CustomTextField(
                   hintText: '30 - 40 min',

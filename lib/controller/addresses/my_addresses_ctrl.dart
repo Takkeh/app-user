@@ -21,6 +21,12 @@ class MyAddressesCtrl extends GetxController {
 
   void selectAddress(int id) {
     selectedAddressId.value = id;
+    var result = myAddresses.where((element) => element.id == selectedAddressId.value).first;
+    selectedLat.value = result.lat!;
+    selectedLng.value = result.long!;
+    locality.value = result.city!;
+    subLocality.value = result.region!;
+    street.value = result.street!;
     MySharedPreferences.addressId = id;
     update();
   }

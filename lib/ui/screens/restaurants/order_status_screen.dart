@@ -5,6 +5,7 @@ import 'package:takkeh/binding/nav_bar.dart';
 import 'package:takkeh/model/restaurants/order_details_model.dart';
 import 'package:takkeh/translation/service.dart';
 import 'package:takkeh/ui/base/nav_bar.dart';
+import 'package:takkeh/ui/screens/restaurants/widgets/captain_search_box.dart';
 import 'package:takkeh/ui/screens/restaurants/widgets/captain_widget.dart';
 import 'package:takkeh/ui/screens/restaurants/widgets/custom_fab_button.dart';
 import 'package:takkeh/ui/screens/restaurants/widgets/gradient_colors_box.dart';
@@ -14,6 +15,7 @@ import 'package:takkeh/ui/screens/restaurants/widgets/order_status_text.dart';
 import 'package:takkeh/ui/screens/restaurants/widgets/order_time_line.dart';
 import 'package:takkeh/ui/widgets/order_details_box.dart';
 import 'package:takkeh/ui/widgets/order_item.dart';
+import 'package:takkeh/utils/app_constants.dart';
 import 'package:takkeh/utils/base/images.dart';
 import 'package:takkeh/utils/shared_prefrences.dart';
 
@@ -43,7 +45,7 @@ class OrderStatusScreen extends StatelessWidget {
             .snapshots(),
         builder: (BuildContext context, snapshot) {
           if (snapshot.hasError) {
-            return Scaffold(body: Text('Something went wrong'));
+            return Scaffold(body: Center(child: Text(AppConstants.failedMessage)));
           }
 
           if (snapshot.connectionState == ConnectionState.waiting) {
@@ -72,9 +74,6 @@ class OrderStatusScreen extends StatelessWidget {
                     padding: const EdgeInsets.only(left: 30, right: 30, bottom: 90),
                     children: [
                       Image.asset(MyImages.driver),
-                      Center(
-                        child: Text("data:: ${data.orderDetailsList[0].name} -- $orderId"),
-                      ),
                       const SizedBox(height: 20),
                       const OrderStatusText(),
                       OrderTimeLine(status: data.status),
@@ -89,7 +88,7 @@ class OrderStatusScreen extends StatelessWidget {
                         indent: 15,
                         endIndent: 15,
                       ),
-                      CaptainWidget(name: data.driverName, imageUrl: data.driverImage, phoneNum: data.driverPhone),
+                      data.driverId == 0 ? const CaptainSearchBox() : CaptainWidget(name: data.driverName, imageUrl: data.driverImage, phoneNum: data.driverPhone),
                       const Divider(
                         height: 30,
                         indent: 15,
@@ -127,7 +126,7 @@ class OrderStatusScreen extends StatelessWidget {
                         paymentMethod: data.paymentMethod,
                         orderValue: data.tax,
                         discount: data.discount,
-                        deliveryFee: data.deliveryFee,
+                        deliveryFee: data.finalPrice,
                       ),
                     ],
                   ),

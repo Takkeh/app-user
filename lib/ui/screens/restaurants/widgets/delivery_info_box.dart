@@ -1,14 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:takkeh/translation/service.dart';
 import 'package:takkeh/utils/base/colors.dart';
 import 'package:takkeh/utils/base/icons.dart';
 
 class DeliveryInfoBox extends StatelessWidget {
   final String address;
+  final bool isVisible;
+  final VoidCallback? onPressed;
 
   const DeliveryInfoBox({
     Key? key,
     required this.address,
+    required this.isVisible,
+    this.onPressed,
   }) : super(key: key);
 
   @override
@@ -37,6 +42,14 @@ class DeliveryInfoBox extends StatelessWidget {
               overflow: TextOverflow.ellipsis,
             ),
           ),
+          if (isVisible)
+            TextButton(
+              onPressed: onPressed,
+              child: Text(
+                TranslationService.getString('change_key'),
+                style: const TextStyle(color: MyColors.redPrimary),
+              ),
+            ),
           // Expanded(
           //   child: SizedBox(
           //     width: 200,
