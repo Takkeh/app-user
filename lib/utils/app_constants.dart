@@ -13,6 +13,20 @@ const String kRawSnackBar = 'rawSnackBar';
 const String kMap = 'map';
 const String kAddress = 'address';
 
+const kWaiting = 'waiting';
+const kHold = 'hold';
+const kPending = 'pending';
+const kWayToPickUpPoint = 'way_to_pickup_point';
+const kArrivedToPickUpPoint = 'arrived_to_pickup_point';
+const kAtPickUpPoint = 'at_pickup_point';
+const kWayToDropPoint = 'way_to_drop_point';
+const kArrivedToDropPoint = 'arrived_to_drop_point';
+const kCollectingMoney = 'collecting_money';
+const kCompleted = 'completed';
+const kCanceled = 'canceled';
+//
+const kDenied = 'denied';
+
 class AppConstants {
   static const googleApiKey = 'AIzaSyDSPeDTWmjTol4rLhHw0fT9Nzrb7bAqs2M';
 

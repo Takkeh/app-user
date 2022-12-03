@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
-import 'package:takkeh/utils/base/colors.dart';
+import 'package:takkeh/utils/app_constants.dart';
 
 class OrderItem extends StatelessWidget {
   const OrderItem({
@@ -11,36 +10,32 @@ class OrderItem extends StatelessWidget {
   }) : super(key: key);
 
   final String title;
-  final String price;
+  final double price;
   final int count;
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 18.0, vertical: 10),
-      child: Row(
-        children: [
-          Text(
-            'X$count',
+    return Row(
+      children: [
+        Text(
+          'X$count',
+          style: const TextStyle(
+            fontSize: 14,
+          ),
+          textDirection: TextDirection.ltr,
+        ),
+        Padding(
+          padding: const EdgeInsetsDirectional.only(start: 8.0),
+          child: Text(
+            title,
             style: const TextStyle(
               fontSize: 14,
             ),
-            textDirection: TextDirection.ltr,
           ),
-          Padding(
-            padding: const EdgeInsetsDirectional.only(start: 8.0),
-            child: Text(
-              title,
-              style: const TextStyle(
-                fontSize: 14,
-                color: MyColors.grey,
-              ),
-            ),
-          ),
-          const Spacer(),
-          Text('$price ${'JOD'.tr}')
-        ],
-      ),
+        ),
+        const Spacer(),
+        Text('$price $kPCurrency')
+      ],
     );
   }
 }

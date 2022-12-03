@@ -12,6 +12,8 @@ import 'package:takkeh/ui/screens/restaurants/widgets/order_address_tile.dart';
 import 'package:takkeh/ui/screens/restaurants/widgets/order_status_appbar.dart';
 import 'package:takkeh/ui/screens/restaurants/widgets/order_status_text.dart';
 import 'package:takkeh/ui/screens/restaurants/widgets/order_time_line.dart';
+import 'package:takkeh/ui/widgets/order_details_box.dart';
+import 'package:takkeh/ui/widgets/order_item.dart';
 import 'package:takkeh/utils/base/images.dart';
 import 'package:takkeh/utils/shared_prefrences.dart';
 
@@ -24,7 +26,6 @@ class OrderStatusScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    print("data:: ${MySharedPreferences.userId} -- $orderId");
     return WillPopScope(
       onWillPop: () async {
         Get.offAll(() => const BaseNavBar(), binding: NavBarBinding());
@@ -68,7 +69,7 @@ class OrderStatusScreen extends StatelessWidget {
                 const GradientColorsBox(height: 136),
                 Expanded(
                   child: ListView(
-                    padding: const EdgeInsets.symmetric(horizontal: 30),
+                    padding: const EdgeInsets.only(left: 30, right: 30, bottom: 90),
                     children: [
                       Image.asset(MyImages.driver),
                       Center(
@@ -76,19 +77,19 @@ class OrderStatusScreen extends StatelessWidget {
                       ),
                       const SizedBox(height: 20),
                       const OrderStatusText(),
-                      const OrderTimeLine(),
+                      OrderTimeLine(status: data.status),
                       const Divider(
                         height: 30,
                         indent: 15,
                         endIndent: 15,
                       ),
-                      const OrderAddressTile(),
+                      OrderAddressTile(address: data.dropPointAddress),
                       const Divider(
                         height: 30,
                         indent: 15,
                         endIndent: 15,
                       ),
-                      CaptainWidget(name: data.driverName, imageUrl: data.driverImage),
+                      CaptainWidget(name: data.driverName, imageUrl: data.driverImage, phoneNum: data.driverPhone),
                       const Divider(
                         height: 30,
                         indent: 15,
@@ -101,7 +102,33 @@ class OrderStatusScreen extends StatelessWidget {
                           fontWeight: FontWeight.w500,
                         ),
                       ),
-                      // OrderDetailsWidget(productName: UpdateOrderCtrl.model!.data!.products!),
+                      ListView.separated(
+                        separatorBuilder: (context, index) => const SizedBox(height: 15),
+                        padding: const EdgeInsets.only(top: 15.0),
+                        physics: const NeverScrollableScrollPhysics(),
+                        itemCount: data.orderDetailsList.length,
+                        shrinkWrap: true,
+                        itemBuilder: (context, index) {
+                          final info = data.orderDetailsList[index];
+                          return OrderItem(
+                            count: info.quantity,
+                            price: info.price,
+                            title: info.name,
+                          );
+                        },
+                      ),
+                      const Padding(
+                        padding: EdgeInsets.symmetric(vertical: 18, horizontal: 18),
+                        child: Divider(thickness: 1.2),
+                      ),
+                      FullOrderDetailsBox(
+                        tax: data.tax,
+                        total: data.totalPrice,
+                        paymentMethod: data.paymentMethod,
+                        orderValue: data.tax,
+                        discount: data.discount,
+                        deliveryFee: data.deliveryFee,
+                      ),
                     ],
                   ),
                 ),

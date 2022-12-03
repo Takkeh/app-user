@@ -8,15 +8,32 @@ import 'package:takkeh/utils/base/colors.dart';
 import 'package:takkeh/utils/base/icons.dart';
 import 'package:takkeh/utils/base/images.dart';
 import 'package:takkeh/utils/shared_prefrences.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class CaptainWidget extends StatelessWidget {
-  final String name, imageUrl;
+  final String name, imageUrl, phoneNum;
 
   const CaptainWidget({
     Key? key,
     required this.name,
     required this.imageUrl,
+    required this.phoneNum,
   }) : super(key: key);
+
+  static Future<void> launchPhoneDialer(String contactNumber) async {
+    final Uri phoneUri = Uri(
+      scheme: "tel",
+      path: contactNumber,
+    );
+    final url = Uri.parse(phoneUri.toString());
+    try {
+      if (await canLaunchUrl(url)) {
+        await launchUrl(url);
+      }
+    } catch (error) {
+      throw ("Cannot dial");
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -51,16 +68,21 @@ class CaptainWidget extends StatelessWidget {
             child: Transform(
               alignment: Alignment.center,
               transform: MySharedPreferences.language == 'en' ? Matrix4.rotationY(pi) : Matrix4.rotationY(0),
-              child: Stack(
-                alignment: Alignment.center,
-                children: [
-                  Image.asset(
-                    MyImages.halfCircleHorizontal,
-                    height: 70,
-                    width: 33,
-                  ),
-                  SvgPicture.asset(MyIcons.phoneCall),
-                ],
+              child: GestureDetector(
+                onTap: () {
+                  launchPhoneDialer(phoneNum);
+                },
+                child: Stack(
+                  alignment: Alignment.center,
+                  children: [
+                    Image.asset(
+                      MyImages.halfCircleHorizontal,
+                      height: 70,
+                      width: 33,
+                    ),
+                    SvgPicture.asset(MyIcons.phoneCall),
+                  ],
+                ),
               ),
             ),
           ),

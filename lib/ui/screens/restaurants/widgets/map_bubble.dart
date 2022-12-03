@@ -64,6 +64,7 @@ class _MapBubbleBuilderState extends State<MapBubbleBuilder> {
                               }
                               if (widget.route == kAddress) {
                                 Get.to(() => const AddNewAddressScreen(), binding: CreateAddressBinding());
+                                Get.to(() => MapScreen(mapController: mapController));
                               }
                             },
                           );
