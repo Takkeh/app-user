@@ -25,6 +25,9 @@ class MapController extends GetxController {
   final mapStreet = ''.obs;
   final mapLocality = ''.obs;
 
+  final regionCtrl = TextEditingController().obs;
+  final streetCtrl = TextEditingController().obs;
+
   Future displayPrediction(Prediction? p) async {
     if (p == null) return;
     GoogleMapsPlaces places = GoogleMapsPlaces(
@@ -103,6 +106,8 @@ class MapController extends GetxController {
     mapLocality.value = placeMarks[0].locality!;
     mapSubLocality.value = placeMarks[0].subLocality!;
     mapStreet.value = placeMarks[0].street!;
+    regionCtrl.value.text = mapSubLocality.value;
+    streetCtrl.value.text = mapStreet.value;
     log("address:: ${mapLocality.value} -- ${mapStreet.value}");
     update();
   }
@@ -114,6 +119,15 @@ class MapController extends GetxController {
     mapLocality.value = MyAddressesCtrl.find.locality.value;
     mapSubLocality.value = MyAddressesCtrl.find.subLocality.value;
     mapStreet.value = MyAddressesCtrl.find.street.value;
+    regionCtrl.value = TextEditingController(text: mapSubLocality.value);
+    streetCtrl.value = TextEditingController(text: mapStreet.value);
     super.onInit();
+  }
+
+  @override
+  void onClose() {
+    regionCtrl.value.dispose();
+    streetCtrl.value.dispose();
+    super.onClose();
   }
 }

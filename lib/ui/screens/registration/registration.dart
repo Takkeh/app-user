@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:takkeh/controller/registration/sign_in.dart';
 import 'package:takkeh/ui/screens/registration//sign_in.dart';
 import 'package:takkeh/ui/screens/registration//sign_up.dart';
 import 'package:takkeh/ui/widgets/base_switch_slider.dart';
@@ -24,6 +26,7 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
   @override
   void initState() {
     pageController = PageController();
+    Get.put(SignInController());
     super.initState();
   }
 
@@ -81,7 +84,7 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                   controller: pageController,
                   children: [
                     SignInScreen(isKeyboardVisible: isKeyboardVisible, route: widget.route),
-                    const SignUpScreen(),
+                    SignUpScreen(route: widget.route),
                   ],
                 ),
               ),

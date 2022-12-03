@@ -5,6 +5,7 @@ import 'package:flutter_overlay_loader/flutter_overlay_loader.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
 import 'package:takkeh/binding/nav_bar.dart';
+import 'package:takkeh/helper/guest_user_helper.dart';
 import 'package:takkeh/model/registration/sign_in_model.dart';
 import 'package:takkeh/network/registration/sign_in.dart';
 import 'package:takkeh/translation/service.dart';
@@ -50,7 +51,7 @@ class SignInController extends GetxController {
         Get.offAll(() => const BaseNavBar(), binding: NavBarBinding());
       }
       if (route == kBack) {
-        Get.back();
+        Get.until((route) => Get.currentRoute == GuestUserHelper.currentRoute);
       }
     } else if (signInModel!.code == 500) {
       Fluttertoast.showToast(msg: TranslationService.getString('incorrect_email_or_password_key'));

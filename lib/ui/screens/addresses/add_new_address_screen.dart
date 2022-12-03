@@ -1,11 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:takkeh/controller/addresses/create_address_ctrl.dart';
+import 'package:takkeh/controller/map.dart';
 import 'package:takkeh/translation/service.dart';
 import 'package:takkeh/ui/screens/restaurants/widgets/custom_fab_button.dart';
 import 'package:takkeh/ui/screens/restaurants/widgets/gradient_colors_box.dart';
 import 'package:takkeh/ui/screens/restaurants/widgets/map_bubble.dart';
 import 'package:takkeh/ui/widgets/custom_text_field.dart';
 import 'package:takkeh/ui/widgets/transparent_app_bar.dart';
+import 'package:takkeh/utils/app_constants.dart';
 
 class AddNewAddressScreen extends StatefulWidget {
   const AddNewAddressScreen({Key? key}) : super(key: key);
@@ -18,8 +21,6 @@ class _AddNewAddressScreenState extends State<AddNewAddressScreen> {
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 
   late TextEditingController titleCtrl;
-  late TextEditingController regionCtrl;
-  late TextEditingController streetCtrl;
   late TextEditingController buildingNumCtrl;
   late TextEditingController floorNumCtrl;
   late TextEditingController apartmentNumCtrl;
@@ -36,8 +37,6 @@ class _AddNewAddressScreenState extends State<AddNewAddressScreen> {
   void initState() {
     super.initState();
     titleCtrl = TextEditingController();
-    regionCtrl = TextEditingController();
-    streetCtrl = TextEditingController();
     buildingNumCtrl = TextEditingController();
     floorNumCtrl = TextEditingController();
     apartmentNumCtrl = TextEditingController();
@@ -48,8 +47,6 @@ class _AddNewAddressScreenState extends State<AddNewAddressScreen> {
   void dispose() {
     super.dispose();
     titleCtrl.dispose();
-    regionCtrl.dispose();
-    streetCtrl.dispose();
     buildingNumCtrl.dispose();
     floorNumCtrl.dispose();
     apartmentNumCtrl.dispose();
@@ -69,8 +66,8 @@ class _AddNewAddressScreenState extends State<AddNewAddressScreen> {
               FocusManager.instance.primaryFocus?.unfocus();
               CreateAddressCtrl.find.fetchData(
                 name: titleCtrl.text,
-                region: regionCtrl.text,
-                street: streetCtrl.text,
+                region: MapController.find.regionCtrl.value.text,
+                street: MapController.find.streetCtrl.value.text,
                 buildingNum: buildingNumCtrl.text,
                 additionalTips: notesCtrl.text,
                 floor: floorNumCtrl.text,
@@ -97,7 +94,7 @@ class _AddNewAddressScreenState extends State<AddNewAddressScreen> {
               child: ListView(
                 padding: const EdgeInsets.fromLTRB(30, 0, 30, 60),
                 children: [
-                  const MapBubbleBuilder(visible: false),
+                  const MapBubbleBuilder(route: kMap),
                   // const SizedBox(height: 15),
                   CustomTextField(
                     padding: const EdgeInsets.only(bottom: 10.0),
@@ -106,18 +103,26 @@ class _AddNewAddressScreenState extends State<AddNewAddressScreen> {
                     horizontalPadding: 20,
                     validator: fieldValidator,
                   ),
-                  CustomTextField(
-                    controller: regionCtrl,
-                    hintText: TranslationService.getString('region_key'),
-                    horizontalPadding: 20,
-                    validator: fieldValidator,
+                  GetX<MapController>(
+                    builder: (controller) {
+                      return CustomTextField(
+                        controller: controller.regionCtrl.value,
+                        hintText: TranslationService.getString('region_key'),
+                        horizontalPadding: 20,
+                        validator: fieldValidator,
+                      );
+                    },
                   ),
-                  CustomTextField(
-                    padding: const EdgeInsets.symmetric(vertical: 10.0),
-                    controller: streetCtrl,
-                    hintText: TranslationService.getString('street_key'),
-                    horizontalPadding: 20,
-                    validator: fieldValidator,
+                  GetX<MapController>(
+                    builder: (controller) {
+                      return CustomTextField(
+                        padding: const EdgeInsets.symmetric(vertical: 10.0),
+                        controller: controller.streetCtrl.value,
+                        hintText: TranslationService.getString('street_key'),
+                        horizontalPadding: 20,
+                        validator: fieldValidator,
+                      );
+                    },
                   ),
                   CustomTextField(
                     keyboardType: TextInputType.number,

@@ -29,6 +29,7 @@ class ApiUrl {
   static const String restaurantReviews = "/api/v1/restaurant/reviews/";
   static const String mostPopular = "/api/v1/restaurant/most-popular/";
   static const String restaurantInfo = "/api/v1/restaurant/info/";
+  static const String restaurantProductsSearch = "/api/v1/restaurant/products/search";
 
   //profile
   static const String updateProfile = "/api/v1/update-profile";

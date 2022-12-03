@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:takkeh/controller/restaurants/make_order.dart';
 import 'package:takkeh/controller/user_order_ctrl.dart';
-import 'package:takkeh/helper/guest_user_helper.dart';
-import 'package:takkeh/helper/location_permission_helper.dart';
+import 'package:takkeh/helper/basket_helper.dart';
 import 'package:takkeh/translation/service.dart';
 import 'package:takkeh/utils/app_constants.dart';
 import 'package:takkeh/utils/base/colors.dart';
@@ -23,32 +21,33 @@ class ProductsFABButton extends StatelessWidget {
       child: GetBuilder<UserOrderCtrl>(builder: (controller) {
         return ElevatedButton(
           onPressed: () {
-            if (GuestUserHelper.check()) {
-              LocationPermissionHelper.check(
-                action: () {
-                  if (controller.orderList.isEmpty) {
-                    Get.closeCurrentSnackbar();
-                    Get.snackbar(
-                      '',
-                      TranslationService.getString('your_basket_is_empty_key'),
-                      titleText: const SizedBox.shrink(),
-                      colorText: Colors.white,
-                      margin: const EdgeInsets.all(10.0),
-                      backgroundColor: MyColors.redPrimary,
-                    );
-                    return;
-                  }
-                  MakeOrderCtrl.find.fetchData(
-                    context: context,
-                    restaurantId: restaurantId,
-                    generalNote: '',
-                    // route: BasketScreen(
-                    //   restaurantId: restaurantId,
-                    // ),
-                  );
-                },
-              );
-            }
+            BasketHelper.toggle(context, restaurantId: restaurantId, surfaceType: kFloatSnackBar);
+            // if (GuestUserHelper.check(Get.currentRoute)) {
+            //   LocationPermissionHelper.check(
+            //     action: () {
+            //       if (controller.orderList.isEmpty) {
+            //         Get.closeCurrentSnackbar();
+            //         Get.snackbar(
+            //           '',
+            //           TranslationService.getString('your_basket_is_empty_key'),
+            //           titleText: const SizedBox.shrink(),
+            //           colorText: Colors.white,
+            //           margin: const EdgeInsets.all(10.0),
+            //           backgroundColor: MyColors.redPrimary,
+            //         );
+            //         return;
+            //       }
+            //       MakeOrderCtrl.find.fetchData(
+            //         context: context,
+            //         restaurantId: restaurantId,
+            //         generalNote: '',
+            //         // route: BasketScreen(
+            //         //   restaurantId: restaurantId,
+            //         // ),
+            //       );
+            //     },
+            //   );
+            // }
           },
           style: ElevatedButton.styleFrom(
             primary: controller.orderList.isEmpty ? MyColors.redF98 : MyColors.redPrimary,

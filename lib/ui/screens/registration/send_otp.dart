@@ -14,13 +14,14 @@ import 'package:takkeh/utils/base/images.dart';
 import 'package:takkeh/utils/phone_field_helper.dart';
 
 class SendOtpScreen extends StatefulWidget {
-  final String? email, password, name;
+  final String? email, password, name, route;
 
   const SendOtpScreen({
     Key? key,
     this.email,
     this.password,
     this.name,
+    this.route,
   }) : super(key: key);
 
   @override
@@ -137,6 +138,7 @@ class _SendOtpScreenState extends State<SendOtpScreen> {
                           name: widget.name!,
                           context: context,
                           phone: phoneCtrl.text,
+                          route: widget.route!,
                         );
                       }
                     },

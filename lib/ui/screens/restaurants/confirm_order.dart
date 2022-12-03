@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
-import 'package:get/get.dart';
 import 'package:takkeh/controller/restaurants/update_order_ctrl.dart';
-import 'package:takkeh/controller/user_order_ctrl.dart';
 import 'package:takkeh/translation/service.dart';
 import 'package:takkeh/ui/screens/registration/widgets/custom_prefix_icon.dart';
 import 'package:takkeh/ui/screens/restaurants/widgets/custom_fab_button.dart';
@@ -10,6 +8,7 @@ import 'package:takkeh/ui/screens/restaurants/widgets/custom_suffix_icon.dart';
 import 'package:takkeh/ui/screens/restaurants/widgets/gradient_colors_box.dart';
 import 'package:takkeh/ui/screens/restaurants/widgets/map_bubble.dart';
 import 'package:takkeh/ui/widgets/custom_text_field.dart';
+import 'package:takkeh/ui/widgets/order_details_box.dart';
 import 'package:takkeh/ui/widgets/transparent_app_bar.dart';
 import 'package:takkeh/utils/app_constants.dart';
 import 'package:takkeh/utils/base/colors.dart';
@@ -63,9 +62,9 @@ class _ConfirmOrderScreenState extends State<ConfirmOrderScreen> {
           const GradientColorsBox(height: 136),
           Expanded(
             child: ListView(
-              padding: const EdgeInsets.symmetric(horizontal: 30),
+              padding: const EdgeInsets.fromLTRB(30, 0, 30, 80),
               children: [
-                const MapBubbleBuilder(visible: true),
+                const MapBubbleBuilder(route: kAddress),
                 const SizedBox(height: 20),
                 CustomTextField(
                   hintText: '30 - 40 min',
@@ -121,13 +120,38 @@ class _ConfirmOrderScreenState extends State<ConfirmOrderScreen> {
                   indent: 15,
                   endIndent: 15,
                 ),
-                const SizedBox(height: 15),
+                const SizedBox(height: 20),
                 Text(
                   TranslationService.getString('order_details_key'),
                   style: const TextStyle(
                     fontSize: 18,
                     fontWeight: FontWeight.w500,
                   ),
+                ),
+                // ListView.builder(
+                //   physics: const NeverScrollableScrollPhysics(),
+                //   itemCount: orderList.length,
+                //   shrinkWrap: true,
+                //   itemBuilder: (context, index) {
+                //     final data = orderList[index];
+                //     return OrderItem(
+                //       count: data.quantity!,
+                //       price: data.price!.toString(),
+                //       title: data.productName!,
+                //     );
+                //   },
+                // ),
+                const Padding(
+                  padding: EdgeInsets.symmetric(vertical: 18, horizontal: 18),
+                  child: Divider(thickness: 1.2),
+                ),
+                const FullOrderDetailsBox(
+                  tax: 5.0,
+                  total: 99.0,
+                  paymentMethod: 'cash',
+                  orderValue: 55.01,
+                  discount: 44.0,
+                  deliveryFee: 33.0,
                 ),
                 // OrderDetailsWidget(
                 //   productName: MakeOrderCtrl.model!.data!.products!,
@@ -138,48 +162,5 @@ class _ConfirmOrderScreenState extends State<ConfirmOrderScreen> {
         ],
       ),
     );
-  }
-}
-
-class OrderDetailsWidget extends StatelessWidget {
-  final List productName;
-
-  const OrderDetailsWidget({
-    Key? key,
-    required this.productName,
-  }) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return GetBuilder<UserOrderCtrl>(builder: (controller) {
-      return Column(
-        children: [
-          ...controller.orderList.map((element) {
-            final index = controller.orderList.indexOf(element);
-            return Row(
-              children: [
-                Text("x${element['quantity']}", style: const TextStyle(fontSize: 16, fontWeight: FontWeight.w500)),
-                const SizedBox(width: 16),
-                Text(productName[index].productName, style: const TextStyle(fontSize: 16)),
-                const Spacer(),
-                Text("${element['price']} $kPCurrency", style: const TextStyle(fontSize: 16)),
-              ],
-            );
-          }).toList(),
-          const Divider(
-            height: 30,
-            indent: 10,
-            endIndent: 10,
-          ),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              const Text("total", style: TextStyle(fontSize: 16)),
-              Text("${controller.totalPrice.value} $kPCurrency", style: const TextStyle(fontSize: 16, fontWeight: FontWeight.w500)),
-            ],
-          ),
-        ],
-      );
-    });
   }
 }

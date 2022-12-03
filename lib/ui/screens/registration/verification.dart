@@ -14,7 +14,7 @@ import 'package:takkeh/utils/base/icons.dart';
 import 'package:takkeh/utils/base/images.dart';
 
 class VerificationScreen extends StatefulWidget {
-  final String phoneNum, name, email, token;
+  final String phoneNum, name, email, token, route;
   final int userId;
 
   const VerificationScreen({
@@ -24,6 +24,7 @@ class VerificationScreen extends StatefulWidget {
     required this.email,
     required this.token,
     required this.userId,
+    required this.route,
   }) : super(key: key);
 
   @override
@@ -142,6 +143,7 @@ class _VerificationScreenState extends State<VerificationScreen> {
                   token: widget.token,
                   email: widget.email,
                   userId: widget.userId,
+                  route: widget.route,
                 );
               },
             ),

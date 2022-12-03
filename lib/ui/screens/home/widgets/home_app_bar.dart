@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
-import 'package:takkeh/binding/notification/notification.dart';
-import 'package:takkeh/ui/base/notifications.dart';
+import 'package:takkeh/helper/location_permission_helper.dart';
+import 'package:takkeh/ui/screens/addresses/my_addresses_screen.dart';
 import 'package:takkeh/ui/widgets/address_widget.dart';
 import 'package:takkeh/utils/base/icons.dart';
 
@@ -35,9 +35,10 @@ class HomeAppBar extends StatelessWidget implements PreferredSizeWidget {
           padding: const EdgeInsetsDirectional.fromSTEB(0, 0, 15, 0),
           child: GestureDetector(
             onTap: () {
-              Get.to(
-                () => const NotificationsScreen(),
-                binding: NotificationBinding(),
+              LocationPermissionHelper.check(
+                action: () {
+                  Get.to(() => const MyAddressesScreen());
+                },
               );
             },
             child: SvgPicture.asset(

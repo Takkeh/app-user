@@ -1,10 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:takkeh/controller/addresses/my_addresses_ctrl.dart';
 import 'package:takkeh/controller/restaurants/add_promo_code_ctrl.dart';
 import 'package:takkeh/controller/restaurants/make_order.dart';
 import 'package:takkeh/controller/restaurants/promo_codes_ctrl.dart';
+import 'package:takkeh/helper/location_permission_helper.dart';
 import 'package:takkeh/model/restaurants/promo_codes_model.dart';
 import 'package:takkeh/translation/service.dart';
+import 'package:takkeh/ui/screens/addresses/widgets/add_address_button.dart';
+import 'package:takkeh/ui/screens/addresses/widgets/my_addresses_listview.dart';
+import 'package:takkeh/ui/screens/addresses/widgets/no_addresses_widget.dart';
 import 'package:takkeh/ui/screens/registration/widgets/custom_prefix_icon.dart';
 import 'package:takkeh/ui/screens/restaurants/confirm_order.dart';
 import 'package:takkeh/ui/screens/restaurants/widgets/basket_products_tile.dart';
@@ -113,7 +118,11 @@ class _BasketScreenState extends State<BasketScreen> {
             ? CustomFABButton(
                 title: TranslationService.getString('confirm_order_key'),
                 onPressed: () {
-                  Get.to(() => ConfirmOrderScreen(orderId: widget.orderId));
+                  LocationPermissionHelper.check(
+                    action: () {
+                      Get.to(() => ConfirmOrderScreen(orderId: widget.orderId));
+                    },
+                  );
                 },
               )
             : null,
@@ -126,7 +135,7 @@ class _BasketScreenState extends State<BasketScreen> {
           const GradientColorsBox(height: 136),
           Expanded(
             child: ListView(
-              padding: const EdgeInsets.only(bottom: 100, top: 10),
+              padding: const EdgeInsets.only(bottom: 80, top: 10),
               children: [
                 Obx(() {
                   return ListView.builder(
@@ -277,22 +286,38 @@ class _BasketScreenState extends State<BasketScreen> {
                     },
                   );
                 }),
-
                 const Divider(
                   height: 30,
                   indent: 45,
                   endIndent: 45,
                 ),
-                Padding(
-                  padding: const EdgeInsetsDirectional.fromSTEB(30, 10, 0, 20),
-                  child: Text(
-                    TranslationService.getString('order_details_key'),
-                    style: const TextStyle(
-                      fontSize: 18,
-                      fontWeight: FontWeight.w500,
-                    ),
-                  ),
-                ),
+                GetBuilder<MyAddressesCtrl>(builder: (controller) {
+                  if (controller.myAddresses.isEmpty) {
+                    return const NoAddressesWidget();
+                  }
+                  return Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Padding(
+                        padding: const EdgeInsetsDirectional.fromSTEB(30, 10, 0, 10),
+                        child: Text(
+                          TranslationService.getString('select_address_key'),
+                          style: const TextStyle(
+                            fontSize: 18,
+                            fontWeight: FontWeight.w500,
+                          ),
+                        ),
+                      ),
+                      const AddNewAddressButton(
+                        padding: EdgeInsets.fromLTRB(30, 10, 30, 30),
+                      ),
+                      const MyAddressesListViewBuilder(
+                        shrinkWrap: true,
+                        physics: NeverScrollableScrollPhysics(),
+                      ),
+                    ],
+                  );
+                })
                 // Padding(
                 //   padding: const EdgeInsets.symmetric(horizontal: 30.0),
                 //   child: OrderDetailsWidget(

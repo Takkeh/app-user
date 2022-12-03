@@ -1,15 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
+import 'package:takkeh/binding/addresses.dart';
 import 'package:takkeh/controller/map.dart';
+import 'package:takkeh/helper/location_permission_helper.dart';
+import 'package:takkeh/ui/screens/addresses/add_new_address_screen.dart';
 import 'package:takkeh/ui/screens/restaurants/map.dart';
 import 'package:takkeh/ui/screens/restaurants/widgets/delivery_info_box.dart';
 import 'package:takkeh/ui/widgets/custom_marker.dart';
+import 'package:takkeh/utils/app_constants.dart';
 import 'package:takkeh/utils/base/colors.dart';
 
 class MapBubbleBuilder extends StatefulWidget {
-  final bool visible;
-  const MapBubbleBuilder({Key? key, required this.visible}) : super(key: key);
+  final String route;
+  const MapBubbleBuilder({Key? key, required this.route}) : super(key: key);
 
   @override
   State<MapBubbleBuilder> createState() => _MapBubbleBuilderState();
@@ -39,7 +43,7 @@ class _MapBubbleBuilderState extends State<MapBubbleBuilder> {
           borderRadius: BorderRadius.circular(20),
           child: SizedBox(
             //TODO: remove this
-            height: widget.visible ? 220 : 220,
+            height: 220,
             child: Column(
               children: [
                 Stack(
@@ -53,8 +57,15 @@ class _MapBubbleBuilderState extends State<MapBubbleBuilder> {
                           mapController = mapCtrl;
                         },
                         onTap: (value) {
-                          Get.to(
-                            () => MapScreen(mapController: mapController),
+                          LocationPermissionHelper.check(
+                            action: () {
+                              if (widget.route == kMap) {
+                                Get.to(() => MapScreen(mapController: mapController));
+                              }
+                              if (widget.route == kAddress) {
+                                Get.to(() => const AddNewAddressScreen(), binding: CreateAddressBinding());
+                              }
+                            },
                           );
                         },
                         initialCameraPosition: CameraPosition(

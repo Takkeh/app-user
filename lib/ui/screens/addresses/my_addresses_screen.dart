@@ -25,7 +25,12 @@ class MyAddressesScreen extends StatelessWidget {
             leading: const CustomBackWidget(),
             title: Text(TranslationService.getString('my_addresses_key')),
           ),
-          body: controller.myAddresses.isEmpty ? const NoAddressesWidget() : const MyAddressesListViewBuilder(),
+          body: controller.myAddresses.isEmpty
+              ? const NoAddressesWidget()
+              : const MyAddressesListViewBuilder(
+                  shrinkWrap: false,
+                  padding: EdgeInsets.symmetric(vertical: 20),
+                ),
         );
       },
     );

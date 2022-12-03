@@ -24,7 +24,7 @@ class BaseNavBar extends StatefulWidget {
 
 class BaseNavBarState extends State<BaseNavBar> {
   void toggleGuestUser(int index) {
-    if (GuestUserHelper.check()) {
+    if (GuestUserHelper.check(Get.currentRoute)) {
       navBarController.index = index;
     }
   }

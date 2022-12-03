@@ -5,14 +5,12 @@ import 'package:takkeh/binding/restaurants/products.dart';
 import 'package:takkeh/controller/restaurants/restaurants_search_ctrl.dart';
 import 'package:takkeh/controller/user_order_ctrl.dart';
 import 'package:takkeh/model/restaurants/restaurants_model.dart';
-import 'package:takkeh/translation/service.dart';
 import 'package:takkeh/ui/screens/restaurants/view_restaurant.dart';
 import 'package:takkeh/ui/screens/restaurants/widgets/restaurants_app_bar.dart';
-import 'package:takkeh/ui/screens/restaurants/widgets/search_field.dart';
+import 'package:takkeh/ui/screens/restaurants/widgets/search_bubble.dart';
 import 'package:takkeh/ui/widgets/custom_list_tile.dart';
 import 'package:takkeh/ui/widgets/custom_restaurants_loading.dart';
 import 'package:takkeh/ui/widgets/restaurant_cpi.dart';
-import 'package:takkeh/utils/base/colors.dart';
 
 class RestaurantsSearchScreen extends StatelessWidget {
   const RestaurantsSearchScreen({Key? key}) : super(key: key);
@@ -23,26 +21,13 @@ class RestaurantsSearchScreen extends StatelessWidget {
       appBar: RestaurantsAppBar(myContext: context),
       body: Column(
         children: [
-          Container(
-            padding: const EdgeInsets.only(bottom: 30, right: 50, left: 50),
-            decoration: const BoxDecoration(
-              color: MyColors.redPrimary,
-              borderRadius: BorderRadius.vertical(
-                bottom: Radius.elliptical(150, 60),
-              ),
-            ),
-            child: SearchField(
-              autofocus: true,
-              readOnly: false,
-              hintText: TranslationService.getString('what_to_search_key'),
-              onChanged: (value) {
-                if (RestaurantsSearchCtrl.find.searchQuery.value != value) {
-                  RestaurantsSearchCtrl.find.onSearchChanged(value);
-                }
-              },
-            ),
+          SearchBubble(
+            onChanged: (value) {
+              if (RestaurantsSearchCtrl.find.searchQuery.value != value) {
+                RestaurantsSearchCtrl.find.onSearchChanged(value);
+              }
+            },
           ),
-          const SizedBox(height: 30),
           GetX<RestaurantsSearchCtrl>(
             builder: (controller) {
               if (controller.searchQuery.isEmpty) {

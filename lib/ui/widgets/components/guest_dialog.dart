@@ -1,6 +1,9 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:takkeh/binding/registration/sign_in.dart';
+import 'package:takkeh/helper/guest_user_helper.dart';
 import 'package:takkeh/translation/service.dart';
 import 'package:takkeh/ui/screens/registration/registration.dart';
 import 'package:takkeh/ui/widgets/back_leading_widget.dart';
@@ -9,7 +12,7 @@ import 'package:takkeh/utils/app_constants.dart';
 import 'package:takkeh/utils/base/colors.dart';
 
 class GuestDialog {
-  static Future<void> show() async {
+  static Future<void> show(String routeName) async {
     Get.defaultDialog(
       title: '',
       titleStyle: const TextStyle(fontSize: 0),
@@ -66,6 +69,8 @@ class GuestDialog {
                   textColor: Colors.white,
                   onPressed: () {
                     Get.back();
+                    GuestUserHelper.currentRoute = routeName;
+                    log("currentRoute:: ${GuestUserHelper.currentRoute}");
                     Get.to(() => const RegistrationScreen(route: kBack), binding: RegistrationBinding());
                   },
                 ),

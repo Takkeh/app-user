@@ -18,6 +18,7 @@ class CreateAccountController {
     required String password,
     required String name,
     required String phone,
+    required String route,
     required BuildContext context,
   }) async {
     OverLayLoader.showLoading(context);
@@ -35,6 +36,7 @@ class CreateAccountController {
                 email: signUpModel!.data!.user!.email!,
                 token: signUpModel!.data!.token!,
                 userId: signUpModel!.data!.user!.id!,
+                route: route,
               ),
           binding: CodeTimerBinding());
     } else if (signUpModel!.code == 500) {

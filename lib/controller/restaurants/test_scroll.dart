@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:takkeh/controller/restaurants/products_filter.dart';
-import 'package:takkeh/ui/screens/restaurants/widgets/most_popular_categories.dart';
 import 'package:takkeh/ui/widgets/back_leading_widget.dart';
-import 'package:takkeh/ui/widgets/search_box_widget.dart';
 import 'package:takkeh/utils/base/colors.dart';
 
 class ScrollTest extends StatefulWidget {
@@ -42,7 +40,7 @@ class _ScrollTestState extends State<ScrollTest> {
               leadingWidth: 73,
               leading: const BackLeadingWidget(),
               actions: const [
-                SearchBoxWidget(),
+                // SearchBoxWidget(restaurantId: null,),
               ],
               expandedHeight: 470,
               collapsedHeight: kToolbarHeight + 50,

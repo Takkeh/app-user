@@ -43,8 +43,8 @@ class ViewRestaurantScreen extends StatelessWidget {
             backgroundColor: MyColors.redPrimary,
             leadingWidth: 73,
             leading: const BackLeadingWidget(),
-            actions: const [
-              SearchBoxWidget(),
+            actions: [
+              SearchBoxWidget(restaurantId: restaurantId),
             ],
             expandedHeight: 530,
             collapsedHeight: kToolbarHeight + 50,

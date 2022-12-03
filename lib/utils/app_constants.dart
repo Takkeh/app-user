@@ -7,6 +7,12 @@ const kFakeImage = 'img/sliders/16616866816673.png';
 const kHome = 'home';
 const kBack = 'back';
 
+const String kFloatSnackBar = 'floatSnackBar';
+const String kRawSnackBar = 'rawSnackBar';
+
+const String kMap = 'map';
+const String kAddress = 'address';
+
 class AppConstants {
   static const googleApiKey = 'AIzaSyDSPeDTWmjTol4rLhHw0fT9Nzrb7bAqs2M';
 

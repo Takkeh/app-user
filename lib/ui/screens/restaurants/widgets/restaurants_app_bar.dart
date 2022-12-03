@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
-import 'package:takkeh/controller/restaurants/make_order.dart';
 import 'package:takkeh/controller/user_order_ctrl.dart';
-import 'package:takkeh/translation/service.dart';
+import 'package:takkeh/helper/basket_helper.dart';
 import 'package:takkeh/ui/widgets/address_widget.dart';
 import 'package:takkeh/ui/widgets/custom_back_widget.dart';
+import 'package:takkeh/utils/app_constants.dart';
 import 'package:takkeh/utils/base/colors.dart';
 import 'package:takkeh/utils/base/icons.dart';
 
@@ -31,22 +31,24 @@ class RestaurantsAppBar extends StatelessWidget implements PreferredSizeWidget {
           builder: (controller) {
             return GestureDetector(
               onTap: () {
-                if (controller.orderList.isEmpty) {
-                  ScaffoldMessenger.of(context).showSnackBar(
-                    SnackBar(
-                      content: Text(TranslationService.getString('your_basket_is_empty_key')),
-                    ),
-                  );
-                  return;
-                }
-                MakeOrderCtrl.find.fetchData(
-                  context: myContext,
-                  restaurantId: controller.restaurantId,
-                  generalNote: '',
-                  // route: BasketScreen(
-                  //   restaurantId: restaurantId,
-                  // ),
-                );
+                //TODO: fix loading error
+                BasketHelper.toggle(context, restaurantId: controller.restaurantId, surfaceType: kRawSnackBar);
+                // if (controller.orderList.isEmpty) {
+                //   ScaffoldMessenger.of(context).showSnackBar(
+                //     SnackBar(
+                //       content: Text(TranslationService.getString('your_basket_is_empty_key')),
+                //     ),
+                //   );
+                //   return;
+                // }
+                // MakeOrderCtrl.find.fetchData(
+                //   context: myContext,
+                //   restaurantId: controller.restaurantId,
+                //   generalNote: '',
+                //   // route: BasketScreen(
+                //   //   restaurantId: restaurantId,
+                //   // ),
+                // );
               },
               child: Stack(
                 clipBehavior: Clip.none,
