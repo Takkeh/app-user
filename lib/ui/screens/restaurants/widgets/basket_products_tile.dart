@@ -13,7 +13,7 @@ import 'package:takkeh/utils/base/colors.dart';
 import 'package:takkeh/utils/base/icons.dart';
 
 class BasketProductTile extends StatefulWidget {
-  final String imageUrl, title, subTitle, description, note;
+  final String imageUrl, title, note;
   final double initialPrice;
   final int index;
   final int initialQuantity, productId, restaurantId;
@@ -24,8 +24,6 @@ class BasketProductTile extends StatefulWidget {
     Key? key,
     required this.imageUrl,
     required this.title,
-    required this.subTitle,
-    required this.description,
     required this.initialPrice,
     required this.initialQuantity,
     required this.note,

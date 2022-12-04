@@ -22,7 +22,7 @@ class RestaurantProductsSearchScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: RestaurantsAppBar(myContext: context),
+      appBar: const RestaurantsAppBar(),
       body: GetX<RestaurantProductsSearchCtrl>(
         builder: (controller) {
           return Column(

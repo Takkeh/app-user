@@ -10,11 +10,8 @@ import 'package:takkeh/utils/base/colors.dart';
 import 'package:takkeh/utils/base/icons.dart';
 
 class RestaurantsAppBar extends StatelessWidget implements PreferredSizeWidget {
-  final BuildContext myContext;
-
   const RestaurantsAppBar({
     Key? key,
-    required this.myContext,
   }) : super(key: key);
 
   @override
@@ -31,24 +28,7 @@ class RestaurantsAppBar extends StatelessWidget implements PreferredSizeWidget {
           builder: (controller) {
             return GestureDetector(
               onTap: () {
-                //TODO: fix loading error
                 BasketHelper.toggle(context, restaurantId: controller.restaurantId, surfaceType: kRawSnackBar);
-                // if (controller.orderList.isEmpty) {
-                //   ScaffoldMessenger.of(context).showSnackBar(
-                //     SnackBar(
-                //       content: Text(TranslationService.getString('your_basket_is_empty_key')),
-                //     ),
-                //   );
-                //   return;
-                // }
-                // MakeOrderCtrl.find.fetchData(
-                //   context: myContext,
-                //   restaurantId: controller.restaurantId,
-                //   generalNote: '',
-                //   // route: BasketScreen(
-                //   //   restaurantId: restaurantId,
-                //   // ),
-                // );
               },
               child: Stack(
                 clipBehavior: Clip.none,

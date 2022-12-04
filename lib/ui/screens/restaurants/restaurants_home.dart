@@ -30,7 +30,7 @@ class _RestaurantsHomeScreenState extends State<RestaurantsHomeScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       resizeToAvoidBottomInset: false,
-      appBar: RestaurantsAppBar(myContext: context),
+      appBar: const RestaurantsAppBar(),
       body: Column(
         children: [
           Stack(

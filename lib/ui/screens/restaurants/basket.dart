@@ -145,12 +145,11 @@ class _BasketScreenState extends State<BasketScreen> {
                       itemBuilder: (context, index) {
                         final data = MakeOrderCtrl.find.orderList[index];
                         return BasketProductTile(
+                          key: GlobalKey(debugLabel: '${data.id}'),
                           imageUrl: data.productImage!,
                           title: data.productName!,
                           index: index,
-                          subTitle: data.productName!,
                           initialQuantity: data.quantity!,
-                          description: data.productName!,
                           initialPrice: data.price!.toDouble(),
                           note: data.note!,
                           productId: data.productId!,
