@@ -21,18 +21,23 @@ import 'package:takkeh/utils/shared_prefrences.dart';
 
 class OrderStatusScreen extends StatelessWidget {
   final int orderId;
+  final String route;
+
   const OrderStatusScreen({
     Key? key,
     required this.orderId,
+    required this.route,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return WillPopScope(
-      onWillPop: () async {
-        Get.offAll(() => const BaseNavBar(), binding: NavBarBinding());
-        return false;
-      },
+      onWillPop: route == kBack
+          ? null
+          : () async {
+              Get.offAll(() => const BaseNavBar(), binding: NavBarBinding());
+              return false;
+            },
       child: StreamBuilder<QuerySnapshot<FireOrderDetails>>(
         stream: FirebaseFirestore.instance
             .collection('orders')

@@ -10,6 +10,7 @@ class ApiUrl {
   static const String resetPassStep1 = "/api/v1/password-otb";
   static const String resetPassStep2 = "/api/v1/otb-check";
   static const String resetPassStep3 = "/api/v1/change-password";
+  static const String socialSignIn = "/api/v1/sociallogin";
 
   //home
   static const String categories = "/api/v1/categories";

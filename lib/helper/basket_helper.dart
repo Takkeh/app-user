@@ -14,7 +14,7 @@ class BasketHelper {
     required int restaurantId,
     required String surfaceType,
   }) {
-    if (GuestUserHelper.check(Get.currentRoute)) {
+    if (GuestUserHelper.check(Get.currentRoute, context)) {
       LocationPermissionHelper.check(
         action: () {
           if (UserOrderCtrl.find.orderList.isEmpty) {

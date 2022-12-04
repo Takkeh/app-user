@@ -6,6 +6,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
 import 'package:takkeh/controller/registration/sign_in.dart';
+import 'package:takkeh/controller/registration/social_sign_in_ctrl.dart';
 import 'package:takkeh/translation/service.dart';
 import 'package:takkeh/ui/screens/registration//widgets/custom_prefix_icon.dart';
 import 'package:takkeh/ui/screens/registration/reset_password/step1.dart';
@@ -139,7 +140,9 @@ class SignInScreenState extends State<SignInScreen> {
                     CustomSocialButton(
                       isGoogle: true,
                       color: Colors.white,
-                      onTap: () {},
+                      onTap: () {
+                        SocialSignInController.find.signInWithGoogle(context, route: widget.route);
+                      },
                     ),
                     CustomSocialButton(
                       icon: FontAwesomeIcons.facebookF,

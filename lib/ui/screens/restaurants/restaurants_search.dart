@@ -6,8 +6,11 @@ import 'package:takkeh/controller/restaurants/restaurants_search_ctrl.dart';
 import 'package:takkeh/controller/user_order_ctrl.dart';
 import 'package:takkeh/model/restaurants/restaurants_model.dart';
 import 'package:takkeh/ui/screens/restaurants/view_restaurant.dart';
+import 'package:takkeh/ui/screens/restaurants/widgets/no_result_search_widget.dart';
 import 'package:takkeh/ui/screens/restaurants/widgets/restaurants_app_bar.dart';
 import 'package:takkeh/ui/screens/restaurants/widgets/search_bubble.dart';
+import 'package:takkeh/ui/screens/restaurants/widgets/search_something_widget.dart';
+import 'package:takkeh/ui/widgets/components/new_basket_dialog.dart';
 import 'package:takkeh/ui/widgets/custom_list_tile.dart';
 import 'package:takkeh/ui/widgets/custom_restaurants_loading.dart';
 import 'package:takkeh/ui/widgets/restaurant_cpi.dart';
@@ -31,7 +34,7 @@ class RestaurantsSearchScreen extends StatelessWidget {
           GetX<RestaurantsSearchCtrl>(
             builder: (controller) {
               if (controller.searchQuery.isEmpty) {
-                return const Text("Search Something");
+                return const SearchSomethingWidget();
               }
               return Expanded(
                 child: PagedListView<int, RestaurantList>.separated(
@@ -40,7 +43,7 @@ class RestaurantsSearchScreen extends StatelessWidget {
                   pagingController: controller.pagingController,
                   builderDelegate: PagedChildBuilderDelegate<RestaurantList>(
                     noItemsFoundIndicatorBuilder: (context) {
-                      return const Text("No Result");
+                      return const NoResultSearchWidget();
                     },
                     firstPageProgressIndicatorBuilder: (context) {
                       return const BaseVerticalListLoading();
@@ -59,7 +62,7 @@ class RestaurantsSearchScreen extends StatelessWidget {
                         cost: data.cost!,
                         onTap: () {
                           if (UserOrderCtrl.find.orderList.isNotEmpty && UserOrderCtrl.find.restaurantId != data.id!) {
-                            // _showMyDialog(context, data: data);
+                            NewBasketDialog.show(context, data: data);
                           } else {
                             UserOrderCtrl.find.restaurantId = data.id!;
                             Get.to(

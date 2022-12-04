@@ -5,8 +5,10 @@ import 'package:takkeh/controller/my_orders/my_orders_ctrl.dart';
 import 'package:takkeh/model/my_orders/my_orders_model.dart';
 import 'package:takkeh/translation/service.dart';
 import 'package:takkeh/ui/screens/my_orders/widget/my_order_tile.dart';
+import 'package:takkeh/ui/screens/restaurants/order_status_screen.dart';
 import 'package:takkeh/ui/widgets/custom_restaurants_loading.dart';
 import 'package:takkeh/ui/widgets/transparent_app_bar.dart';
+import 'package:takkeh/utils/app_constants.dart';
 import 'package:takkeh/utils/base/colors.dart';
 import 'package:takkeh/utils/base/images.dart';
 
@@ -51,7 +53,9 @@ class _MyOrdersScreenState extends State<MyOrdersScreen> {
                 firstPageProgressIndicatorBuilder: (context) => const BaseVerticalListLoading(),
                 itemBuilder: (context, data, index) {
                   return MyOrderTile(
-                    onTap: () {},
+                    onTap: () {
+                      Get.to(() => OrderStatusScreen(orderId: data.id!, route: kBack));
+                    },
                     id: '${data.orderNumber!}',
                     name: data.restaurantName!,
                     date: data.createdAt!,

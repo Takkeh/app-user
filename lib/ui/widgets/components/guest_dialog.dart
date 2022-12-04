@@ -12,7 +12,7 @@ import 'package:takkeh/utils/app_constants.dart';
 import 'package:takkeh/utils/base/colors.dart';
 
 class GuestDialog {
-  static Future<void> show(String routeName) async {
+  static Future<void> show(String routeName, BuildContext context) async {
     Get.defaultDialog(
       title: '',
       titleStyle: const TextStyle(fontSize: 0),

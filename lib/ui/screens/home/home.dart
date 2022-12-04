@@ -5,6 +5,7 @@ import 'package:takkeh/ui/base/base_drawer.dart';
 import 'package:takkeh/ui/base/guest_drawer.dart';
 import 'package:takkeh/ui/screens/home/widgets/home_app_bar.dart';
 import 'package:takkeh/ui/screens/home/widgets/home_header.dart';
+import 'package:takkeh/ui/screens/home/widgets/order_fab_button.dart';
 import 'package:takkeh/ui/screens/home/widgets/sections_builder.dart';
 import 'package:takkeh/ui/screens/home/widgets/slider_builder.dart';
 import 'package:takkeh/ui/screens/home/widgets/special_offers_builder.dart';
@@ -18,6 +19,8 @@ class HomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
+      floatingActionButton: const OrderFABButton(),
       onDrawerChanged: (isOpen) {
         NavBarCtrl.find.toggle(isOpen);
       },

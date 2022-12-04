@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:persistent_bottom_nav_bar/persistent-tab-view.dart';
+import 'package:takkeh/controller/my_orders/my_orders_ctrl.dart';
 import 'package:takkeh/controller/nav_bar_ctrl.dart';
 import 'package:takkeh/helper/guest_user_helper.dart';
 import 'package:takkeh/ui/screens/help/help.dart';
@@ -24,9 +25,18 @@ class BaseNavBar extends StatefulWidget {
 
 class BaseNavBarState extends State<BaseNavBar> {
   void toggleGuestUser(int index) {
-    if (GuestUserHelper.check(Get.currentRoute)) {
+    if (GuestUserHelper.check(Get.currentRoute, context)) {
       navBarController.index = index;
     }
+  }
+
+  List<Widget> _buildScreens() {
+    return [
+      const HomeScreen(),
+      const MyOrdersScreen(),
+      const HelpScreen(),
+      const ProfileScreen(),
+    ];
   }
 
   List<PersistentBottomNavBarItem> _navBarsItems() {
@@ -36,6 +46,10 @@ class BaseNavBarState extends State<BaseNavBar> {
       ),
       PersistentBottomNavBarItem(
         onPressed: (value) {
+          if (!Get.isRegistered<MyOrdersCtrl>()) {
+            Get.put(MyOrdersCtrl());
+          }
+          MyOrdersCtrl.find.pagingController.refresh();
           toggleGuestUser(1);
         },
         icon: CustomNavBaaButton(icon: MyIcons.timePast, isChosen: navBarController.index == 1 ? true : false),
@@ -52,15 +66,6 @@ class BaseNavBarState extends State<BaseNavBar> {
         },
         icon: CustomNavBaaButton(icon: MyIcons.user, isChosen: navBarController.index == 3 ? true : false),
       ),
-    ];
-  }
-
-  List<Widget> _buildScreens() {
-    return [
-      const HomeScreen(),
-      const MyOrdersScreen(),
-      const HelpScreen(),
-      const ProfileScreen(),
     ];
   }
 

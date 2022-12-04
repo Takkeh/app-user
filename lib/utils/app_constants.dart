@@ -24,7 +24,6 @@ const kArrivedToDropPoint = 'arrived_to_drop_point';
 const kCollectingMoney = 'collecting_money';
 const kCompleted = 'completed';
 const kCanceled = 'canceled';
-//
 const kDenied = 'denied';
 
 class AppConstants {

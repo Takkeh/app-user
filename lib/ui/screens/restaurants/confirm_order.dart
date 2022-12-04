@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:get/get.dart';
+import 'package:takkeh/controller/restaurants/make_order.dart';
 import 'package:takkeh/controller/restaurants/update_order_ctrl.dart';
 import 'package:takkeh/translation/service.dart';
 import 'package:takkeh/ui/screens/registration/widgets/custom_prefix_icon.dart';
@@ -9,30 +11,18 @@ import 'package:takkeh/ui/screens/restaurants/widgets/custom_suffix_icon.dart';
 import 'package:takkeh/ui/screens/restaurants/widgets/gradient_colors_box.dart';
 import 'package:takkeh/ui/widgets/custom_text_field.dart';
 import 'package:takkeh/ui/widgets/order_details_box.dart';
+import 'package:takkeh/ui/widgets/order_item.dart';
 import 'package:takkeh/ui/widgets/transparent_app_bar.dart';
 import 'package:takkeh/utils/base/colors.dart';
 import 'package:takkeh/utils/base/icons.dart';
 
-class ConfirmOrderScreen extends StatefulWidget {
+class ConfirmOrderScreen extends StatelessWidget {
   final int orderId;
 
   const ConfirmOrderScreen({
     Key? key,
     required this.orderId,
   }) : super(key: key);
-
-  @override
-  State<ConfirmOrderScreen> createState() => _ConfirmOrderScreenState();
-}
-
-class _ConfirmOrderScreenState extends State<ConfirmOrderScreen> {
-  // late GoogleMapController mapController;
-
-  // @override
-  // void dispose() {
-  //   super.dispose();
-  //   mapController.dispose();
-  // }
 
   @override
   Widget build(BuildContext context) {
@@ -46,8 +36,7 @@ class _ConfirmOrderScreenState extends State<ConfirmOrderScreen> {
             ? CustomFABButton(
                 title: TranslationService.getString('confirm_order_key'),
                 onPressed: () {
-                  UpdateOrderCtrl().fetchUpdateOrderData(orderId: widget.orderId, context: context);
-                  // UpdateOrderCtrl.fetchUpdateOrderData(orderId: widget.orderId, context: context);
+                  UpdateOrderCtrl().fetchUpdateOrderData(orderId: orderId, context: context);
                 },
               )
             : null,
@@ -85,9 +74,10 @@ class _ConfirmOrderScreenState extends State<ConfirmOrderScreen> {
                   ),
                 ),
                 const Divider(
+                  thickness: 1.2,
                   height: 30,
-                  indent: 15,
-                  endIndent: 15,
+                  indent: 18,
+                  endIndent: 18,
                 ),
                 Text(
                   TranslationService.getString('pay_by_key'),
@@ -117,8 +107,9 @@ class _ConfirmOrderScreenState extends State<ConfirmOrderScreen> {
                   ),
                 ),
                 const Divider(
-                  indent: 15,
-                  endIndent: 15,
+                  thickness: 1.2,
+                  indent: 18,
+                  endIndent: 18,
                 ),
                 const SizedBox(height: 20),
                 Text(
@@ -128,21 +119,26 @@ class _ConfirmOrderScreenState extends State<ConfirmOrderScreen> {
                     fontWeight: FontWeight.w500,
                   ),
                 ),
-                // ListView.builder(
-                //   physics: const NeverScrollableScrollPhysics(),
-                //   itemCount: orderList.length,
-                //   shrinkWrap: true,
-                //   itemBuilder: (context, index) {
-                //     final data = orderList[index];
-                //     return OrderItem(
-                //       count: data.quantity!,
-                //       price: data.price!.toString(),
-                //       title: data.productName!,
-                //     );
-                //   },
-                // ),
+                GetX<MakeOrderCtrl>(
+                  builder: (controller) {
+                    return ListView.builder(
+                      padding: const EdgeInsets.symmetric(vertical: 10),
+                      physics: const NeverScrollableScrollPhysics(),
+                      itemCount: controller.orderList.length,
+                      shrinkWrap: true,
+                      itemBuilder: (context, index) {
+                        final data = controller.orderList[index];
+                        return OrderItem(
+                          count: data.quantity!,
+                          price: data.price!,
+                          title: data.productName!,
+                        );
+                      },
+                    );
+                  },
+                ),
                 const Padding(
-                  padding: EdgeInsets.symmetric(vertical: 18, horizontal: 18),
+                  padding: EdgeInsets.symmetric(vertical: 9, horizontal: 18),
                   child: Divider(thickness: 1.2),
                 ),
                 const FullOrderDetailsBox(

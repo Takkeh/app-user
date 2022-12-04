@@ -4,9 +4,11 @@ import 'package:takkeh/binding/restaurants/view_product.dart';
 import 'package:takkeh/controller/restaurants/restaurant_products_search_ctrl.dart';
 import 'package:takkeh/model/restaurants/restaurants_products_search_model.dart';
 import 'package:takkeh/ui/screens/restaurants/view_restaurant_product.dart';
+import 'package:takkeh/ui/screens/restaurants/widgets/no_result_search_widget.dart';
 import 'package:takkeh/ui/screens/restaurants/widgets/products_list_tile.dart';
 import 'package:takkeh/ui/screens/restaurants/widgets/restaurants_app_bar.dart';
 import 'package:takkeh/ui/screens/restaurants/widgets/search_bubble.dart';
+import 'package:takkeh/ui/screens/restaurants/widgets/search_something_widget.dart';
 import 'package:takkeh/ui/widgets/custom_restaurants_loading.dart';
 import 'package:takkeh/ui/widgets/failed_widget.dart';
 
@@ -33,7 +35,7 @@ class RestaurantProductsSearchScreen extends StatelessWidget {
                 },
               ),
               controller.searchQuery.value.isEmpty
-                  ? const Text("Search Something")
+                  ? const SearchSomethingWidget()
                   : FutureBuilder<RestaurantProductsSearchModel?>(
                       future: controller.initialize,
                       builder: (context, snapshot) {
@@ -48,7 +50,7 @@ class RestaurantProductsSearchScreen extends StatelessWidget {
                           default:
                             if (snapshot.hasData) {
                               if (snapshot.data!.data!.products!.isEmpty) {
-                                return const Text("No Result");
+                                return const NoResultSearchWidget();
                               }
                               return Expanded(
                                 child: ListView.separated(

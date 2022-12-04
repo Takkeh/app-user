@@ -24,7 +24,7 @@ class UpdateOrderCtrl {
       return;
     }
     if (model!.code == 200) {
-      Get.to(() => OrderStatusScreen(orderId: model!.order!.id!));
+      Get.to(() => OrderStatusScreen(orderId: model!.order!.id!, route: kHome));
     } else {
       Fluttertoast.showToast(msg: model!.msg!);
     }
