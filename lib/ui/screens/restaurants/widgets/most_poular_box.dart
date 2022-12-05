@@ -77,9 +77,12 @@ class MostPopularBox extends StatelessWidget {
                 height: 30,
                 width: 30,
                 alignment: Alignment.center,
-                decoration: BoxDecoration(
+                decoration: const BoxDecoration(
                   color: MyColors.redPrimary,
-                  borderRadius: BorderRadius.circular(12.0),
+                  borderRadius: BorderRadiusDirectional.only(
+                    topEnd: Radius.circular(12.0),
+                    bottomStart: Radius.circular(12.0),
+                  ),
                 ),
                 child: Text(
                   "X$itemQuantity",

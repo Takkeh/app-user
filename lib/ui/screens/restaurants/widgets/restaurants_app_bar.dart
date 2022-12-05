@@ -1,15 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
-import 'package:takkeh/controller/restaurants/make_order.dart';
 import 'package:takkeh/controller/user_order_ctrl.dart';
-import 'package:takkeh/translation/service.dart';
-import 'package:takkeh/ui/widgets/adress_widget.dart';
+import 'package:takkeh/helper/basket_helper.dart';
+import 'package:takkeh/ui/widgets/address_widget.dart';
+import 'package:takkeh/ui/widgets/custom_back_widget.dart';
+import 'package:takkeh/utils/app_constants.dart';
 import 'package:takkeh/utils/base/colors.dart';
 import 'package:takkeh/utils/base/icons.dart';
 
 class RestaurantsAppBar extends StatelessWidget implements PreferredSizeWidget {
-  const RestaurantsAppBar({Key? key}) : super(key: key);
+  const RestaurantsAppBar({
+    Key? key,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -18,42 +21,14 @@ class RestaurantsAppBar extends StatelessWidget implements PreferredSizeWidget {
       backgroundColor: MyColors.redPrimary,
       leadingWidth: 60,
       centerTitle: true,
-      leading: GestureDetector(
-        onTap: () {
-          Get.back();
-        },
-        child: Card(
-          color: MyColors.grey4F9.withOpacity(0.70),
-          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
-          margin: const EdgeInsets.fromLTRB(10, 10, 10, 10),
-          child: const Icon(
-            Icons.navigate_before,
-            color: Colors.white,
-          ),
-        ),
-      ),
+      leading: const CustomBackWidget(),
       title: const AddressWidget(),
       actions: [
         GetBuilder<UserOrderCtrl>(
           builder: (controller) {
             return GestureDetector(
               onTap: () {
-                if (controller.orderList.isEmpty) {
-                  ScaffoldMessenger.of(context).showSnackBar(
-                    SnackBar(
-                      content: Text(TranslationService.getString('your_basket_is_empty_key')),
-                    ),
-                  );
-                  return;
-                }
-                MakeOrderCtrl.find.fetchData(
-                  context: context,
-                  restaurantId: controller.restaurantId,
-                  generalNote: '',
-                  // route: BasketScreen(
-                  //   restaurantId: restaurantId,
-                  // ),
-                );
+                BasketHelper.toggle(context, restaurantId: controller.restaurantId, surfaceType: kRawSnackBar);
               },
               child: Stack(
                 clipBehavior: Clip.none,
@@ -65,7 +40,6 @@ class RestaurantsAppBar extends StatelessWidget implements PreferredSizeWidget {
                     ),
                   ),
                   Positioned(
-                    //TODO: check language change position + icon
                     right: -8,
                     top: 8,
                     child: CircleAvatar(

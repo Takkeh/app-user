@@ -3,7 +3,6 @@ import 'package:get/get.dart';
 import 'package:takkeh/controller/wallet/wallet_ctrl.dart';
 import 'package:takkeh/model/wallet/wallet_view_model.dart';
 import 'package:takkeh/translation/service.dart';
-import 'package:takkeh/ui/screens/restaurants/widgets/custom_circular_progress_indicator.dart';
 import 'package:takkeh/ui/screens/wallet/deposite.dart';
 import 'package:takkeh/ui/screens/wallet/payment_options.dart';
 import 'package:takkeh/ui/screens/wallet/transactions.dart';
@@ -24,17 +23,17 @@ class WalletScreen extends StatelessWidget {
     return Scaffold(
       backgroundColor: MyColors.blue6FA,
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
-      floatingActionButton: GetBuilder<WalletCtrl>(
-        builder: (controller) {
-          return CustomElevatedButton(
-            width: Get.width - 100,
-            title: TranslationService.getString('deposit_key'),
-            onPressed: controller.walletId.value!=0?(){
-              Get.to(() => const DepositScreen());
-            }:null,
-          );
-        }
-      ),
+      floatingActionButton: GetBuilder<WalletCtrl>(builder: (controller) {
+        return CustomElevatedButton(
+          width: Get.width - 100,
+          title: TranslationService.getString('deposit_key'),
+          onPressed: controller.walletId.value != 0
+              ? () {
+                  Get.to(() => const DepositScreen());
+                }
+              : null,
+        );
+      }),
       appBar: TransparentAppBar(title: TranslationService.getString('wallet_key')),
       body: FutureBuilder<WalletViewModel?>(
           future: WalletCtrl.find.initialize,
@@ -77,7 +76,7 @@ class WalletScreen extends StatelessWidget {
                         icon: MyIcons.book,
                         onTap: () {
                           Get.to(
-                                () => const TransactionsScreen(),
+                            () => const TransactionsScreen(),
                           );
                         },
                       ),

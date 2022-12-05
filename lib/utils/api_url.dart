@@ -10,6 +10,7 @@ class ApiUrl {
   static const String resetPassStep1 = "/api/v1/password-otb";
   static const String resetPassStep2 = "/api/v1/otb-check";
   static const String resetPassStep3 = "/api/v1/change-password";
+  static const String socialSignIn = "/api/v1/sociallogin";
 
   //home
   static const String categories = "/api/v1/categories";
@@ -29,6 +30,7 @@ class ApiUrl {
   static const String restaurantReviews = "/api/v1/restaurant/reviews/";
   static const String mostPopular = "/api/v1/restaurant/most-popular/";
   static const String restaurantInfo = "/api/v1/restaurant/info/";
+  static const String restaurantProductsSearch = "/api/v1/restaurant/products/search";
 
   //profile
   static const String updateProfile = "/api/v1/update-profile";
@@ -45,4 +47,8 @@ class ApiUrl {
   //wallet
   static const String walletView = '/api/v1/my-wallet';
   static const String transaction = '/api/v1/transaction';
+
+  //addresses
+  static const String myAddresses = '/api/v1/my-address';
+  static const String createAddress = '/api/v1/address-create';
 }

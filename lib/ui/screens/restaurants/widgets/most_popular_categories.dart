@@ -3,7 +3,6 @@ import 'package:get/get.dart';
 import 'package:takkeh/binding/restaurants/view_product.dart';
 import 'package:takkeh/controller/restaurants/most_popular_products.dart';
 import 'package:takkeh/model/restaurants/most_popular_model.dart';
-import 'package:takkeh/model/restaurants/view_restaurant.dart';
 import 'package:takkeh/ui/screens/restaurants/view_restaurant_product.dart';
 import 'package:takkeh/ui/screens/restaurants/widgets/most_popular_loading.dart';
 import 'package:takkeh/ui/screens/restaurants/widgets/most_poular_box.dart';

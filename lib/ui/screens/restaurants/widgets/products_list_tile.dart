@@ -64,6 +64,7 @@ class ProductsListTile extends StatelessWidget {
                               fontSize: 18,
                             ),
                           ),
+                          const SizedBox(height: 3),
                           Text(
                             subTitle,
                             style: const TextStyle(

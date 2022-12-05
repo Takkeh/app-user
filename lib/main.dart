@@ -1,6 +1,7 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:get/get.dart';
 import 'package:takkeh/binding/nav_bar.dart';
 import 'package:takkeh/binding/registration/sign_in.dart';
@@ -26,8 +27,6 @@ Future<void> main() async {
       // ),
       );
   await MySharedPreferences.init();
-  //TODO: change later for both
-  // MySharedPreferences.language = "";
   if (MySharedPreferences.language.isEmpty) {
     // MySharedPreferences.language = Get.deviceLocale!.languageCode;
     MySharedPreferences.language = 'ar';
@@ -46,7 +45,7 @@ class MyApp extends StatefulWidget {
 
 class _MyAppState extends State<MyApp> {
   Widget _toggleScreen() {
-    if (MySharedPreferences.isLogIn && MySharedPreferences.accessToken.isNotEmpty) {
+    if (MySharedPreferences.isLogIn) {
       return const BaseNavBar();
     } else if (!MySharedPreferences.isLogIn && !MySharedPreferences.isPassedIntro) {
       return const IntroScreen();
@@ -55,19 +54,20 @@ class _MyAppState extends State<MyApp> {
     }
   }
 
-  Bindings _initialBinding() {
-    //TODO: test and edit
+  Bindings? _initialBinding() {
     if (MySharedPreferences.isLogIn) {
       return NavBarBinding();
+    } else if (!MySharedPreferences.isLogIn && !MySharedPreferences.isPassedIntro) {
+      return null;
     } else {
-      // return SignInBinding();
-      return SignInBinding();
+      return RegistrationBinding();
     }
   }
 
   @override
   Widget build(BuildContext context) {
     return GetMaterialApp(
+      builder: EasyLoading.init(),
       debugShowCheckedModeBanner: false,
       initialBinding: _initialBinding(),
       translations: Translation(),

@@ -1,16 +1,23 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:takkeh/binding/restaurants/restaurant_products_search_binding.dart';
+import 'package:takkeh/ui/screens/restaurants/restaurant_products_search_screen.dart';
 import 'package:takkeh/utils/base/colors.dart';
 
 class SearchBoxWidget extends StatelessWidget {
+  final int restaurantId;
+
   const SearchBoxWidget({
     Key? key,
+    required this.restaurantId,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      //TODO: bisher: this is where you navigate product search
-      onTap: () {},
+      onTap: () {
+        Get.to(() => RestaurantProductsSearchScreen(restaurantId: restaurantId), binding: RestaurantProductsSearchBinding(restaurantsId: restaurantId));
+      },
       child: Container(
         height: 50,
         width: 50,

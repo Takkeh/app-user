@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:takkeh/translation/service.dart';
-import 'package:takkeh/ui/base/widgets/notifications_box.dart';
 import 'package:takkeh/ui/widgets/transparent_app_bar.dart';
 import 'package:takkeh/utils/base/colors.dart';
-import 'package:takkeh/utils/base/icons.dart';
 import 'package:takkeh/utils/base/images.dart';
 
 class TransactionsScreen extends StatelessWidget {
@@ -60,7 +58,7 @@ class TransactionsScreen extends StatelessWidget {
                 //   subTitle: "subTitle",
                 //   time: "time",
                 // );
-                return SizedBox();
+                return const SizedBox();
               },
             ),
     );

@@ -3,7 +3,6 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:takkeh/ui/widgets/custom_network_image.dart';
 import 'package:takkeh/utils/base/colors.dart';
 import 'package:takkeh/utils/base/icons.dart';
-import 'package:takkeh/utils/base/images.dart';
 import 'package:takkeh/utils/shared_prefrences.dart';
 
 class DrawerProfileInfo extends StatelessWidget {
@@ -85,6 +84,7 @@ class DrawerProfileInfo extends StatelessWidget {
                 style: const TextStyle(
                   fontSize: 18,
                 ),
+                textDirection: TextDirection.ltr,
               ),
             ],
           )

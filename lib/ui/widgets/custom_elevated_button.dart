@@ -9,6 +9,7 @@ class CustomElevatedButton extends StatelessWidget {
   final double radius;
   final Color? color;
   final Color? textColor;
+  final EdgeInsetsGeometry? padding;
 
   const CustomElevatedButton({
     Key? key,
@@ -19,26 +20,30 @@ class CustomElevatedButton extends StatelessWidget {
     this.color,
     this.textColor = MyColors.black109,
     this.radius = 23,
+    this.padding,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return ElevatedButton(
-      onPressed: onPressed,
-      style: ElevatedButton.styleFrom(
-        primary: color,
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(radius),
+    return Padding(
+      padding: padding ?? EdgeInsets.zero,
+      child: ElevatedButton(
+        onPressed: onPressed,
+        style: ElevatedButton.styleFrom(
+          backgroundColor: color,
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(radius),
+          ),
+          fixedSize: Size(width, height),
+          elevation: 0,
         ),
-        fixedSize: Size(width, height),
-        elevation: 0,
-      ),
-      child: Text(
-        title,
-        style: TextStyle(
-          color: textColor,
-          fontSize: 16,
-          fontWeight: FontWeight.w500,
+        child: Text(
+          title,
+          style: TextStyle(
+            color: textColor,
+            fontSize: 16,
+            fontWeight: FontWeight.w500,
+          ),
         ),
       ),
     );

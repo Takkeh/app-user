@@ -11,7 +11,12 @@ import 'package:takkeh/ui/widgets/custom_text_field.dart';
 import 'package:takkeh/utils/base/icons.dart';
 
 class SignUpScreen extends StatefulWidget {
-  const SignUpScreen({Key? key}) : super(key: key);
+  final String route;
+
+  const SignUpScreen({
+    Key? key,
+    required this.route,
+  }) : super(key: key);
 
   @override
   SignUpScreenState createState() => SignUpScreenState();
@@ -170,6 +175,7 @@ class SignUpScreenState extends State<SignUpScreen> {
                       email: emailCtrl.text.trim(),
                       password: passwordCtrl.text.trim(),
                       name: nameCtrl.text.trim(),
+                      route: widget.route,
                     ),
                   );
                 }

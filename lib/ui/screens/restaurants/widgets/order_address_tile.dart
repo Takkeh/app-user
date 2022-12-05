@@ -1,13 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:takkeh/controller/user_location_ctrl.dart';
 import 'package:takkeh/translation/service.dart';
 import 'package:takkeh/utils/base/colors.dart';
 import 'package:takkeh/utils/base/icons.dart';
 
 class OrderAddressTile extends StatelessWidget {
+  final String address;
+
   const OrderAddressTile({
     Key? key,
+    required this.address,
   }) : super(key: key);
 
   @override
@@ -28,7 +30,7 @@ class OrderAddressTile extends StatelessWidget {
         ),
       ),
       subtitle: Text(
-        "${UserLocationCtrl.find.locality.value}, ${UserLocationCtrl.find.subLocality.value}\n${UserLocationCtrl.find.street}",
+        address,
         style: const TextStyle(
           fontSize: 14,
           color: MyColors.grey070,

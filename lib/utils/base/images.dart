@@ -16,4 +16,7 @@ class MyImages {
   static const String leftSemiCircle = "${_path}left_semi_circle.png";
   static const String rightSemiCircle = "${_path}right_semi_circle.png";
   static const String intro = "${_path}intro.png";
+  static const String locationPermission = "${_path}location_permission.png";
+  static const String searchSomething = "${_path}search_something.png";
+  static const String noResultSearch = "${_path}no_result_search.png";
 }

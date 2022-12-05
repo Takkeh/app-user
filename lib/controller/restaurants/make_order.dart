@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:flutter_overlay_loader/flutter_overlay_loader.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
@@ -17,21 +18,30 @@ class MakeOrderCtrl extends GetxController {
   MakeOrderModel? model;
   final orderList = <UserProducts>[].obs;
 
+  void showLoading() {
+    EasyLoading.instance
+      ..loadingStyle = EasyLoadingStyle.custom
+      ..maskType = EasyLoadingMaskType.custom
+      ..indicatorColor = Colors.transparent
+      ..textColor = Colors.transparent
+      ..maskColor = Colors.black26
+      ..backgroundColor = Colors.transparent
+      ..boxShadow = [];
+    EasyLoading.show(
+      indicator: LoadingAnimationWidget.flickr(
+        leftDotColor: MyColors.text,
+        rightDotColor: MyColors.redPrimary,
+        size: 50,
+      ),
+    );
+  }
+
   Future fetchData({
     required String generalNote,
     required int restaurantId,
     required BuildContext context,
   }) async {
-    Loader.show(
-      context,
-      progressIndicator: Center(
-        child: LoadingAnimationWidget.flickr(
-          leftDotColor: MyColors.text,
-          rightDotColor: MyColors.redPrimary,
-          size: 50,
-        ),
-      ),
-    );
+    showLoading();
     model = await MakeOrderApi.data(
       userOrder: UserOrderCtrl.find.orderList,
       generalNote: generalNote,
@@ -55,6 +65,6 @@ class MakeOrderCtrl extends GetxController {
     } else {
       Fluttertoast.showToast(msg: model!.msg!);
     }
-    Loader.hide();
+    EasyLoading.dismiss();
   }
 }

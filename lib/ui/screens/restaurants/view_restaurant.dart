@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:takkeh/translation/service.dart';
-import 'package:takkeh/ui/screens/home/home.dart';
 import 'package:takkeh/ui/screens/restaurants/widgets/most_popular_categories.dart';
 import 'package:takkeh/ui/screens/restaurants/widgets/products_fab_button.dart';
 import 'package:takkeh/ui/screens/restaurants/widgets/products_filter_builder.dart';
@@ -10,6 +9,7 @@ import 'package:takkeh/ui/widgets/back_leading_widget.dart';
 import 'package:takkeh/ui/widgets/custom_network_image.dart';
 import 'package:takkeh/ui/widgets/search_box_widget.dart';
 import 'package:takkeh/utils/base/colors.dart';
+import 'package:takkeh/utils/custom_clip_path.dart';
 
 class ViewRestaurantScreen extends StatelessWidget {
   final String title, cover, logo, time, cost, review, reviewIcon;
@@ -43,8 +43,8 @@ class ViewRestaurantScreen extends StatelessWidget {
             backgroundColor: MyColors.redPrimary,
             leadingWidth: 73,
             leading: const BackLeadingWidget(),
-            actions: const [
-              SearchBoxWidget(),
+            actions: [
+              SearchBoxWidget(restaurantId: restaurantId),
             ],
             expandedHeight: 530,
             collapsedHeight: kToolbarHeight + 50,

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:takkeh/translation/service.dart';
 import 'package:takkeh/utils/base/colors.dart';
 import 'package:takkeh/utils/shared_prefrences.dart';
 
@@ -23,24 +24,27 @@ class HomeHeader extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Row(
-            children: [
-              const Text(
-                "Hi",
-                style: TextStyle(color: Colors.white),
-              ),
-              Text(
-                " ${MySharedPreferences.name} ",
-                style: const TextStyle(
-                  color: Colors.white,
-                  fontWeight: FontWeight.bold,
+          //TODO: check if this will appear on change like edit profile and guest sign in + handle notifications icon
+          if (MySharedPreferences.isLogIn)
+            Row(
+              children: [
+                const Text(
+                  "Hi",
+                  style: TextStyle(color: Colors.white, fontSize: 16),
                 ),
-              ),
-            ],
-          ),
-          const Text(
-            "Hungry? ",
-            style: TextStyle(color: Colors.white),
+                Text(
+                  " ${MySharedPreferences.name} ",
+                  style: const TextStyle(
+                    color: Colors.white,
+                    fontWeight: FontWeight.bold,
+                    fontSize: 16,
+                  ),
+                ),
+              ],
+            ),
+          Text(
+            TranslationService.getString('home_welcome_text_key'),
+            style: const TextStyle(color: Colors.white, fontSize: 16),
           ),
         ],
       ),

@@ -7,6 +7,7 @@ import 'package:takkeh/controller/user_order_ctrl.dart';
 import 'package:takkeh/model/restaurants/restaurants_model.dart';
 import 'package:takkeh/translation/service.dart';
 import 'package:takkeh/ui/screens/restaurants/view_restaurant.dart';
+import 'package:takkeh/ui/widgets/components/new_basket_dialog.dart';
 import 'package:takkeh/ui/widgets/custom_list_tile.dart';
 import 'package:takkeh/ui/widgets/custom_restaurants_loading.dart';
 import 'package:takkeh/ui/widgets/restaurant_cpi.dart';
@@ -84,7 +85,7 @@ class RestaurantsBuilder extends StatelessWidget {
               cost: data.cost!,
               onTap: () {
                 if (UserOrderCtrl.find.orderList.isNotEmpty && UserOrderCtrl.find.restaurantId != data.id!) {
-                  _showMyDialog(context, data: data);
+                  NewBasketDialog.show(context, data: data);
                 } else {
                   UserOrderCtrl.find.restaurantId = data.id!;
                   Get.to(

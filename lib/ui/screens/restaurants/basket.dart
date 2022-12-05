@@ -1,10 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:takkeh/controller/addresses/my_addresses_ctrl.dart';
 import 'package:takkeh/controller/restaurants/add_promo_code_ctrl.dart';
 import 'package:takkeh/controller/restaurants/make_order.dart';
 import 'package:takkeh/controller/restaurants/promo_codes_ctrl.dart';
+import 'package:takkeh/helper/location_permission_helper.dart';
 import 'package:takkeh/model/restaurants/promo_codes_model.dart';
 import 'package:takkeh/translation/service.dart';
+import 'package:takkeh/ui/screens/addresses/widgets/add_address_button.dart';
+import 'package:takkeh/ui/screens/addresses/widgets/my_addresses_listview.dart';
+import 'package:takkeh/ui/screens/addresses/widgets/no_addresses_widget.dart';
 import 'package:takkeh/ui/screens/registration/widgets/custom_prefix_icon.dart';
 import 'package:takkeh/ui/screens/restaurants/confirm_order.dart';
 import 'package:takkeh/ui/screens/restaurants/widgets/basket_products_tile.dart';
@@ -35,6 +40,61 @@ class BasketScreen extends StatefulWidget {
 class _BasketScreenState extends State<BasketScreen> {
   late TextEditingController noteCtrl;
 
+  final myList = [
+    {
+      "id": 18,
+      "product_id": 18,
+      "product_name": "بيج تيستي",
+      "product_image": "img/products/BigTasty-Classic.jpg",
+      "quantity": 1,
+      "items": [
+        {"id": 653, "group_name": "Size", "group_type": "required", "item_name": "smaill", "price": "10.00"}
+      ],
+      "note": "",
+      "area": null,
+      "price": "15.00"
+    },
+    {
+      "id": 17,
+      "product_id": 17,
+      "product_name": "ماك تشكن سبايسي",
+      "product_image": "img/products/mcd2.jpg",
+      "quantity": 2,
+      "items": [
+        {"id": 654, "group_name": "Size", "group_type": "required", "item_name": "big", "price": "20.00"}
+      ],
+      "note": "",
+      "area": null,
+      "price": "50.00"
+    },
+    {
+      "id": 16,
+      "product_id": 16,
+      "product_name": "kfc",
+      "product_image": "img/products/mcd2.jpg",
+      "quantity": 2,
+      "items": [
+        {"id": 654, "group_name": "Size", "group_type": "required", "item_name": "big", "price": "20.00"}
+      ],
+      "note": "",
+      "area": null,
+      "price": "50.00"
+    },
+    {
+      "id": 15,
+      "product_id": 15,
+      "product_name": "kfc",
+      "product_image": "img/products/mcd2.jpg",
+      "quantity": 2,
+      "items": [
+        {"id": 654, "group_name": "Size", "group_type": "required", "item_name": "big", "price": "20.00"}
+      ],
+      "note": "",
+      "area": null,
+      "price": "50.00"
+    }
+  ];
+
   @override
   void initState() {
     super.initState();
@@ -58,15 +118,11 @@ class _BasketScreenState extends State<BasketScreen> {
             ? CustomFABButton(
                 title: TranslationService.getString('confirm_order_key'),
                 onPressed: () {
-                  Get.to(() => ConfirmOrderScreen(orderId: widget.orderId));
-                  // MakeOrderCtrl.find.fetchData(
-                  //   context: context,
-                  //   restaurantId: widget.restaurantId,
-                  //   generalNote: noteCtrl.text,
-                  //   // route: ConfirmOrderScreen(
-                  //   //   orderId: MakeOrderCtrl.orderId!,
-                  //   // ),
-                  // );
+                  LocationPermissionHelper.check(
+                    action: () {
+                      Get.to(() => ConfirmOrderScreen(orderId: widget.orderId));
+                    },
+                  );
                 },
               )
             : null,
@@ -78,180 +134,184 @@ class _BasketScreenState extends State<BasketScreen> {
         children: [
           const GradientColorsBox(height: 136),
           Expanded(
-            child: Obx(() {
-              return ListView(
-                padding: const EdgeInsets.only(bottom: 100, top: 10),
-                children: [
-                  //TODO: fix dialog bug
-                  ...MakeOrderCtrl.find.orderList.map((element) {
-                    final index = MakeOrderCtrl.find.orderList.indexOf(element);
-                    return Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 25),
-                      child: GestureDetector(
-                        onTap: () {
-                          print("index:: $index");
-                        },
-                        child: BasketProductTile(
-                          imageUrl: element.productImage!,
-                          title: element.productName!,
+            child: ListView(
+              padding: const EdgeInsets.only(bottom: 80, top: 10),
+              children: [
+                Obx(() {
+                  return ListView.builder(
+                      padding: EdgeInsets.zero,
+                      shrinkWrap: true,
+                      itemCount: MakeOrderCtrl.find.orderList.length,
+                      itemBuilder: (context, index) {
+                        final data = MakeOrderCtrl.find.orderList[index];
+                        return BasketProductTile(
+                          key: GlobalKey(debugLabel: '${data.id}'),
+                          imageUrl: data.productImage!,
+                          title: data.productName!,
                           index: index,
-                          subTitle: element.productName!,
-                          initialQuantity: element.quantity!,
-                          description: element.productName!,
-                          initialPrice: element.price!.toDouble(),
-                          note: element.note!,
-                          productId: element.productId!,
+                          initialQuantity: data.quantity!,
+                          initialPrice: data.price!.toDouble(),
+                          note: data.note!,
+                          productId: data.productId!,
                           restaurantId: widget.restaurantId,
-                          items: element.items!,
-                          element: element,
+                          items: data.items!,
+                          element: data,
+                        );
+                      });
+                }),
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 30),
+                  child: CustomTextField(
+                    controller: noteCtrl,
+                    keyboardType: TextInputType.multiline,
+                    hintText: "do_you_have_notes_key",
+                    minLines: 1,
+                    maxLines: 3,
+                    prefixIcon: const CustomPrefixIcon(
+                      icon: MyIcons.notes,
+                    ),
+                  ),
+                ),
+                const Divider(
+                  height: 30,
+                  indent: 45,
+                  endIndent: 45,
+                ),
+                GetBuilder<PromoCodesCtrl>(builder: (controller) {
+                  return FutureBuilder<PromoCodesModel?>(
+                    future: controller.initialize,
+                    builder: (context, snapshot) {
+                      switch (snapshot.connectionState) {
+                        case ConnectionState.waiting:
+                          return const PromoCodesLoading();
+                        case ConnectionState.done:
+                        default:
+                          if (snapshot.hasData) {
+                            return Column(
+                              mainAxisAlignment: MainAxisAlignment.start,
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Row(
+                                  children: [
+                                    Padding(
+                                      padding: const EdgeInsetsDirectional.fromSTEB(30, 0, 10, 0),
+                                      child: Text(
+                                        TranslationService.getString('coupon_num_key'),
+                                      ),
+                                    ),
+                                    Expanded(
+                                      child: SizedBox(
+                                        height: 30,
+                                        child: ListView.separated(
+                                          shrinkWrap: true,
+                                          physics: const BouncingScrollPhysics(),
+                                          padding: const EdgeInsets.symmetric(horizontal: 10),
+                                          separatorBuilder: (context, index) => const SizedBox(width: 5),
+                                          scrollDirection: Axis.horizontal,
+                                          // shrinkWrap: true,
+                                          itemCount: snapshot.data!.data!.length,
+                                          itemBuilder: (context, index) {
+                                            final data = snapshot.data!.data![index];
+                                            return GestureDetector(
+                                              onTap: () {
+                                                controller.submit(data.id!, data.code!);
+                                              },
+                                              child: Container(
+                                                alignment: Alignment.center,
+                                                padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
+                                                decoration: BoxDecoration(
+                                                  borderRadius: BorderRadius.circular(20),
+                                                  border: Border.all(color: controller.selectedPromo.value == data.id ? MyColors.redPrimary : MyColors.grey9F4),
+                                                ),
+                                                child: Text(
+                                                  data.code!,
+                                                  style: const TextStyle(color: MyColors.grey070),
+                                                ),
+                                              ),
+                                            );
+                                          },
+                                        ),
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                                Padding(
+                                  padding: const EdgeInsets.fromLTRB(30, 10, 30, 10),
+                                  child: CustomTextField(
+                                    onChanged: (value) {
+                                      if (value.isEmpty) {
+                                        controller.selectedPromo.value = null;
+                                        controller.update();
+                                      }
+                                    },
+                                    controller: controller.promoCtrl.value,
+                                    hintText: TranslationService.getString('enter_coupon_num_key'),
+                                    minLines: 1,
+                                    maxLines: 1,
+                                    prefixIcon: const CustomPrefixIcon(
+                                      icon: MyIcons.ticketBlack,
+                                    ),
+                                    suffixIcon: CustomSuffixIcon(
+                                      title: TranslationService.getString('send_key'),
+                                      icon: MyIcons.ticketBlack,
+                                      onTap: () {
+                                        FocusManager.instance.primaryFocus?.unfocus();
+                                        AddPromoCodeCtrl.find.fetchData(4, controller.selectedPromo.value!, context);
+                                      },
+                                    ),
+                                    //TODO: check later
+                                    maxSuffixWidth: 100,
+                                  ),
+                                ),
+                              ],
+                            );
+                          } else {
+                            return const FailedWidget();
+                          }
+                      }
+                    },
+                  );
+                }),
+                const Divider(
+                  height: 30,
+                  indent: 45,
+                  endIndent: 45,
+                ),
+                GetBuilder<MyAddressesCtrl>(builder: (controller) {
+                  if (controller.myAddresses.isEmpty) {
+                    return const NoAddressesWidget();
+                  }
+                  return Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Padding(
+                        padding: const EdgeInsetsDirectional.fromSTEB(30, 10, 0, 10),
+                        child: Text(
+                          TranslationService.getString('select_address_key'),
+                          style: const TextStyle(
+                            fontSize: 18,
+                            fontWeight: FontWeight.w500,
+                          ),
                         ),
                       ),
-                    );
-                  }).toList(),
-                  Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 30),
-                    child: CustomTextField(
-                      controller: noteCtrl,
-                      keyboardType: TextInputType.multiline,
-                      hintText: "do_you_have_notes_key",
-                      minLines: 1,
-                      maxLines: 3,
-                      prefixIcon: const CustomPrefixIcon(
-                        icon: MyIcons.notes,
+                      const AddNewAddressButton(
+                        padding: EdgeInsets.fromLTRB(30, 10, 30, 30),
                       ),
-                    ),
-                  ),
-                  const Divider(
-                    height: 30,
-                    indent: 45,
-                    endIndent: 45,
-                  ),
-                  GetBuilder<PromoCodesCtrl>(builder: (controller) {
-                    return FutureBuilder<PromoCodesModel?>(
-                      future: controller.initialize,
-                      builder: (context, snapshot) {
-                        switch (snapshot.connectionState) {
-                          case ConnectionState.waiting:
-                            return const PromoCodesLoading();
-                          case ConnectionState.done:
-                          default:
-                            if (snapshot.hasData) {
-                              return Column(
-                                mainAxisAlignment: MainAxisAlignment.start,
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  Row(
-                                    children: [
-                                      Padding(
-                                        padding: const EdgeInsetsDirectional.fromSTEB(30, 0, 10, 0),
-                                        child: Text(
-                                          TranslationService.getString('coupon_num_key'),
-                                        ),
-                                      ),
-                                      Expanded(
-                                        child: SizedBox(
-                                          height: 30,
-                                          child: ListView.separated(
-                                            shrinkWrap: true,
-                                            physics: const BouncingScrollPhysics(),
-                                            padding: const EdgeInsets.symmetric(horizontal: 10),
-                                            separatorBuilder: (context, index) => const SizedBox(width: 5),
-                                            scrollDirection: Axis.horizontal,
-                                            // shrinkWrap: true,
-                                            itemCount: snapshot.data!.data!.length,
-                                            itemBuilder: (context, index) {
-                                              final data = snapshot.data!.data![index];
-                                              return GestureDetector(
-                                                onTap: () {
-                                                  controller.submit(data.id!, data.code!);
-                                                },
-                                                child: Container(
-                                                  alignment: Alignment.center,
-                                                  padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
-                                                  decoration: BoxDecoration(
-                                                    borderRadius: BorderRadius.circular(20),
-                                                    border: Border.all(color: controller.selectedPromo.value == data.id ? MyColors.redPrimary : MyColors.grey9F4),
-                                                  ),
-                                                  child: Text(
-                                                    data.code!,
-                                                    style: const TextStyle(color: MyColors.grey070),
-                                                  ),
-                                                ),
-                                              );
-                                              return ChoiceChip(
-                                                onSelected: null,
-                                                shape: RoundedRectangleBorder(
-                                                  side: const BorderSide(color: MyColors.grey9F4),
-                                                  borderRadius: BorderRadius.circular(20),
-                                                ),
-                                                disabledColor: Colors.transparent,
-                                                selectedColor: MyColors.redPrimary,
-                                                label: Text(
-                                                  data.code!,
-                                                ),
-                                                selected: false,
-                                              );
-                                            },
-                                          ),
-                                        ),
-                                      ),
-                                    ],
-                                  ),
-                                  Padding(
-                                    padding: const EdgeInsets.fromLTRB(30, 10, 30, 10),
-                                    child: CustomTextField(
-                                      controller: controller.promoCtrl.value,
-                                      hintText: TranslationService.getString('enter_coupon_num_key'),
-                                      minLines: 1,
-                                      maxLines: 1,
-                                      prefixIcon: const CustomPrefixIcon(
-                                        icon: MyIcons.ticketBlack,
-                                      ),
-                                      suffixIcon: CustomSuffixIcon(
-                                        title: TranslationService.getString('send_key'),
-                                        icon: MyIcons.ticketBlack,
-                                        onTap: () {
-                                          AddPromoCodeCtrl.find.fetchCategoriesData(4, controller.selectedPromo.value!, context);
-                                        },
-                                      ),
-                                      //TODO: check later
-                                      maxSuffixWidth: 100,
-                                    ),
-                                  ),
-                                ],
-                              );
-                            } else {
-                              return const FailedWidget();
-                            }
-                        }
-                      },
-                    );
-                  }),
-
-                  const Divider(
-                    height: 30,
-                    indent: 45,
-                    endIndent: 45,
-                  ),
-                  Padding(
-                    padding: const EdgeInsetsDirectional.fromSTEB(30, 10, 0, 20),
-                    child: Text(
-                      TranslationService.getString('order_details_key'),
-                      style: const TextStyle(
-                        fontSize: 18,
-                        fontWeight: FontWeight.w500,
+                      const MyAddressesListViewBuilder(
+                        shrinkWrap: true,
+                        physics: NeverScrollableScrollPhysics(),
                       ),
-                    ),
-                  ),
-                  // Padding(
-                  //   padding: const EdgeInsets.symmetric(horizontal: 30.0),
-                  //   child: OrderDetailsWidget(
-                  //     productName: MakeOrderCtrl.model!.data!.products!,
-                  //   ),
-                  // ),
-                ],
-              );
-            }),
+                    ],
+                  );
+                })
+                // Padding(
+                //   padding: const EdgeInsets.symmetric(horizontal: 30.0),
+                //   child: OrderDetailsWidget(
+                //     productName: MakeOrderCtrl.model!.data!.products!,
+                //   ),
+                // ),
+              ],
+            ),
           ),
         ],
       ),
