@@ -4,7 +4,7 @@ import 'package:takkeh/utils/app_constants.dart';
 
 class FullOrderDetailsBox extends StatelessWidget {
   final String paymentMethod;
-  final double total, tax, deliveryFee, discount, orderValue;
+  final double total, tax, deliveryFee, discount, finalPrice;
 
   const FullOrderDetailsBox({
     Key? key,
@@ -13,7 +13,7 @@ class FullOrderDetailsBox extends StatelessWidget {
     required this.deliveryFee,
     required this.paymentMethod,
     required this.discount,
-    required this.orderValue,
+    required this.finalPrice,
   }) : super(key: key);
 
   static Widget _getText(
@@ -52,7 +52,7 @@ class FullOrderDetailsBox extends StatelessWidget {
         _getText('delivery_fee_key', deliveryFee.toString()),
         _getText('payment_method_key', paymentMethod.toString(), withCurrency: false),
         _getText('discount_key', discount.toString()),
-        _getText('order_value_key', orderValue.toString()),
+        _getText('order_value_key', finalPrice.toString()),
       ],
     );
   }

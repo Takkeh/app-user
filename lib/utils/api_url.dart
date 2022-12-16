@@ -51,4 +51,7 @@ class ApiUrl {
   //addresses
   static const String myAddresses = '/api/v1/my-address';
   static const String createAddress = '/api/v1/address-create';
+
+  //device token
+  static const String updateDeviceToken = "/api/v1/user/token";
 }

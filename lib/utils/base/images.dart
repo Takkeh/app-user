@@ -19,4 +19,5 @@ class MyImages {
   static const String locationPermission = "${_path}location_permission.png";
   static const String searchSomething = "${_path}search_something.png";
   static const String noResultSearch = "${_path}no_result_search.png";
+  static const String internet = "${_path}internet.png";
 }

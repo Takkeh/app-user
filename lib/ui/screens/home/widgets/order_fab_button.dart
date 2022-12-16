@@ -15,6 +15,7 @@ class OrderFABButton extends StatelessWidget {
   static final finished = [
     kCompleted,
     kCanceled,
+    kCanceled0,
     kDenied,
   ];
 

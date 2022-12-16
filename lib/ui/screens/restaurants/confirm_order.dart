@@ -145,7 +145,7 @@ class ConfirmOrderScreen extends StatelessWidget {
                   tax: 5.0,
                   total: 99.0,
                   paymentMethod: 'cash',
-                  orderValue: 55.01,
+                  finalPrice: 55.01,
                   discount: 44.0,
                   deliveryFee: 33.0,
                 ),
