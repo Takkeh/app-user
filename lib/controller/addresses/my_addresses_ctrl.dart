@@ -41,6 +41,9 @@ class MyAddressesCtrl extends GetxController {
 
   Future<MyAddressesModel?> fetchData() async {
     model = await MyAddressesApi().data();
+    if (model == null) {
+      return null;
+    }
     if (model!.code == 200) {
       myAddresses.value = model!.myAddresses!;
       if (model!.myAddresses!.isNotEmpty) {

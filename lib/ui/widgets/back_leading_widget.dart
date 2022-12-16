@@ -17,9 +17,9 @@ class BackLeadingWidget extends StatelessWidget {
         Get.back();
       },
       child: Container(
-        height: 50,
-        width: 50,
-        margin: const EdgeInsetsDirectional.fromSTEB(0, 5, 5, 5),
+        height: 40,
+        width: 40,
+        margin: const EdgeInsetsDirectional.fromSTEB(5, 5, 5, 5),
         alignment: Alignment.center,
         decoration: BoxDecoration(
           color: MyColors.grey4F9.withOpacity(0.70),

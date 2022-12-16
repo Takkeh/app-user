@@ -7,6 +7,7 @@ import 'package:takkeh/ui/screens/restaurants/view_restaurant_product.dart';
 import 'package:takkeh/ui/screens/restaurants/widgets/products_list_tile.dart';
 import 'package:takkeh/ui/widgets/custom_vertical_list_loading.dart';
 import 'package:takkeh/ui/widgets/failed_widget.dart';
+import 'package:takkeh/utils/base/colors.dart';
 
 class ViewRestaurantBuilder extends StatelessWidget {
   final int restaurantId;
@@ -31,6 +32,7 @@ class ViewRestaurantBuilder extends StatelessWidget {
           default:
             if (snapshot.hasData) {
               return Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children: List.generate(
                   snapshot.data!.categories!.length,
                   (number) {
@@ -47,6 +49,7 @@ class ViewRestaurantBuilder extends StatelessWidget {
                             key: ViewRestaurantCtrl.find.itemKeys[number],
                             style: const TextStyle(
                               fontSize: 20,
+                              color: MyColors.redPrimary,
                               fontWeight: FontWeight.w400,
                             ),
                           ),
