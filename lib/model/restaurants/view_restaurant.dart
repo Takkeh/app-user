@@ -66,11 +66,13 @@ class Product {
     this.name,
     this.image,
     this.price,
+    this.description,
     this.groups,
   });
 
   int? id;
   String? name;
+  String? description;
   String? image;
   double? price;
   List<Groups>? groups;
@@ -79,6 +81,7 @@ class Product {
         id: json["id"],
         name: json["name"],
         image: json["image"] ?? '',
+        description: 'khaled awad',
         price: double.parse(json["price"].toString()),
         groups: List<Groups>.from(json["groups"].map((x) => Groups.fromJson(x))),
       );
@@ -88,6 +91,7 @@ class Product {
         "name": name,
         "image": image,
         "price": price,
+        "description": description,
         "groups": List<dynamic>.from(groups!.map((x) => x.toJson())),
       };
 }

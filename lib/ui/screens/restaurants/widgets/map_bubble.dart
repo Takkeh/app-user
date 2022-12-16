@@ -41,7 +41,6 @@ class _MapBubbleBuilderState extends State<MapBubbleBuilder> {
         return ClipRRect(
           borderRadius: BorderRadius.circular(20),
           child: SizedBox(
-            //TODO: remove this
             height: 220,
             child: Column(
               children: [

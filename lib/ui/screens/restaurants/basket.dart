@@ -259,7 +259,6 @@ class _BasketScreenState extends State<BasketScreen> {
                                         AddPromoCodeCtrl.find.fetchData(4, controller.selectedPromo.value!, context);
                                       },
                                     ),
-                                    //TODO: check later
                                     maxSuffixWidth: 100,
                                   ),
                                 ),

@@ -64,12 +64,12 @@ class RestaurantProductsSearchScreen extends StatelessWidget {
                                         imageUrl: data.image!,
                                         title: data.name!,
                                         price: data.price!,
-                                        subTitle: data.description!,
+                                        description: data.description!,
                                         onTap: () {
                                           Get.to(
                                             () => ViewRestaurantProductScreen(
                                               title: data.name!,
-                                              subTitle: data.description!,
+                                              description: data.description!,
                                               price: data.price!.toDouble(),
                                               cover: data.image!,
                                               productId: data.id!,

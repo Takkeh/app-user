@@ -8,7 +8,7 @@ import 'package:takkeh/utils/base/colors.dart';
 import 'package:takkeh/utils/shared_prefrences.dart';
 
 class ProductsListTile extends StatelessWidget {
-  final String imageUrl, title, subTitle;
+  final String imageUrl, title, description;
   final int id;
   final double price;
   final Function() onTap;
@@ -17,7 +17,7 @@ class ProductsListTile extends StatelessWidget {
     Key? key,
     required this.imageUrl,
     required this.title,
-    required this.subTitle,
+    required this.description,
     required this.onTap,
     required this.price,
     required this.id,
@@ -66,7 +66,7 @@ class ProductsListTile extends StatelessWidget {
                           ),
                           const SizedBox(height: 3),
                           Text(
-                            subTitle,
+                            description,
                             style: const TextStyle(
                               color: MyColors.greyEB3,
                             ),

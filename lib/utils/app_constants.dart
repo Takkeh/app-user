@@ -7,6 +7,9 @@ const kFakeImage = 'img/sliders/16616866816673.png';
 const kHome = 'home';
 const kBack = 'back';
 
+const String kOptional = 'optional';
+const String kRequired = 'required';
+
 const String kFloatSnackBar = 'floatSnackBar';
 const String kRawSnackBar = 'rawSnackBar';
 

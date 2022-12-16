@@ -8,8 +8,6 @@ import 'package:takkeh/utils/api_url.dart';
 class ViewRestaurantApi {
   static Future<ViewRestaurantModel?> data(int id) async {
     try {
-      //TODO: change later
-      // String url = '${ApiUrl.mainUrl}${ApiUrl.viewRestaurants}$id';
       String url = '${ApiUrl.mainUrl}${ApiUrl.viewRestaurants}$id';
       Uri uri = Uri.parse(url);
       var headers = {
