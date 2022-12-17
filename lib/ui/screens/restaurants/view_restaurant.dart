@@ -96,7 +96,6 @@ class ViewRestaurantScreen extends StatelessWidget {
                             )
                           ],
                         ),
-                        // if (controller.isEmpty.value) const SizedBox(height: 20),
                         if (!controller.isEmpty.value)
                           Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
