@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:takkeh/controller/home/slider.dart';
 import 'package:takkeh/model/home/slider_model.dart';
-import 'package:takkeh/model/restaurants/khaled_model.dart';
+import 'package:takkeh/model/restaurants/groups_model.dart';
 import 'package:takkeh/ui/screens/home/widgets/category_loading.dart';
 import 'package:takkeh/ui/widgets/custom_network_image.dart';
 import 'package:takkeh/ui/widgets/failed_widget.dart';

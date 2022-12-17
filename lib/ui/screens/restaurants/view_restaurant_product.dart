@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:takkeh/controller/user_order_ctrl.dart';
 import 'package:takkeh/controller/view_product_ctrl.dart';
-import 'package:takkeh/model/restaurants/khaled_model.dart';
+import 'package:takkeh/model/restaurants/groups_model.dart';
 import 'package:takkeh/translation/service.dart';
 import 'package:takkeh/ui/screens/registration/widgets/custom_prefix_icon.dart';
 import 'package:takkeh/ui/screens/restaurants/widgets/custom_fab_button.dart';

@@ -2,7 +2,10 @@ import 'dart:developer';
 
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
+import 'package:get/get.dart';
 import 'package:takkeh/main.dart';
+import 'package:takkeh/model/notifications/notifications_model.dart';
+import 'package:takkeh/ui/screens/help/help.dart';
 import 'package:takkeh/utils/base/colors.dart';
 
 class LocalNotificationsService {
@@ -21,16 +24,12 @@ class LocalNotificationsService {
       initializationSettings,
       onDidReceiveNotificationResponse: (message) {
         if (notificationsMap.isNotEmpty) {
-          log("onSelectNotification:: $message");
-          final data = notificationsMap;
-          final route = data["route"];
-          final dreamId = data["id"];
-          log("_route:: $route");
-          log("_dreamId:: $dreamId");
-          if (route == "dream") {
-            // Get.to(() => DisplayDreamScreen(dreamId: int.parse(_dreamId), isAnswered: false));
-          } else if (route == "chat") {
-            // Get.to(() => ChatScreen(dreamId: int.parse(_dreamId)));
+          var myData = NotificationsModel.fromJson(notificationsMap);
+          // print("result:: ${myData.notification!.title}");
+          log("resultttt:: message:: $message notificationsMap:: $notificationsMap");
+          log("onSelectNotification:: message:: $message notificationsMap:: $notificationsMap");
+          if (myData.data!.route == 'restaurant') {
+            Get.to(() => const HelpScreen());
           }
         }
       },

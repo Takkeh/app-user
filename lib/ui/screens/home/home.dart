@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:takkeh/controller/nav_bar_ctrl.dart';
+import 'package:takkeh/send_noti_ctrl.dart';
 import 'package:takkeh/translation/service.dart';
 import 'package:takkeh/ui/base/base_drawer.dart';
 import 'package:takkeh/ui/base/guest_drawer.dart';
@@ -38,6 +39,12 @@ class HomeScreen extends StatelessWidget {
               ],
             ),
             const SizedBox(height: 30),
+            ElevatedButton(
+              onPressed: () {
+                SendNotificationsCtrl().send();
+              },
+              child: const Text("Send"),
+            ),
             const SectionsBuilder(),
             TitleWidget(
               title: TranslationService.getString('takkeh_offers_key'),

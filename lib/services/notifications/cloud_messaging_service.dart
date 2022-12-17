@@ -1,13 +1,15 @@
 import 'dart:developer';
 
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:takkeh/main.dart';
 import 'package:takkeh/services/notifications/local_notifications_service.dart';
 
 class CloudMessagingService {
   static final localNotificationsService = LocalNotificationsService();
 
-  static void terminatedMessages(message) {
-    if (message?.notification != null && message!.data.isNotEmpty) {
+  static void terminatedMessages(RemoteMessage? message) {
+    if (message == null) return;
+    if (message.notification != null && message.data.isNotEmpty) {
       final data = message.notification;
       log("getInitialMessage:: ${message.data}");
       log("getInitialMessage:: ${data!.title}");
@@ -25,34 +27,28 @@ class CloudMessagingService {
     }
   }
 
-  static void foregroundMessages(message) {
+  static void foregroundMessages(RemoteMessage? message) {
+    if (message == null) return;
     if (message.notification != null) {
       final data = message.notification;
-      log("_data:: $data");
-      log("onMessage:: ${message.data}");
-      log("onMessage:: ${data?.title}");
-      log("onMessage:: ${data?.body}");
       notificationsMap = message.data;
-      log("onMessage:: $notificationsMap");
+      log("foregroundMessage::\nTitle:: ${data?.title}\nBody:: ${data?.body}\nData:: ${message.data}");
       LocalNotificationsService.display(message);
     }
   }
 
-  static void background(message) {
+  static void background(RemoteMessage? message) {
+    if (message == null) return;
     if (message.notification != null && message.data.isNotEmpty) {
       final data = message.notification;
-      log("onMessageOpenedApp:: ${message.data}");
-      log("onMessageOpenedApp:: ${data?.title}");
-      log("onMessageOpenedApp:: ${data?.body}");
-      final route = message.data["route"];
-      final dreamId = message.data["id"];
-      log("_route:: $route");
-      log("_dreamId:: $dreamId");
-      if (route == "dream") {
+      log("backgroundMessage::\nTitle:: ${data?.title}\nBody:: ${data?.body}\nData:: ${message.data}");
+      if (message.data['route'] == "restaurant") {
+        print("893ur9283r");
         // Get.to(() => DisplayDreamScreen(dreamId: int.parse(_dreamId), isAnswered: false));
-      } else if (route == "chat") {
-        // Get.to(() => ChatScreen(dreamId: int.parse(_dreamId)));
       }
+      // else if (route == "chat") {
+      //   // Get.to(() => ChatScreen(dreamId: int.parse(_dreamId)));
+      // }
     }
   }
 }

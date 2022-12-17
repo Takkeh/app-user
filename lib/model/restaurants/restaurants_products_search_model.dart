@@ -4,7 +4,7 @@
 
 import 'dart:convert';
 
-import 'package:takkeh/model/restaurants/khaled_model.dart';
+import 'package:takkeh/model/restaurants/groups_model.dart';
 
 RestaurantProductsSearchModel restaurantProductsSearchFromJson(String str) => RestaurantProductsSearchModel.fromJson(json.decode(str));
 

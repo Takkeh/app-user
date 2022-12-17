@@ -5,7 +5,7 @@ import 'package:takkeh/binding/restaurants/products.dart';
 import 'package:takkeh/binding/restaurants/view_product.dart';
 import 'package:takkeh/controller/home/offers.dart';
 import 'package:takkeh/model/home/offers_model.dart';
-import 'package:takkeh/model/restaurants/khaled_model.dart';
+import 'package:takkeh/model/restaurants/groups_model.dart';
 import 'package:takkeh/ui/screens/home/widgets/offers_loading.dart';
 import 'package:takkeh/ui/screens/restaurants/view_restaurant.dart';
 import 'package:takkeh/ui/screens/restaurants/view_restaurant_product.dart';

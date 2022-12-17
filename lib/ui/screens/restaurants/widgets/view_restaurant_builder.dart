@@ -78,6 +78,8 @@ class ViewRestaurantBuilder extends StatelessWidget {
                                         groups: data.groups!,
                                       ),
                                       binding: ViewProductBinding(),
+                                      duration: const Duration(milliseconds: 300),
+                                      transition: Transition.downToUp,
                                     );
                                   },
                                 ),
