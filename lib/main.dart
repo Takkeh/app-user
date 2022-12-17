@@ -28,9 +28,7 @@ Map<String, dynamic> notificationsMap = {};
 Future<void> _onBackgroundMessage(RemoteMessage message) async {
   if (message.notification != null) {
     final data = message.notification;
-    log("onBackgroundMessage:: ${message.data}");
-    log("onBackgroundMessage:: ${data?.title}");
-    log("onBackgroundMessage:: ${data?.body}");
+    log("onBackgroundMessage::\nTitle:: ${data?.title}\nBody:: ${data?.body}\nData:: ${message.data}");
   }
 }
 
@@ -115,12 +113,8 @@ class _MyAppState extends State<MyApp> {
     // FirebaseMessaging.instance.getToken().then((token) {});
     // FirebaseMessaging.instance.getAPNSToken().then((aPNStoken) {});
 
-    //gives you the message on which user taps
-    //and it opens the app from terminated state
-    FirebaseMessaging.instance.getInitialMessage().then(CloudMessagingService().terminatedMessages);
-    //foreground
-    FirebaseMessaging.onMessage.listen(CloudMessagingService().foregroundMessages);
-    //background and not terminated
+    FirebaseMessaging.instance.getInitialMessage().then(CloudMessagingService().terminated);
+    FirebaseMessaging.onMessage.listen(CloudMessagingService().foreground);
     FirebaseMessaging.onMessageOpenedApp.listen(CloudMessagingService().background);
 
     super.initState();

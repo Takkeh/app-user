@@ -2,21 +2,12 @@ import 'dart:developer';
 
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
-import 'package:get/get.dart';
 import 'package:takkeh/main.dart';
-import 'package:takkeh/model/notifications/notifications_model.dart';
-import 'package:takkeh/send_noti_ctrl.dart';
-import 'package:takkeh/ui/screens/help/help.dart';
+import 'package:takkeh/services/routes_service.dart';
 import 'package:takkeh/utils/base/colors.dart';
 
 class LocalNotificationsService {
   final FlutterLocalNotificationsPlugin _flutterLocalNotificationsPlugin = FlutterLocalNotificationsPlugin();
-
-  void toggle() {
-    log("MyData::: ${notificationsMap['route']}");
-    // var myData = NotificationsModel.fromJson(notificationsMap);
-    // print("alsfijalsfija:: $myData");
-  }
 
   void initialize() {
     const initializationSettings = InitializationSettings(
@@ -31,22 +22,7 @@ class LocalNotificationsService {
       initializationSettings,
       onDidReceiveNotificationResponse: (message) {
         if (notificationsMap.isNotEmpty) {
-          try {
-            log("notificationsMap:: $notificationsMap");
-            // var route = notificationsMap['route'];
-            // var id = notificationsMap['id'];
-            // var title = notificationsMap['title'];
-            // var cost = notificationsMap['cost'];
-            // var time = notificationsMap['time'];
-            // log("type:: ${notificationsMap.runtimeType}");
-            var myList = NotificationsModel.fromJson(notificationsMap);
-            print("myList:: $myList");
-            if (myList.route == RoutesEnum.restaurant.name) {
-              Get.to(() => const HelpScreen());
-            }
-          } catch (e) {
-            print("myError:: $e");
-          }
+          RoutesService().toggle(notificationsMap);
         }
       },
     );
@@ -80,7 +56,6 @@ class LocalNotificationsService {
           ),
           iOS: const DarwinNotificationDetails(),
         ),
-        payload: message.data["route"],
       );
     } on Exception catch (e) {
       log("Exception:: $e");

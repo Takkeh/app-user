@@ -10,7 +10,7 @@ String notificationsModelToJson(NotificationsModel data) => json.encode(data.toJ
 
 class NotificationsModel {
   NotificationsModel({
-    this.id,
+    this.restaurantId,
     this.route,
     this.title,
     this.cost,
@@ -20,9 +20,17 @@ class NotificationsModel {
     this.logo,
     this.review,
     this.phone,
+    this.productId,
+    this.price,
+    this.description,
+    this.groups,
+    this.orderId,
   });
 
-  String? id;
+  int? restaurantId;
+  int? productId;
+  int? orderId;
+  double? price;
   String? route;
   String? title;
   String? cost;
@@ -32,9 +40,13 @@ class NotificationsModel {
   String? logo;
   String? review;
   String? phone;
+  String? description;
+  List<dynamic>? groups;
 
   factory NotificationsModel.fromJson(Map<String, dynamic> json) => NotificationsModel(
-        id: json["id"],
+        restaurantId: json["restaurant_id"] == null ? null : int.parse(json["restaurant_id"].toString()),
+        productId: json["product_id"] == null ? null : int.parse(json["product_id"].toString()),
+        orderId: json["orderId"] == null ? null : int.parse(json["orderId"].toString()),
         route: json["route"],
         title: json["title"],
         cost: json["cost"],
@@ -44,10 +56,14 @@ class NotificationsModel {
         logo: json["logo"],
         review: json["review"],
         phone: json["phone"],
+        price: json["price"] == null ? null : double.parse(json["price"].toString()),
+        description: json["description"],
+        groups: json["groups"] == null ? null : jsonDecode(json["groups"]),
       );
 
   Map<String, dynamic> toJson() => {
-        "id": id,
+        "restaurant_id": restaurantId,
+        "product_id": productId,
         "route": route,
         "title": title,
         "cost": cost,
@@ -57,5 +73,9 @@ class NotificationsModel {
         "logo": logo,
         "review": review,
         "phone": phone,
+        "price": price,
+        "description": description,
+        "groups": groups,
+        "orderId": orderId,
       };
 }

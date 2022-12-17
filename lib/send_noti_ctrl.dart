@@ -4,10 +4,8 @@ import 'dart:developer';
 import 'package:http/http.dart' as http;
 import 'package:takkeh/utils/shared_prefrences.dart';
 
-enum RoutesEnum { app, order, restaurant, product }
-
 const Map<String, dynamic> data = {
-  'id': 5,
+  'restaurant_id': 5,
   'route': 'restaurant',
   'title': 'ابو جبارة',
   'cost': 'مجاني',
@@ -17,6 +15,34 @@ const Map<String, dynamic> data = {
   'logo': 'img/restaurants/16693683296163.jpg',
   'review': 'فاخر',
   'phone': '+96298775785',
+};
+
+const Map<String, dynamic> data2 = {
+  'restaurant_id': 5,
+  'product_id': 18,
+  'orderId': 496,
+  'route': 'restaurant_order',
+  'title': 'ابو جبارة',
+  'cost': 'مجاني',
+  'time': '20 - 90 دقيقة',
+  'reviewIcon': '4.svg',
+  'cover': 'img/restaurants/mcdonald-s.png',
+  'logo': 'img/restaurants/16693683296163.jpg',
+  'review': 'فاخر',
+  'phone': '+96298775785',
+  'description': 'زاكي كثير',
+  'price': 55.5,
+  'groups': [
+    {
+      "id": 33,
+      "name": "",
+      "type": "required",
+      "items": [
+        {"id": 65, "name": "gggg", "price": "10.00"},
+        {"id": 66, "name": "ggrrr", "price": "20.00"}
+      ]
+    }
+  ],
 };
 
 class SendNotificationsCtrl {
@@ -53,7 +79,7 @@ class SendNotificationsCtrl {
             'body': "content",
           },
           'priority': 'high',
-          'data': data,
+          'data': data2,
           'to': MySharedPreferences.deviceToken,
           // "registration_ids": tokens,
         },
