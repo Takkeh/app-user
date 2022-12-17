@@ -65,6 +65,8 @@ class RestaurantProductsSearchScreen extends StatelessWidget {
                                         title: data.name!,
                                         price: data.price!,
                                         description: data.description!,
+                                        //TODO: missing api data
+                                        isAvailable: index == 0 ? 0 : 1,
                                         onTap: () {
                                           Get.to(
                                             () => ViewRestaurantProductScreen(

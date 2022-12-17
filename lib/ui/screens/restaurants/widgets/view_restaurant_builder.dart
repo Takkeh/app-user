@@ -38,7 +38,6 @@ class ViewRestaurantBuilder extends StatelessWidget {
                   (number) {
                     final info = snapshot.data!.categories![number];
                     ViewRestaurantCtrl.find.itemKeys.add(GlobalKey());
-                    //TODO: re-comment later
                     return Padding(
                       padding: const EdgeInsets.fromLTRB(20, 20, 20, 16),
                       child: Column(
@@ -54,7 +53,6 @@ class ViewRestaurantBuilder extends StatelessWidget {
                             ),
                           ),
                           ...List.generate(
-                            //TODO: missing api data
                             snapshot.data!.categories![number].products!.length,
                             (index) {
                               final data = snapshot.data!.categories![number].products![index];
@@ -66,8 +64,9 @@ class ViewRestaurantBuilder extends StatelessWidget {
                                   title: data.name!,
                                   price: data.price!,
                                   description: data.description!,
+                                  //TODO: missing api data
+                                  isAvailable: index == 0 ? 0 : 1,
                                   onTap: () {
-                                    print("TEST:::: ${data.groups!.first.items!.first.price}");
                                     Get.to(
                                       () => ViewRestaurantProductScreen(
                                         title: data.name!,
@@ -76,7 +75,6 @@ class ViewRestaurantBuilder extends StatelessWidget {
                                         cover: data.image!,
                                         productId: data.id!,
                                         restaurantId: restaurantId,
-                                        //TODO: khaled groups
                                         groups: data.groups!,
                                       ),
                                       binding: ViewProductBinding(),

@@ -8,9 +8,9 @@ import 'package:takkeh/model/restaurants/restaurants_model.dart';
 import 'package:takkeh/translation/service.dart';
 import 'package:takkeh/ui/screens/restaurants/view_restaurant.dart';
 import 'package:takkeh/ui/widgets/components/new_basket_dialog.dart';
-import 'package:takkeh/ui/widgets/custom_list_tile.dart';
 import 'package:takkeh/ui/widgets/custom_restaurants_loading.dart';
 import 'package:takkeh/ui/widgets/restaurant_cpi.dart';
+import 'package:takkeh/ui/widgets/restaurant_list_tile.dart';
 
 class RestaurantsBuilder extends StatelessWidget {
   const RestaurantsBuilder({Key? key}) : super(key: key);
@@ -75,7 +75,7 @@ class RestaurantsBuilder extends StatelessWidget {
             return const RestaurantCPI();
           },
           itemBuilder: (context, data, index) {
-            return CustomListTile(
+            return RestaurantListTile(
               imageUrl: data.logo!,
               title: data.name!,
               description: data.description!,
@@ -83,6 +83,7 @@ class RestaurantsBuilder extends StatelessWidget {
               review: data.review!,
               time: data.time!,
               cost: data.cost!,
+              isBusy: data.isBusy!,
               onTap: () {
                 if (UserOrderCtrl.find.orderList.isNotEmpty && UserOrderCtrl.find.restaurantId != data.id!) {
                   NewBasketDialog.show(context, data: data);
