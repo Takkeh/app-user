@@ -74,6 +74,7 @@ class RestaurantProductsSearchScreen extends StatelessWidget {
                                               cover: data.image!,
                                               productId: data.id!,
                                               restaurantId: restaurantId,
+                                              //TODO: khaled groups
                                               groups: data.groups!,
                                             ),
                                             binding: ViewProductBinding(),

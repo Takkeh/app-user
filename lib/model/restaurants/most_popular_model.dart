@@ -4,6 +4,8 @@
 
 import 'dart:convert';
 
+import 'package:takkeh/model/restaurants/khaled_model.dart';
+
 MostPopularProductsModel mostPopularProductsModelFromJson(String str) => MostPopularProductsModel.fromJson(json.decode(str));
 
 String mostPopularProductsModelToJson(MostPopularProductsModel data) => json.encode(data.toJson());
@@ -113,7 +115,7 @@ class MostPopularProducts {
   int? soldQuantity;
   String? description;
   double? price;
-  List<Group>? groups;
+  List<ProductGroups>? groups;
 
   factory MostPopularProducts.fromJson(Map<String, dynamic> json) => MostPopularProducts(
         id: json["id"],
@@ -122,7 +124,7 @@ class MostPopularProducts {
         soldQuantity: json["sold_quantity"],
         description: json["description"],
         price: double.parse(json["price"].toString()),
-        groups: List<Group>.from(json["groups"].map((x) => Group.fromJson(x))),
+        groups: List<ProductGroups>.from(json["groups"].map((x) => ProductGroups.fromJson(x))),
       );
 
   Map<String, dynamic> toJson() => {
@@ -132,58 +134,6 @@ class MostPopularProducts {
         "sold_quantity": soldQuantity,
         "description": description,
         "price": price,
-        "groups": List<dynamic>.from(groups!.map((x) => x.toJson())),
-      };
-}
-
-class Group {
-  Group({
-    this.id,
-    this.name,
-    this.type,
-    this.items,
-  });
-
-  int? id;
-  String? name;
-  String? type;
-  List<MostPopularItem>? items;
-
-  factory Group.fromJson(Map<String, dynamic> json) => Group(
-        id: json["id"],
-        name: json["name"],
-        type: json["type"],
-        items: List<MostPopularItem>.from(json["items"].map((x) => MostPopularItem.fromJson(x))),
-      );
-
-  Map<String, dynamic> toJson() => {
-        "id": id,
-        "name": name,
-        "type": type,
-        "items": List<dynamic>.from(items!.map((x) => x.toJson())),
-      };
-}
-
-class MostPopularItem {
-  MostPopularItem({
-    this.id,
-    this.name,
-    this.price,
-  });
-
-  int? id;
-  String? name;
-  double? price;
-
-  factory MostPopularItem.fromJson(Map<String, dynamic> json) => MostPopularItem(
-        id: json["id"],
-        name: json["name "],
-        price: double.parse(json["price"].toString()),
-      );
-
-  Map<String, dynamic> toJson() => {
-        "id": id,
-        "name ": name,
-        "price": price,
+        "groups": List<ProductGroups>.from(groups!.map((x) => x.toJson())),
       };
 }

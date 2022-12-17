@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:takkeh/controller/user_order_ctrl.dart';
 import 'package:takkeh/controller/view_product_ctrl.dart';
+import 'package:takkeh/model/restaurants/khaled_model.dart';
 import 'package:takkeh/translation/service.dart';
 import 'package:takkeh/ui/screens/registration/widgets/custom_prefix_icon.dart';
 import 'package:takkeh/ui/screens/restaurants/widgets/custom_fab_button.dart';
@@ -23,7 +24,7 @@ class ViewRestaurantProductScreen extends StatefulWidget {
   final String cover;
   final int productId;
   final int restaurantId;
-  final List<dynamic> groups;
+  final List<ProductGroups> groups;
 
   const ViewRestaurantProductScreen({
     Key? key,

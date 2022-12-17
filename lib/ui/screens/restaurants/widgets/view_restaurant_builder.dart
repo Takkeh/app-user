@@ -67,6 +67,7 @@ class ViewRestaurantBuilder extends StatelessWidget {
                                   price: data.price!,
                                   description: data.description!,
                                   onTap: () {
+                                    print("TEST:::: ${data.groups!.first.items!.first.price}");
                                     Get.to(
                                       () => ViewRestaurantProductScreen(
                                         title: data.name!,
@@ -75,6 +76,7 @@ class ViewRestaurantBuilder extends StatelessWidget {
                                         cover: data.image!,
                                         productId: data.id!,
                                         restaurantId: restaurantId,
+                                        //TODO: khaled groups
                                         groups: data.groups!,
                                       ),
                                       binding: ViewProductBinding(),

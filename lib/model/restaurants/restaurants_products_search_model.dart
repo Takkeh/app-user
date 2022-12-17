@@ -4,6 +4,8 @@
 
 import 'dart:convert';
 
+import 'package:takkeh/model/restaurants/khaled_model.dart';
+
 RestaurantProductsSearchModel restaurantProductsSearchFromJson(String str) => RestaurantProductsSearchModel.fromJson(json.decode(str));
 
 String restaurantProductsSearchToJson(RestaurantProductsSearchModel data) => json.encode(data.toJson());
@@ -113,7 +115,7 @@ class Product {
   int? soldQuantity;
   String? description;
   double? price;
-  List<Group>? groups;
+  List<ProductGroups>? groups;
 
   factory Product.fromJson(Map<String, dynamic> json) => Product(
         id: json["id"],
@@ -122,7 +124,7 @@ class Product {
         soldQuantity: json["sold_quantity"],
         description: json["description"],
         price: double.parse(json["price"].toString()),
-        groups: List<Group>.from(json["groups"].map((x) => Group.fromJson(x))),
+        groups: List<ProductGroups>.from(json["groups"].map((x) => ProductGroups.fromJson(x))),
       );
 
   Map<String, dynamic> toJson() => {
@@ -132,58 +134,6 @@ class Product {
         "sold_quantity": soldQuantity,
         "description": description,
         "price": price,
-        "groups": List<dynamic>.from(groups!.map((x) => x.toJson())),
-      };
-}
-
-class Group {
-  Group({
-    this.id,
-    this.name,
-    this.type,
-    this.items,
-  });
-
-  int? id;
-  String? name;
-  String? type;
-  List<Item>? items;
-
-  factory Group.fromJson(Map<String, dynamic> json) => Group(
-        id: json["id"],
-        name: json["name"],
-        type: json["type"],
-        items: List<Item>.from(json["items"].map((x) => Item.fromJson(x))),
-      );
-
-  Map<String, dynamic> toJson() => {
-        "id": id,
-        "name": name,
-        "type": type,
-        "items": List<dynamic>.from(items!.map((x) => x.toJson())),
-      };
-}
-
-class Item {
-  Item({
-    this.id,
-    this.name,
-    this.price,
-  });
-
-  int? id;
-  String? name;
-  double? price;
-
-  factory Item.fromJson(Map<String, dynamic> json) => Item(
-        id: json["id"],
-        name: json["name "],
-        price: double.parse(json["price"].toString()),
-      );
-
-  Map<String, dynamic> toJson() => {
-        "id": id,
-        "name ": name,
-        "price": price,
+        "groups": List<ProductGroups>.from(groups!.map((x) => x.toJson())),
       };
 }
