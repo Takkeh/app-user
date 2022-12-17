@@ -107,7 +107,7 @@ class _MyAppState extends State<MyApp> {
       }
     });
 
-    LocalNotificationsService.initialize();
+    LocalNotificationsService().initialize();
 
     FirebaseMessaging.instance.requestPermission().then((value) {});
 
@@ -117,11 +117,11 @@ class _MyAppState extends State<MyApp> {
 
     //gives you the message on which user taps
     //and it opens the app from terminated state
-    FirebaseMessaging.instance.getInitialMessage().then(CloudMessagingService.terminatedMessages);
+    FirebaseMessaging.instance.getInitialMessage().then(CloudMessagingService().terminatedMessages);
     //foreground
-    FirebaseMessaging.onMessage.listen(CloudMessagingService.foregroundMessages);
+    FirebaseMessaging.onMessage.listen(CloudMessagingService().foregroundMessages);
     //background and not terminated
-    FirebaseMessaging.onMessageOpenedApp.listen(CloudMessagingService.background);
+    FirebaseMessaging.onMessageOpenedApp.listen(CloudMessagingService().background);
 
     super.initState();
   }

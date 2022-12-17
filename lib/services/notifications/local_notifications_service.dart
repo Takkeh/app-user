@@ -5,13 +5,20 @@ import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:get/get.dart';
 import 'package:takkeh/main.dart';
 import 'package:takkeh/model/notifications/notifications_model.dart';
+import 'package:takkeh/send_noti_ctrl.dart';
 import 'package:takkeh/ui/screens/help/help.dart';
 import 'package:takkeh/utils/base/colors.dart';
 
 class LocalNotificationsService {
-  static final FlutterLocalNotificationsPlugin _flutterLocalNotificationsPlugin = FlutterLocalNotificationsPlugin();
+  final FlutterLocalNotificationsPlugin _flutterLocalNotificationsPlugin = FlutterLocalNotificationsPlugin();
 
-  static void initialize() {
+  void toggle() {
+    log("MyData::: ${notificationsMap['route']}");
+    // var myData = NotificationsModel.fromJson(notificationsMap);
+    // print("alsfijalsfija:: $myData");
+  }
+
+  void initialize() {
     const initializationSettings = InitializationSettings(
       android: AndroidInitializationSettings('@drawable/notifications_icon'),
       iOS: DarwinInitializationSettings(
@@ -24,12 +31,21 @@ class LocalNotificationsService {
       initializationSettings,
       onDidReceiveNotificationResponse: (message) {
         if (notificationsMap.isNotEmpty) {
-          var myData = NotificationsModel.fromJson(notificationsMap);
-          // print("result:: ${myData.notification!.title}");
-          log("resultttt:: message:: $message notificationsMap:: $notificationsMap");
-          log("onSelectNotification:: message:: $message notificationsMap:: $notificationsMap");
-          if (myData.data!.route == 'restaurant') {
-            Get.to(() => const HelpScreen());
+          try {
+            log("notificationsMap:: $notificationsMap");
+            // var route = notificationsMap['route'];
+            // var id = notificationsMap['id'];
+            // var title = notificationsMap['title'];
+            // var cost = notificationsMap['cost'];
+            // var time = notificationsMap['time'];
+            // log("type:: ${notificationsMap.runtimeType}");
+            var myList = NotificationsModel.fromJson(notificationsMap);
+            print("myList:: $myList");
+            if (myList.route == RoutesEnum.restaurant.name) {
+              Get.to(() => const HelpScreen());
+            }
+          } catch (e) {
+            print("myError:: $e");
           }
         }
       },
@@ -37,7 +53,7 @@ class LocalNotificationsService {
   }
 
   //for notifications in foreground
-  static void display(RemoteMessage message) async {
+  void display(RemoteMessage message) async {
     try {
       final id = DateTime.now().millisecondsSinceEpoch ~/ 1000;
       const AndroidNotificationChannel channel = AndroidNotificationChannel(

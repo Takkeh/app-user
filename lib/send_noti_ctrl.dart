@@ -4,10 +4,10 @@ import 'dart:developer';
 import 'package:http/http.dart' as http;
 import 'package:takkeh/utils/shared_prefrences.dart';
 
-enum Routes { app, order, restaurant, product }
+enum RoutesEnum { app, order, restaurant, product }
 
 const Map<String, dynamic> data = {
-  'id': '5',
+  'id': 5,
   'route': 'restaurant',
   'title': 'ابو جبارة',
   'cost': 'مجاني',

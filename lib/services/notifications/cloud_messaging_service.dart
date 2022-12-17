@@ -5,9 +5,7 @@ import 'package:takkeh/main.dart';
 import 'package:takkeh/services/notifications/local_notifications_service.dart';
 
 class CloudMessagingService {
-  static final localNotificationsService = LocalNotificationsService();
-
-  static void terminatedMessages(RemoteMessage? message) {
+  void terminatedMessages(RemoteMessage? message) {
     if (message == null) return;
     if (message.notification != null && message.data.isNotEmpty) {
       final data = message.notification;
@@ -27,17 +25,17 @@ class CloudMessagingService {
     }
   }
 
-  static void foregroundMessages(RemoteMessage? message) {
+  void foregroundMessages(RemoteMessage? message) {
     if (message == null) return;
     if (message.notification != null) {
       final data = message.notification;
       notificationsMap = message.data;
       log("foregroundMessage::\nTitle:: ${data?.title}\nBody:: ${data?.body}\nData:: ${message.data}");
-      LocalNotificationsService.display(message);
+      LocalNotificationsService().display(message);
     }
   }
 
-  static void background(RemoteMessage? message) {
+  void background(RemoteMessage? message) {
     if (message == null) return;
     if (message.notification != null && message.data.isNotEmpty) {
       final data = message.notification;

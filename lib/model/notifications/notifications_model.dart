@@ -10,26 +10,6 @@ String notificationsModelToJson(NotificationsModel data) => json.encode(data.toJ
 
 class NotificationsModel {
   NotificationsModel({
-    this.notification,
-    this.data,
-  });
-
-  Notification? notification;
-  Data? data;
-
-  factory NotificationsModel.fromJson(Map<String, dynamic> json) => NotificationsModel(
-        notification: Notification.fromJson(json["notification"]),
-        data: Data.fromJson(json["data"]),
-      );
-
-  Map<String, dynamic> toJson() => {
-        "notification": notification!.toJson(),
-        "data": data!.toJson(),
-      };
-}
-
-class Data {
-  Data({
     this.id,
     this.route,
     this.title,
@@ -42,7 +22,7 @@ class Data {
     this.phone,
   });
 
-  int? id;
+  String? id;
   String? route;
   String? title;
   String? cost;
@@ -53,7 +33,7 @@ class Data {
   String? review;
   String? phone;
 
-  factory Data.fromJson(Map<String, dynamic> json) => Data(
+  factory NotificationsModel.fromJson(Map<String, dynamic> json) => NotificationsModel(
         id: json["id"],
         route: json["route"],
         title: json["title"],
@@ -77,25 +57,5 @@ class Data {
         "logo": logo,
         "review": review,
         "phone": phone,
-      };
-}
-
-class Notification {
-  Notification({
-    this.title,
-    this.body,
-  });
-
-  String? title;
-  String? body;
-
-  factory Notification.fromJson(Map<String, dynamic> json) => Notification(
-        title: json["title"],
-        body: json["body"],
-      );
-
-  Map<String, dynamic> toJson() => {
-        "title": title,
-        "body": body,
       };
 }
