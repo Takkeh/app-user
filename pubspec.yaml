@@ -45,7 +45,7 @@ dependencies:
   cached_network_image: ^3.2.1
   carousel_slider: ^4.1.1
   shimmer: ^2.0.0
-  firebase_core: ^2.1.0
+  firebase_core: ^2.4.0
   firebase_auth: ^4.2.1
   cloud_firestore: ^4.0.2
   auto_size_text: ^3.0.0
