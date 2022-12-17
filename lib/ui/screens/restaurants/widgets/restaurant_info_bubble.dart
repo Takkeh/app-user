@@ -9,7 +9,7 @@ import 'package:takkeh/utils/base/colors.dart';
 import 'package:takkeh/utils/base/icons.dart';
 
 class RestaurantInfoBubble extends StatelessWidget {
-  final String title, logo, time, cost, review, cover, reviewIcon;
+  final String title, logo, time, cost, review, cover, reviewIcon, phone;
   final int restaurantId;
 
   const RestaurantInfoBubble({
@@ -22,6 +22,7 @@ class RestaurantInfoBubble extends StatelessWidget {
     required this.cover,
     required this.restaurantId,
     required this.reviewIcon,
+    required this.phone,
   }) : super(key: key);
 
   static Widget getWidget(String text, String icon) {
@@ -60,6 +61,7 @@ class RestaurantInfoBubble extends StatelessWidget {
                     imageUrl: cover,
                     logo: logo,
                     restaurantId: restaurantId,
+                    phone: phone,
                   ),
                 );
               },

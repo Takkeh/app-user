@@ -50,6 +50,7 @@ class TakkehOffersBuilder extends StatelessWidget {
                                 cover: 'img/restaurants/mcdonald-s.png',
                                 logo: 'img/restaurants/16693683296163.jpg',
                                 review: 'فاخر',
+                                phone: '+96298775785',
                               ),
                               binding: ProductBinding(id: 5),
                             );

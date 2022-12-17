@@ -14,7 +14,7 @@ import 'package:takkeh/utils/base/colors.dart';
 import 'package:takkeh/utils/custom_clip_path.dart';
 
 class ViewRestaurantScreen extends StatelessWidget {
-  final String title, cover, logo, time, cost, review, reviewIcon;
+  final String title, cover, logo, time, cost, review, reviewIcon, phone;
   final int restaurantId;
 
   const ViewRestaurantScreen({
@@ -27,6 +27,7 @@ class ViewRestaurantScreen extends StatelessWidget {
     required this.cost,
     required this.review,
     required this.reviewIcon,
+    required this.phone,
   }) : super(key: key);
 
   @override
@@ -83,6 +84,7 @@ class ViewRestaurantScreen extends StatelessWidget {
                               bottom: -37,
                               child: RestaurantInfoBubble(
                                 title: title,
+                                phone: phone,
                                 logo: logo,
                                 time: time,
                                 cost: cost,

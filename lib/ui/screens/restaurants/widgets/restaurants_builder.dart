@@ -49,6 +49,7 @@ class RestaurantsBuilder extends StatelessWidget {
                     cost: data.cost!,
                     review: data.review!,
                     reviewIcon: data.reviewIcon!,
+                    phone: '+96298775785',
                   ),
                   binding: ProductBinding(id: data.id!),
                 );
@@ -99,6 +100,7 @@ class RestaurantsBuilder extends StatelessWidget {
                       cost: data.cost!,
                       review: data.review!,
                       reviewIcon: data.reviewIcon!,
+                      phone: '+96298775785',
                     ),
                     binding: ProductBinding(id: data.id!),
                   );

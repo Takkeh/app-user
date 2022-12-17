@@ -1,5 +1,8 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
 import 'package:takkeh/translation/service.dart';
 import 'package:takkeh/ui/screens/restaurants/widgets/custom_bubble_image.dart';
@@ -9,21 +12,17 @@ import 'package:takkeh/ui/screens/restaurants/widgets/restaurants_reviews_builde
 import 'package:takkeh/ui/widgets/base_switch_slider.dart';
 import 'package:takkeh/ui/widgets/custom_network_image.dart';
 import 'package:takkeh/ui/widgets/transparent_app_bar.dart';
+import 'package:takkeh/utils/app_constants.dart';
 import 'package:takkeh/utils/base/colors.dart';
 import 'package:takkeh/utils/base/icons.dart';
 import 'package:takkeh/utils/shared_prefrences.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class RestaurantInfoScreen extends StatefulWidget {
-  final String title, imageUrl, logo;
+  final String title, imageUrl, logo, phone;
   final int restaurantId;
 
-  const RestaurantInfoScreen({
-    Key? key,
-    required this.title,
-    required this.imageUrl,
-    required this.logo,
-    required this.restaurantId
-  }) : super(key: key);
+  const RestaurantInfoScreen({Key? key, required this.title, required this.imageUrl, required this.logo, required this.restaurantId, required this.phone}) : super(key: key);
 
   @override
   State<RestaurantInfoScreen> createState() => _RestaurantInfoScreenState();
@@ -33,6 +32,16 @@ class _RestaurantInfoScreenState extends State<RestaurantInfoScreen> {
   late PageController pageController;
   bool isInformation = true;
   int currentIndex = 0;
+
+  Future<void> _launchUrl(String phone) async {
+    try {
+      final Uri url = Uri.parse("tel:$phone");
+      await launchUrl(url);
+    } catch (e) {
+      log("error:: $e");
+      Fluttertoast.showToast(msg: AppConstants.failedMessage);
+    }
+  }
 
   @override
   void initState() {
@@ -86,10 +95,15 @@ class _RestaurantInfoScreenState extends State<RestaurantInfoScreen> {
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
-                              CircleAvatar(
-                                backgroundColor: Colors.white,
-                                radius: 18,
-                                child: SvgPicture.asset(MyIcons.phoneGreen),
+                              GestureDetector(
+                                onTap: () {
+                                  _launchUrl(widget.phone);
+                                },
+                                child: CircleAvatar(
+                                  backgroundColor: Colors.white,
+                                  radius: 18,
+                                  child: SvgPicture.asset(MyIcons.phoneGreen),
+                                ),
                               ),
                               CircleAvatar(
                                 backgroundColor: Colors.white,
@@ -146,8 +160,10 @@ class _RestaurantInfoScreenState extends State<RestaurantInfoScreen> {
               physics: const NeverScrollableScrollPhysics(),
               controller: pageController,
               children: [
-                RestaurantsInfoBuilder(restaurantId: widget.restaurantId,),
-                RestaurantsReviewsBuilder(imageUrl: widget.imageUrl,restaurantId:widget.restaurantId),
+                RestaurantsInfoBuilder(
+                  restaurantId: widget.restaurantId,
+                ),
+                RestaurantsReviewsBuilder(imageUrl: widget.imageUrl, restaurantId: widget.restaurantId),
               ],
             ),
           ),
