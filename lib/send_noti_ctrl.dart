@@ -21,7 +21,7 @@ const Map<String, dynamic> data2 = {
   'restaurant_id': 5,
   'product_id': 18,
   'orderId': 496,
-  'route': 'restaurant_order',
+  'route': 'restaurant_product',
   'title': 'ابو جبارة',
   'cost': 'مجاني',
   'time': '20 - 90 دقيقة',
@@ -43,6 +43,11 @@ const Map<String, dynamic> data2 = {
       ]
     }
   ],
+};
+
+const Map<String, dynamic> data3 = {
+  'orderId': 1,
+  'route': 'restaurant_order',
 };
 
 class SendNotificationsCtrl {

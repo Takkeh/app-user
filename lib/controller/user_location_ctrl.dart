@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'dart:developer';
 
 import 'package:geocoding/geocoding.dart';
@@ -49,7 +50,7 @@ class UserLocationCtrl extends GetxController {
       return permission.value!;
     }
 
-    final position = await Geolocator.getCurrentPosition(desiredAccuracy: LocationAccuracy.bestForNavigation);
+    final position = await Geolocator.getCurrentPosition(desiredAccuracy: LocationAccuracy.best);
     getLocation(position.latitude, position.longitude);
     await getAddress(position.latitude, position.longitude);
     if (MyAddressesCtrl.find.myAddresses.isEmpty && MySharedPreferences.accessToken.isNotEmpty) {

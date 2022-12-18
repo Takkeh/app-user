@@ -54,16 +54,16 @@ class LocationPermissionScreen extends StatelessWidget {
             children: [
               Image.asset(MyImages.locationPermission),
               const SizedBox(height: 50.0),
-              const Text(
-                "يجب إعطاء صلاحية الموقع",
-                style: TextStyle(fontSize: 20, fontWeight: FontWeight.w600),
+              Text(
+                TranslationService.getString('you_must_enable_location_permission_key'),
+                style: const TextStyle(fontSize: 20, fontWeight: FontWeight.w600),
                 textAlign: TextAlign.center,
               ),
-              const Padding(
-                padding: EdgeInsets.only(top: 8.0, bottom: 60.0),
+              Padding(
+                padding: const EdgeInsets.only(top: 8.0, bottom: 60.0),
                 child: Text(
-                  "لا يمكن الوصول إلى محتويات الصفحة إلا بعد اعطاء صلاحية الموقع للتطبيق",
-                  style: TextStyle(fontSize: 20),
+                  TranslationService.getString("you_cant_user_app_without_location_permission_key"),
+                  style: const TextStyle(fontSize: 20),
                   textAlign: TextAlign.center,
                 ),
               ),
@@ -73,9 +73,9 @@ class LocationPermissionScreen extends StatelessWidget {
                 onPressed: () {
                   submit(context);
                 },
-                label: const Text(
-                  "تفعيل الموقع",
-                  style: TextStyle(color: MyColors.text),
+                label: Text(
+                  TranslationService.getString("enable_location_key"),
+                  style: const TextStyle(color: MyColors.text),
                 ),
               ),
             ],
