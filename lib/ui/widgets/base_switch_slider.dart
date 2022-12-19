@@ -51,6 +51,7 @@ class BaseSwitchSlider extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final width = MediaQuery.of(context).size.width;
     return Container(
       alignment: Alignment.center,
       margin: margin,
@@ -70,6 +71,7 @@ class BaseSwitchSlider extends StatelessWidget {
               duration: const Duration(milliseconds: 750),
               curve: Curves.fastOutSlowIn,
               child: CustomElevatedButton(
+                width: (width / 2) - 40,
                 title: "",
                 onPressed: () {},
                 color: buttonColor,
