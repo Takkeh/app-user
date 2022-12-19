@@ -42,6 +42,13 @@ class MyAddressesCtrl extends GetxController {
   Future<MyAddressesModel?> fetchData() async {
     model = await MyAddressesApi().data();
     if (model == null) {
+      print("alsfijasflij");
+      selectedLat.value = UserLocationCtrl.find.latitude.value;
+      selectedLng.value = UserLocationCtrl.find.longitude.value;
+      locality.value = UserLocationCtrl.find.locality.value;
+      subLocality.value = UserLocationCtrl.find.subLocality.value;
+      street.value = UserLocationCtrl.find.street.value;
+      update();
       return null;
     }
     if (model!.code == 200) {

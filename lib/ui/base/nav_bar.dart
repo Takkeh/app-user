@@ -1,8 +1,11 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:persistent_bottom_nav_bar/persistent-tab-view.dart';
 import 'package:takkeh/controller/my_orders/my_orders_ctrl.dart';
 import 'package:takkeh/controller/nav_bar_ctrl.dart';
+import 'package:takkeh/controller/user_location_ctrl.dart';
 import 'package:takkeh/helper/guest_user_helper.dart';
 import 'package:takkeh/ui/screens/help/help.dart';
 import 'package:takkeh/ui/screens/home/home.dart';
@@ -23,7 +26,7 @@ class BaseNavBar extends StatefulWidget {
   State<BaseNavBar> createState() => BaseNavBarState();
 }
 
-class BaseNavBarState extends State<BaseNavBar> {
+class BaseNavBarState extends State<BaseNavBar> with WidgetsBindingObserver {
   void toggleGuestUser(int index) {
     if (GuestUserHelper.check(Get.currentRoute, context)) {
       navBarController.index = index;
@@ -75,7 +78,23 @@ class BaseNavBarState extends State<BaseNavBar> {
     navBarController.addListener(() {
       setState(() {});
     });
+    WidgetsBinding.instance.addObserver(this);
     super.initState();
+  }
+
+  @override
+  void dispose() {
+    WidgetsBinding.instance.removeObserver(this);
+    super.dispose();
+  }
+
+  @override
+  void didChangeAppLifecycleState(AppLifecycleState state) async {
+    log("AppLifecycleState:: $state");
+    if (state == AppLifecycleState.resumed) {
+      UserLocationCtrl.find.getPermission();
+    }
+    super.didChangeAppLifecycleState(state);
   }
 
   @override

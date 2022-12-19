@@ -47,7 +47,11 @@ class OrderStatusScreen extends StatelessWidget {
           child: CustomFABButton(
             title: TranslationService.getString("go_to_home_screen_key"),
             onPressed: () {
-              Get.offAll(() => const BaseNavBar(), binding: NavBarBinding());
+              if (route == kBack) {
+                Get.back();
+              } else {
+                Get.offAll(() => const BaseNavBar(), binding: NavBarBinding());
+              }
             },
           ),
         ),
