@@ -73,7 +73,11 @@ class RestaurantsBuilder extends StatelessWidget {
             return const BaseVerticalListLoading();
           },
           newPageProgressIndicatorBuilder: (context) {
-            return const RestaurantCPI();
+            if (RestaurantsCtrl.find.pagingController.itemList!.length < 6) {
+              return const SizedBox.shrink();
+            } else {
+              return const RestaurantCPI();
+            }
           },
           itemBuilder: (context, data, index) {
             return RestaurantListTile(
@@ -87,7 +91,7 @@ class RestaurantsBuilder extends StatelessWidget {
               isBusy: data.isBusy!,
               onTap: () {
                 if (UserOrderCtrl.find.orderList.isNotEmpty && UserOrderCtrl.find.restaurantId != data.id!) {
-                  NewBasketDialog.show(context, data: data);
+                  NewBasketDialog().show(data: data);
                 } else {
                   UserOrderCtrl.find.restaurantId = data.id!;
                   Get.to(

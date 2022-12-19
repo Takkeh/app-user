@@ -182,7 +182,7 @@ class _ViewRestaurantProductScreenState extends State<ViewRestaurantProductScree
                     child: CustomTextField(
                       controller: noteCtrl,
                       keyboardType: TextInputType.multiline,
-                      hintText: "Do you have any Notes ?",
+                      hintText: TranslationService.getString('do_you_have_notes_key'),
                       minLines: 1,
                       maxLines: 3,
                       prefixIcon: const CustomPrefixIcon(

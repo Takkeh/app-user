@@ -5,7 +5,7 @@ import 'package:takkeh/translation/service.dart';
 import 'package:takkeh/ui/screens/addresses/widgets/add_address_button.dart';
 import 'package:takkeh/ui/screens/addresses/widgets/my_addresses_listview.dart';
 import 'package:takkeh/ui/screens/addresses/widgets/no_addresses_widget.dart';
-import 'package:takkeh/ui/widgets/custom_back_widget.dart';
+import 'package:takkeh/ui/widgets/transparent_app_bar.dart';
 
 class MyAddressesScreen extends StatelessWidget {
   const MyAddressesScreen({Key? key}) : super(key: key);
@@ -21,10 +21,7 @@ class MyAddressesScreen extends StatelessWidget {
                   padding: EdgeInsets.symmetric(horizontal: 30.0),
                 )
               : null,
-          appBar: AppBar(
-            leading: const CustomBackWidget(),
-            title: Text(TranslationService.getString('my_addresses_key')),
-          ),
+          appBar: TransparentAppBar(title: TranslationService.getString('my_addresses_key')),
           body: controller.myAddresses.isEmpty
               ? const NoAddressesWidget()
               : const MyAddressesListViewBuilder(

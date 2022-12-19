@@ -17,15 +17,81 @@ import 'package:takkeh/ui/widgets/title_widget.dart';
 import 'package:takkeh/utils/app_constants.dart';
 import 'package:takkeh/utils/shared_prefrences.dart';
 
-class HomeScreen extends StatelessWidget {
+class HomeScreen extends StatefulWidget {
   const HomeScreen({Key? key}) : super(key: key);
 
-  static final finished = [
+  @override
+  State<HomeScreen> createState() => _HomeScreenState();
+}
+
+// with WidgetsBindingObserver
+class _HomeScreenState extends State<HomeScreen> {
+  final finished = [
     kCompleted,
     kCanceled,
     kCanceled0,
     kDenied,
   ];
+
+  Widget _getOrderBox(AsyncSnapshot<QuerySnapshot<FireOrderDetails>> snapshot) {
+    if (snapshot.hasError) {
+      return const SizedBox.shrink();
+    }
+
+    if (snapshot.connectionState == ConnectionState.waiting) {
+      return const SizedBox.shrink();
+    }
+
+    if (snapshot.data!.docs.isEmpty) {
+      return const SizedBox.shrink();
+    }
+
+    final data = snapshot.data!.docs[0].data();
+    return OrderFABButton(data: data);
+  }
+
+  double _togglePadding(AsyncSnapshot<QuerySnapshot<FireOrderDetails>> snapshot) {
+    if (snapshot.hasError) {
+      return 30.0;
+    }
+
+    if (snapshot.connectionState == ConnectionState.waiting) {
+      return 30.0;
+    }
+
+    if (snapshot.data!.docs.isEmpty) {
+      return 30.0;
+    }
+
+    return snapshot.data!.docs.isEmpty ? 30 : 120;
+  }
+
+  @override
+  void initState() {
+    // WidgetsBinding.instance.addObserver(this);
+    super.initState();
+  }
+
+  @override
+  void dispose() {
+    // WidgetsBinding.instance.removeObserver(this);
+    super.dispose();
+  }
+
+  // @override
+  // void didChangeAppLifecycleState(AppLifecycleState state) async {
+  //   log("AppLifecycleState:: $state");
+  //   switch (state) {
+  //     case AppLifecycleState.paused:
+  //     case AppLifecycleState.detached:
+  //     case AppLifecycleState.inactive:
+  //       break;
+  //     case AppLifecycleState.resumed:
+  //       UserLocationCtrl.find.getPermission();
+  //       break;
+  //   }
+  //   super.didChangeAppLifecycleState(state);
+  // }
 
   @override
   Widget build(BuildContext context) {
@@ -42,21 +108,9 @@ class HomeScreen extends StatelessWidget {
             )
             .snapshots(),
         builder: (context, snapshot) {
-          if (snapshot.hasError) {
-            return const SizedBox.shrink();
-          }
-
-          if (snapshot.connectionState == ConnectionState.waiting) {
-            return const SizedBox.shrink();
-          }
-
-          if (snapshot.data!.docs.isEmpty) {
-            return const SizedBox.shrink();
-          }
-
           return Scaffold(
             floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
-            floatingActionButton: const OrderFABButton(),
+            floatingActionButton: _getOrderBox(snapshot),
             onDrawerChanged: (isOpen) {
               NavBarCtrl.find.toggle(isOpen);
             },
@@ -64,7 +118,7 @@ class HomeScreen extends StatelessWidget {
             appBar: const HomeAppBar(),
             body: SingleChildScrollView(
               //30 //120
-              padding: const EdgeInsets.only(bottom: 30),
+              padding: EdgeInsets.only(bottom: _togglePadding(snapshot)),
               child: Column(
                 children: [
                   Stack(

@@ -28,9 +28,9 @@ class HomeHeader extends StatelessWidget {
           if (MySharedPreferences.isLogIn)
             Row(
               children: [
-                const Text(
-                  "Hi",
-                  style: TextStyle(color: Colors.white, fontSize: 16),
+                Text(
+                  TranslationService.getString('hi_key'),
+                  style: const TextStyle(color: Colors.white, fontSize: 16),
                 ),
                 Text(
                   " ${MySharedPreferences.name} ",

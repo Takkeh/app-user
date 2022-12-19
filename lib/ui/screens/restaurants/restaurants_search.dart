@@ -63,7 +63,7 @@ class RestaurantsSearchScreen extends StatelessWidget {
                         isBusy: data.isBusy!,
                         onTap: () {
                           if (UserOrderCtrl.find.orderList.isNotEmpty && UserOrderCtrl.find.restaurantId != data.id!) {
-                            NewBasketDialog.show(context, data: data);
+                            NewBasketDialog().show(data: data);
                           } else {
                             UserOrderCtrl.find.restaurantId = data.id!;
                             Get.to(

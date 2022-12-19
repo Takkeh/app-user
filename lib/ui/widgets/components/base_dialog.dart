@@ -1,18 +1,17 @@
-import 'dart:developer';
-
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:takkeh/binding/registration/sign_in.dart';
-import 'package:takkeh/helper/guest_user_helper.dart';
 import 'package:takkeh/translation/service.dart';
-import 'package:takkeh/ui/screens/registration/registration.dart';
 import 'package:takkeh/ui/widgets/back_leading_widget.dart';
 import 'package:takkeh/ui/widgets/custom_elevated_button.dart';
-import 'package:takkeh/utils/app_constants.dart';
 import 'package:takkeh/utils/base/colors.dart';
 
-class GuestDialog {
-  Future<void> show(String routeName, BuildContext context) async {
+class BaseDialog {
+  void show({
+    required String title,
+    required String body,
+    required VoidCallback onPressed,
+    String? confirmTitle,
+  }) async {
     Get.defaultDialog(
       title: '',
       titleStyle: const TextStyle(fontSize: 0),
@@ -30,7 +29,7 @@ class GuestDialog {
                 child: Padding(
                   padding: const EdgeInsetsDirectional.only(start: 8.0),
                   child: Text(
-                    TranslationService.getString('guest_dialog_title_key'),
+                    title,
                     style: const TextStyle(
                       color: MyColors.redPrimary,
                       fontSize: 22,
@@ -43,7 +42,7 @@ class GuestDialog {
           Padding(
             padding: const EdgeInsets.only(top: 20.0, bottom: 40.0),
             child: Text(
-              TranslationService.getString('guest_dialog_body_key'),
+              body,
               style: const TextStyle(
                 fontSize: 18,
               ),
@@ -64,15 +63,10 @@ class GuestDialog {
               const SizedBox(width: 8.0),
               Expanded(
                 child: CustomElevatedButton(
-                  title: TranslationService.getString('sign_in_key'),
+                  title: confirmTitle ?? TranslationService.getString('confirm_key'),
                   color: MyColors.redPrimary,
                   textColor: Colors.white,
-                  onPressed: () {
-                    Get.back();
-                    GuestUserHelper.currentRoute = routeName;
-                    log("currentRoute:: ${GuestUserHelper.currentRoute}");
-                    Get.to(() => const RegistrationScreen(route: kBack), binding: RegistrationBinding());
-                  },
+                  onPressed: onPressed,
                 ),
               ),
             ],

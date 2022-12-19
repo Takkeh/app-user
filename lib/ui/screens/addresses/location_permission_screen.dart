@@ -6,6 +6,7 @@ import 'package:get/get.dart';
 import 'package:takkeh/controller/user_location_ctrl.dart';
 import 'package:takkeh/translation/service.dart';
 import 'package:takkeh/ui/widgets/components/overlay_loader.dart';
+import 'package:takkeh/ui/widgets/transparent_app_bar.dart';
 import 'package:takkeh/utils/base/colors.dart';
 import 'package:takkeh/utils/base/images.dart';
 
@@ -45,8 +46,8 @@ class LocationPermissionScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(),
       backgroundColor: MyColors.blue6FA,
+      appBar: TransparentAppBar(title: TranslationService.getString('grant_location_key')),
       body: Padding(
         padding: const EdgeInsets.all(30.0),
         child: SingleChildScrollView(

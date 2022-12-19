@@ -40,61 +40,6 @@ class BasketScreen extends StatefulWidget {
 class _BasketScreenState extends State<BasketScreen> {
   late TextEditingController noteCtrl;
 
-  final myList = [
-    {
-      "id": 18,
-      "product_id": 18,
-      "product_name": "بيج تيستي",
-      "product_image": "img/products/BigTasty-Classic.jpg",
-      "quantity": 1,
-      "items": [
-        {"id": 653, "group_name": "Size", "group_type": "required", "item_name": "smaill", "price": "10.00"}
-      ],
-      "note": "",
-      "area": null,
-      "price": "15.00"
-    },
-    {
-      "id": 17,
-      "product_id": 17,
-      "product_name": "ماك تشكن سبايسي",
-      "product_image": "img/products/mcd2.jpg",
-      "quantity": 2,
-      "items": [
-        {"id": 654, "group_name": "Size", "group_type": "required", "item_name": "big", "price": "20.00"}
-      ],
-      "note": "",
-      "area": null,
-      "price": "50.00"
-    },
-    {
-      "id": 16,
-      "product_id": 16,
-      "product_name": "kfc",
-      "product_image": "img/products/mcd2.jpg",
-      "quantity": 2,
-      "items": [
-        {"id": 654, "group_name": "Size", "group_type": "required", "item_name": "big", "price": "20.00"}
-      ],
-      "note": "",
-      "area": null,
-      "price": "50.00"
-    },
-    {
-      "id": 15,
-      "product_id": 15,
-      "product_name": "kfc",
-      "product_image": "img/products/mcd2.jpg",
-      "quantity": 2,
-      "items": [
-        {"id": 654, "group_name": "Size", "group_type": "required", "item_name": "big", "price": "20.00"}
-      ],
-      "note": "",
-      "area": null,
-      "price": "50.00"
-    }
-  ];
-
   @override
   void initState() {
     super.initState();
@@ -164,7 +109,7 @@ class _BasketScreenState extends State<BasketScreen> {
                   child: CustomTextField(
                     controller: noteCtrl,
                     keyboardType: TextInputType.multiline,
-                    hintText: "do_you_have_notes_key",
+                    hintText: TranslationService.getString('do_you_have_notes_key'),
                     minLines: 1,
                     maxLines: 3,
                     prefixIcon: const CustomPrefixIcon(
