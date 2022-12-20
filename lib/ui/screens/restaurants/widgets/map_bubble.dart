@@ -36,7 +36,7 @@ class _MapBubbleBuilderState extends State<MapBubbleBuilder> {
 
   @override
   Widget build(BuildContext context) {
-    return GetBuilder<MapController>(
+    return GetX<MapController>(
       builder: (controller) {
         return ClipRRect(
           borderRadius: BorderRadius.circular(20),
@@ -78,7 +78,7 @@ class _MapBubbleBuilderState extends State<MapBubbleBuilder> {
                   ],
                 ),
                 DeliveryInfoBox(
-                  address: "${controller.mapSubLocality.value}, ${controller.mapStreet.value}",
+                  address: "${controller.mapLocality.value} ${controller.mapSubLocality.value}, ${controller.mapStreet.value}",
                   isVisible: false,
                 ),
               ],

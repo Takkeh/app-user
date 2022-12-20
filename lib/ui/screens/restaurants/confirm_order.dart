@@ -53,7 +53,6 @@ class ConfirmOrderScreen extends StatelessWidget {
               padding: const EdgeInsets.fromLTRB(30, 10, 30, 80),
               children: [
                 const ConfirmOrderMapBubble(),
-                // const MapBubbleBuilder(route: kAddress),
                 const SizedBox(height: 20),
                 CustomTextField(
                   hintText: '30 - 40 min',

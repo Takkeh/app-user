@@ -77,8 +77,8 @@ class MapScreen extends StatelessWidget {
                     MapController.find.mapController = googleMapController;
                   },
                   zoomControlsEnabled: false,
-                  myLocationButtonEnabled: false,
-                  myLocationEnabled: false,
+                  myLocationButtonEnabled: true,
+                  myLocationEnabled: true,
                   initialCameraPosition: CameraPosition(
                     target: LatLng(MapController.find.mapLat!, MapController.find.mapLng!),
                     zoom: 15,

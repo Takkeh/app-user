@@ -103,10 +103,10 @@ class MapController extends GetxController {
 
   Future getAddress(double lat, double lng) async {
     List<Placemark> placeMarks = await placemarkFromCoordinates(lat, lng, localeIdentifier: MySharedPreferences.language);
-    mapLocality.value = placeMarks[1].locality!;
-    mapSubLocality.value = placeMarks[1].subLocality!;
-    mapStreet.value = placeMarks[1].street!;
-    regionCtrl.value.text = mapSubLocality.value;
+    mapLocality.value = placeMarks[0].locality ?? '';
+    mapSubLocality.value = placeMarks[0].subLocality ?? '';
+    mapStreet.value = placeMarks.firstWhere((element) => !element.name!.contains('+')).name ?? '';
+    regionCtrl.value.text = '${mapLocality.value} ${mapSubLocality.value}';
     streetCtrl.value.text = mapStreet.value;
     log("placeMarks:: $placeMarks");
     log("address:: ${mapLocality.value} -- ${mapStreet.value}");
@@ -120,7 +120,7 @@ class MapController extends GetxController {
     mapLocality.value = MyAddressesCtrl.find.locality.value;
     mapSubLocality.value = MyAddressesCtrl.find.subLocality.value;
     mapStreet.value = MyAddressesCtrl.find.street.value;
-    regionCtrl.value = TextEditingController(text: mapSubLocality.value);
+    regionCtrl.value = TextEditingController(text: '${mapLocality.value} ${mapSubLocality.value}');
     streetCtrl.value = TextEditingController(text: mapStreet.value);
     super.onInit();
   }

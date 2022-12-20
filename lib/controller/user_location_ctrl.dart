@@ -14,9 +14,9 @@ class UserLocationCtrl extends GetxController {
 
   final latitude = 0.0.obs;
   final longitude = 0.0.obs;
+  final locality = ''.obs;
   final subLocality = ''.obs;
   final street = ''.obs;
-  final locality = ''.obs;
 
   final deniedPermissions = [
     LocationPermission.denied,
@@ -68,9 +68,9 @@ class UserLocationCtrl extends GetxController {
 
   Future getAddress(double lat, double lng) async {
     List<Placemark> placeMarks = await placemarkFromCoordinates(lat, lng, localeIdentifier: MySharedPreferences.language);
-    locality.value = placeMarks[1].locality!;
-    subLocality.value = placeMarks[1].subLocality!;
-    street.value = placeMarks[1].street!;
+    locality.value = placeMarks[0].locality ?? '';
+    subLocality.value = placeMarks[0].subLocality ?? '';
+    street.value = placeMarks.firstWhere((element) => !element.name!.contains('+')).name ?? '';
     log("placeMarks:: $placeMarks");
     log("address:: ${subLocality.value} -- ${street.value}");
     update();

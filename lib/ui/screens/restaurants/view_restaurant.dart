@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:takkeh/controller/restaurants/most_popular_products.dart';
+import 'package:takkeh/controller/user_location_ctrl.dart';
 import 'package:takkeh/translation/service.dart';
 import 'package:takkeh/ui/screens/restaurants/widgets/most_popular_categories.dart';
 import 'package:takkeh/ui/screens/restaurants/widgets/products_fab_button.dart';
@@ -13,7 +14,7 @@ import 'package:takkeh/ui/widgets/search_box_widget.dart';
 import 'package:takkeh/utils/base/colors.dart';
 import 'package:takkeh/utils/custom_clip_path.dart';
 
-class ViewRestaurantScreen extends StatelessWidget {
+class ViewRestaurantScreen extends StatefulWidget {
   final String title, cover, logo, time, cost, review, reviewIcon, phone;
   final int restaurantId;
 
@@ -31,11 +32,22 @@ class ViewRestaurantScreen extends StatelessWidget {
   }) : super(key: key);
 
   @override
+  State<ViewRestaurantScreen> createState() => _ViewRestaurantScreenState();
+}
+
+class _ViewRestaurantScreenState extends State<ViewRestaurantScreen> {
+  @override
+  void initState() {
+    UserLocationCtrl.find.getPermission();
+    super.initState();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
       floatingActionButton: ProductsFABButton(
-        restaurantId: restaurantId,
+        restaurantId: widget.restaurantId,
       ),
       body: GetX<MostPopularProductsCtrl>(
         builder: (controller) {
@@ -48,13 +60,13 @@ class ViewRestaurantScreen extends StatelessWidget {
                 leadingWidth: 60,
                 leading: const BackLeadingWidget(),
                 actions: [
-                  SearchBoxWidget(restaurantId: restaurantId),
+                  SearchBoxWidget(restaurantId: widget.restaurantId),
                 ],
                 expandedHeight: controller.isEmpty.value ? 330 : 533,
                 collapsedHeight: kToolbarHeight + 50,
                 centerTitle: true,
                 title: Text(
-                  title,
+                  widget.title,
                   style: const TextStyle(
                     color: Colors.white,
                     fontWeight: FontWeight.bold,
@@ -75,7 +87,7 @@ class ViewRestaurantScreen extends StatelessWidget {
                             ClipPath(
                               clipper: CustomClipPath(),
                               child: CustomNetworkImage(
-                                url: cover,
+                                url: widget.cover,
                                 radius: 0,
                                 height: 240,
                               ),
@@ -83,15 +95,15 @@ class ViewRestaurantScreen extends StatelessWidget {
                             Positioned(
                               bottom: -37,
                               child: RestaurantInfoBubble(
-                                title: title,
-                                phone: phone,
-                                logo: logo,
-                                time: time,
-                                cost: cost,
-                                review: review,
-                                cover: cover,
-                                restaurantId: restaurantId,
-                                reviewIcon: reviewIcon,
+                                title: widget.title,
+                                phone: widget.phone,
+                                logo: widget.logo,
+                                time: widget.time,
+                                cost: widget.cost,
+                                review: widget.review,
+                                cover: widget.cover,
+                                restaurantId: widget.restaurantId,
+                                reviewIcon: widget.reviewIcon,
                               ),
                             )
                           ],
@@ -110,7 +122,7 @@ class ViewRestaurantScreen extends StatelessWidget {
                                   ),
                                 ),
                               ),
-                              MostPopularCategoriesBuilder(restaurantId: restaurantId),
+                              MostPopularCategoriesBuilder(restaurantId: widget.restaurantId),
                             ],
                           ),
                       ],
@@ -124,7 +136,7 @@ class ViewRestaurantScreen extends StatelessWidget {
                 ),
               ),
               SliverToBoxAdapter(
-                child: ViewRestaurantBuilder(restaurantId: restaurantId),
+                child: ViewRestaurantBuilder(restaurantId: widget.restaurantId),
               ),
               const SliverToBoxAdapter(
                 child: SizedBox(height: 80),

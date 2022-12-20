@@ -2,7 +2,6 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:takkeh/controller/nav_bar_ctrl.dart';
 import 'package:takkeh/model/restaurants/order_details_model.dart';
-import 'package:takkeh/send_noti_ctrl.dart';
 import 'package:takkeh/translation/service.dart';
 import 'package:takkeh/ui/base/base_drawer.dart';
 import 'package:takkeh/ui/base/guest_drawer.dart';
@@ -131,7 +130,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   const SizedBox(height: 30),
                   ElevatedButton(
                     onPressed: () {
-                      SendNotificationsCtrl().send();
+                      // SendNotificationsCtrl().send();
                     },
                     child: const Text("Send"),
                   ),
