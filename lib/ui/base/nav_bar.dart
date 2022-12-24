@@ -12,10 +12,6 @@ import 'package:takkeh/ui/widgets/custom_nav_bar_icon.dart';
 import 'package:takkeh/utils/base/colors.dart';
 import 'package:takkeh/utils/base/icons.dart';
 
-bool isHidden = false;
-
-late PersistentTabController navBarController;
-
 class BaseNavBar extends StatefulWidget {
   const BaseNavBar({Key? key}) : super(key: key);
 
@@ -24,6 +20,8 @@ class BaseNavBar extends StatefulWidget {
 }
 
 class BaseNavBarState extends State<BaseNavBar> {
+  late PersistentTabController navBarController;
+
   void toggleGuestUser(int index) {
     if (GuestUserHelper.check(Get.currentRoute, context)) {
       navBarController.index = index;
