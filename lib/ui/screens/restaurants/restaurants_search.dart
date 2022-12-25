@@ -15,6 +15,7 @@ import 'package:takkeh/ui/widgets/custom_restaurants_loading.dart';
 import 'package:takkeh/ui/widgets/restaurant_cpi.dart';
 import 'package:takkeh/ui/widgets/restaurant_list_tile.dart';
 
+//TODO: search and pagination
 class RestaurantsSearchScreen extends StatelessWidget {
   const RestaurantsSearchScreen({Key? key}) : super(key: key);
 
@@ -89,47 +90,6 @@ class RestaurantsSearchScreen extends StatelessWidget {
               );
             },
           ),
-
-          // Obx(
-          //   () => RestaurantsSearchCtrl.find.searchQuery.isEmpty
-          //       ? const SizedBox.shrink()
-          //       : RestaurantsSearchCtrl.find.isLoading.value
-          //           ? const RedCircularProgressIndicator()
-          //           : ListView.separated(
-          //               padding: const EdgeInsetsDirectional.fromSTEB(20, 0, 20, 20),
-          //               physics: const NeverScrollableScrollPhysics(),
-          //               shrinkWrap: true,
-          //               separatorBuilder: (context, index) => const SizedBox(height: 15),
-          //               itemCount: RestaurantsSearchCtrl.find.model.value!.data!.length,
-          //               itemBuilder: (context, index) {
-          //                 final data = RestaurantsSearchCtrl.find.model.value!.data![index];
-          //                 return CustomListTile(
-          //                   imageUrl: data.logo!,
-          //                   title: data.name!,
-          //                   description: data.name!,
-          //                   onTap: () {
-          //                     Get.to(
-          //                       () => ViewRestaurantScreen(
-          //                         title: data.name!,
-          //                         cover: data.cover!,
-          //                         restaurantId: data.id!,
-          //                         logo: data.logo!,
-          //                         time: '',
-          //                         cost: '',
-          //                         review: '',
-          //                         reviewIcon: '',
-          //                       ),
-          //                       binding: ProductBinding(id: data.id!),
-          //                     );
-          //                   },
-          //                   reviewIcon: '',
-          //                   review: '',
-          //                   time: '',
-          //                   cost: '',
-          //                 );
-          //               },
-          //             ),
-          // ),
         ],
       ),
     );
