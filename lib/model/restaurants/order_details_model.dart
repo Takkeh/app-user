@@ -70,7 +70,7 @@ class FireOrderDetails {
           orderId: json['order_id'] as int,
           dropPointId: json['drop_point_id'] as int,
           pickUpPointId: json['pickup_point_id'] as int,
-          driverImage: json['driver_image'] as String,
+          driverImage: json['driver_image'] as String ?? '',
           driverName: json['driver_name'] as String,
           driverPhone: json['driver_phone'] as String,
           dropPointAddress: json['drop_point_address'] as String,
