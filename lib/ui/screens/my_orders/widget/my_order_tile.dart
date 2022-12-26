@@ -7,9 +7,16 @@ import 'package:takkeh/utils/base/icons.dart';
 
 class MyOrderTile extends StatelessWidget {
   final Function() onTap;
-  final String name,id,logo;
+  final String name, id, logo;
   final DateTime date;
-  const MyOrderTile({Key? key,required this.onTap,required this.name , required this.id,required this.date,required this.logo}) : super(key: key);
+  const MyOrderTile({
+    Key? key,
+    required this.onTap,
+    required this.name,
+    required this.id,
+    required this.date,
+    required this.logo,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -20,20 +27,15 @@ class MyOrderTile extends StatelessWidget {
           borderRadius: BorderRadius.circular(17),
           color: const Color(0xFFFDFDFE),
         ),
-        padding:
-        const EdgeInsets.symmetric(horizontal: 10, vertical: 13),
+        padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 13),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.start,
           children: [
-            Container(
+            CustomNetworkImage(
+              url: logo,
+              radius: 10,
               width: 80,
               height: 80,
-              alignment: Alignment.center,
-              decoration: BoxDecoration(
-                color: MyColors.primary.withOpacity(0.50),
-                borderRadius: BorderRadius.circular(9.0),
-              ),
-              child: CustomNetworkImage(url: logo,radius: 12,),
             ),
             const SizedBox(width: 10),
             Expanded(

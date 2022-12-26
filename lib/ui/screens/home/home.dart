@@ -23,7 +23,6 @@ class HomeScreen extends StatefulWidget {
   State<HomeScreen> createState() => _HomeScreenState();
 }
 
-// with WidgetsBindingObserver
 class _HomeScreenState extends State<HomeScreen> {
   final finished = [
     kCompleted,
@@ -66,33 +65,6 @@ class _HomeScreenState extends State<HomeScreen> {
   }
 
   @override
-  void initState() {
-    // WidgetsBinding.instance.addObserver(this);
-    super.initState();
-  }
-
-  @override
-  void dispose() {
-    // WidgetsBinding.instance.removeObserver(this);
-    super.dispose();
-  }
-
-  // @override
-  // void didChangeAppLifecycleState(AppLifecycleState state) async {
-  //   log("AppLifecycleState:: $state");
-  //   switch (state) {
-  //     case AppLifecycleState.paused:
-  //     case AppLifecycleState.detached:
-  //     case AppLifecycleState.inactive:
-  //       break;
-  //     case AppLifecycleState.resumed:
-  //       UserLocationCtrl.find.getPermission();
-  //       break;
-  //   }
-  //   super.didChangeAppLifecycleState(state);
-  // }
-
-  @override
   Widget build(BuildContext context) {
     return StreamBuilder(
         stream: FirebaseFirestore.instance
@@ -116,7 +88,6 @@ class _HomeScreenState extends State<HomeScreen> {
             drawer: MySharedPreferences.isLogIn ? const BaseDrawer() : const GuestDrawer(),
             appBar: const HomeAppBar(),
             body: SingleChildScrollView(
-              //30 //120
               padding: EdgeInsets.only(bottom: _togglePadding(snapshot)),
               child: Column(
                 children: [
@@ -128,11 +99,14 @@ class _HomeScreenState extends State<HomeScreen> {
                     ],
                   ),
                   const SizedBox(height: 30),
-                  ElevatedButton(
-                    onPressed: () {
-                      // SendNotificationsCtrl().send();
-                    },
-                    child: const Text("Send"),
+                  Visibility(
+                    visible: false,
+                    child: ElevatedButton(
+                      onPressed: () {
+                        // SendNotificationsCtrl().send();
+                      },
+                      child: const Text("Send"),
+                    ),
                   ),
                   const SectionsBuilder(),
                   TitleWidget(

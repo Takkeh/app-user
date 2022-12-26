@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:takkeh/binding/addresses.dart';
 import 'package:takkeh/controller/addresses/my_addresses_ctrl.dart';
 import 'package:takkeh/controller/restaurants/add_promo_code_ctrl.dart';
 import 'package:takkeh/controller/restaurants/make_order.dart';
@@ -7,6 +8,7 @@ import 'package:takkeh/controller/restaurants/promo_codes_ctrl.dart';
 import 'package:takkeh/helper/location_permission_helper.dart';
 import 'package:takkeh/model/restaurants/promo_codes_model.dart';
 import 'package:takkeh/translation/service.dart';
+import 'package:takkeh/ui/screens/addresses/add_new_address_screen.dart';
 import 'package:takkeh/ui/screens/addresses/widgets/add_address_button.dart';
 import 'package:takkeh/ui/screens/addresses/widgets/my_addresses_listview.dart';
 import 'package:takkeh/ui/screens/addresses/widgets/no_addresses_widget.dart';
@@ -40,6 +42,14 @@ class BasketScreen extends StatefulWidget {
 class _BasketScreenState extends State<BasketScreen> {
   late TextEditingController noteCtrl;
 
+  void navigate() {
+    LocationPermissionHelper.check(
+      action: () {
+        Get.to(() => ConfirmOrderScreen(orderId: widget.orderId));
+      },
+    );
+  }
+
   @override
   void initState() {
     super.initState();
@@ -63,11 +73,19 @@ class _BasketScreenState extends State<BasketScreen> {
             ? CustomFABButton(
                 title: TranslationService.getString('confirm_order_key'),
                 onPressed: () {
-                  LocationPermissionHelper.check(
-                    action: () {
-                      Get.to(() => ConfirmOrderScreen(orderId: widget.orderId));
-                    },
-                  );
+                  if (MyAddressesCtrl.find.myAddresses.isEmpty) {
+                    Get.to(
+                      () => const AddNewAddressScreen(),
+                      binding: CreateAddressBinding(),
+                    )!
+                        .then((value) {
+                      if (MyAddressesCtrl.find.myAddresses.isNotEmpty) {
+                        navigate();
+                      }
+                    });
+                    return;
+                  }
+                  navigate();
                 },
               )
             : null,

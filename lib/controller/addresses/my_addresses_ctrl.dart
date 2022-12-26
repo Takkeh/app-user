@@ -34,15 +34,12 @@ class MyAddressesCtrl extends GetxController {
   void addAddress(MyAddresses newAddress, int addressId) {
     myAddresses.insert(0, newAddress);
     selectAddress(addressId);
-    // selectedAddressId.value = addressId;
-    // MySharedPreferences.addressId = addressId;
     update();
   }
 
   Future<MyAddressesModel?> fetchData() async {
     model = await MyAddressesApi().data();
     if (model == null) {
-      print("alsfijasflij");
       selectedLat.value = UserLocationCtrl.find.latitude.value;
       selectedLng.value = UserLocationCtrl.find.longitude.value;
       locality.value = UserLocationCtrl.find.locality.value;

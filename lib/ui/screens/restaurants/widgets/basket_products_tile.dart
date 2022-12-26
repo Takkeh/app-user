@@ -142,8 +142,8 @@ class BasketProductTileState extends State<BasketProductTile> {
               radius: 10,
               width: 80,
               height: 80,
+              margin: const EdgeInsetsDirectional.only(start: 10, end: 10),
             ),
-            const SizedBox(width: 10),
             Expanded(
               child: Row(
                 crossAxisAlignment: CrossAxisAlignment.start,
