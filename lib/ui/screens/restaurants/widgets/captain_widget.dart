@@ -2,13 +2,13 @@ import 'dart:math';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:takkeh/services/call_phone_num_service.dart';
 import 'package:takkeh/translation/service.dart';
 import 'package:takkeh/ui/widgets/custom_network_image.dart';
 import 'package:takkeh/utils/base/colors.dart';
 import 'package:takkeh/utils/base/icons.dart';
 import 'package:takkeh/utils/base/images.dart';
 import 'package:takkeh/utils/shared_prefrences.dart';
-import 'package:url_launcher/url_launcher.dart';
 
 class CaptainWidget extends StatelessWidget {
   final String name, imageUrl, phoneNum;
@@ -19,21 +19,6 @@ class CaptainWidget extends StatelessWidget {
     required this.imageUrl,
     required this.phoneNum,
   }) : super(key: key);
-
-  static Future<void> launchPhoneDialer(String contactNumber) async {
-    final Uri phoneUri = Uri(
-      scheme: "tel",
-      path: contactNumber,
-    );
-    final url = Uri.parse(phoneUri.toString());
-    try {
-      if (await canLaunchUrl(url)) {
-        await launchUrl(url);
-      }
-    } catch (error) {
-      throw ("Cannot dial");
-    }
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -70,7 +55,7 @@ class CaptainWidget extends StatelessWidget {
               transform: MySharedPreferences.language == 'en' ? Matrix4.rotationY(pi) : Matrix4.rotationY(0),
               child: GestureDetector(
                 onTap: () {
-                  launchPhoneDialer(phoneNum);
+                  CallPhoneNumService().init(phoneNum);
                 },
                 child: Stack(
                   alignment: Alignment.center,

@@ -1,9 +1,7 @@
-import 'dart:developer';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
+import 'package:takkeh/services/call_phone_num_service.dart';
 import 'package:takkeh/translation/service.dart';
 import 'package:takkeh/ui/screens/restaurants/widgets/custom_bubble_image.dart';
 import 'package:takkeh/ui/screens/restaurants/widgets/gradient_colors_box.dart';
@@ -12,11 +10,9 @@ import 'package:takkeh/ui/screens/restaurants/widgets/restaurants_reviews_builde
 import 'package:takkeh/ui/widgets/base_switch_slider.dart';
 import 'package:takkeh/ui/widgets/custom_network_image.dart';
 import 'package:takkeh/ui/widgets/transparent_app_bar.dart';
-import 'package:takkeh/utils/app_constants.dart';
 import 'package:takkeh/utils/base/colors.dart';
 import 'package:takkeh/utils/base/icons.dart';
 import 'package:takkeh/utils/shared_prefrences.dart';
-import 'package:url_launcher/url_launcher.dart';
 
 class RestaurantInfoScreen extends StatefulWidget {
   final String title, imageUrl, logo, phone;
@@ -32,16 +28,6 @@ class _RestaurantInfoScreenState extends State<RestaurantInfoScreen> {
   late PageController pageController;
   bool isInformation = true;
   int currentIndex = 0;
-
-  Future<void> _launchUrl(String phone) async {
-    try {
-      final Uri url = Uri.parse("tel:$phone");
-      await launchUrl(url);
-    } catch (e) {
-      log("error:: $e");
-      Fluttertoast.showToast(msg: AppConstants.failedMessage);
-    }
-  }
 
   @override
   void initState() {
@@ -97,7 +83,7 @@ class _RestaurantInfoScreenState extends State<RestaurantInfoScreen> {
                             children: [
                               GestureDetector(
                                 onTap: () {
-                                  _launchUrl(widget.phone);
+                                  CallPhoneNumService().init(widget.phone);
                                 },
                                 child: CircleAvatar(
                                   backgroundColor: Colors.white,
