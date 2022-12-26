@@ -74,5 +74,10 @@
         <string>Please allow access to photo library so you can easily upload your photos.</string>
         <key>NSPhotoLibraryUsageDescription</key>
         <string>Please allow access to photo library so you can easily upload your photos.</string>
+        <key>LSApplicationQueriesSchemes</key>
+        <array>
+          <string>sms</string>
+          <string>tel</string>
+        </array>
 	</dict>
 </plist>

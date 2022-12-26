@@ -50,6 +50,7 @@ class _MapBubbleBuilderState extends State<MapBubbleBuilder> {
                     SizedBox(
                       height: 156,
                       child: GoogleMap(
+                        myLocationButtonEnabled: false,
                         zoomControlsEnabled: false,
                         onMapCreated: (mapCtrl) {
                           mapController = mapCtrl;
@@ -62,8 +63,6 @@ class _MapBubbleBuilderState extends State<MapBubbleBuilder> {
                               }
                               if (widget.route == kAddress) {
                                 Get.to(() => const MyAddressesScreen());
-                                // Get.to(() => const AddNewAddressScreen(), binding: CreateAddressBinding());
-                                // Get.to(() => MapScreen(mapController: mapController));
                               }
                             },
                           );
