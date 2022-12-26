@@ -9,6 +9,7 @@ import 'package:takkeh/translation/service.dart';
 import 'package:takkeh/ui/screens/restaurants/widgets/custom_fab_button.dart';
 import 'package:takkeh/ui/widgets/custom_marker.dart';
 import 'package:takkeh/ui/widgets/custom_text_field.dart';
+import 'package:takkeh/ui/widgets/my_location_button.dart';
 import 'package:takkeh/utils/base/colors.dart';
 import 'package:takkeh/utils/base/icons.dart';
 
@@ -67,7 +68,6 @@ class MapScreen extends StatelessWidget {
               prefixIcon: const Icon(Icons.search),
             ),
           ),
-          //TODO: config for ios runner
           Expanded(
             child: Stack(
               alignment: const Alignment(0, 0),
@@ -77,7 +77,7 @@ class MapScreen extends StatelessWidget {
                     MapController.find.mapController = googleMapController;
                   },
                   zoomControlsEnabled: false,
-                  myLocationButtonEnabled: true,
+                  myLocationButtonEnabled: false,
                   myLocationEnabled: true,
                   initialCameraPosition: CameraPosition(
                     target: LatLng(MapController.find.mapLat!, MapController.find.mapLng!),
@@ -89,6 +89,7 @@ class MapScreen extends StatelessWidget {
                     MapController.find.mapLng = position.target.longitude;
                   },
                 ),
+                const MyLocationButton(),
                 const CustomMarker(color: MyColors.redPrimary),
               ],
             ),

@@ -40,6 +40,10 @@ class MapController extends GetxController {
     mapLat = lat;
     mapLng = lng;
     log("result:: $lat -- $lng");
+    animateCamera(lat, lng);
+  }
+
+  Future<void> animateCamera(double lat, double lng) async {
     CameraUpdate update = CameraUpdate.newCameraPosition(CameraPosition(target: LatLng(lat, lng), zoom: 15));
     await mapController!.animateCamera(update);
   }
