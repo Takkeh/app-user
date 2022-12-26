@@ -143,13 +143,12 @@ class FireOrderDetailsList {
     required this.quantity,
   });
 
-  FireOrderDetailsList.fromJson(Map<String, Object?> json)
-      : this(
-          id: json['id']! as int,
-          name: json['name'] as String,
-          price: double.parse(json['price'].toString()),
-          quantity: json['quantity'] as int,
-        );
+  static FireOrderDetailsList fromJson(Map<String, dynamic> json) => FireOrderDetailsList(
+        id: json['id']! as int,
+        name: json['name'] ?? '',
+        price: double.parse(json['price'].toString()),
+        quantity: json['quantity'] as int,
+      );
 
   Map<String, Object?> toJson() {
     return {
