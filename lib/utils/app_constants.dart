@@ -7,6 +7,9 @@ const kFakeImage = 'img/sliders/16616866816673.png';
 const kHome = 'home';
 const kBack = 'back';
 
+const String kOptional = 'optional';
+const String kRequired = 'required';
+
 const String kFloatSnackBar = 'floatSnackBar';
 const String kRawSnackBar = 'rawSnackBar';
 
@@ -24,6 +27,7 @@ const kArrivedToDropPoint = 'arrived_to_drop_point';
 const kCollectingMoney = 'collecting_money';
 const kCompleted = 'completed';
 const kCanceled = 'canceled';
+const kCanceled0 = 'canceled_0';
 const kDenied = 'denied';
 
 class AppConstants {

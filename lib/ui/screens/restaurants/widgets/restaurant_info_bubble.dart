@@ -9,7 +9,7 @@ import 'package:takkeh/utils/base/colors.dart';
 import 'package:takkeh/utils/base/icons.dart';
 
 class RestaurantInfoBubble extends StatelessWidget {
-  final String title, logo, time, cost, review, cover, reviewIcon;
+  final String title, logo, time, cost, review, cover, reviewIcon, phone;
   final int restaurantId;
 
   const RestaurantInfoBubble({
@@ -22,6 +22,7 @@ class RestaurantInfoBubble extends StatelessWidget {
     required this.cover,
     required this.restaurantId,
     required this.reviewIcon,
+    required this.phone,
   }) : super(key: key);
 
   static Widget getWidget(String text, String icon) {
@@ -54,12 +55,15 @@ class RestaurantInfoBubble extends StatelessWidget {
             alignment: const Alignment(0, 0),
             child: GestureDetector(
               onTap: () {
-                Get.to(() => RestaurantInfoScreen(
-                      title: title,
-                      imageUrl: cover,
-                      logo: logo,
-                      restaurantId: restaurantId,
-                    ));
+                Get.to(
+                  () => RestaurantInfoScreen(
+                    title: title,
+                    imageUrl: cover,
+                    logo: logo,
+                    restaurantId: restaurantId,
+                    phone: phone,
+                  ),
+                );
               },
               child: Stack(
                 alignment: Alignment.bottomCenter,
@@ -67,12 +71,11 @@ class RestaurantInfoBubble extends StatelessWidget {
                   CircleAvatar(
                     backgroundColor: MyColors.redPrimary,
                     radius: 50,
-                    backgroundImage:
-                        CachedNetworkImageProvider('${ApiUrl.mainUrl}/$logo'),
+                    backgroundImage: CachedNetworkImageProvider('${ApiUrl.mainUrl}/$logo'),
                   ),
                   Stack(
                     clipBehavior: Clip.none,
-                    alignment: Alignment.topCenter,
+                    alignment: Alignment.bottomCenter,
                     children: [
                       Positioned(
                         bottom: -1,
@@ -84,8 +87,7 @@ class RestaurantInfoBubble extends StatelessWidget {
                       Container(
                         width: 57,
                         color: Colors.transparent,
-                        margin: const EdgeInsets.only(bottom: 7),
-                        padding: const EdgeInsets.only(top: 0),
+                        margin: const EdgeInsets.only(bottom: 4),
                         child: FittedBox(
                           child: Text(
                             TranslationService.getString('information_key'),

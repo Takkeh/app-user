@@ -1,15 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:takkeh/translation/service.dart';
 import 'package:takkeh/ui/widgets/custom_network_image.dart';
 import 'package:takkeh/ui/widgets/restaurant_info_box.dart';
 import 'package:takkeh/utils/base/colors.dart';
 import 'package:takkeh/utils/base/icons.dart';
 
-class CustomListTile extends StatelessWidget {
+class RestaurantListTile extends StatelessWidget {
   final String imageUrl, title, description, reviewIcon, review, time, cost;
+  final int isBusy;
   final Function() onTap;
 
-  const CustomListTile({
+  const RestaurantListTile({
     Key? key,
     required this.imageUrl,
     required this.title,
@@ -19,12 +21,13 @@ class CustomListTile extends StatelessWidget {
     required this.review,
     required this.time,
     required this.cost,
+    required this.isBusy,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: onTap,
+      onTap: isBusy == 0 ? onTap : null,
       child: Container(
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(17),
@@ -39,6 +42,19 @@ class CustomListTile extends StatelessWidget {
               radius: 10,
               width: 80,
               height: 80,
+              colorFilter: isBusy == 1 ? ColorFilter.mode(MyColors.grey070.withOpacity(0.50), BlendMode.dstATop) : null,
+              child: isBusy == 1
+                  ? Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                      child: FittedBox(
+                        child: Text(
+                          TranslationService.getString('busy_key'),
+                          textAlign: TextAlign.center,
+                          style: const TextStyle(color: Colors.white),
+                        ),
+                      ),
+                    )
+                  : null,
             ),
             const SizedBox(width: 10),
             Expanded(

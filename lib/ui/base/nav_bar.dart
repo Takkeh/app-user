@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:persistent_bottom_nav_bar/persistent-tab-view.dart';
-import 'package:takkeh/controller/my_orders/my_orders_ctrl.dart';
 import 'package:takkeh/controller/nav_bar_ctrl.dart';
 import 'package:takkeh/helper/guest_user_helper.dart';
 import 'package:takkeh/ui/screens/help/help.dart';
@@ -12,10 +11,6 @@ import 'package:takkeh/ui/widgets/custom_nav_bar_icon.dart';
 import 'package:takkeh/utils/base/colors.dart';
 import 'package:takkeh/utils/base/icons.dart';
 
-bool isHidden = false;
-
-late PersistentTabController navBarController;
-
 class BaseNavBar extends StatefulWidget {
   const BaseNavBar({Key? key}) : super(key: key);
 
@@ -24,6 +19,8 @@ class BaseNavBar extends StatefulWidget {
 }
 
 class BaseNavBarState extends State<BaseNavBar> {
+  late PersistentTabController navBarController;
+
   void toggleGuestUser(int index) {
     if (GuestUserHelper.check(Get.currentRoute, context)) {
       navBarController.index = index;
@@ -46,10 +43,6 @@ class BaseNavBarState extends State<BaseNavBar> {
       ),
       PersistentBottomNavBarItem(
         onPressed: (value) {
-          if (!Get.isRegistered<MyOrdersCtrl>()) {
-            Get.put(MyOrdersCtrl());
-          }
-          MyOrdersCtrl.find.pagingController.refresh();
           toggleGuestUser(1);
         },
         icon: CustomNavBaaButton(icon: MyIcons.timePast, isChosen: navBarController.index == 1 ? true : false),
@@ -75,7 +68,14 @@ class BaseNavBarState extends State<BaseNavBar> {
     navBarController.addListener(() {
       setState(() {});
     });
+
     super.initState();
+  }
+
+  @override
+  void dispose() {
+    navBarController.dispose();
+    super.dispose();
   }
 
   @override

@@ -80,7 +80,6 @@ class RestaurantCategoriesBuilder extends StatelessWidget {
                                     width: 30,
                                     child: GetBuilder<RestaurantCategoriesController>(
                                       builder: (controller) {
-                                        //TODO: first icon must be id = 1
                                         if (element.id == 1) {
                                           return CustomSvgIcon(
                                             iconUrl: element.image!,

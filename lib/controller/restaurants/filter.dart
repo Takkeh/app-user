@@ -20,8 +20,6 @@ class RestaurantsFilterController extends GetxController {
     } else {
       selectedTagId.value = tagId;
     }
-    // RestaurantsCtrl.find.pagingController.appendPage([], 1);
-    // RestaurantsCtrl.find.init(tagId, RestaurantCategoriesController.find.filterId, true);
     RestaurantsCtrl.find.pagingController.refresh();
     update();
   }

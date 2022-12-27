@@ -11,6 +11,8 @@ class CustomNetworkImage extends StatelessWidget {
   final double? height;
   final EdgeInsetsGeometry? margin;
   final BoxFit boxFit;
+  final ColorFilter? colorFilter;
+  final Widget? child;
 
   const CustomNetworkImage({
     Key? key,
@@ -20,6 +22,8 @@ class CustomNetworkImage extends StatelessWidget {
     this.height,
     this.margin,
     this.boxFit = BoxFit.cover,
+    this.colorFilter,
+    this.child,
   }) : super(key: key);
 
   @override
@@ -30,18 +34,22 @@ class CustomNetworkImage extends StatelessWidget {
         width: width,
         height: height,
         margin: margin,
+        alignment: Alignment.center,
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(radius),
           image: DecorationImage(
             image: imageProvider,
             fit: boxFit,
+            colorFilter: colorFilter,
           ),
         ),
+        child: child,
       ),
       placeholder: (context, url) => Container(
         width: width,
         height: height,
         margin: margin,
+        alignment: Alignment.center,
         decoration: BoxDecoration(
           color: MyColors.greyED0,
           borderRadius: BorderRadius.circular(radius),
@@ -51,12 +59,13 @@ class CustomNetworkImage extends StatelessWidget {
             alignment: Alignment.center,
           ),
         ),
+        child: child,
       ),
       errorWidget: (context, url, error) => Container(
         width: width,
         height: height,
         margin: margin,
-        // alignment: Alignment.center,
+        alignment: Alignment.center,
         decoration: BoxDecoration(
           color: MyColors.greyED0,
           borderRadius: BorderRadius.circular(radius),
@@ -66,6 +75,7 @@ class CustomNetworkImage extends StatelessWidget {
             alignment: Alignment.center,
           ),
         ),
+        child: child,
       ),
     );
   }

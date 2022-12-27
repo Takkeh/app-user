@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
+import 'package:takkeh/services/call_phone_num_service.dart';
 import 'package:takkeh/translation/service.dart';
 import 'package:takkeh/ui/screens/restaurants/widgets/custom_bubble_image.dart';
 import 'package:takkeh/ui/screens/restaurants/widgets/gradient_colors_box.dart';
@@ -14,16 +15,10 @@ import 'package:takkeh/utils/base/icons.dart';
 import 'package:takkeh/utils/shared_prefrences.dart';
 
 class RestaurantInfoScreen extends StatefulWidget {
-  final String title, imageUrl, logo;
+  final String title, imageUrl, logo, phone;
   final int restaurantId;
 
-  const RestaurantInfoScreen({
-    Key? key,
-    required this.title,
-    required this.imageUrl,
-    required this.logo,
-    required this.restaurantId
-  }) : super(key: key);
+  const RestaurantInfoScreen({Key? key, required this.title, required this.imageUrl, required this.logo, required this.restaurantId, required this.phone}) : super(key: key);
 
   @override
   State<RestaurantInfoScreen> createState() => _RestaurantInfoScreenState();
@@ -86,10 +81,15 @@ class _RestaurantInfoScreenState extends State<RestaurantInfoScreen> {
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
-                              CircleAvatar(
-                                backgroundColor: Colors.white,
-                                radius: 18,
-                                child: SvgPicture.asset(MyIcons.phoneGreen),
+                              GestureDetector(
+                                onTap: () {
+                                  CallPhoneNumService().init(widget.phone);
+                                },
+                                child: CircleAvatar(
+                                  backgroundColor: Colors.white,
+                                  radius: 18,
+                                  child: SvgPicture.asset(MyIcons.phoneGreen),
+                                ),
                               ),
                               CircleAvatar(
                                 backgroundColor: Colors.white,
@@ -146,8 +146,10 @@ class _RestaurantInfoScreenState extends State<RestaurantInfoScreen> {
               physics: const NeverScrollableScrollPhysics(),
               controller: pageController,
               children: [
-                RestaurantsInfoBuilder(restaurantId: widget.restaurantId,),
-                RestaurantsReviewsBuilder(imageUrl: widget.imageUrl,restaurantId:widget.restaurantId),
+                RestaurantsInfoBuilder(
+                  restaurantId: widget.restaurantId,
+                ),
+                RestaurantsReviewsBuilder(imageUrl: widget.imageUrl, restaurantId: widget.restaurantId),
               ],
             ),
           ),

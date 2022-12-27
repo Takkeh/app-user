@@ -36,12 +36,11 @@ class _MapBubbleBuilderState extends State<MapBubbleBuilder> {
 
   @override
   Widget build(BuildContext context) {
-    return GetBuilder<MapController>(
+    return GetX<MapController>(
       builder: (controller) {
         return ClipRRect(
           borderRadius: BorderRadius.circular(20),
           child: SizedBox(
-            //TODO: remove this
             height: 220,
             child: Column(
               children: [
@@ -51,6 +50,7 @@ class _MapBubbleBuilderState extends State<MapBubbleBuilder> {
                     SizedBox(
                       height: 156,
                       child: GoogleMap(
+                        myLocationButtonEnabled: false,
                         zoomControlsEnabled: false,
                         onMapCreated: (mapCtrl) {
                           mapController = mapCtrl;
@@ -63,8 +63,6 @@ class _MapBubbleBuilderState extends State<MapBubbleBuilder> {
                               }
                               if (widget.route == kAddress) {
                                 Get.to(() => const MyAddressesScreen());
-                                // Get.to(() => const AddNewAddressScreen(), binding: CreateAddressBinding());
-                                // Get.to(() => MapScreen(mapController: mapController));
                               }
                             },
                           );
@@ -79,7 +77,7 @@ class _MapBubbleBuilderState extends State<MapBubbleBuilder> {
                   ],
                 ),
                 DeliveryInfoBox(
-                  address: "${controller.mapSubLocality.value}, ${controller.mapStreet.value}",
+                  address: "${controller.mapLocality.value} ${controller.mapSubLocality.value}, ${controller.mapStreet.value}",
                   isVisible: false,
                 ),
               ],

@@ -31,7 +31,7 @@ class _ConfirmOrderMapBubbleState extends State<ConfirmOrderMapBubble> {
 
   @override
   Widget build(BuildContext context) {
-    return GetBuilder<MyAddressesCtrl>(
+    return GetX<MyAddressesCtrl>(
       builder: (controller) {
         return ClipRRect(
           borderRadius: BorderRadius.circular(20),
@@ -69,7 +69,7 @@ class _ConfirmOrderMapBubbleState extends State<ConfirmOrderMapBubble> {
                   ],
                 ),
                 DeliveryInfoBox(
-                  address: "${controller.locality.value}, ${controller.subLocality.value}",
+                  address: "${controller.locality.value} ${controller.subLocality.value}, ${controller.street.value}",
                   isVisible: true,
                   onPressed: () {
                     LocationPermissionHelper.check(

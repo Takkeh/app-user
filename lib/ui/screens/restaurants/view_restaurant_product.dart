@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:takkeh/controller/user_order_ctrl.dart';
 import 'package:takkeh/controller/view_product_ctrl.dart';
+import 'package:takkeh/model/restaurants/groups_model.dart';
 import 'package:takkeh/translation/service.dart';
 import 'package:takkeh/ui/screens/registration/widgets/custom_prefix_icon.dart';
 import 'package:takkeh/ui/screens/restaurants/widgets/custom_fab_button.dart';
@@ -13,21 +14,22 @@ import 'package:takkeh/ui/screens/restaurants/widgets/product_counter.dart';
 import 'package:takkeh/ui/screens/restaurants/widgets/required_check_box_2.dart';
 import 'package:takkeh/ui/screens/restaurants/widgets/view_product_app_bar.dart';
 import 'package:takkeh/ui/widgets/custom_text_field.dart';
+import 'package:takkeh/utils/app_constants.dart';
 import 'package:takkeh/utils/base/colors.dart';
 import 'package:takkeh/utils/base/icons.dart';
 
 class ViewRestaurantProductScreen extends StatefulWidget {
-  final String title, subTitle;
+  final String title, description;
   final double price;
   final String cover;
   final int productId;
   final int restaurantId;
-  final List<dynamic> groups;
+  final List<ProductGroups> groups;
 
   const ViewRestaurantProductScreen({
     Key? key,
     required this.title,
-    required this.subTitle,
+    required this.description,
     required this.price,
     required this.cover,
     required this.productId,
@@ -132,7 +134,7 @@ class _ViewRestaurantProductScreenState extends State<ViewRestaurantProductScree
                     ),
                   ),
                   Text(
-                    widget.subTitle,
+                    widget.description,
                     style: const TextStyle(
                       fontSize: 16,
                       color: MyColors.grey070,
@@ -159,13 +161,12 @@ class _ViewRestaurantProductScreenState extends State<ViewRestaurantProductScree
                                   fontWeight: FontWeight.w500,
                                 ),
                               ),
-                              if (data.type == 'required')
+                              if (data.type == kRequired)
                                 RequiredCheckBox2(
                                   items: data.items!,
                                   groupId: data.id!,
                                 ),
-                              //TODO: ask if it's opp
-                              if (data.type == 'opp' || data.type == 'remove')
+                              if (data.type == kOptional || data.type == 'opp')
                                 OptionalCheckBox2(
                                   items: data.items!,
                                   groupId: data.id!,
@@ -176,76 +177,12 @@ class _ViewRestaurantProductScreenState extends State<ViewRestaurantProductScree
                       );
                     },
                   ),
-                  // Text(
-                  //   TranslationService.getString('chose_from_key'),
-                  //   style: const TextStyle(
-                  //     fontSize: 18,
-                  //     fontWeight: FontWeight.w500,
-                  //   ),
-                  // ),
-                  // //TODO: sizes and extras, some has price some don't. handle with alaa
-                  // ...List.generate(
-                  //   widget.sizes.length,
-                  //   (index) {
-                  //     return CustomCheckBox(
-                  //       title: widget.sizes[index].name!,
-                  //       price: widget.sizes[index].price!.toDouble(),
-                  //       shape: const CircleBorder(),
-                  //       trailing: index == 0 ? Text('${widget.sizes[index].price!.toDouble()}') : Text('+ ${widget.sizes[index].price!.toDouble()} $kPCurrency'),
-                  //       onChanged: (value) {
-                  //         var id = widget.sizes[index].restaurantId;
-                  //         setState(() {
-                  //           if (sizeId == id) {
-                  //             sizeId = null;
-                  //             counterKey.currentState!.price = counterKey.currentState!.price - widget.sizes[index].price!.toDouble();
-                  //             return;
-                  //           }
-                  //           sizeId = id;
-                  //           counterKey.currentState!.price = counterKey.currentState!.price + widget.sizes[index].price!.toDouble();
-                  //         });
-                  //       },
-                  //       value: sizeId == widget.sizes[index].restaurantId ? true : false,
-                  //     );
-                  //   },
-                  // ),
-                  // const SizedBox(height: 20),
-                  // Text(
-                  //   TranslationService.getString('extras_key'),
-                  //   style: const TextStyle(
-                  //     fontSize: 18,
-                  //     fontWeight: FontWeight.w500,
-                  //   ),
-                  // ),
-                  // ...List.generate(
-                  //   widget.extras.length,
-                  //   (index) {
-                  //     return CustomCheckBox(
-                  //       title: widget.extras[index].name!,
-                  //       price: 80.0,
-                  //       shape: null,
-                  //       trailing: index == 0 ? Text('${widget.extras[index].price!.toDouble()}') : Text('+ ${widget.extras[index].price!.toDouble()} $kPCurrency'),
-                  //       onChanged: (value) {
-                  //         var id = widget.extras[index].restaurantId!;
-                  //         setState(() {
-                  //           if (extrasTest.contains(id)) {
-                  //             extrasTest.remove(id);
-                  //           } else {
-                  //             extrasTest.add(id);
-                  //           }
-                  //         });
-                  //         print("extras:: $extrasTest");
-                  //       },
-                  //       value: extrasTest.contains(widget.extras[index].restaurantId!),
-                  //       // value: true,
-                  //     );
-                  //   },
-                  // ),
                   Padding(
                     padding: const EdgeInsets.only(top: 20.0),
                     child: CustomTextField(
                       controller: noteCtrl,
                       keyboardType: TextInputType.multiline,
-                      hintText: "Do you have any Notes ?",
+                      hintText: TranslationService.getString('do_you_have_notes_key'),
                       minLines: 1,
                       maxLines: 3,
                       prefixIcon: const CustomPrefixIcon(

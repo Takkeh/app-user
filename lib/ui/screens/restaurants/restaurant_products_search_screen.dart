@@ -64,16 +64,19 @@ class RestaurantProductsSearchScreen extends StatelessWidget {
                                         imageUrl: data.image!,
                                         title: data.name!,
                                         price: data.price!,
-                                        subTitle: data.description!,
+                                        description: data.description!,
+                                        //TODO: missing api data
+                                        isAvailable: index == 0 ? 0 : 1,
                                         onTap: () {
                                           Get.to(
                                             () => ViewRestaurantProductScreen(
                                               title: data.name!,
-                                              subTitle: data.description!,
+                                              description: data.description!,
                                               price: data.price!.toDouble(),
                                               cover: data.image!,
                                               productId: data.id!,
                                               restaurantId: restaurantId,
+                                              //TODO: khaled groups
                                               groups: data.groups!,
                                             ),
                                             binding: ViewProductBinding(),

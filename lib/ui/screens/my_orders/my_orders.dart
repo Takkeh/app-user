@@ -43,25 +43,38 @@ class _MyOrdersScreenState extends State<MyOrdersScreen> {
         Scaffold(
           backgroundColor: Colors.transparent,
           appBar: TransparentAppBar(title: TranslationService.getString('my_orders_key')),
-          body: PagedListView<int, OrdersList>.separated(
-            padding: const EdgeInsets.all(20),
-            pagingController: MyOrdersCtrl.find.pagingController,
-            separatorBuilder: (context, index) => const SizedBox(
-              height: 15,
+          body: RefreshIndicator(
+            onRefresh: () async {
+              MyOrdersCtrl.find.pagingController.refresh();
+              return Future.value(null);
+            },
+            child: PagedListView<int, OrdersList>.separated(
+              padding: const EdgeInsets.all(20),
+              pagingController: MyOrdersCtrl.find.pagingController,
+              separatorBuilder: (context, index) => const SizedBox(
+                height: 15,
+              ),
+              builderDelegate: PagedChildBuilderDelegate<OrdersList>(
+                  firstPageProgressIndicatorBuilder: (context) => const BaseVerticalListLoading(),
+                  newPageProgressIndicatorBuilder: (context) {
+                    if (MyOrdersCtrl.find.pagingController.itemList!.length < 6) {
+                      return const SizedBox.shrink();
+                    } else {
+                      return const Center(child: CircularProgressIndicator());
+                    }
+                  },
+                  itemBuilder: (context, data, index) {
+                    return MyOrderTile(
+                      onTap: () {
+                        Get.to(() => OrderStatusScreen(orderId: data.id!, route: kBack));
+                      },
+                      id: '${data.orderNumber!}',
+                      name: data.restaurantName!,
+                      date: data.createdAt!,
+                      logo: data.restaurantLogo!,
+                    );
+                  }),
             ),
-            builderDelegate: PagedChildBuilderDelegate<OrdersList>(
-                firstPageProgressIndicatorBuilder: (context) => const BaseVerticalListLoading(),
-                itemBuilder: (context, data, index) {
-                  return MyOrderTile(
-                    onTap: () {
-                      Get.to(() => OrderStatusScreen(orderId: data.id!, route: kBack));
-                    },
-                    id: '${data.orderNumber!}',
-                    name: data.restaurantName!,
-                    date: data.createdAt!,
-                    logo: data.restaurantLogo!,
-                  );
-                }),
           ),
         ),
       ],

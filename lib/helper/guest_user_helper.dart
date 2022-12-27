@@ -9,7 +9,7 @@ class GuestUserHelper {
     if (MySharedPreferences.isLogIn) {
       return true;
     } else {
-      GuestDialog.show(routeName, context);
+      GuestDialog().show(routeName, context);
       return false;
     }
   }

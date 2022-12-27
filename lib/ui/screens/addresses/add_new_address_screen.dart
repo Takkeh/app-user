@@ -95,7 +95,6 @@ class _AddNewAddressScreenState extends State<AddNewAddressScreen> {
                 padding: const EdgeInsets.fromLTRB(30, 0, 30, 60),
                 children: [
                   const MapBubbleBuilder(route: kMap),
-                  // const SizedBox(height: 15),
                   CustomTextField(
                     autoValidateMode: null,
                     padding: const EdgeInsets.only(bottom: 10.0),

@@ -6,6 +6,7 @@ import 'package:get/get.dart';
 import 'package:takkeh/controller/user_location_ctrl.dart';
 import 'package:takkeh/translation/service.dart';
 import 'package:takkeh/ui/widgets/components/overlay_loader.dart';
+import 'package:takkeh/ui/widgets/transparent_app_bar.dart';
 import 'package:takkeh/utils/base/colors.dart';
 import 'package:takkeh/utils/base/images.dart';
 
@@ -45,8 +46,8 @@ class LocationPermissionScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(),
       backgroundColor: MyColors.blue6FA,
+      appBar: TransparentAppBar(title: TranslationService.getString('grant_location_key')),
       body: Padding(
         padding: const EdgeInsets.all(30.0),
         child: SingleChildScrollView(
@@ -54,16 +55,16 @@ class LocationPermissionScreen extends StatelessWidget {
             children: [
               Image.asset(MyImages.locationPermission),
               const SizedBox(height: 50.0),
-              const Text(
-                "يجب إعطاء صلاحية الموقع",
-                style: TextStyle(fontSize: 20, fontWeight: FontWeight.w600),
+              Text(
+                TranslationService.getString('you_must_enable_location_permission_key'),
+                style: const TextStyle(fontSize: 20, fontWeight: FontWeight.w600),
                 textAlign: TextAlign.center,
               ),
-              const Padding(
-                padding: EdgeInsets.only(top: 8.0, bottom: 60.0),
+              Padding(
+                padding: const EdgeInsets.only(top: 8.0, bottom: 60.0),
                 child: Text(
-                  "لا يمكن الوصول إلى محتويات الصفحة إلا بعد اعطاء صلاحية الموقع للتطبيق",
-                  style: TextStyle(fontSize: 20),
+                  TranslationService.getString("you_cant_user_app_without_location_permission_key"),
+                  style: const TextStyle(fontSize: 20),
                   textAlign: TextAlign.center,
                 ),
               ),
@@ -73,9 +74,9 @@ class LocationPermissionScreen extends StatelessWidget {
                 onPressed: () {
                   submit(context);
                 },
-                label: const Text(
-                  "تفعيل الموقع",
-                  style: TextStyle(color: MyColors.text),
+                label: Text(
+                  TranslationService.getString("enable_location_key"),
+                  style: const TextStyle(color: MyColors.text),
                 ),
               ),
             ],

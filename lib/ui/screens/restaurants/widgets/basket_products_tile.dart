@@ -6,7 +6,9 @@ import 'package:get/get.dart';
 import 'package:takkeh/controller/restaurants/make_order.dart';
 import 'package:takkeh/controller/user_order_ctrl.dart';
 import 'package:takkeh/model/restaurants/make_order_model.dart';
+import 'package:takkeh/translation/service.dart';
 import 'package:takkeh/ui/screens/restaurants/widgets/quantity_button.dart';
+import 'package:takkeh/ui/widgets/components/base_dialog.dart';
 import 'package:takkeh/ui/widgets/custom_network_image.dart';
 import 'package:takkeh/utils/app_constants.dart';
 import 'package:takkeh/utils/base/colors.dart';
@@ -42,6 +44,23 @@ class BasketProductTileState extends State<BasketProductTile> {
   late double originalPrice;
   late int quantity;
   late double newPrice;
+
+  void _showDialog() {
+    BaseDialog().show(
+      title: TranslationService.getString('delete_item_key'),
+      body: TranslationService.getString('delete_item_from_basket_key'),
+      onPressed: () {
+        MakeOrderCtrl.find.orderList.removeAt(widget.index);
+        UserOrderCtrl.find.orderList.removeAt(widget.index);
+        UserOrderCtrl.find.calculateTotalPrice(originalPrice, status: 'remove');
+        UserOrderCtrl.find.calculateTotalQuantity(1, status: 'remove');
+        Get.back();
+        if (UserOrderCtrl.find.orderList.isEmpty) {
+          Get.back();
+        }
+      },
+    );
+  }
 
   Future<void> _showMyDialog() async {
     return showDialog<void>(
@@ -89,7 +108,7 @@ class BasketProductTileState extends State<BasketProductTile> {
       toggleProduct();
     } else {
       if (quantity == 1) {
-        _showMyDialog();
+        _showDialog();
       } else {
         setState(() {
           quantity--;
@@ -123,8 +142,8 @@ class BasketProductTileState extends State<BasketProductTile> {
               radius: 10,
               width: 80,
               height: 80,
+              margin: const EdgeInsetsDirectional.only(start: 10, end: 10),
             ),
-            const SizedBox(width: 10),
             Expanded(
               child: Row(
                 crossAxisAlignment: CrossAxisAlignment.start,

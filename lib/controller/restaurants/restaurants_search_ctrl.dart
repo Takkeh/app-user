@@ -12,7 +12,6 @@ class RestaurantsSearchCtrl extends GetxController {
   final model = Rxn<RestaurantsModel>();
   final searchQuery = "".obs;
   Timer? _debounce;
-  final results = <RestaurantList>[];
 
   late PagingController<int, RestaurantList> pagingController;
 
@@ -32,7 +31,7 @@ class RestaurantsSearchCtrl extends GetxController {
 
   void onSearchChanged(String query) {
     if (_debounce?.isActive ?? false) _debounce!.cancel();
-    _debounce = Timer(const Duration(milliseconds: 500), () {
+    _debounce = Timer(const Duration(milliseconds: 300), () {
       if (query.isNotEmpty) {
         searchQuery.value = query;
         pagingController.refresh();

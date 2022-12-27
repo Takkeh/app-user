@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:takkeh/binding/addresses.dart';
 import 'package:takkeh/controller/addresses/my_addresses_ctrl.dart';
 import 'package:takkeh/controller/restaurants/add_promo_code_ctrl.dart';
 import 'package:takkeh/controller/restaurants/make_order.dart';
@@ -7,6 +8,7 @@ import 'package:takkeh/controller/restaurants/promo_codes_ctrl.dart';
 import 'package:takkeh/helper/location_permission_helper.dart';
 import 'package:takkeh/model/restaurants/promo_codes_model.dart';
 import 'package:takkeh/translation/service.dart';
+import 'package:takkeh/ui/screens/addresses/add_new_address_screen.dart';
 import 'package:takkeh/ui/screens/addresses/widgets/add_address_button.dart';
 import 'package:takkeh/ui/screens/addresses/widgets/my_addresses_listview.dart';
 import 'package:takkeh/ui/screens/addresses/widgets/no_addresses_widget.dart';
@@ -40,60 +42,13 @@ class BasketScreen extends StatefulWidget {
 class _BasketScreenState extends State<BasketScreen> {
   late TextEditingController noteCtrl;
 
-  final myList = [
-    {
-      "id": 18,
-      "product_id": 18,
-      "product_name": "بيج تيستي",
-      "product_image": "img/products/BigTasty-Classic.jpg",
-      "quantity": 1,
-      "items": [
-        {"id": 653, "group_name": "Size", "group_type": "required", "item_name": "smaill", "price": "10.00"}
-      ],
-      "note": "",
-      "area": null,
-      "price": "15.00"
-    },
-    {
-      "id": 17,
-      "product_id": 17,
-      "product_name": "ماك تشكن سبايسي",
-      "product_image": "img/products/mcd2.jpg",
-      "quantity": 2,
-      "items": [
-        {"id": 654, "group_name": "Size", "group_type": "required", "item_name": "big", "price": "20.00"}
-      ],
-      "note": "",
-      "area": null,
-      "price": "50.00"
-    },
-    {
-      "id": 16,
-      "product_id": 16,
-      "product_name": "kfc",
-      "product_image": "img/products/mcd2.jpg",
-      "quantity": 2,
-      "items": [
-        {"id": 654, "group_name": "Size", "group_type": "required", "item_name": "big", "price": "20.00"}
-      ],
-      "note": "",
-      "area": null,
-      "price": "50.00"
-    },
-    {
-      "id": 15,
-      "product_id": 15,
-      "product_name": "kfc",
-      "product_image": "img/products/mcd2.jpg",
-      "quantity": 2,
-      "items": [
-        {"id": 654, "group_name": "Size", "group_type": "required", "item_name": "big", "price": "20.00"}
-      ],
-      "note": "",
-      "area": null,
-      "price": "50.00"
-    }
-  ];
+  void navigate() {
+    LocationPermissionHelper.check(
+      action: () {
+        Get.to(() => ConfirmOrderScreen(orderId: widget.orderId));
+      },
+    );
+  }
 
   @override
   void initState() {
@@ -118,11 +73,19 @@ class _BasketScreenState extends State<BasketScreen> {
             ? CustomFABButton(
                 title: TranslationService.getString('confirm_order_key'),
                 onPressed: () {
-                  LocationPermissionHelper.check(
-                    action: () {
-                      Get.to(() => ConfirmOrderScreen(orderId: widget.orderId));
-                    },
-                  );
+                  if (MyAddressesCtrl.find.myAddresses.isEmpty) {
+                    Get.to(
+                      () => const AddNewAddressScreen(),
+                      binding: CreateAddressBinding(),
+                    )!
+                        .then((value) {
+                      if (MyAddressesCtrl.find.myAddresses.isNotEmpty) {
+                        navigate();
+                      }
+                    });
+                    return;
+                  }
+                  navigate();
                 },
               )
             : null,
@@ -164,7 +127,7 @@ class _BasketScreenState extends State<BasketScreen> {
                   child: CustomTextField(
                     controller: noteCtrl,
                     keyboardType: TextInputType.multiline,
-                    hintText: "do_you_have_notes_key",
+                    hintText: TranslationService.getString('do_you_have_notes_key'),
                     minLines: 1,
                     maxLines: 3,
                     prefixIcon: const CustomPrefixIcon(
@@ -259,7 +222,6 @@ class _BasketScreenState extends State<BasketScreen> {
                                         AddPromoCodeCtrl.find.fetchData(4, controller.selectedPromo.value!, context);
                                       },
                                     ),
-                                    //TODO: check later
                                     maxSuffixWidth: 100,
                                   ),
                                 ),

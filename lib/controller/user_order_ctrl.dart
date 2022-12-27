@@ -30,4 +30,11 @@ class UserOrderCtrl extends GetxController {
     log("totalQuantity:: ${totalQuantity.value}");
     update();
   }
+
+  void reset() {
+    orderList.clear();
+    totalPrice.value = 0.0;
+    totalQuantity.value = 0;
+    update();
+  }
 }

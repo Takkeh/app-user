@@ -42,7 +42,6 @@ class SendOtpController {
       if (route == kHome) {
         Get.offAll(() => const BaseNavBar(), binding: NavBarBinding());
       }
-      //TODO: test this
       if (route == kBack) {
         await MyAddressesCtrl.find.fetchData();
         Get.until((route) => Get.currentRoute == GuestUserHelper.currentRoute);

@@ -11,9 +11,21 @@ class MostPopularProductsCtrl extends GetxController {
 
   MostPopularProductsModel? model;
   late Future<MostPopularProductsModel?> initialize;
+  final isEmpty = false.obs;
 
   Future<MostPopularProductsModel?> fetchData(int restaurantId) async {
     model = await MostPopularApi.data(restaurantId);
+    if (model == null) {
+      isEmpty.value = true;
+      return null;
+    }
+    if (model!.code == 200) {
+      if (model!.mostPopular!.mostPopularProducts!.isEmpty) {
+        isEmpty.value = true;
+      }
+    } else {
+      isEmpty.value = true;
+    }
     return model;
   }
 

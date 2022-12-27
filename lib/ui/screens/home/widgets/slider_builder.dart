@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:takkeh/controller/home/slider.dart';
 import 'package:takkeh/model/home/slider_model.dart';
+import 'package:takkeh/model/restaurants/groups_model.dart';
 import 'package:takkeh/ui/screens/home/widgets/category_loading.dart';
 import 'package:takkeh/ui/widgets/custom_network_image.dart';
 import 'package:takkeh/ui/widgets/failed_widget.dart';
@@ -29,9 +30,26 @@ class SliderBuilder extends StatelessWidget {
                   itemBuilder: (context, index) {
                     return AspectRatio(
                       aspectRatio: 2,
-                      child: CustomNetworkImage(
-                        url: snapshot.data!.sliders![index].image!,
-                        radius: 16,
+                      child: GestureDetector(
+                        onTap: () {
+                          var myList = [
+                            {
+                              "id": 33,
+                              "name": "",
+                              "type": "required",
+                              "items": [
+                                {"id": 65, "name": "gggg", "price": "10.00"},
+                                {"id": 66, "name": "ggrrr", "price": "20.00"}
+                              ]
+                            }
+                          ];
+                          var secondList = List<ProductGroups>.from(myList.map((x) => ProductGroups.fromJson(x)));
+                          print("TEST:: ${secondList.first.type}");
+                        },
+                        child: CustomNetworkImage(
+                          url: snapshot.data!.sliders![index].image!,
+                          radius: 16,
+                        ),
                       ),
                     );
                   },

@@ -24,17 +24,19 @@ class AddressWidget extends StatelessWidget {
               },
             );
           },
-          child: Row(
-            crossAxisAlignment: CrossAxisAlignment.baseline,
-            textBaseline: TextBaseline.ideographic,
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              SvgPicture.asset(MyIcons.marker),
-              const SizedBox(width: 5),
-              Text(
-                "${controller.locality.value}, ${controller.subLocality.value}",
-              ),
-            ],
+          child: FittedBox(
+            child: Row(
+              crossAxisAlignment: CrossAxisAlignment.baseline,
+              textBaseline: TextBaseline.ideographic,
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                SvgPicture.asset(MyIcons.marker),
+                const SizedBox(width: 5),
+                Text(
+                  "${controller.locality.value}, ${controller.subLocality.value}",
+                ),
+              ],
+            ),
           ),
         );
       },

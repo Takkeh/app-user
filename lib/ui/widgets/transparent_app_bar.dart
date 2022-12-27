@@ -12,7 +12,7 @@ class TransparentAppBar extends StatelessWidget implements PreferredSizeWidget {
     return AppBar(
       backgroundColor: Colors.transparent,
       elevation: 0,
-      leadingWidth: 73,
+      leadingWidth: 60,
       centerTitle: true,
       leading: const BackLeadingWidget(),
       title: title != null

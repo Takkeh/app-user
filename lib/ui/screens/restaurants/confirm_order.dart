@@ -53,7 +53,6 @@ class ConfirmOrderScreen extends StatelessWidget {
               padding: const EdgeInsets.fromLTRB(30, 10, 30, 80),
               children: [
                 const ConfirmOrderMapBubble(),
-                // const MapBubbleBuilder(route: kAddress),
                 const SizedBox(height: 20),
                 CustomTextField(
                   hintText: '30 - 40 min',
@@ -145,7 +144,7 @@ class ConfirmOrderScreen extends StatelessWidget {
                   tax: 5.0,
                   total: 99.0,
                   paymentMethod: 'cash',
-                  orderValue: 55.01,
+                  finalPrice: 55.01,
                   discount: 44.0,
                   deliveryFee: 33.0,
                 ),

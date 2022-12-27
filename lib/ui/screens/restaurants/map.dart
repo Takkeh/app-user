@@ -9,6 +9,7 @@ import 'package:takkeh/translation/service.dart';
 import 'package:takkeh/ui/screens/restaurants/widgets/custom_fab_button.dart';
 import 'package:takkeh/ui/widgets/custom_marker.dart';
 import 'package:takkeh/ui/widgets/custom_text_field.dart';
+import 'package:takkeh/ui/widgets/my_location_button.dart';
 import 'package:takkeh/utils/base/colors.dart';
 import 'package:takkeh/utils/base/icons.dart';
 
@@ -53,46 +54,47 @@ class MapScreen extends StatelessWidget {
           MapController.find.updateLocationDetails(mapController, context);
         },
       ),
-      body: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
+      body: Stack(
+        alignment: const Alignment(0, 0),
         children: [
-          Padding(
-            padding: const EdgeInsets.all(18.0),
-            child: CustomTextField(
-              readOnly: true,
-              onTap: () {
-                MapController.find.showSearchField(context);
-              },
-              label: 'Search for the address'.tr,
-              prefixIcon: const Icon(Icons.search),
+          GoogleMap(
+            onMapCreated: (GoogleMapController googleMapController) {
+              MapController.find.mapController = googleMapController;
+            },
+            zoomControlsEnabled: false,
+            myLocationButtonEnabled: false,
+            myLocationEnabled: true,
+            initialCameraPosition: CameraPosition(
+              target: LatLng(MapController.find.mapLat!, MapController.find.mapLng!),
+              zoom: 15,
             ),
+            onCameraMove: (CameraPosition position) {
+              log("position:: ${position.target.latitude} -- ${position.target.longitude}");
+              MapController.find.mapLat = position.target.latitude;
+              MapController.find.mapLng = position.target.longitude;
+            },
           ),
-          //TODO: config for ios runner
-          Expanded(
-            child: Stack(
-              alignment: const Alignment(0, 0),
+          Align(
+            alignment: Alignment.topCenter,
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                GoogleMap(
-                  onMapCreated: (GoogleMapController googleMapController) {
-                    MapController.find.mapController = googleMapController;
+                CustomTextField(
+                  padding: const EdgeInsets.all(10.0),
+                  readOnly: true,
+                  filled: true,
+                  fillColor: Colors.white,
+                  onTap: () {
+                    MapController.find.showSearchField(context);
                   },
-                  zoomControlsEnabled: false,
-                  myLocationButtonEnabled: false,
-                  myLocationEnabled: false,
-                  initialCameraPosition: CameraPosition(
-                    target: LatLng(MapController.find.mapLat!, MapController.find.mapLng!),
-                    zoom: 15,
-                  ),
-                  onCameraMove: (CameraPosition position) {
-                    log("position:: ${position.target.latitude} -- ${position.target.longitude}");
-                    MapController.find.mapLat = position.target.latitude;
-                    MapController.find.mapLng = position.target.longitude;
-                  },
+                  label: 'Search for the address'.tr,
+                  prefixIcon: const Icon(Icons.search),
                 ),
-                const CustomMarker(color: MyColors.redPrimary),
+                const MyLocationButton(),
               ],
             ),
           ),
+          const CustomMarker(color: MyColors.redPrimary),
         ],
       ),
     );

@@ -3,11 +3,12 @@ import 'dart:developer';
 
 import 'package:flutter/material.dart';
 import 'package:takkeh/controller/view_product_ctrl.dart';
+import 'package:takkeh/model/restaurants/groups_model.dart';
 import 'package:takkeh/ui/screens/restaurants/widgets/custom_check_box.dart';
 
 class RequiredCheckBox2 extends StatefulWidget {
   final int groupId;
-  final List<dynamic> items;
+  final List<ProductItems> items;
 
   const RequiredCheckBox2({
     Key? key,

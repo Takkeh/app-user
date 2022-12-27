@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:takkeh/utils/api_url.dart';
 import 'package:takkeh/utils/base/colors.dart';
-import 'package:takkeh/utils/base/images.dart';
 
 class CustomSvgIcon extends StatelessWidget {
   final String iconUrl;
@@ -23,11 +22,10 @@ class CustomSvgIcon extends StatelessWidget {
       width: width,
       color: color,
       placeholderBuilder: (context) {
-        //TODO: place holder image
-        return const CircleAvatar(
-          radius: 12,
-          backgroundColor: MyColors.grey4F9,
-          backgroundImage: AssetImage(MyImages.logo),
+        return const Icon(
+          Icons.image,
+          size: 40,
+          color: MyColors.redPrimary,
         );
       },
     );

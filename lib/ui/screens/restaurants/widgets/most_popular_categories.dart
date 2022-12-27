@@ -45,11 +45,12 @@ class MostPopularCategoriesBuilder extends StatelessWidget {
                         Get.to(
                           () => ViewRestaurantProductScreen(
                             title: data.name!,
-                            subTitle: data.name!,
+                            description: data.name!,
                             price: data.price!.toDouble(),
                             cover: data.image!,
                             productId: data.id!,
                             restaurantId: restaurantId,
+                            //TODO:: khaledgroups
                             groups: data.groups!,
                           ),
                           binding: ViewProductBinding(),
