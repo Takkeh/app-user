@@ -20,7 +20,7 @@ class TranslationService {
   }
 
   static String getString(String key) {
-    addToFirebase(key);
+    addToFirebase(key); //TODO: delete this function on the final release and after making sure all strings are translated
     if (MySharedPreferences.language == 'en') {
       return english.containsKey(key) && english[key]!.isNotEmpty ? english[key]! : key;
     } else {

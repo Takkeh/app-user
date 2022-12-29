@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
@@ -71,6 +73,7 @@ class SectionsBuilder extends StatelessWidget {
                 ),
               );
             } else {
+              log("error:: ${snapshot.error}");
               return const FailedWidget();
             }
         }
