@@ -1,6 +1,6 @@
 import 'package:takkeh/utils/strings.dart';
 
-final Map<String, String> ar = {
+final Map<String, String> arabicKeys = {
   "Sign in": "تسجيل الدخول",
   "Sign Up": "إنشاء حساب",
   "Phone number": "رقم الهاتف",

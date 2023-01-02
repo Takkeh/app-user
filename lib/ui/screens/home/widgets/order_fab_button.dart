@@ -22,6 +22,35 @@ class OrderFABButton extends StatelessWidget {
     kDenied,
   ];
 
+  //hold بانتظار القبول
+  //pending جاري التحضير
+  // kWayToDropPoint or > جاري التوصيل
+
+  String _getStatus(String status) {
+    if (status == kHold) {
+      return 'ينتظر القبول';
+    } else if (status == kPending) {
+      return 'جاري البحث';
+    } else if (status == kWayToPickUpPoint) {
+      return 'في الطريق';
+    } else if (status == kArrivedToPickUpPoint) {
+      return 'متواجد';
+    } else if (status == kAtPickUpPoint) {
+      return 'جاري الإستلام';
+    } else if (status == kWayToDropPoint) {
+      return 'تم الإستلام';
+    } else if (status == kCollectingMoney || status == kArrivedToDropPoint) {
+      return 'جاري التوصيل';
+    } else if (status == kCompleted) {
+      return 'مكتمل';
+    } else if (status == kCanceled || status == kCanceled0) {
+      return 'تم الإلغاء';
+    } else if (status == kDenied) {
+      return 'مرفوض';
+    }
+    return '';
+  }
+
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
@@ -83,9 +112,9 @@ class OrderFABButton extends StatelessWidget {
                       ],
                     ),
                   ),
-                  const Text(
-                    "جاري التحضير",
-                    style: TextStyle(fontSize: 18, color: MyColors.white),
+                  Text(
+                    _getStatus(data.status),
+                    style: const TextStyle(fontSize: 18, color: MyColors.white),
                   ),
                 ],
               ),

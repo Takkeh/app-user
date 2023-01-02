@@ -88,7 +88,8 @@ class RestaurantsBuilder extends StatelessWidget {
               review: data.review!,
               time: data.time!,
               cost: data.cost!,
-              isBusy: data.isBusy!,
+              // isBusy: data.isBusy!,
+              isBusy: 0,
               onTap: () {
                 if (UserOrderCtrl.find.orderList.isNotEmpty && UserOrderCtrl.find.restaurantId != data.id!) {
                   NewBasketDialog().show(data: data);
@@ -104,6 +105,7 @@ class RestaurantsBuilder extends StatelessWidget {
                       cost: data.cost!,
                       review: data.review!,
                       reviewIcon: data.reviewIcon!,
+                      //TODO: missing api data
                       phone: '+96298775785',
                     ),
                     binding: ProductBinding(id: data.id!),
