@@ -4,6 +4,7 @@ import 'dart:developer';
 import 'package:http/http.dart' as http;
 import 'package:takkeh/model/restaurants/view_restaurant.dart';
 import 'package:takkeh/utils/api_url.dart';
+import 'package:takkeh/utils/shared_prefrences.dart';
 
 class ViewRestaurantApi {
   static Future<ViewRestaurantModel?> data(int id) async {
@@ -12,6 +13,7 @@ class ViewRestaurantApi {
       Uri uri = Uri.parse(url);
       var headers = {
         'Content-Type': 'application/json',
+        'X-localization': MySharedPreferences.language,
       };
       log("Response:: ViewRestaurantsResponse\nUrl:: $url\nheaders:: $headers");
       http.Response response = await http.get(uri, headers: headers);

@@ -80,14 +80,17 @@ class RestaurantsHeaderWidget extends StatelessWidget {
             transitionBuilder: (Widget child, Animation<double> animation) {
               return ScaleTransition(scale: animation, child: child);
             },
-            child: Text(
-              title,
-              key: ValueKey<int>(index),
-              style: const TextStyle(
-                color: MyColors.primary,
-                fontSize: 20,
+            child: FittedBox(
+              child: Text(
+                title,
+                key: ValueKey<int>(index),
+                style: const TextStyle(
+                  color: MyColors.primary,
+                  fontSize: 20,
+                ),
+                textAlign: TextAlign.center,
+                maxLines: 1,
               ),
-              maxLines: 1,
             ),
           ),
         ),

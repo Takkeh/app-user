@@ -88,8 +88,7 @@ class RestaurantsBuilder extends StatelessWidget {
               review: data.review!,
               time: data.time!,
               cost: data.cost!,
-              // isBusy: data.isBusy!,
-              isBusy: 0,
+              isBusy: data.isBusy!,
               onTap: () {
                 if (UserOrderCtrl.find.orderList.isNotEmpty && UserOrderCtrl.find.restaurantId != data.id!) {
                   NewBasketDialog().show(data: data);

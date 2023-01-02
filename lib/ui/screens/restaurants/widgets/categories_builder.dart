@@ -66,7 +66,8 @@ class RestaurantCategoriesBuilder extends StatelessWidget {
                           },
                           child: CarouselSlider(
                             options: CarouselOptions(
-                              viewportFraction: 0.167,
+                              // 0.167
+                              viewportFraction: 0.20,
                               height: 80.0,
                               onPageChanged: (index, value) {
                                 RestaurantCategoriesController.find.onPageChanged(index, snapshot.data!.categorys![index].name!, snapshot.data!.categorys![index].id!);
