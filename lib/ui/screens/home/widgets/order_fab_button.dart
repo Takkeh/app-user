@@ -22,6 +22,10 @@ class OrderFABButton extends StatelessWidget {
     kDenied,
   ];
 
+  //hold بانتظار القبول
+  //pending جاري التحضير
+  // kWayToDropPoint or > جاري التوصيل
+
   String _getStatus(String status) {
     if (status == kHold) {
       return 'ينتظر القبول';
