@@ -54,52 +54,43 @@ class RestaurantCategoriesBuilder extends StatelessWidget {
                   case ConnectionState.done:
                   default:
                     if (snapshot.hasData) {
-                      return SizedBox(
-                        height: 80,
-                        child: NotificationListener<ScrollNotification>(
-                          onNotification: (scrollNotification) {
-                            if (scrollNotification is ScrollEndNotification) {
-                              // RestaurantsCtrl.find.init(RestaurantsFilterController.find.selectedTagId.value, RestaurantCategoriesController.find.filterId, true);
-                              RestaurantsCtrl.find.pagingController.refresh();
-                            }
-                            return true;
-                          },
-                          child: CarouselSlider(
-                            options: CarouselOptions(
-                              // 0.167
-                              viewportFraction: 0.20,
-                              height: 80.0,
-                              onPageChanged: (index, value) {
-                                RestaurantCategoriesController.find.onPageChanged(index, snapshot.data!.categorys![index].name!, snapshot.data!.categorys![index].id!);
-                              },
-                            ),
-                            items: snapshot.data!.categorys!.map((element) {
-                              return Builder(
-                                builder: (BuildContext context) {
-                                  return Container(
-                                    alignment: Alignment.center,
-                                    width: 30,
-                                    child: GetBuilder<RestaurantCategoriesController>(
-                                      builder: (controller) {
-                                        if (element.id == 1) {
-                                          return CustomSvgIcon(
-                                            iconUrl: element.image!,
-                                            color: controller.currentIndex.value == 0 ? Colors.white : MyColors.primary,
-                                            width: 80,
-                                          );
-                                        } else {
-                                          return CustomSvgIcon(
-                                            iconUrl: element.image!,
-                                            width: 80,
-                                          );
-                                        }
-                                      },
-                                    ),
-                                  );
-                                },
-                              );
-                            }).toList(),
+                      return NotificationListener<ScrollNotification>(
+                        onNotification: (scrollNotification) {
+                          if (scrollNotification is ScrollEndNotification) {
+                            RestaurantsCtrl.find.pagingController.refresh();
+                          }
+                          return true;
+                        },
+                        child: CarouselSlider(
+                          options: CarouselOptions(
+                            viewportFraction: 0.25,
+                            height: 80.0,
+                            onPageChanged: (index, value) {
+                              RestaurantCategoriesController.find.onPageChanged(index, snapshot.data!.categorys![index].name!, snapshot.data!.categorys![index].id!);
+                            },
                           ),
+                          items: snapshot.data!.categorys!.map((element) {
+                            return Builder(
+                              builder: (BuildContext context) {
+                                return GetBuilder<RestaurantCategoriesController>(
+                                  builder: (controller) {
+                                    if (element.id == 1) {
+                                      return CustomSvgIcon(
+                                        iconUrl: element.image!,
+                                        color: controller.currentIndex.value == 0 ? Colors.white : MyColors.primary,
+                                        width: 30,
+                                      );
+                                    } else {
+                                      return CustomSvgIcon(
+                                        iconUrl: element.image!,
+                                        width: 30,
+                                      );
+                                    }
+                                  },
+                                );
+                              },
+                            );
+                          }).toList(),
                         ),
                       );
                     } else if (snapshot.hasError) {

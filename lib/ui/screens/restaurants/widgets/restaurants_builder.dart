@@ -9,57 +9,12 @@ import 'package:takkeh/translation/service.dart';
 import 'package:takkeh/ui/screens/restaurants/view_restaurant.dart';
 import 'package:takkeh/ui/widgets/components/new_basket_dialog.dart';
 import 'package:takkeh/ui/widgets/custom_restaurants_loading.dart';
+import 'package:takkeh/ui/widgets/no_items_found_widget.dart';
 import 'package:takkeh/ui/widgets/restaurant_cpi.dart';
 import 'package:takkeh/ui/widgets/restaurant_list_tile.dart';
 
 class RestaurantsBuilder extends StatelessWidget {
   const RestaurantsBuilder({Key? key}) : super(key: key);
-
-  Future<void> _showMyDialog(
-    BuildContext context, {
-    required RestaurantList data,
-  }) async {
-    return showDialog<void>(
-      context: context,
-      builder: (BuildContext context) {
-        return AlertDialog(
-          title: Text(TranslationService.getString('start_new_basket_key')),
-          content: Text(TranslationService.getString('new_order_will_clear_basket_key')),
-          actions: <Widget>[
-            TextButton(
-              child: Text(TranslationService.getString('cancel_key')),
-              onPressed: () {
-                Get.back();
-              },
-            ),
-            ElevatedButton(
-              child: Text(TranslationService.getString('start_key')),
-              onPressed: () {
-                Get.delete<UserOrderCtrl>(force: true);
-                Get.put(UserOrderCtrl(), permanent: true);
-                UserOrderCtrl.find.restaurantId = data.id!;
-                Get.back();
-                Get.to(
-                  () => ViewRestaurantScreen(
-                    title: data.name!,
-                    cover: data.cover!,
-                    restaurantId: data.id!,
-                    logo: data.logo!,
-                    time: data.time!,
-                    cost: data.cost!,
-                    review: data.review!,
-                    reviewIcon: data.reviewIcon!,
-                    phone: '+96298775785',
-                  ),
-                  binding: ProductBinding(id: data.id!),
-                );
-              },
-            ),
-          ],
-        );
-      },
-    );
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -71,6 +26,9 @@ class RestaurantsBuilder extends StatelessWidget {
         builderDelegate: PagedChildBuilderDelegate<RestaurantList>(
           firstPageProgressIndicatorBuilder: (context) {
             return const BaseVerticalListLoading();
+          },
+          noItemsFoundIndicatorBuilder: (context) {
+            return NoItemsFoundWidget(text: TranslationService.getString("no_restaurants_found_key"));
           },
           newPageProgressIndicatorBuilder: (context) {
             if (RestaurantsCtrl.find.pagingController.itemList!.length < 6) {

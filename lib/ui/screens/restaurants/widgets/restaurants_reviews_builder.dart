@@ -4,8 +4,10 @@ import 'package:get/get.dart';
 import 'package:infinite_scroll_pagination/infinite_scroll_pagination.dart';
 import 'package:takkeh/controller/restaurants/restaurant_reviews.dart';
 import 'package:takkeh/model/restaurants/restaurant_info_model.dart';
+import 'package:takkeh/translation/service.dart';
 import 'package:takkeh/ui/screens/restaurants/widgets/restaurant_reviews_loading.dart';
 import 'package:takkeh/ui/widgets/custom_network_image.dart';
+import 'package:takkeh/ui/widgets/no_items_found_widget.dart';
 import 'package:takkeh/ui/widgets/restaurant_cpi.dart';
 import 'package:takkeh/utils/base/colors.dart';
 import 'package:takkeh/utils/base/icons.dart';
@@ -21,8 +23,7 @@ class RestaurantsReviewsBuilder extends StatefulWidget {
   }) : super(key: key);
 
   @override
-  State<RestaurantsReviewsBuilder> createState() =>
-      _RestaurantsReviewsBuilderState();
+  State<RestaurantsReviewsBuilder> createState() => _RestaurantsReviewsBuilderState();
 }
 
 class _RestaurantsReviewsBuilderState extends State<RestaurantsReviewsBuilder> {
@@ -42,9 +43,11 @@ class _RestaurantsReviewsBuilderState extends State<RestaurantsReviewsBuilder> {
         height: 15,
       ),
       builderDelegate: PagedChildBuilderDelegate<Review>(
-          firstPageProgressIndicatorBuilder: (context) =>
-              const RestaurantReviewsLoading(),
+          firstPageProgressIndicatorBuilder: (context) => const RestaurantReviewsLoading(),
           newPageProgressIndicatorBuilder: (context) => const RestaurantCPI(),
+          noItemsFoundIndicatorBuilder: (context) {
+            return NoItemsFoundWidget(text: TranslationService.getString("no_reviews_found_key"));
+          },
           itemBuilder: (context, data, index) {
             return Row(
               children: [
@@ -60,8 +63,7 @@ class _RestaurantsReviewsBuilderState extends State<RestaurantsReviewsBuilder> {
                       borderRadius: BorderRadius.circular(17.0),
                       color: MyColors.whiteDFE,
                     ),
-                    padding: const EdgeInsets.symmetric(
-                        horizontal: 20, vertical: 20),
+                    padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 20),
                     child: IntrinsicHeight(
                       child: Row(
                         children: [

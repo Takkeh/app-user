@@ -34,28 +34,21 @@ Future<void> _onBackgroundMessage(RemoteMessage message) async {
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
-
   await Firebase.initializeApp(
-    // options: const FirebaseOptions(
-    //   apiKey: "XXX",
-    //   appId: "XXX",
-    //   messagingSenderId: "XXX",
-    //   projectId: "XXX",
-    // ),
-  );
+      // options: const FirebaseOptions(
+      //   apiKey: "XXX",
+      //   appId: "XXX",
+      //   messagingSenderId: "XXX",
+      //   projectId: "XXX",
+      // ),
+      );
   FirebaseMessaging.onBackgroundMessage(_onBackgroundMessage);
   await MySharedPreferences.init();
-  await FirebaseMessaging.instance.getToken().then((value) async {
-    MySharedPreferences.deviceToken = value!;
-    log("deviceToken:: $value");
-    DeviceTokenService.updateDeviceToken(value);
-  });
   if (MySharedPreferences.language.isEmpty) {
     // MySharedPreferences.language = Get.deviceLocale!.languageCode;
     MySharedPreferences.language = 'ar';
   }
   await TranslationService.init();
-
   await SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp, DeviceOrientation.portraitDown]);
   runApp(const MyApp());
 }
@@ -92,6 +85,14 @@ class _MyAppState extends State<MyApp> {
 
   @override
   void initState() {
+    FirebaseMessaging.instance.getToken().then((value) async {
+      MySharedPreferences.deviceToken = value!;
+      log("deviceToken:: $value");
+      if (MySharedPreferences.accessToken.isNotEmpty) {
+        DeviceTokenService().updateDeviceToken(value);
+      }
+    });
+
     Connectivity().onConnectivityChanged.listen((status) {
       log("internetStatus:: $status");
       if (status == ConnectivityResult.none) {

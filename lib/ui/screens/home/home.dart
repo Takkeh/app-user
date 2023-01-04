@@ -109,13 +109,9 @@ class _HomeScreenState extends State<HomeScreen> {
                     ),
                   ),
                   const SectionsBuilder(),
-                  TitleWidget(
-                    title: TranslationService.getString('takkeh_offers_key'),
-                  ),
+                  TitleWidget(title: TranslationService.getString('takkeh_offers_key')),
                   const TakkehOffersBuilder(),
-                  TitleWidget(
-                    title: TranslationService.getString('special_offers_key'),
-                  ),
+                  TitleWidget(title: TranslationService.getString('special_offers_key')),
                   const SpecialOffersBuilder(),
                 ],
               ),
