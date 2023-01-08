@@ -24,7 +24,7 @@ import 'package:takkeh/utils/shared_prefrences.dart';
 // implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
 
 Map<String, dynamic> notificationsMap = {};
-//.............
+//...............
 
 Future<void> _onBackgroundMessage(RemoteMessage message) async {
   if (message.notification != null) {
