@@ -13,7 +13,8 @@ import 'package:takkeh/utils/base/colors.dart';
 import 'package:takkeh/utils/base/images.dart';
 
 class MyOrdersScreen extends StatefulWidget {
-  const MyOrdersScreen({Key? key}) : super(key: key);
+  final bool withBackButton;
+  const MyOrdersScreen({Key? key,required this.withBackButton}) : super(key: key);
 
   @override
   State<MyOrdersScreen> createState() => _MyOrdersScreenState();
@@ -42,7 +43,7 @@ class _MyOrdersScreenState extends State<MyOrdersScreen> {
         ),
         Scaffold(
           backgroundColor: Colors.transparent,
-          appBar: TransparentAppBar(title: TranslationService.getString('my_orders_key')),
+          appBar: TransparentAppBar(title: TranslationService.getString('my_orders_key'),withBackButton: widget.withBackButton,),
           body: RefreshIndicator(
             onRefresh: () async {
               MyOrdersCtrl.find.pagingController.refresh();

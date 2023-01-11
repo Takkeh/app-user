@@ -2,7 +2,6 @@ import 'dart:convert';
 import 'dart:developer';
 
 import 'package:takkeh/model/wallet/transaction_model.dart';
-import 'package:takkeh/utils/shared_prefrences.dart';
 import 'package:takkeh/utils/api_url.dart';
 import 'package:http/http.dart' as http;
 
@@ -18,7 +17,6 @@ class MakeTransactionApi {
       Uri uri = Uri.parse(url);
       var headers = {
         'Content-Type': 'application/json',
-        'Authorization': 'Bearer ${MySharedPreferences.accessToken}',
       };
       var body = jsonEncode({
         "user_id": userId.toString(),

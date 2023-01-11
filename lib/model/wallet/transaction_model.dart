@@ -18,18 +18,18 @@ class TransactionModel {
   String transactionModelToJson() => json.encode(toJson());
 
   factory TransactionModel.fromJson(Map<String, dynamic> json) => TransactionModel(
-        status: json["status"],
-        code: json["code"],
-        msg: json["msg"],
-        transaction: Transaction.fromJson(json["Transaction"]),
-      );
+    status: json["status"],
+    code: json["code"],
+    msg: json["msg"],
+    transaction: Transaction.fromJson(json["Transaction"]),
+  );
 
   Map<String, dynamic> toJson() => {
-        "status": status,
-        "code": code,
-        "msg": msg,
-        "Transaction": transaction!.toJson(),
-      };
+    "status": status,
+    "code": code,
+    "msg": msg,
+    "Transaction": transaction!.toJson(),
+  };
 }
 
 class Transaction {
@@ -58,26 +58,26 @@ class Transaction {
   String transactionToJson() => json.encode(toJson());
 
   factory Transaction.fromJson(Map<String, dynamic> json) => Transaction(
-        id: json["id"],
-        type: json["type"],
-        status: json["status"],
-        amount: json["amount"],
-        walletId: json["wallet_id"],
-        walletName: json["wallet_name"],
-        walletTotal: json["wallet_total"],
-        user: User.fromJson(json["user"]),
-      );
+    id: json["id"],
+    type: json["type"],
+    status: json["status"],
+    amount: json["amount"],
+    walletId: json["wallet_id"],
+    walletName: json["wallet_name"],
+    walletTotal: json["wallet_total"],
+    user: User.fromJson(json["user"]),
+  );
 
   Map<String, dynamic> toJson() => {
-        "id": id,
-        "type": type,
-        "status": status,
-        "amount": amount,
-        "wallet_id": walletId,
-        "wallet_name": walletName,
-        "wallet_total": walletTotal,
-        "user": user!.toJson(),
-      };
+    "id": id,
+    "type": type,
+    "status": status,
+    "amount": amount,
+    "wallet_id": walletId,
+    "wallet_name": walletName,
+    "wallet_total": walletTotal,
+    "user": user!.toJson(),
+  };
 }
 
 class User {
@@ -89,6 +89,10 @@ class User {
     this.email,
     this.deviceToken,
     this.image,
+    this.active,
+    this.lat,
+    this.long,
+    this.online,
   });
 
   int? id;
@@ -96,30 +100,42 @@ class User {
   String? lastName;
   String? phone;
   String? email;
-  dynamic deviceToken;
+  String? deviceToken;
   String? image;
+  dynamic active;
+  String? lat;
+  String? long;
+  int? online;
 
   User userFromJson(String str) => User.fromJson(json.decode(str));
 
   String userToJson() => json.encode(toJson());
 
   factory User.fromJson(Map<String, dynamic> json) => User(
-        id: json["id"],
-        name: json["name"] ?? '',
-        lastName: json["last_name"] ?? '',
-        phone: json["phone"] == null ? '' : json["phone"].toString(),
-        email: json["email"] ?? '',
-        deviceToken: json["device_token"] ?? '',
-        image: json["image"] ?? '',
-      );
+    id: json["id"],
+    name: json["name"],
+    lastName: json["last_name"]??"",
+    phone: json["phone"],
+    email: json["email"],
+    deviceToken: json["device_token"],
+    image: json["image"],
+    active: json["active"],
+    lat: json["lat"]??"",
+    long: json["long"]??"",
+    online: json["online"],
+  );
 
   Map<String, dynamic> toJson() => {
-        "id": id,
-        "name": name,
-        "last_name": lastName,
-        "phone": phone,
-        "email": email,
-        "device_token": deviceToken,
-        "image": image,
-      };
+    "id": id,
+    "name": name,
+    "last_name": lastName,
+    "phone": phone,
+    "email": email,
+    "device_token": deviceToken,
+    "image": image,
+    "active": active,
+    "lat": lat,
+    "long": long,
+    "online": online,
+  };
 }

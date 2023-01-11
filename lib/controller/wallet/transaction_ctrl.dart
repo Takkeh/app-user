@@ -22,7 +22,7 @@ class MakeTransactionCtrl extends GetxController {
     OverLayLoader.showLoading(context);
     transactionModel = await MakeTransactionApi.data(
       walletId: walletId,
-      userId: userId,
+      userId: 20,
       type: type,
       amount: amount,
     );

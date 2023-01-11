@@ -11,7 +11,8 @@ import 'package:takkeh/utils/base/images.dart';
 import 'package:takkeh/utils/shared_prefrences.dart';
 
 class HelpScreen extends StatefulWidget {
-  const HelpScreen({Key? key}) : super(key: key);
+  final bool withBackButton;
+  const HelpScreen({Key? key,required this.withBackButton}) : super(key: key);
 
   @override
   State<HelpScreen> createState() => _HelpScreenState();
@@ -28,7 +29,7 @@ class _HelpScreenState extends State<HelpScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: MyColors.blue6FA,
-      appBar: TransparentAppBar(title: TranslationService.getString('help_key')),
+      appBar: TransparentAppBar(title: TranslationService.getString('help_key'),withBackButton: widget.withBackButton,),
       body: Stack(
         alignment: Alignment.bottomCenter,
         children: [
