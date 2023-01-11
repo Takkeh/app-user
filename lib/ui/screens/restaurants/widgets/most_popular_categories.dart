@@ -50,7 +50,6 @@ class MostPopularCategoriesBuilder extends StatelessWidget {
                             cover: data.image!,
                             productId: data.id!,
                             restaurantId: restaurantId,
-                            //TODO:: khaledgroups
                             groups: data.groups!,
                           ),
                           binding: ViewProductBinding(),

@@ -15,7 +15,6 @@ import 'package:takkeh/ui/widgets/custom_restaurants_loading.dart';
 import 'package:takkeh/ui/widgets/restaurant_cpi.dart';
 import 'package:takkeh/ui/widgets/restaurant_list_tile.dart';
 
-//TODO: search and pagination
 class RestaurantsSearchScreen extends StatelessWidget {
   const RestaurantsSearchScreen({Key? key}) : super(key: key);
 
@@ -77,7 +76,7 @@ class RestaurantsSearchScreen extends StatelessWidget {
                                 cost: data.cost!,
                                 review: data.review!,
                                 reviewIcon: data.reviewIcon!,
-                                phone: '+96298775785',
+                                phone: data.phone!,
                               ),
                               binding: ProductBinding(id: data.id!),
                             );

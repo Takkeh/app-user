@@ -18,18 +18,18 @@ class WalletViewModel {
   String walletViewModelToJson() => json.encode(toJson());
 
   factory WalletViewModel.fromJson(Map<String, dynamic> json) => WalletViewModel(
-    status: json["status"],
-    code: json["code"],
-    msg: json["msg"],
-    myWallet: MyWallet.fromJson(json["my_wallet"]),
-  );
+        status: json["status"],
+        code: json["code"],
+        msg: json["msg"],
+        myWallet: MyWallet.fromJson(json["my_wallet"]),
+      );
 
   Map<String, dynamic> toJson() => {
-    "status": status,
-    "code": code,
-    "msg": msg,
-    "my_wallet": myWallet!.toJson(),
-  };
+        "status": status,
+        "code": code,
+        "msg": msg,
+        "my_wallet": myWallet!.toJson(),
+      };
 }
 
 class MyWallet {
@@ -52,20 +52,20 @@ class MyWallet {
   String myWalletToJson() => json.encode(toJson());
 
   factory MyWallet.fromJson(Map<String, dynamic> json) => MyWallet(
-    id: json["id"],
-    name: json["name"],
-    total: json["total"],
-    user: User.fromJson(json["user"]),
-    transactions: List<Transaction>.from(json["transactions"].map((x) => Transaction.fromJson(x))),
-  );
+        id: json["id"],
+        name: json["name"],
+        total: json["total"],
+        user: User.fromJson(json["user"]),
+        transactions: List<Transaction>.from(json["transactions"].map((x) => Transaction.fromJson(x))),
+      );
 
   Map<String, dynamic> toJson() => {
-    "id": id,
-    "name": name,
-    "total": total,
-    "user": user!.toJson(),
-    "transactions": List<dynamic>.from(transactions!.map((x) => x.toJson())),
-  };
+        "id": id,
+        "name": name,
+        "total": total,
+        "user": user!.toJson(),
+        "transactions": List<dynamic>.from(transactions!.map((x) => x.toJson())),
+      };
 }
 
 class Transaction {
@@ -86,18 +86,18 @@ class Transaction {
   String transactionToJson() => json.encode(toJson());
 
   factory Transaction.fromJson(Map<String, dynamic> json) => Transaction(
-    id: json["id"],
-    type: json["type"],
-    status: json["status"],
-    amount: json["amount"],
-  );
+        id: json["id"],
+        type: json["type"],
+        status: json["status"],
+        amount: json["amount"],
+      );
 
   Map<String, dynamic> toJson() => {
-    "id": id,
-    "type": type,
-    "status": status,
-    "amount": amount,
-  };
+        "id": id,
+        "type": type,
+        "status": status,
+        "amount": amount,
+      };
 }
 
 class User {
@@ -124,22 +124,22 @@ class User {
   String userToJson() => json.encode(toJson());
 
   factory User.fromJson(Map<String, dynamic> json) => User(
-    id: json["id"],
-    name: json["name"],
-    lastName: json["last_name"],
-    phone: json["phone"],
-    email: json["email"],
-    deviceToken: json["device_token"],
-    image: json["image"],
-  );
+        id: json["id"],
+        name: json["name"],
+        lastName: json["last_name"],
+        phone: json["phone"] == null ? '' : json["phone"].toString(),
+        email: json["email"],
+        deviceToken: json["device_token"],
+        image: json["image"],
+      );
 
   Map<String, dynamic> toJson() => {
-    "id": id,
-    "name": name,
-    "last_name": lastName,
-    "phone": phone,
-    "email": email,
-    "device_token": deviceToken,
-    "image": image,
-  };
+        "id": id,
+        "name": name,
+        "last_name": lastName,
+        "phone": phone,
+        "email": email,
+        "device_token": deviceToken,
+        "image": image,
+      };
 }

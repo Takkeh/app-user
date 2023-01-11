@@ -35,7 +35,7 @@ class ProductsListTile extends StatelessWidget {
           itemQuantity = itemQuantity + element['quantity'] as int;
         }
         return GestureDetector(
-          onTap: isAvailable == 0 ? onTap : null,
+          onTap: isAvailable == 1 ? onTap : null,
           child: Stack(
             alignment: MySharedPreferences.language == 'en' ? Alignment.bottomRight : Alignment.bottomLeft,
             children: [

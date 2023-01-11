@@ -49,6 +49,7 @@ class RestaurantList {
     this.isBusy,
     this.reviewAverage,
     this.review,
+    this.phone,
   });
 
   int? id;
@@ -56,6 +57,7 @@ class RestaurantList {
   String? logo;
   String? cover;
   String? reviewIcon;
+  String? phone;
   String? cost;
   String? time;
   String? description;
@@ -69,10 +71,11 @@ class RestaurantList {
         logo: json["logo"],
         cover: json["cover"],
         reviewIcon: json["review_icon"],
-        cost: json["cost"],
+        cost: json["cost"].toString(),
         time: json["time"],
         description: json["description"],
         isBusy: json["is_busy"],
+        phone: json["phone"] == null ? '' : json["phone"].toString(),
         reviewAverage: json["review_average"] != null ? double.parse(json["review_average"].toString()) : 4.0,
         review: json["review"] ?? '',
       );
@@ -89,5 +92,6 @@ class RestaurantList {
         "is_busy": isBusy,
         "review_average": reviewAverage,
         "review": review,
+        "phone": phone,
       };
 }

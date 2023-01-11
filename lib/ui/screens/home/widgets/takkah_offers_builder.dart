@@ -6,14 +6,103 @@ import 'package:takkeh/binding/restaurants/view_product.dart';
 import 'package:takkeh/controller/home/offers.dart';
 import 'package:takkeh/model/home/offers_model.dart';
 import 'package:takkeh/model/restaurants/groups_model.dart';
+import 'package:takkeh/model/restaurants/view_restaurant.dart';
+import 'package:takkeh/translation/service.dart';
 import 'package:takkeh/ui/screens/home/widgets/offers_loading.dart';
 import 'package:takkeh/ui/screens/restaurants/view_restaurant.dart';
 import 'package:takkeh/ui/screens/restaurants/view_restaurant_product.dart';
 import 'package:takkeh/ui/widgets/custom_network_image.dart';
 import 'package:takkeh/ui/widgets/failed_widget.dart';
+import 'package:takkeh/utils/app_constants.dart';
+import 'package:takkeh/utils/base/colors.dart';
 
 class TakkehOffersBuilder extends StatelessWidget {
   const TakkehOffersBuilder({Key? key}) : super(key: key);
+
+  void toggleRoute(Offers element) {
+    if (element.route == null) return;
+    final id = element.restaurant!.id!;
+    final title = element.restaurant!.name!;
+    final cost = element.restaurant!.cost!;
+    final time = element.restaurant!.time!;
+    final phone = element.restaurant!.phone!;
+    final reviewIcon = element.restaurant!.reviewIcon!;
+    final cover = element.restaurant!.cover!;
+    final logo = element.restaurant!.logo!;
+    final review = element.restaurant!.review!;
+    final isBusy = element.restaurant!.isBusy!;
+    if (element.route == kRestaurant) {
+      if (isBusy == 1) {
+        Get.snackbar(
+          '',
+          titleText: const Text("", style: TextStyle(fontSize: 0)),
+          TranslationService.getString('restaurant_busy_key'),
+          colorText: Colors.white,
+          margin: const EdgeInsets.all(10.0),
+          backgroundColor: MyColors.redPrimary,
+        );
+        return;
+      }
+      Get.to(
+        () => ViewRestaurantScreen(
+          restaurantId: id,
+          title: title,
+          cost: cost,
+          time: time,
+          reviewIcon: reviewIcon,
+          cover: cover,
+          logo: logo,
+          review: review,
+          phone: phone,
+        ),
+        binding: ProductBinding(id: id),
+      );
+    } else if (element.route == kRestaurantProduct) {
+      final productId = element.product!.id!;
+      final title = element.product!.name!;
+      final isAvailable = element.product!.isAvailable!;
+      final description = element.product!.description!;
+      final price = element.product!.price!;
+      final groups = element.product!.groups!;
+      if (isAvailable == 0) {
+        Get.snackbar(
+          '',
+          titleText: const Text("", style: TextStyle(fontSize: 0)),
+          TranslationService.getString('product_not_available_key'),
+          colorText: Colors.white,
+          margin: const EdgeInsets.all(10.0),
+          backgroundColor: MyColors.redPrimary,
+        );
+        return;
+      }
+      Get.to(
+        () => ViewRestaurantScreen(
+          restaurantId: id,
+          title: title,
+          cost: cost,
+          time: time,
+          reviewIcon: reviewIcon,
+          cover: cover,
+          logo: logo,
+          review: review,
+          phone: '+96298775785',
+        ),
+        binding: ProductBinding(id: id),
+      );
+      Get.to(
+        () => ViewRestaurantProductScreen(
+          restaurantId: 5,
+          productId: productId,
+          title: title,
+          description: description,
+          price: price,
+          cover: cover,
+          groups: groups,
+        ),
+        binding: ViewProductBinding(),
+      );
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -40,43 +129,7 @@ class TakkehOffersBuilder extends StatelessWidget {
                       builder: (BuildContext context) {
                         return GestureDetector(
                           onTap: () {
-                            Get.to(
-                              () => const ViewRestaurantScreen(
-                                restaurantId: 5,
-                                title: 'ابو جبارة',
-                                cost: 'مجاني',
-                                time: '20 - 90 دقيقة',
-                                reviewIcon: '4.svg',
-                                cover: 'img/restaurants/mcdonald-s.png',
-                                logo: 'img/restaurants/16693683296163.jpg',
-                                review: 'فاخر',
-                                phone: '+96298775785',
-                              ),
-                              binding: ProductBinding(id: 5),
-                            );
-                            var list = [
-                              {
-                                "id": 33,
-                                "name": "",
-                                "type": "required",
-                                "items": [
-                                  {"id": 65, "name": "gggg", "price": "10.00"},
-                                  {"id": 66, "name": "ggrrr", "price": "20.00"}
-                                ]
-                              }
-                            ];
-                            Get.to(
-                              () => ViewRestaurantProductScreen(
-                                restaurantId: 5,
-                                productId: 18,
-                                title: 'big mac',
-                                description: 'زاكي',
-                                price: 22.8,
-                                cover: "img/restaurants/mcdonald-s.png",
-                                groups: List<ProductGroups>.from(list.map((x) => ProductGroups.fromJson(x))),
-                              ),
-                              binding: ViewProductBinding(),
-                            );
+                            toggleRoute(element);
                           },
                           child: CustomNetworkImage(
                             url: snapshot.data!.offers![index].image!,

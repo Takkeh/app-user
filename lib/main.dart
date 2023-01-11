@@ -111,10 +111,6 @@ class _MyAppState extends State<MyApp> {
 
     FirebaseMessaging.instance.requestPermission().then((value) {});
 
-    //TODO: check if needed for ios
-    // FirebaseMessaging.instance.getToken().then((token) {});
-    // FirebaseMessaging.instance.getAPNSToken().then((aPNStoken) {});
-
     FirebaseMessaging.instance.getInitialMessage().then(CloudMessagingService().terminated);
     FirebaseMessaging.onMessage.listen(CloudMessagingService().foreground);
     FirebaseMessaging.onMessageOpenedApp.listen(CloudMessagingService().background);

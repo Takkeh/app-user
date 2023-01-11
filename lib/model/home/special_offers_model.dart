@@ -47,7 +47,7 @@ class Special {
 
   factory Special.fromJson(Map<String, dynamic> json) => Special(
         id: json["id"],
-        image: json["image"],
+        image: json["image"] ?? '',
       );
 
   Map<String, dynamic> toJson() => {

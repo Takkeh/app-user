@@ -45,8 +45,7 @@ class _ViewRestaurantProductScreenState extends State<ViewRestaurantProductScree
   late TextEditingController noteCtrl;
 
   bool isAlreadyExist(List<Map<String, dynamic>> groups) {
-    var data =
-        UserOrderCtrl.find.orderList.where((element) => element['product_id'] == widget.productId && element["note"] == noteCtrl.text.trim() && element["groups"].toString() == groups.toString());
+    var data = UserOrderCtrl.find.orderList.where((element) => element['product_id'] == widget.productId && element["note"] == noteCtrl.text.trim() && element["groups"].toString() == groups.toString());
     if (data.isEmpty) return false;
     data.first.update('price', (value) => value + ViewProductCtrl.find.finalPrice.value);
     data.first.update('quantity', (value) => value + ViewProductCtrl.find.quantity.value);
@@ -98,7 +97,6 @@ class _ViewRestaurantProductScreenState extends State<ViewRestaurantProductScree
                     if (Get.isSnackbarOpen) {
                       Get.closeCurrentSnackbar();
                     }
-                    //TODO: specify the required field and scroll to it for next version
                     Get.snackbar(
                       TranslationService.getString('required_field_key'),
                       TranslationService.getString('check_required_field_key'),

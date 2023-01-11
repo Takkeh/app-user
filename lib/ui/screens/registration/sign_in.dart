@@ -14,6 +14,7 @@ import 'package:takkeh/ui/screens/registration/widgets/skip_button.dart';
 import 'package:takkeh/ui/widgets/custom_elevated_button.dart';
 import 'package:takkeh/ui/widgets/custom_social_button.dart';
 import 'package:takkeh/ui/widgets/custom_text_field.dart';
+import 'package:takkeh/utils/app_constants.dart';
 import 'package:takkeh/utils/base/colors.dart';
 import 'package:takkeh/utils/base/icons.dart';
 import 'package:takkeh/utils/phone_field_helper.dart';
@@ -121,7 +122,6 @@ class SignInScreenState extends State<SignInScreen> {
                     const Spacer(),
                   ],
                 ),
-                // TODO: for 2nd version
                 const Divider(
                   height: 30,
                   indent: 30,
@@ -176,8 +176,7 @@ class SignInScreenState extends State<SignInScreen> {
             ),
           ),
         ),
-        //TODO: add route check in case sign in is required
-        if (widget.isKeyboardVisible) const SkipButton(),
+        if (widget.isKeyboardVisible && widget.route == kHome) const SkipButton(),
       ],
     );
   }

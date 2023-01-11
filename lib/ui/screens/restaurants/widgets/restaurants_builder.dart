@@ -62,8 +62,7 @@ class RestaurantsBuilder extends StatelessWidget {
                       cost: data.cost!,
                       review: data.review!,
                       reviewIcon: data.reviewIcon!,
-                      //TODO: missing api data
-                      phone: '+96298775785',
+                      phone: data.phone!,
                     ),
                     binding: ProductBinding(id: data.id!),
                   );

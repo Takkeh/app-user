@@ -10,7 +10,6 @@ class ChooseCardList extends StatelessWidget {
       padding: const EdgeInsets.symmetric(horizontal: 15.0),
       child: ListBody(
         children: [
-          //TODO: refactor if needed
           Container(
             margin: const EdgeInsets.symmetric(vertical: 5),
             padding: const EdgeInsetsDirectional.fromSTEB(16, 20, 35, 20),

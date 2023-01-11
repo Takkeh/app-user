@@ -47,12 +47,12 @@ class RestaurantProducts {
 
   int? id;
   String? name;
-  List<Product>? products;
+  List<ProductInfo>? products;
 
   factory RestaurantProducts.fromJson(Map<String, dynamic> json) => RestaurantProducts(
         id: json["id"],
         name: json["name"],
-        products: List<Product>.from(json["products"].map((x) => Product.fromJson(x))),
+        products: List<ProductInfo>.from(json["products"].map((x) => ProductInfo.fromJson(x))),
       );
 
   Map<String, dynamic> toJson() => {
@@ -62,14 +62,15 @@ class RestaurantProducts {
       };
 }
 
-class Product {
-  Product({
+class ProductInfo {
+  ProductInfo({
     this.id,
     this.name,
     this.image,
     this.price,
     this.description,
     this.groups,
+    this.isAvailable,
   });
 
   int? id;
@@ -77,12 +78,14 @@ class Product {
   String? description;
   String? image;
   double? price;
+  int? isAvailable;
   List<ProductGroups>? groups;
 
-  factory Product.fromJson(Map<String, dynamic> json) => Product(
+  factory ProductInfo.fromJson(Map<String, dynamic> json) => ProductInfo(
         id: json["id"],
         name: json["name"],
         image: json["image"] ?? '',
+        isAvailable: json["is_available"] ?? '',
         description: json["description"] ?? '',
         price: double.parse(json["price"].toString()),
         groups: List<ProductGroups>.from(json["groups"].map((x) => ProductGroups.fromJson(x))),
@@ -93,6 +96,7 @@ class Product {
         "name": name,
         "image": image,
         "price": price,
+        "is_available": isAvailable,
         "description": description,
         "groups": List<ProductGroups>.from(groups!.map((x) => x.toJson())),
       };

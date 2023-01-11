@@ -102,6 +102,7 @@ class _BasketScreenState extends State<BasketScreen> {
               children: [
                 Obx(() {
                   return ListView.builder(
+                      physics: const NeverScrollableScrollPhysics(),
                       padding: EdgeInsets.zero,
                       shrinkWrap: true,
                       itemCount: MakeOrderCtrl.find.orderList.length,

@@ -106,6 +106,7 @@ class Product {
     this.soldQuantity,
     this.description,
     this.price,
+    this.isAvailable,
     this.groups,
   });
 
@@ -115,6 +116,7 @@ class Product {
   int? soldQuantity;
   String? description;
   double? price;
+  int? isAvailable;
   List<ProductGroups>? groups;
 
   factory Product.fromJson(Map<String, dynamic> json) => Product(
@@ -123,6 +125,7 @@ class Product {
         image: json["image"] ?? '',
         soldQuantity: json["sold_quantity"],
         description: json["description"],
+        isAvailable: json["is_available"],
         price: double.parse(json["price"].toString()),
         groups: List<ProductGroups>.from(json["groups"].map((x) => ProductGroups.fromJson(x))),
       );
@@ -134,6 +137,7 @@ class Product {
         "sold_quantity": soldQuantity,
         "description": description,
         "price": price,
+        "is_available": isAvailable,
         "groups": List<ProductGroups>.from(groups!.map((x) => x.toJson())),
       };
 }
