@@ -42,7 +42,7 @@ class Offers {
 
   Offers.fromJson(dynamic json) {
     id = json['id'];
-    image = json['image'];
+    image = json['image'] ?? '';
   }
   int? id;
   String? image;

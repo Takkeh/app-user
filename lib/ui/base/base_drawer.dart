@@ -18,9 +18,13 @@ import 'package:takkeh/ui/screens/my_orders/my_orders.dart';
 import 'package:takkeh/ui/screens/profile/profile.dart';
 import 'package:takkeh/ui/screens/registration/registration.dart';
 import 'package:takkeh/ui/screens/wallet/wallet.dart';
+import 'package:takkeh/ui/widgets/components/base_dialog.dart';
+import 'package:takkeh/ui/widgets/components/language_dialog.dart';
 import 'package:takkeh/utils/base/colors.dart';
 import 'package:takkeh/utils/base/icons.dart';
 import 'package:takkeh/utils/shared_prefrences.dart';
+
+enum LanguageEnum { english, arabic }
 
 class BaseDrawer extends StatefulWidget {
   const BaseDrawer({Key? key}) : super(key: key);
@@ -98,6 +102,13 @@ class _BaseDrawerState extends State<BaseDrawer> {
                         title: TranslationService.getString('cards_key'),
                         icon: MyIcons.ticketBlack,
                         onTap: () {},
+                      ),
+                      DrawerListTile(
+                        title: TranslationService.getString('language_key'),
+                        icon: MyIcons.timePast,
+                        onTap: () {
+                          LanguageDialog().show();
+                        },
                       ),
                       DrawerListTile(
                         title: TranslationService.getString('help_key'),
