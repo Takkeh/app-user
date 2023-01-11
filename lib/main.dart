@@ -22,6 +22,7 @@ import 'package:takkeh/utils/material_theme.dart';
 import 'package:takkeh/utils/shared_prefrences.dart';
 
 // implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
+// 'X-localization': MySharedPreferences.language,
 
 Map<String, dynamic> notificationsMap = {};
 //.................

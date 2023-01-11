@@ -12,7 +12,7 @@ class ProductsListTile extends StatelessWidget {
   final String imageUrl, title, description;
   final int id, isAvailable;
   final double price;
-  final Function() onTap;
+  final Function()? onTap;
 
   const ProductsListTile({
     Key? key,
@@ -53,19 +53,19 @@ class ProductsListTile extends StatelessWidget {
                       radius: 10,
                       width: 80,
                       height: 80,
-                      colorFilter: isAvailable == 1 ? ColorFilter.mode(MyColors.grey070.withOpacity(0.50), BlendMode.dstATop) : null,
+                      colorFilter: isAvailable == 1 ? null : ColorFilter.mode(MyColors.grey070.withOpacity(0.50), BlendMode.dstATop),
                       child: isAvailable == 1
-                          ? Padding(
+                          ? null
+                          : Padding(
                               padding: const EdgeInsets.symmetric(horizontal: 8.0),
                               child: FittedBox(
                                 child: Text(
                                   TranslationService.getString('available_key'),
                                   textAlign: TextAlign.center,
-                                  style: const TextStyle(color: Colors.white),
+                                  style: const TextStyle(color: Colors.black),
                                 ),
                               ),
-                            )
-                          : null,
+                            ),
                     ),
                     const SizedBox(width: 10),
                     Expanded(

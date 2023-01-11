@@ -13,16 +13,6 @@ class RestaurantsInfoBuilder extends StatefulWidget {
   final int restaurantId;
   const RestaurantsInfoBuilder({Key? key, required this.restaurantId}) : super(key: key);
 
-  static final info = [
-    'Khaled',
-    'Khaled',
-    'Khaled',
-    'Khaled',
-    'Khaled',
-    'Khaled',
-    'Khaled',
-  ];
-
   @override
   State<RestaurantsInfoBuilder> createState() => _RestaurantsInfoBuilderState();
 }
@@ -153,7 +143,7 @@ class _RestaurantsInfoBuilderState extends State<RestaurantsInfoBuilder> {
                           style: const TextStyle(fontSize: 16, color: MyColors.grey070),
                         ),
                         trailing: Text(
-                          '${data.isTaxable!}',
+                          data.isTaxable == 1 ? TranslationService.getString('yes_key') : TranslationService.getString('no_key'),
                           style: const TextStyle(fontSize: 16, color: MyColors.grey070),
                         ),
                       ),

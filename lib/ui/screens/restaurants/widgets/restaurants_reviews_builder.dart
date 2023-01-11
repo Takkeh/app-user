@@ -3,6 +3,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:infinite_scroll_pagination/infinite_scroll_pagination.dart';
 import 'package:takkeh/controller/restaurants/restaurant_reviews.dart';
+import 'package:takkeh/controller/restaurants/restaurants.dart';
 import 'package:takkeh/model/restaurants/restaurant_info_model.dart';
 import 'package:takkeh/translation/service.dart';
 import 'package:takkeh/ui/screens/restaurants/widgets/restaurant_reviews_loading.dart';
@@ -39,12 +40,17 @@ class _RestaurantsReviewsBuilderState extends State<RestaurantsReviewsBuilder> {
     return PagedListView<int, Review>.separated(
       padding: const EdgeInsets.all(20),
       pagingController: RestaurantReviewsCtrl.find.pagingController,
-      separatorBuilder: (context, index) => const SizedBox(
-        height: 15,
-      ),
+      separatorBuilder: (context, index) => const SizedBox(height: 15),
       builderDelegate: PagedChildBuilderDelegate<Review>(
           firstPageProgressIndicatorBuilder: (context) => const RestaurantReviewsLoading(),
-          newPageProgressIndicatorBuilder: (context) => const RestaurantCPI(),
+          newPageProgressIndicatorBuilder: (context) {
+            if (RestaurantsCtrl.find.pagingController.itemList!.length < 5) {
+              return const SizedBox.shrink();
+            } else {
+              print("alskfjasklfj");
+              return const RestaurantCPI();
+            }
+          },
           noItemsFoundIndicatorBuilder: (context) {
             return NoItemsFoundWidget(text: TranslationService.getString("no_reviews_found_key"));
           },

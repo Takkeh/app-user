@@ -16,6 +16,7 @@ import 'package:takkeh/ui/screens/restaurants/widgets/order_status_text.dart';
 import 'package:takkeh/ui/screens/restaurants/widgets/order_time_line.dart';
 import 'package:takkeh/ui/widgets/order_details_box.dart';
 import 'package:takkeh/ui/widgets/order_item.dart';
+import 'package:takkeh/ui/widgets/transparent_app_bar.dart';
 import 'package:takkeh/utils/app_constants.dart';
 import 'package:takkeh/utils/base/colors.dart';
 import 'package:takkeh/utils/base/images.dart';
@@ -30,6 +31,31 @@ class OrderStatusScreen extends StatelessWidget {
     required this.orderId,
     required this.route,
   }) : super(key: key);
+
+  static final showStatusList = [kHold, kPending, kDenied];
+
+  static String _toggleGif(FireOrderDetails data) {
+    switch (data.status) {
+      case kHold:
+        return MyImages.orderStatusHolding;
+      case kPending:
+        return MyImages.orderStatusSearching;
+      case kWayToPickUpPoint:
+      case kArrivedToPickUpPoint:
+      case kAtPickUpPoint:
+        return MyImages.orderStatusInRestaurants;
+      case kWayToDropPoint:
+      case kArrivedToDropPoint:
+      case kCollectingMoney:
+        return MyImages.orderStatusOnDelivery;
+      case kCompleted:
+        return MyImages.orderStatusComplete;
+      default:
+        {
+          return MyImages.orderStatusHolding;
+        }
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -55,8 +81,7 @@ class OrderStatusScreen extends StatelessWidget {
             },
           ),
         ),
-        extendBodyBehindAppBar: true,
-        appBar: OrderStatusAppBar(orderId: orderId),
+        appBar: TransparentAppBar(title: orderId.toString()),
         body: StreamBuilder<QuerySnapshot<FireOrderDetails>>(
             stream: FirebaseFirestore.instance
                 .collection('orders')
@@ -69,29 +94,38 @@ class OrderStatusScreen extends StatelessWidget {
                 .snapshots(),
             builder: (context, snapshot) {
               if (snapshot.hasError) {
-                return Center(
-                  child: LoadingAnimationWidget.flickr(
-                    leftDotColor: MyColors.text,
-                    rightDotColor: MyColors.redPrimary,
-                    size: 50,
-                  ),
-                );
+                return const SizedBox.shrink();
               }
               if (snapshot.connectionState == ConnectionState.waiting) {
-                return const Scaffold(body: Text('Loading'));
+                return Scaffold(
+                  body: Center(
+                    child: LoadingAnimationWidget.flickr(
+                      leftDotColor: MyColors.text,
+                      rightDotColor: MyColors.redPrimary,
+                      size: 50,
+                    ),
+                  ),
+                );
               }
 
               final data = snapshot.data!.docs[0].data();
               return Column(
                 children: [
-                  const GradientColorsBox(height: 136),
                   Expanded(
                     child: ListView(
                       padding: const EdgeInsets.only(left: 30, right: 30, bottom: 90),
                       children: [
-                        Image.asset(MyImages.driver),
-                        const SizedBox(height: 20),
-                        const OrderStatusText(),
+                        AnimatedSwitcher(
+                          duration: const Duration(seconds: 1),
+                          transitionBuilder: (Widget child, Animation<double> animation) {
+                            return FadeTransition(opacity: animation, child: child);
+                          },
+                          child: Image.asset(
+                            key: ValueKey<String>(_toggleGif(data)),
+                            _toggleGif(data),
+                          ),
+                        ),
+                        OrderStatusText(data: data),
                         OrderTimeLine(status: data.status),
                         const Divider(
                           height: 30,
@@ -104,7 +138,7 @@ class OrderStatusScreen extends StatelessWidget {
                           indent: 15,
                           endIndent: 15,
                         ),
-                        data.driverId == 0 ? const CaptainSearchBox() : CaptainWidget(name: data.driverName, imageUrl: data.driverImage, phoneNum: data.driverPhone),
+                        showStatusList.contains(data.status) ? const CaptainSearchBox() : CaptainWidget(name: data.driverName, imageUrl: data.driverImage, phoneNum: data.driverPhone),
                         const Divider(
                           height: 30,
                           indent: 15,

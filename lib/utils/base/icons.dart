@@ -53,6 +53,7 @@ class MyIcons {
   static const String dollar = "${_path}dollar.svg";
   static const String mapMarker = "${_path}map-marker.svg";
   static const String moneyCheck = "${_path}money-check-edit.svg";
+  static const String language = "${_path}language.svg";
 
   static String getReviewIcon(String icon) {
     return '$_path$icon';

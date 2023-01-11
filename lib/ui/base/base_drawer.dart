@@ -104,7 +104,7 @@ class _BaseDrawerState extends State<BaseDrawer> {
                       ),
                       DrawerListTile(
                         title: TranslationService.getString('language_key'),
-                        icon: MyIcons.timePast,
+                        icon: MyIcons.language,
                         onTap: () {
                           LanguageDialog().show();
                         },

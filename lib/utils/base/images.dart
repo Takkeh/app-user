@@ -1,5 +1,6 @@
 class MyImages {
   static const String _path = "assets/images/";
+  static const String _pathOrderStatus = "${_path}order_status/";
 
   static const String logo = "${_path}logo.png";
   // static const String handAr = "${_path}hand_ar.png";
@@ -20,4 +21,9 @@ class MyImages {
   static const String searchSomething = "${_path}search_something.png";
   static const String noResultSearch = "${_path}no_result_search.png";
   static const String internet = "${_path}internet.png";
+  static const String orderStatusComplete = "${_pathOrderStatus}complete.gif";
+  static const String orderStatusHolding = "${_pathOrderStatus}holding-whiteBg.gif";
+  static const String orderStatusInRestaurants = "${_pathOrderStatus}inResturant.gif";
+  static const String orderStatusOnDelivery = "${_pathOrderStatus}onDelivery-whiteBg.gif";
+  static const String orderStatusSearching = "${_pathOrderStatus}SearchingDriver.gif";
 }

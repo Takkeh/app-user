@@ -101,6 +101,7 @@ flutter:
   assets:
     - assets/
     - assets/images/
+    - assets/images/order_status/
     - assets/icons/
     - assets/fonts/
 
