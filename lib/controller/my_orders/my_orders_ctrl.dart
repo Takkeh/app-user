@@ -30,4 +30,10 @@ class MyOrdersCtrl extends GetxController {
       });
     super.onInit();
   }
+
+  @override
+  void onClose() {
+    pagingController.dispose();
+    super.onClose();
+  }
 }

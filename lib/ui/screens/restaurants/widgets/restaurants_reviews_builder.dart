@@ -44,12 +44,13 @@ class _RestaurantsReviewsBuilderState extends State<RestaurantsReviewsBuilder> {
       builderDelegate: PagedChildBuilderDelegate<Review>(
           firstPageProgressIndicatorBuilder: (context) => const RestaurantReviewsLoading(),
           newPageProgressIndicatorBuilder: (context) {
-            if (RestaurantsCtrl.find.pagingController.itemList!.length < 5) {
-              return const SizedBox.shrink();
-            } else {
-              print("alskfjasklfj");
-              return const RestaurantCPI();
-            }
+            // if () {
+            //   return const SizedBox.shrink();
+            // } else {
+            //   print("alskfjasklfj");
+            //   return const RestaurantCPI();
+            // }
+            return const RestaurantCPI();
           },
           noItemsFoundIndicatorBuilder: (context) {
             return NoItemsFoundWidget(text: TranslationService.getString("no_reviews_found_key"));

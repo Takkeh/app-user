@@ -11,7 +11,7 @@ class RestaurantReviewsCtrl extends GetxController {
 
   Future<void> fetchPage(int pageKey) async {
     try {
-      final model = await RestaurantReviewsApi.data(pageKey: pageKey,id: restaurantId!);
+      final model = await RestaurantReviewsApi.data(pageKey: pageKey, id: restaurantId!);
       final newItems = model!.data!.reviews;
       if (newItems!.isEmpty) {
         pagingController.appendLastPage(newItems);
@@ -28,6 +28,7 @@ class RestaurantReviewsCtrl extends GetxController {
     pagingController = PagingController(firstPageKey: 1)
       ..addPageRequestListener((pageKey) {
         fetchPage(pageKey);
+        print("STSTPagingStatus:: ${pagingController.value.status}");
       });
     super.onInit();
   }
