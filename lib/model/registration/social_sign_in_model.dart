@@ -82,7 +82,7 @@ class User {
         name: json["name"] ?? '',
         lname: json["lname"] ?? '',
         email: json["email"] ?? '',
-        phone: json["phone"] ?? '',
+        phone: json["phone"] == null ? '' : json["phone"].toString(),
         image: json["image"] ?? '',
         type: json["type"] ?? '',
         otp: json["otp"] ?? '',

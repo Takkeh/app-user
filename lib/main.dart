@@ -24,6 +24,7 @@ import 'package:takkeh/utils/shared_prefrences.dart';
 // implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
 
 Map<String, dynamic> notificationsMap = {};
+//.................
 
 Future<void> _onBackgroundMessage(RemoteMessage message) async {
   if (message.notification != null) {
@@ -34,7 +35,6 @@ Future<void> _onBackgroundMessage(RemoteMessage message) async {
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
-
   await Firebase.initializeApp(
       // options: const FirebaseOptions(
       //   apiKey: "XXX",
@@ -45,17 +45,11 @@ Future<void> main() async {
       );
   FirebaseMessaging.onBackgroundMessage(_onBackgroundMessage);
   await MySharedPreferences.init();
-  await FirebaseMessaging.instance.getToken().then((value) async {
-    MySharedPreferences.deviceToken = value!;
-    log("deviceToken:: $value");
-    DeviceTokenService.updateDeviceToken(value);
-  });
   if (MySharedPreferences.language.isEmpty) {
     // MySharedPreferences.language = Get.deviceLocale!.languageCode;
     MySharedPreferences.language = 'ar';
   }
   await TranslationService.init();
-
   await SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp, DeviceOrientation.portraitDown]);
   runApp(const MyApp());
 }
@@ -92,6 +86,14 @@ class _MyAppState extends State<MyApp> {
 
   @override
   void initState() {
+    FirebaseMessaging.instance.getToken().then((value) async {
+      MySharedPreferences.deviceToken = value!;
+      log("deviceToken:: $value");
+      if (MySharedPreferences.accessToken.isNotEmpty) {
+        DeviceTokenService().updateDeviceToken(value);
+      }
+    });
+
     Connectivity().onConnectivityChanged.listen((status) {
       log("internetStatus:: $status");
       if (status == ConnectivityResult.none) {
@@ -108,10 +110,6 @@ class _MyAppState extends State<MyApp> {
     LocalNotificationsService().initialize();
 
     FirebaseMessaging.instance.requestPermission().then((value) {});
-
-    //TODO: check if needed for ios
-    // FirebaseMessaging.instance.getToken().then((token) {});
-    // FirebaseMessaging.instance.getAPNSToken().then((aPNStoken) {});
 
     FirebaseMessaging.instance.getInitialMessage().then(CloudMessagingService().terminated);
     FirebaseMessaging.onMessage.listen(CloudMessagingService().foreground);

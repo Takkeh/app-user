@@ -1,3 +1,6 @@
+import 'package:takkeh/model/restaurants/restaurants_model.dart';
+import 'package:takkeh/model/restaurants/view_restaurant.dart';
+
 class OffersModel {
   OffersModel({
     this.status,
@@ -38,19 +41,32 @@ class Offers {
   Offers({
     this.id,
     this.image,
+    this.route,
+    this.restaurant,
+    this.product,
   });
+
+  int? id;
+  String? image;
+  String? route;
+  RestaurantList? restaurant;
+  ProductInfo? product;
 
   Offers.fromJson(dynamic json) {
     id = json['id'];
-    image = json['image'];
+    image = json['image'] ?? '';
+    route = json['route'];
+    restaurant = json['restaurant'] == null ? null : RestaurantList.fromJson(json['restaurant']);
+    product = json['product'] == null ? null : ProductInfo.fromJson(json['product']);
   }
-  int? id;
-  String? image;
 
   Map<String, dynamic> toJson() {
     final map = <String, dynamic>{};
     map['id'] = id;
     map['image'] = image;
+    map['route'] = route;
+    map['restaurant'] = restaurant!.toJson();
+    map['product'] = product!.toJson();
     return map;
   }
 }

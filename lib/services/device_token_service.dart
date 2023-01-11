@@ -3,14 +3,16 @@ import 'dart:developer';
 
 import 'package:http/http.dart' as http;
 import 'package:takkeh/utils/api_url.dart';
+import 'package:takkeh/utils/shared_prefrences.dart';
 
 class DeviceTokenService {
-  static Future<void> updateDeviceToken(String token) async {
+  Future<void> updateDeviceToken(String token) async {
     try {
       String url = '${ApiUrl.mainUrl}${ApiUrl.updateDeviceToken}';
       Uri uri = Uri.parse(url);
       var headers = {
         'Content-Type': 'application/json',
+        'Authorization': 'Bearer ${MySharedPreferences.accessToken}',
       };
       var body = jsonEncode({
         'device_token': token,

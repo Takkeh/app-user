@@ -149,18 +149,21 @@ class ProductItems {
     this.id,
     this.groupName,
     this.itemName,
+    this.groupType,
     this.price,
   });
 
   int? id;
   String? groupName;
   String? itemName;
+  String? groupType;
   double? price;
 
   factory ProductItems.fromJson(Map<String, dynamic> json) => ProductItems(
         id: json["id"],
         groupName: json["group_name"],
         itemName: json["item_name"] ?? '',
+        groupType: json["group_type"] ?? '',
         price: double.parse(json["price"].toString()),
       );
 
@@ -169,5 +172,6 @@ class ProductItems {
         "group_name": groupName,
         "item_name": itemName,
         "price": price,
+        "group_type": groupType,
       };
 }

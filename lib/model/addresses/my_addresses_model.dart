@@ -80,7 +80,7 @@ class MyAddresses {
         userId: json["user_id"],
         long: double.parse(json["long"].toString()),
         lat: double.parse(json["lat"].toString()),
-        phone: json["phone"],
+        phone: json["phone"] == null ? '' : json["phone"].toString(),
       );
 
   Map<String, dynamic> toJson() => {

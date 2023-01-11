@@ -30,7 +30,7 @@ class NewBasketDialog {
             cost: data.cost!,
             review: data.review!,
             reviewIcon: data.reviewIcon!,
-            phone: '+96298775785',
+            phone: data.phone!,
           ),
           binding: ProductBinding(id: data.id!),
         );

@@ -13,24 +13,22 @@ class UpdateProfileModel {
   String? msg;
   User? user;
 
-  UpdateProfileModel updateProfileModelFromJson(String str) =>
-      UpdateProfileModel.fromJson(json.decode(str));
+  UpdateProfileModel updateProfileModelFromJson(String str) => UpdateProfileModel.fromJson(json.decode(str));
 
   String updateProfileModelToJson() => json.encode(toJson());
 
-  factory UpdateProfileModel.fromJson(Map<String, dynamic> json) =>
-      UpdateProfileModel(
+  factory UpdateProfileModel.fromJson(Map<String, dynamic> json) => UpdateProfileModel(
         status: json["status"],
         code: json["code"],
         msg: json["msg"],
-        user: json["user"]==null?null:User.fromJson(json["user"]),
+        user: json["user"] == null ? null : User.fromJson(json["user"]),
       );
 
   Map<String, dynamic> toJson() => {
         "status": status,
         "code": code,
         "msg": msg,
-        "user": user==null?null: user!.toJson(),
+        "user": user == null ? null : user!.toJson(),
       };
 }
 
@@ -57,11 +55,11 @@ class User {
 
   factory User.fromJson(Map<String, dynamic> json) => User(
         id: json["id"],
-        name: json["name"]??'',
-        lastName: json["last_name"]??'',
-        phone: json["phone"]??'',
-        email: json["email"]??'',
-        image: json["image"]??'',
+        name: json["name"] ?? '',
+        lastName: json["last_name"] ?? '',
+        phone: json["phone"] == null ? '' : json["phone"].toString(),
+        email: json["email"] ?? '',
+        image: json["image"] ?? '',
       );
 
   Map<String, dynamic> toJson() => {

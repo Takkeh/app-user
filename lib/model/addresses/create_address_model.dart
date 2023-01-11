@@ -80,7 +80,7 @@ class Data {
         userId: json["user_id"],
         long: json["long"],
         lat: json["lat"],
-        phone: json["phone"],
+        phone: json["phone"] == null ? '' : json["phone"].toString(),
       );
 
   Map<String, dynamic> toJson() => {

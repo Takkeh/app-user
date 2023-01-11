@@ -18,18 +18,18 @@ class RestaurantInfoModel {
   String restaurantReviewsModelToJson() => json.encode(toJson());
 
   factory RestaurantInfoModel.fromJson(Map<String, dynamic> json) => RestaurantInfoModel(
-    status: json["status"],
-    code: json["code"],
-    msg: json["msg"],
-    data: Data.fromJson(json["data"]),
-  );
+        status: json["status"],
+        code: json["code"],
+        msg: json["msg"],
+        data: Data.fromJson(json["data"]),
+      );
 
   Map<String, dynamic> toJson() => {
-    "status": status,
-    "code": code,
-    "msg": msg,
-    "data": data!.toJson(),
-  };
+        "status": status,
+        "code": code,
+        "msg": msg,
+        "data": data!.toJson(),
+      };
 }
 
 class Data {
@@ -82,50 +82,50 @@ class Data {
   String dataToJson() => json.encode(toJson());
 
   factory Data.fromJson(Map<String, dynamic> json) => Data(
-    id: json["id"],
-    name: json["name"]??'',
-    logo: json["logo"]??'',
-    cover: json["cover"]??'',
-    cost: json["cost"]??0,
-    time: json["time"]??'',
-    isBusy: json["is_busy"],
-    description: json["description"]??'',
-    reviewAverage: json["review_average"]??0,
-    review: json["review"]??'',
-    reviewIcon: json["review_icon"]??'',
-    address: json["address"]??'',
-    phone: json["phone"]??'',
-    workTime: json["Work_time"]??'',
-    deliveryTime: json["delivery_time"]??'',
-    minimum: json["minimum"]??0,
-    deliveryFee: json["delivery_fee"]??0,
-    salesTax: json["sales_tax"]??0,
-    isTaxable: json["is_taxable"]??0,
-    reviews: List<Review>.from(json["reviews"].map((x) => Review.fromJson(x))),
-  );
+        id: json["id"],
+        name: json["name"] ?? '',
+        logo: json["logo"] ?? '',
+        cover: json["cover"] ?? '',
+        cost: json["cost"] ?? 0,
+        time: json["time"] ?? '',
+        isBusy: json["is_busy"],
+        description: json["description"] ?? '',
+        reviewAverage: json["review_average"] ?? 0,
+        review: json["review"] ?? '',
+        reviewIcon: json["review_icon"] ?? '',
+        address: json["address"] ?? '',
+        phone: json["phone"] == null ? '' : json["phone"].toString(),
+        workTime: json["Work_time"] ?? '',
+        deliveryTime: json["delivery_time"] ?? '',
+        minimum: json["minimum"] ?? 0,
+        deliveryFee: json["delivery_fee"] ?? 0,
+        salesTax: json["sales_tax"] ?? 0,
+        isTaxable: json["is_taxable"] ?? 0,
+        reviews: List<Review>.from(json["reviews"].map((x) => Review.fromJson(x))),
+      );
 
   Map<String, dynamic> toJson() => {
-    "id": id,
-    "name": name,
-    "logo": logo,
-    "cover": cover,
-    "cost": cost,
-    "time": time,
-    "is_busy": isBusy,
-    "description": description,
-    "review_average": reviewAverage,
-    "review": review,
-    "review_icon": reviewIcon,
-    "address": address,
-    "phone": phone,
-    "Work_time": workTime,
-    "delivery_time": deliveryTime,
-    "minimum": minimum,
-    "delivery_fee": deliveryFee,
-    "sales_tax": salesTax,
-    "is_taxable": isTaxable,
-    "reviews": List<dynamic>.from(reviews!.map((x) => x.toJson())),
-  };
+        "id": id,
+        "name": name,
+        "logo": logo,
+        "cover": cover,
+        "cost": cost,
+        "time": time,
+        "is_busy": isBusy,
+        "description": description,
+        "review_average": reviewAverage,
+        "review": review,
+        "review_icon": reviewIcon,
+        "address": address,
+        "phone": phone,
+        "Work_time": workTime,
+        "delivery_time": deliveryTime,
+        "minimum": minimum,
+        "delivery_fee": deliveryFee,
+        "sales_tax": salesTax,
+        "is_taxable": isTaxable,
+        "reviews": List<dynamic>.from(reviews!.map((x) => x.toJson())),
+      };
 }
 
 class Review {
@@ -154,24 +154,24 @@ class Review {
   String reviewToJson() => json.encode(toJson());
 
   factory Review.fromJson(Map<String, dynamic> json) => Review(
-    id: json["id"],
-    title: json["title"]??'',
-    content: json["content"]??'',
-    points: json["points"]??'',
-    reviewString: json["review_string"]??'',
-    reviewIcon: json["review_icon"]??'',
-    userImage: json["user_image"]??'',
-    status: json["status"],
-  );
+        id: json["id"],
+        title: json["title"] ?? '',
+        content: json["content"] ?? '',
+        points: json["points"] ?? '',
+        reviewString: json["review_string"] ?? '',
+        reviewIcon: json["review_icon"] ?? '',
+        userImage: json["user_image"] ?? '',
+        status: json["status"],
+      );
 
   Map<String, dynamic> toJson() => {
-    "id": id,
-    "title": title,
-    "content": content,
-    "points": points,
-    "review_string": reviewString,
-    "review_icon": reviewIcon,
-    "user_image": userImage,
-    "status": status,
-  };
+        "id": id,
+        "title": title,
+        "content": content,
+        "points": points,
+        "review_string": reviewString,
+        "review_icon": reviewIcon,
+        "user_image": userImage,
+        "status": status,
+      };
 }

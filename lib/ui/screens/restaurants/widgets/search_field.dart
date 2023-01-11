@@ -4,7 +4,7 @@ import 'package:takkeh/utils/base/colors.dart';
 import 'package:takkeh/utils/base/icons.dart';
 
 class SearchField extends StatelessWidget {
-  final Function(String) onChanged;
+  final Function(String)? onChanged;
   final String hintText;
   final bool readOnly;
   final bool autofocus;
@@ -12,7 +12,7 @@ class SearchField extends StatelessWidget {
 
   const SearchField({
     Key? key,
-    required this.onChanged,
+    this.onChanged,
     required this.hintText,
     required this.readOnly,
     this.onTap,

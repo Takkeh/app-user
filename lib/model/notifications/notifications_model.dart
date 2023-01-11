@@ -55,7 +55,7 @@ class NotificationsModel {
         cover: json["cover"],
         logo: json["logo"],
         review: json["review"],
-        phone: json["phone"],
+        phone: json["phone"] == null ? '' : json["phone"].toString(),
         price: json["price"] == null ? null : double.parse(json["price"].toString()),
         description: json["description"],
         groups: json["groups"] == null ? null : jsonDecode(json["groups"]),

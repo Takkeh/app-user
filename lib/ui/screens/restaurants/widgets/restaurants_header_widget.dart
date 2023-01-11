@@ -47,7 +47,7 @@ class RestaurantsHeaderWidget extends StatelessWidget {
                           Get.to(() => const RestaurantsSearchScreen(), binding: RestaurantsSearchBinding());
                         },
                         hintText: TranslationService.getString('what_to_search_key'),
-                        onChanged: onChanged,
+                        onChanged: null,
                       ),
                     ),
                     const SizedBox(width: 5),
@@ -75,19 +75,24 @@ class RestaurantsHeaderWidget extends StatelessWidget {
             ),
             color: Colors.white,
           ),
-          child: AnimatedSwitcher(
-            duration: const Duration(milliseconds: 250),
-            transitionBuilder: (Widget child, Animation<double> animation) {
-              return ScaleTransition(scale: animation, child: child);
-            },
-            child: Text(
-              title,
-              key: ValueKey<int>(index),
-              style: const TextStyle(
-                color: MyColors.primary,
-                fontSize: 20,
+          child: SizedBox.expand(
+            child: FittedBox(
+              child: AnimatedSwitcher(
+                duration: const Duration(milliseconds: 250),
+                transitionBuilder: (Widget child, Animation<double> animation) {
+                  return ScaleTransition(scale: animation, child: child);
+                },
+                child: Text(
+                  title,
+                  key: ValueKey<int>(index),
+                  style: const TextStyle(
+                    color: MyColors.primary,
+                    fontSize: 20,
+                  ),
+                  textAlign: TextAlign.center,
+                  maxLines: 1,
+                ),
               ),
-              maxLines: 1,
             ),
           ),
         ),

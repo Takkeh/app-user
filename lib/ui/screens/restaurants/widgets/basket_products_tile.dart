@@ -62,38 +62,11 @@ class BasketProductTileState extends State<BasketProductTile> {
     );
   }
 
-  Future<void> _showMyDialog() async {
-    return showDialog<void>(
-      context: context,
-      builder: (BuildContext context) => AlertDialog(
-        title: Text('Delete Item'.tr),
-        content: Text('Are you sure you want to delete the item from the basket ?'.tr),
-        actions: <Widget>[
-          TextButton(
-            onPressed: () => Get.back(),
-            child: Text('Cancel'.tr),
-          ),
-          TextButton(
-            onPressed: () {
-              MakeOrderCtrl.find.orderList.removeAt(widget.index);
-              UserOrderCtrl.find.orderList.removeAt(widget.index);
-              UserOrderCtrl.find.calculateTotalPrice(originalPrice, status: 'remove');
-              UserOrderCtrl.find.calculateTotalQuantity(1, status: 'remove');
-              Get.back();
-              if (UserOrderCtrl.find.orderList.isEmpty) {
-                Get.back();
-              }
-            },
-            child: Text('Confirm'.tr),
-          ),
-        ],
-      ),
-    );
-  }
-
   void toggleProduct() {
     UserOrderCtrl.find.orderList[widget.index]['price'] = newPrice;
+    MakeOrderCtrl.find.orderList[widget.index].price = newPrice;
     UserOrderCtrl.find.orderList[widget.index]['quantity'] = quantity;
+    MakeOrderCtrl.find.orderList[widget.index].quantity = quantity;
     log("userOrder:: ${UserOrderCtrl.find.orderList}");
   }
 
@@ -162,8 +135,13 @@ class BasketProductTileState extends State<BasketProductTile> {
                         ),
                         const SizedBox(height: 5),
                         ...widget.items.map((element) {
-                          //TODO: missing type for + sign
-                          return Text("+ ${element.itemName}");
+                          if (element.groupType == kOptional) {
+                            return Text("+ ${element.itemName}");
+                          } else if (element.groupType == kRemove) {
+                            return Text("- ${element.itemName}");
+                          } else {
+                            return Text("${element.itemName}");
+                          }
                         }).toList(),
                         const SizedBox(height: 12),
                         widget.note.isEmpty
@@ -203,10 +181,6 @@ class BasketProductTileState extends State<BasketProductTile> {
                         icon: Icons.add,
                         onPressed: () {
                           toggle('add');
-                          // toggle('add', widget.initialPrice);
-                          // UserOrderCtrl.find.userOrder[widget.index]['price'] = newPrice;
-                          // UserOrderCtrl.find.userOrder[widget.index]['quantity'] = newQuantity;
-                          // print("newOrder:: ${UserOrderCtrl.find.userOrder}");
                         },
                         color: MyColors.redPrimary,
                       ),
@@ -220,7 +194,6 @@ class BasketProductTileState extends State<BasketProductTile> {
                         icon: Icons.remove,
                         onPressed: () {
                           toggle('remove');
-                          // toggle('remove', widget.initialPrice);
                         },
                         color: quantity == 1 ? MyColors.redPrimary.withOpacity(0.60) : MyColors.redPrimary,
                       ),
