@@ -2,7 +2,7 @@ import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:takkeh/controller/home/special_offers.dart';
-import 'package:takkeh/model/home/special_offers_model.dart';
+import 'package:takkeh/model/home/offers_model.dart';
 import 'package:takkeh/ui/screens/home/widgets/custom_indicator.dart';
 import 'package:takkeh/ui/screens/home/widgets/special_offers_loading.dart';
 import 'package:takkeh/ui/widgets/custom_network_image.dart';
@@ -20,7 +20,7 @@ class _SpecialOffersBuilderState extends State<SpecialOffersBuilder> {
 
   @override
   Widget build(BuildContext context) {
-    return FutureBuilder<SpecialOffersModel?>(
+    return FutureBuilder<OffersModel?>(
       future: SpecialOffersController.find.initializeSpecialOffersFuture,
       builder: (context, snapshot) {
         switch (snapshot.connectionState) {
@@ -45,14 +45,14 @@ class _SpecialOffersBuilderState extends State<SpecialOffersBuilder> {
                         },
                         // enlargeCenterPage: true,
                       ),
-                      items: snapshot.data!.specials!.map((element) {
-                        final index = snapshot.data!.specials!.indexOf(element);
+                      items: snapshot.data!.offers!.map((element) {
+                        final index = snapshot.data!.offers!.indexOf(element);
                         return Builder(
                           builder: (BuildContext context) {
                             return Padding(
                               padding: const EdgeInsets.symmetric(horizontal: 8.0),
                               child: CustomNetworkImage(
-                                url: snapshot.data!.specials![index].image!,
+                                url: snapshot.data!.offers![index].image!,
                                 radius: 23,
                                 width: Get.width,
                               ),
@@ -65,7 +65,7 @@ class _SpecialOffersBuilderState extends State<SpecialOffersBuilder> {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      for (int i = 0; i < snapshot.data!.specials!.length; i++)
+                      for (int i = 0; i < snapshot.data!.offers!.length; i++)
                         CustomIndicator(
                           index: currentIndex,
                           currentWidget: i,

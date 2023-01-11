@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:takkeh/translation/service.dart';
 import 'package:takkeh/ui/widgets/custom_elevated_button.dart';
-import 'package:takkeh/utils/base/colors.dart';
 import 'package:takkeh/utils/shared_prefrences.dart';
 
 class LanguageDialog {

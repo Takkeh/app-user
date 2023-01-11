@@ -18,7 +18,6 @@ import 'package:takkeh/ui/screens/my_orders/my_orders.dart';
 import 'package:takkeh/ui/screens/profile/profile.dart';
 import 'package:takkeh/ui/screens/registration/registration.dart';
 import 'package:takkeh/ui/screens/wallet/wallet.dart';
-import 'package:takkeh/ui/widgets/components/base_dialog.dart';
 import 'package:takkeh/ui/widgets/components/language_dialog.dart';
 import 'package:takkeh/utils/base/colors.dart';
 import 'package:takkeh/utils/base/icons.dart';

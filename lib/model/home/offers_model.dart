@@ -66,7 +66,7 @@ class Offers {
     map['image'] = image;
     map['route'] = route;
     map['restaurant'] = restaurant!.toJson();
-    map['restaurant'] = product!.toJson();
+    map['product'] = product!.toJson();
     return map;
   }
 }
