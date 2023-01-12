@@ -12,7 +12,8 @@ import 'package:takkeh/utils/base/icons.dart';
 import 'package:takkeh/utils/shared_prefrences.dart';
 
 class ProfileScreen extends StatefulWidget {
-  const ProfileScreen({Key? key}) : super(key: key);
+  final bool withBackButton;
+  const ProfileScreen({Key? key,required this.withBackButton}) : super(key: key);
 
   @override
   State<ProfileScreen> createState() => _ProfileScreenState();
@@ -48,7 +49,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: MyColors.blue6FA,
-      appBar: TransparentAppBar(title: TranslationService.getString('edit_profile_key')),
+      appBar: TransparentAppBar(title: TranslationService.getString('edit_profile_key'),withBackButton: widget.withBackButton,),
       body: Column(
         children: [
           Stack(

@@ -69,14 +69,14 @@ class _BaseDrawerState extends State<BaseDrawer> {
                         title: TranslationService.getString('profile_key'),
                         icon: MyIcons.user,
                         onTap: () {
-                          Get.to(() => const ProfileScreen());
+                          Get.to(() => const ProfileScreen(withBackButton: true,));
                         },
                       ),
                       DrawerListTile(
                         title: TranslationService.getString('orders_key'),
                         icon: MyIcons.timePast,
                         onTap: () {
-                          Get.to(() => const MyOrdersScreen());
+                          Get.to(() => const MyOrdersScreen(withBackButton: true,));
                         },
                       ),
                       DrawerListTile(
@@ -113,7 +113,7 @@ class _BaseDrawerState extends State<BaseDrawer> {
                         title: TranslationService.getString('help_key'),
                         icon: MyIcons.questionMark,
                         onTap: () {
-                          Get.to(() => const HelpScreen());
+                          Get.to(() => const HelpScreen(withBackButton: true,));
                         },
                       ),
                       DrawerListTile(

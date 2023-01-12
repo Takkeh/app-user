@@ -4,8 +4,9 @@ import 'package:takkeh/utils/base/colors.dart';
 
 class TransparentAppBar extends StatelessWidget implements PreferredSizeWidget {
   final String? title;
+  final bool withBackButton;
 
-  const TransparentAppBar({super.key, this.title});
+  const TransparentAppBar({super.key, this.title,this.withBackButton=true});
 
   @override
   Widget build(BuildContext context) {
@@ -14,7 +15,7 @@ class TransparentAppBar extends StatelessWidget implements PreferredSizeWidget {
       elevation: 0,
       leadingWidth: 60,
       centerTitle: true,
-      leading: const BackLeadingWidget(),
+      leading: withBackButton?const BackLeadingWidget():null,
       title: title != null
           ? Text(
               title!,

@@ -38,6 +38,7 @@ class WalletCard extends StatelessWidget {
                   child: SvgPicture.asset(MyIcons.wallet),
                 ),
                 Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     const Text(
                       "Wallet",
