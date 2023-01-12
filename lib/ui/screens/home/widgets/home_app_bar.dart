@@ -34,13 +34,7 @@ class HomeAppBar extends StatelessWidget implements PreferredSizeWidget {
         Padding(
           padding: const EdgeInsetsDirectional.fromSTEB(0, 0, 15, 0),
           child: GestureDetector(
-            onTap: () {
-              LocationPermissionHelper.check(
-                action: () {
-                  Get.to(() => const MyAddressesScreen());
-                },
-              );
-            },
+            onTap: () {},
             child: SvgPicture.asset(
               MyIcons.bell,
             ),

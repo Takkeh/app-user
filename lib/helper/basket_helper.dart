@@ -42,9 +42,7 @@ class BasketHelper {
             context: context,
             restaurantId: restaurantId,
             generalNote: '',
-            // route: BasketScreen(
-            //   restaurantId: restaurantId,
-            // ),
+            route: kBasket,
           );
         },
       );

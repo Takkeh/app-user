@@ -9,6 +9,9 @@ import 'package:takkeh/controller/user_order_ctrl.dart';
 import 'package:takkeh/model/restaurants/make_order_model.dart';
 import 'package:takkeh/network/restaurants/make_order.dart';
 import 'package:takkeh/ui/screens/restaurants/basket.dart';
+import 'package:takkeh/ui/screens/restaurants/confirm_order.dart';
+import 'package:takkeh/ui/widgets/components/base_dialog.dart';
+import 'package:takkeh/ui/widgets/components/busy_dialog.dart';
 import 'package:takkeh/utils/app_constants.dart';
 import 'package:takkeh/utils/base/colors.dart';
 
@@ -40,6 +43,7 @@ class MakeOrderCtrl extends GetxController {
     required String generalNote,
     required int restaurantId,
     required BuildContext context,
+    required String route,
   }) async {
     showLoading();
     model = await MakeOrderApi.data(
@@ -54,17 +58,28 @@ class MakeOrderCtrl extends GetxController {
       return;
     }
     if (model!.code == 200) {
+      EasyLoading.dismiss();
       orderList.value = model!.data!.products!;
-      Get.to(
-        () => BasketScreen(
-          orderId: model!.data!.id!,
-          restaurantId: restaurantId,
-        ),
-        binding: PromoCodesBinding(),
-      );
+      var orderId = model!.data!.id!;
+      if (model!.data!.isBusy == 1) {
+        BusyDialog().show();
+        return;
+      }
+      if (route == kBasket) {
+        Get.to(
+          () => BasketScreen(
+            orderId: orderId,
+            restaurantId: restaurantId,
+          ),
+          binding: PromoCodesBinding(),
+        );
+      }
+      if (route == kConfirm) {
+        Get.to(() => ConfirmOrderScreen(orderId: orderId));
+      }
     } else {
+      EasyLoading.dismiss();
       Fluttertoast.showToast(msg: model!.msg!);
     }
-    EasyLoading.dismiss();
   }
 }

@@ -30,9 +30,9 @@ class BaseNavBarState extends State<BaseNavBar> {
   List<Widget> _buildScreens() {
     return [
       const HomeScreen(),
-      const MyOrdersScreen(withBackButton: false,),
-      const HelpScreen(withBackButton: false,),
-      const ProfileScreen(withBackButton: false,),
+      const MyOrdersScreen(withBackButton: false),
+      const HelpScreen(withBackButton: false),
+      const ProfileScreen(withBackButton: false),
     ];
   }
 

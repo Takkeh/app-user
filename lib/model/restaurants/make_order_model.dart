@@ -51,11 +51,13 @@ class Data {
     this.lat,
     this.long,
     this.products,
+    this.isBusy,
   });
 
   int? id;
   int? userId;
   int? driverId;
+  int? isBusy;
   String? userName;
   String? driverName;
   int? restaurantId;
@@ -77,6 +79,7 @@ class Data {
         restaurantName: json["restaurant_name"],
         note: json["note"],
         status: json["status"],
+        isBusy: json["is_busy"],
         total: json["total"],
         lat: json["lat"],
         long: json["long"],
@@ -89,6 +92,7 @@ class Data {
         "driver_id": driverId,
         "user_name": userName,
         "driver_name": driverName,
+        "is_busy": isBusy,
         "restaurant_id": restaurantId,
         "restaurant_name": restaurantName,
         "note": note,

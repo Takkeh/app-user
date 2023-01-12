@@ -9,6 +9,7 @@ import 'package:takkeh/ui/screens/home/widgets/home_image_loading.dart';
 import 'package:takkeh/ui/screens/restaurants/restaurants_home.dart';
 import 'package:takkeh/ui/widgets/custom_network_image.dart';
 import 'package:takkeh/ui/widgets/failed_widget.dart';
+import 'package:takkeh/utils/app_constants.dart';
 
 class SectionsBuilder extends StatelessWidget {
   const SectionsBuilder({Key? key}) : super(key: key);
@@ -31,7 +32,11 @@ class SectionsBuilder extends StatelessWidget {
                     Expanded(
                       child: GestureDetector(
                         onTap: () {
-                          Get.to(() => const RestaurantsHomeScreen(), binding: RestaurantsHomeBinding());
+                          Get.to(
+                            () => const RestaurantsHomeScreen(),
+                            binding: RestaurantsHomeBinding(),
+                            routeName: AppConstants.restaurantsRouteName,
+                          );
                         },
                         child: CustomNetworkImage(
                           boxFit: BoxFit.contain,

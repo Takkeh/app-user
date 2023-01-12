@@ -12,6 +12,7 @@ import 'package:takkeh/ui/widgets/custom_restaurants_loading.dart';
 import 'package:takkeh/ui/widgets/no_items_found_widget.dart';
 import 'package:takkeh/ui/widgets/restaurant_cpi.dart';
 import 'package:takkeh/ui/widgets/restaurant_list_tile.dart';
+import 'package:takkeh/utils/app_constants.dart';
 
 class RestaurantsBuilder extends StatelessWidget {
   const RestaurantsBuilder({Key? key}) : super(key: key);

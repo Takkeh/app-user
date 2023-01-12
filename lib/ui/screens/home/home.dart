@@ -61,7 +61,7 @@ class _HomeScreenState extends State<HomeScreen> {
       return 30.0;
     }
 
-    return snapshot.data!.docs.isEmpty ? 30 : 120;
+    return 120.0;
   }
 
   @override

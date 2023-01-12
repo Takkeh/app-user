@@ -22,6 +22,7 @@ import 'package:takkeh/ui/widgets/custom_text_field.dart';
 import 'package:takkeh/ui/widgets/failed_widget.dart';
 import 'package:takkeh/ui/widgets/promo_codes_loading.dart';
 import 'package:takkeh/ui/widgets/transparent_app_bar.dart';
+import 'package:takkeh/utils/app_constants.dart';
 import 'package:takkeh/utils/base/colors.dart';
 import 'package:takkeh/utils/base/icons.dart';
 
@@ -45,7 +46,12 @@ class _BasketScreenState extends State<BasketScreen> {
   void navigate() {
     LocationPermissionHelper.check(
       action: () {
-        Get.to(() => ConfirmOrderScreen(orderId: widget.orderId));
+        MakeOrderCtrl.find.fetchData(
+          generalNote: noteCtrl.text,
+          restaurantId: widget.restaurantId,
+          context: context,
+          route: kConfirm,
+        );
       },
     );
   }

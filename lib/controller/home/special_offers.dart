@@ -1,14 +1,15 @@
 import 'package:get/get.dart';
 import 'package:takkeh/model/home/offers_model.dart';
+import 'package:takkeh/model/home/special_offers_model.dart';
 import 'package:takkeh/network/home/spcial_offers.dart';
 
 class SpecialOffersController extends GetxController {
   static SpecialOffersController get find => Get.find();
 
-  OffersModel? specialOffersModel;
-  late Future<OffersModel?> initializeSpecialOffersFuture;
+  SpecialOffersModel? specialOffersModel;
+  late Future<SpecialOffersModel?> initializeSpecialOffersFuture;
 
-  Future<OffersModel?> fetchSpecialOffersData() async {
+  Future<SpecialOffersModel?> fetchSpecialOffersData() async {
     specialOffersModel = await SpecialOffersApi.data();
     return specialOffersModel;
   }

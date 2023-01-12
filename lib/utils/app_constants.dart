@@ -20,6 +20,9 @@ const String kRawSnackBar = 'rawSnackBar';
 const String kMap = 'map';
 const String kAddress = 'address';
 
+const String kBasket = 'basket';
+const String kConfirm = 'confirm';
+
 const kWaiting = 'waiting';
 const kHold = 'hold';
 const kPending = 'pending';
@@ -36,6 +39,8 @@ const kDenied = 'denied';
 
 class AppConstants {
   static const googleApiKey = 'AIzaSyDSPeDTWmjTol4rLhHw0fT9Nzrb7bAqs2M';
+
+  static const restaurantsRouteName = '/restaurants';
 
   static const differentCredentialMessage = "[firebase_auth/account-exists-with-different-credential] An account already exists with the same email address but different sign-in credentials. Sign in using a provider associated with this email address.";
   static final failedMessage = "Something went Wrong, try again later".tr;

@@ -32,7 +32,20 @@ class OrderStatusScreen extends StatelessWidget {
     required this.route,
   }) : super(key: key);
 
-  static final showStatusList = [kHold, kPending, kDenied];
+  static final showStatusList = [kPending, kDenied];
+
+  Widget _toggleCaptainBox(FireOrderDetails data) {
+    switch (data.status) {
+      case kHold:
+        return SizedBox.shrink(key: ValueKey<String>(data.status));
+      case kPending:
+        return CaptainSearchBox(key: ValueKey<String>(data.status));
+      default:
+        {
+          return CaptainWidget(key: ValueKey<String>(data.status), name: data.driverName, imageUrl: data.driverImage, phoneNum: data.driverPhone);
+        }
+    }
+  }
 
   static String _toggleGif(FireOrderDetails data) {
     switch (data.status) {
@@ -133,12 +146,19 @@ class OrderStatusScreen extends StatelessWidget {
                           endIndent: 15,
                         ),
                         OrderAddressTile(address: data.dropPointAddress),
-                        const Divider(
-                          height: 30,
-                          indent: 15,
-                          endIndent: 15,
+                        if (data.status != kHold)
+                          const Divider(
+                            height: 30,
+                            indent: 15,
+                            endIndent: 15,
+                          ),
+                        AnimatedSwitcher(
+                          duration: const Duration(seconds: 1),
+                          transitionBuilder: (Widget child, Animation<double> animation) {
+                            return FadeTransition(opacity: animation, child: child);
+                          },
+                          child: _toggleCaptainBox(data),
                         ),
-                        showStatusList.contains(data.status) ? const CaptainSearchBox() : CaptainWidget(name: data.driverName, imageUrl: data.driverImage, phoneNum: data.driverPhone),
                         const Divider(
                           height: 30,
                           indent: 15,
