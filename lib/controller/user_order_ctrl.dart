@@ -6,7 +6,6 @@ class UserOrderCtrl extends GetxController {
   static UserOrderCtrl get find => Get.find();
 
   int restaurantId = 0;
-
   final orderList = <Map<String, dynamic>>[].obs;
   final totalPrice = 0.0.obs;
   final totalQuantity = 0.obs;
@@ -33,6 +32,7 @@ class UserOrderCtrl extends GetxController {
 
   void reset() {
     orderList.clear();
+    restaurantId = 0;
     totalPrice.value = 0.0;
     totalQuantity.value = 0;
     update();

@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:takkeh/controller/user_order_ctrl.dart';
 import 'package:takkeh/translation/service.dart';
-import 'package:takkeh/ui/screens/restaurants/restaurants_home.dart';
-import 'package:takkeh/ui/widgets/back_leading_widget.dart';
 import 'package:takkeh/ui/widgets/custom_elevated_button.dart';
 import 'package:takkeh/utils/app_constants.dart';
 import 'package:takkeh/utils/base/colors.dart';
@@ -40,6 +39,7 @@ class BusyDialog {
             textColor: Colors.white,
             width: 200,
             onPressed: () {
+              UserOrderCtrl.find.reset();
               Get.until((route) => Get.currentRoute == AppConstants.restaurantsRouteName);
             },
           ),

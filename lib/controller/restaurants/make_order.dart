@@ -10,7 +10,6 @@ import 'package:takkeh/model/restaurants/make_order_model.dart';
 import 'package:takkeh/network/restaurants/make_order.dart';
 import 'package:takkeh/ui/screens/restaurants/basket.dart';
 import 'package:takkeh/ui/screens/restaurants/confirm_order.dart';
-import 'package:takkeh/ui/widgets/components/base_dialog.dart';
 import 'package:takkeh/ui/widgets/components/busy_dialog.dart';
 import 'package:takkeh/utils/app_constants.dart';
 import 'package:takkeh/utils/base/colors.dart';

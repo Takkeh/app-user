@@ -16,8 +16,9 @@ class NewBasketDialog {
       confirmTitle: TranslationService.getString('start_key'),
       onPressed: () {
         UserOrderCtrl.find.reset();
-        Get.delete<UserOrderCtrl>(force: true);
-        Get.put(UserOrderCtrl(), permanent: true);
+        // //TODO: delete
+        // Get.delete<UserOrderCtrl>(force: true);
+        // Get.put(UserOrderCtrl(), permanent: true);
         UserOrderCtrl.find.restaurantId = data.id!;
         Get.back();
         Get.to(
