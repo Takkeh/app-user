@@ -3,8 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:takkeh/controller/nav_bar_ctrl.dart';
 import 'package:takkeh/model/restaurants/order_details_model.dart';
 import 'package:takkeh/translation/service.dart';
-import 'package:takkeh/ui/base/base_drawer.dart';
-import 'package:takkeh/ui/base/guest_drawer.dart';
+import 'package:takkeh/ui/base/drawer/base_drawer.dart';
 import 'package:takkeh/ui/screens/home/widgets/home_app_bar.dart';
 import 'package:takkeh/ui/screens/home/widgets/home_header.dart';
 import 'package:takkeh/ui/screens/home/widgets/order_fab_button.dart';
@@ -85,7 +84,7 @@ class _HomeScreenState extends State<HomeScreen> {
             onDrawerChanged: (isOpen) {
               NavBarCtrl.find.toggle(isOpen);
             },
-            drawer: MySharedPreferences.isLogIn ? const BaseDrawer() : const GuestDrawer(),
+            drawer: const BaseDrawer(),
             appBar: const HomeAppBar(),
             body: SingleChildScrollView(
               padding: EdgeInsets.only(bottom: _togglePadding(snapshot)),

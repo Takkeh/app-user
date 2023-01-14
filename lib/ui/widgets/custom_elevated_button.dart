@@ -9,6 +9,7 @@ class CustomElevatedButton extends StatelessWidget {
   final double radius;
   final Color? color;
   final Color? textColor;
+  final bool isFittedBox;
   final EdgeInsetsGeometry? padding;
 
   const CustomElevatedButton({
@@ -21,7 +22,19 @@ class CustomElevatedButton extends StatelessWidget {
     this.textColor = MyColors.black109,
     this.radius = 23,
     this.padding,
+    this.isFittedBox = false,
   }) : super(key: key);
+
+  Widget _getTextWidget() {
+    return Text(
+      title,
+      style: TextStyle(
+        color: textColor,
+        fontSize: 16,
+        fontWeight: FontWeight.w500,
+      ),
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -37,14 +50,11 @@ class CustomElevatedButton extends StatelessWidget {
           fixedSize: Size(width, height),
           elevation: 0,
         ),
-        child: Text(
-          title,
-          style: TextStyle(
-            color: textColor,
-            fontSize: 16,
-            fontWeight: FontWeight.w500,
-          ),
-        ),
+        child: isFittedBox
+            ? FittedBox(
+                child: _getTextWidget(),
+              )
+            : _getTextWidget(),
       ),
     );
   }

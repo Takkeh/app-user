@@ -56,6 +56,7 @@ class GuestDialog {
                   title: TranslationService.getString('cancel_key'),
                   color: MyColors.redPrimary,
                   textColor: Colors.white,
+                  isFittedBox: true,
                   onPressed: () {
                     Get.back();
                   },
@@ -67,6 +68,7 @@ class GuestDialog {
                   title: TranslationService.getString('sign_in_key'),
                   color: MyColors.redPrimary,
                   textColor: Colors.white,
+                  isFittedBox: true,
                   onPressed: () {
                     Get.back();
                     GuestUserHelper.currentRoute = routeName;

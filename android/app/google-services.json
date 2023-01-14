@@ -15,6 +15,14 @@
       },
       "oauth_client": [
         {
+          "client_id": "308674443378-08dpt4f0v44pcn6s7p9fdmuv9uq4a75c.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.takkeh.wecan",
+            "certificate_hash": "9c6e58baf8b12df55420f21af22e6383617a0c3a"
+          }
+        },
+        {
           "client_id": "308674443378-t0lv1b1kre9cjq4n8fuls5tomp0ql9h8.apps.googleusercontent.com",
           "client_type": 3
         }
@@ -30,6 +38,13 @@
             {
               "client_id": "308674443378-t0lv1b1kre9cjq4n8fuls5tomp0ql9h8.apps.googleusercontent.com",
               "client_type": 3
+            },
+            {
+              "client_id": "308674443378-12haj0o1afut15i8c15qghmm9pldc966.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.takkeh-restaurants.wecan"
+              }
             }
           ]
         }
@@ -59,6 +74,49 @@
             {
               "client_id": "308674443378-t0lv1b1kre9cjq4n8fuls5tomp0ql9h8.apps.googleusercontent.com",
               "client_type": 3
+            },
+            {
+              "client_id": "308674443378-12haj0o1afut15i8c15qghmm9pldc966.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.takkeh-restaurants.wecan"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:308674443378:android:3a35a78141bf0e600daaeb",
+        "android_client_info": {
+          "package_name": "com.takkeh_restaurants.wecan"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "308674443378-t0lv1b1kre9cjq4n8fuls5tomp0ql9h8.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCmppBilNY1xdR_o6J67qmGx1CDDIg0plY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "308674443378-t0lv1b1kre9cjq4n8fuls5tomp0ql9h8.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "308674443378-12haj0o1afut15i8c15qghmm9pldc966.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.takkeh-restaurants.wecan"
+              }
             }
           ]
         }
