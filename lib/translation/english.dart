@@ -45,6 +45,6 @@ final Map<String, String> en = {
   MyStrings.fullNameLabelKey: 'Enter your full name',
   "": "",
   "Coming Soon!": "Coming Soon!",
-  "minute": "minute",
+  "Minute": "Minute",
   "Something went Wrong, try again later": "Something went Wrong, try again later",
 };

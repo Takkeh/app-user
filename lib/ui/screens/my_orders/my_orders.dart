@@ -14,7 +14,7 @@ import 'package:takkeh/utils/base/images.dart';
 
 class MyOrdersScreen extends StatefulWidget {
   final bool withBackButton;
-  const MyOrdersScreen({Key? key,required this.withBackButton}) : super(key: key);
+  const MyOrdersScreen({Key? key, required this.withBackButton}) : super(key: key);
 
   @override
   State<MyOrdersScreen> createState() => _MyOrdersScreenState();
@@ -43,7 +43,10 @@ class _MyOrdersScreenState extends State<MyOrdersScreen> {
         ),
         Scaffold(
           backgroundColor: Colors.transparent,
-          appBar: TransparentAppBar(title: TranslationService.getString('my_orders_key'),withBackButton: widget.withBackButton,),
+          appBar: TransparentAppBar(
+            title: TranslationService.getString('my_orders_key'),
+            withBackButton: widget.withBackButton,
+          ),
           body: RefreshIndicator(
             onRefresh: () async {
               MyOrdersCtrl.find.pagingController.refresh();

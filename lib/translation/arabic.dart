@@ -45,6 +45,6 @@ final Map<String, String> arabicKeys = {
   MyStrings.fullNameLabelKey: "أدخل الإسم",
   "": "",
   "Coming Soon!": "قريبا!",
-  "minute": "دقيقة",
+  "Minute": "دقيقة",
   "Something went Wrong, try again later": "حدث خطأ ما, الرجاء المحاولة لاحقاً",
 };

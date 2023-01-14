@@ -9,4 +9,4 @@ const kSliderBoxDecoration = BoxDecoration(
   ),
 );
 
-String get kMinute => 'minute'.tr;
+String get kMinute => 'Minute'.tr;
